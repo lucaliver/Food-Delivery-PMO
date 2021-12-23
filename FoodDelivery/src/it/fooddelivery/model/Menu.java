@@ -5,11 +5,11 @@ package it.fooddelivery.model;
 public interface Menu {
 
 	// Return the price of the menu
-	double price();
+	double getPrice();
 	// Return the name of the menu
-	String name();
+	String getName();
 	// Return the size of the menu
-	int size();
+	int getSize();
 	// Return the info of the menu
 	String show();
 }
