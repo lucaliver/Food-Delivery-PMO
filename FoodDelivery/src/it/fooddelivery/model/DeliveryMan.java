@@ -1,6 +1,6 @@
 package it.fooddelivery.model;
 
-// Giulia
+// Giulia Costa
 public interface DeliveryMan {
 
 }
