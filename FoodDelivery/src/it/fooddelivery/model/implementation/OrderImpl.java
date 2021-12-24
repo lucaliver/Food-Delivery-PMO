@@ -1,4 +1,3 @@
-// TOMBARI GIACOMO
 package it.fooddelivery.model.implementation;
 
 import java.util.Iterator;
@@ -10,11 +9,11 @@ public class OrderImpl implements Order{
 
 	// Campi
 	private final String idOrder;
-	private final String destination;
+	private final ZoneImpl destination;
 	private final List<Menu> menus;
 	
 	// Costruttore
-	public OrderImpl(String id, String dest) {		
+	public OrderImpl(String id, ZoneImpl dest) {		
 		this.idOrder = id;
 		this.destination = dest;
 		this.menus = null;
@@ -60,7 +59,8 @@ public class OrderImpl implements Order{
 	}
 
 	@Override
-	public String getDestination() {
+	public ZoneImpl getDestination() {
 		return this.destination;		
 	}
+
 }
