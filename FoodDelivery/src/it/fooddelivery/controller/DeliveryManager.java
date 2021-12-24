@@ -15,7 +15,7 @@ public class DeliveryManager {
 	private List<Restaurant> restaurants = new ArrayList<>();
 	
 	//Costruttore
-	DeliveryManager(){
+	public DeliveryManager(){
 		this.waitingOrders = new ArrayList<>();
 		this.zones = new ArrayList<>();
 		this.restaurants = new ArrayList<>();
