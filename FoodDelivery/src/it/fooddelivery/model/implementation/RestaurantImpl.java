@@ -10,12 +10,12 @@ import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Restaurant;
 
 public class RestaurantImpl implements Restaurant {
-	private String name;
+	private final String name;
 	private List<Menu> menuOffer;
 	
-	public RestaurantImpl(String n, List<Menu> o) {
-		this.name = n;
-		this.setMenuOffer(o);
+	public RestaurantImpl(String name, List<Menu> menuOffer) {
+		this.name = name;
+		this.setMenuOffer(menuOffer);
 	}
 	
 	@Override

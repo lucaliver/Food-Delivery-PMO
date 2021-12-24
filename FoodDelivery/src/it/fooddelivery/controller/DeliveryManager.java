@@ -12,7 +12,7 @@ import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.Zone;
 
 /**
- * Classe per il controller del programma di gestione del delivery.
+ * Classe per il controller del programma di delivery.
  *
  */
 public class DeliveryManager {
@@ -30,14 +30,24 @@ public class DeliveryManager {
 	}
 	
 	/**
-	 * Assegna l'ordine secondo a un fattorino di quella città,
-	 * col guadagno minore e con abbastanza spazio in zaino.
+	 * Assegna l'ordine a un fattorino di quella città,
+	 * con abbastanza spazio in zaino e col guadagno minore.
 	 * @param order è l'ordine da assegnare
 	 * @return vero se assegnata a fattorino,
 	 * falso se messa in lista d'attesa
 	 */
 	public boolean assignOrder(Order order) {
 		//TODO implementarla
+		// Cercare la zona corrispondente a order.destination()
+		// Ottenere la lista di deliveryMen di quella città
+		// Filtrare quelli con spazio sufficente all'order.size()
+		// Sort per il guadagno crescente
+		// Prendo il primo fattorino
+		
+		// Assegno l'ordine a quel fattorino
+		
+		// Se non c'è un fattorino, aggiungo l'ordine a waitingOrders
+		
 		return false;
 	}
 
