@@ -1,4 +1,6 @@
-// LUCA PROCICCHIANI
+/**
+ * @author Luca Procicchiani
+ */
 
 package it.fooddelivery.application;
 
