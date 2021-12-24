@@ -1,5 +1,7 @@
+// TOMBARI GIACOMO
 package it.fooddelivery.model.implementation;
 
+import java.util.Iterator;
 import java.util.List;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
@@ -36,25 +38,29 @@ public class OrderImpl implements Order{
 
 	@Override
 	public int getSize() {
-		int s = for(Menu m :)
+		int size = 0;
+		for(Menu m : menus) {
+			size += m.getSize();
+		}
+		return size;
 	}
 
 	@Override
 	public double totalPrice() {
-		// TODO Auto-generated method stub
-		return 0;
+		double totPrice = 0;
+		for(Menu m : menus) {
+			totPrice += m.getPrice();
+		}
+		return totPrice;
 	}
 
 	@Override
 	public String getIdOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.idOrder;
 	}
 
 	@Override
-	public void getDestination() {
-		// TODO Auto-generated method stub
-		
+	public String getDestination() {
+		return this.destination;		
 	}
-
 }
