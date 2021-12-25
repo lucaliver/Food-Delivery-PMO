@@ -1,5 +1,6 @@
 package it.fooddelivery.model.implementation;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import it.fooddelivery.model.Menu;
@@ -16,7 +17,7 @@ public class OrderImpl implements Order{
 	public OrderImpl(String id, ZoneImpl dest) {		
 		this.idOrder = id;
 		this.destination = dest;
-		this.menus = null;
+		this.menus = new ArrayList<>();
 	}
 	
 	

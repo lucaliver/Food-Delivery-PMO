@@ -15,13 +15,13 @@ class TestOrderImpl {
 		assertNotNull(o);
 		assertEquals("8ft9", o.getIdOrder());
 		assertEquals(ZoneImpl.CAGLI, o.getDestination());
-		assertNull(o.menusList());
+		assertTrue(o.menusList().isEmpty());
 	}
 
 	@Test
 	void testMenusList() {
 		OrderImpl o = new OrderImpl("88ty", ZoneImpl.FOSSOMBRONE);
-		assertNull(o.menusList());		
+		assertTrue(o.menusList().isEmpty());		
 		o.addMenu(new MenuImpl("M1", 0.40, 55));
 		assertNotNull(o.menusList());
 				
@@ -30,11 +30,11 @@ class TestOrderImpl {
 	@Test
 	void testAddMenu() {
 		OrderImpl o = new OrderImpl("oo9i8", ZoneImpl.FOSSOMBRONE);
-		assertNull(o.menusList()); 
+		assertTrue(o.menusList().isEmpty()); 
 		MenuImpl m = new MenuImpl("Name", 0.20, 3);
 		o.addMenu(m);
-		assertNotNull(o.menusList());
 		assertTrue(!o.menusList().isEmpty());
+		assertEquals(1, o.menusList().size());
 	}
 
 	@Test
