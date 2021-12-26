@@ -9,6 +9,9 @@ import java.util.List;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Restaurant;
 
+/**
+ * A class to represent a restaurant.
+ */
 public class RestaurantImpl implements Restaurant {
 	private final String name;
 	private List<Menu> menuOffer;

@@ -7,17 +7,17 @@ package it.fooddelivery.model;
 import java.util.List;
 
 /**
- * Un'interfaccia per rappresentare dei ristoranti.
+ * An interface to represent a restaurant.
  */
 public interface Restaurant {
 	
 	/**
-	 * @return il nome del ristorante.
+	 * @return the restaurant's name.
 	 */
 	public String name();
 	
 	/**
-	 * @return tutti i menu offerti dal ristorante.
+	 * @return a list of the menus offered by the restaurant.
 	 */
 	public List<Menu> menuOffer();
 }

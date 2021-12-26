@@ -12,7 +12,7 @@ import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.Zone;
 
 /**
- * Classe per il controller del programma di delivery.
+ * Controller of a food delivery management software.
  *
  */
 public class DeliveryManager {
@@ -21,7 +21,7 @@ public class DeliveryManager {
 	private List<Restaurant> restaurants = new ArrayList<>();
 	
 	/**
-	 * Costruttore, inizializza i campi.
+	 * The constructor inizializes all the lists.
 	 */
 	public DeliveryManager(){
 		this.waitingOrders = new ArrayList<>();
@@ -30,11 +30,12 @@ public class DeliveryManager {
 	}
 	
 	/**
-	 * Assegna l'ordine a un fattorino di quella città,
-	 * con abbastanza spazio in zaino e col guadagno minore.
-	 * @param order è l'ordine da assegnare
-	 * @return vero se assegnata a fattorino,
-	 * falso se messa in lista d'attesa
+	 * It tries to assign the order to a delivery man of the correct city.
+	 * He needs to have enough bag space.
+	 * It select the delivery man with the lower profit.
+	 * @param order is the order to assign
+	 * @return true if assigned to a delivery man,
+	 * false if the order was put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
 		//TODO implementarla
