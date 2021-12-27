@@ -14,6 +14,8 @@ public class Main {
 		final DeliveryManager manager = new DeliveryManager();
 
 		final View view = new View();
+		
+		//TODO Finire main.
 	}
 
 }
