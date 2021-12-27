@@ -12,12 +12,14 @@ public class OrderImpl implements Order{
 	private final String idOrder;
 	private final ZoneImpl destination;
 	private final List<Menu> menus;
+	private final int x;
 	
 	// Costruttore
 	public OrderImpl(String id, ZoneImpl dest) {		
 		this.idOrder = id;
 		this.destination = dest;
 		this.menus = new ArrayList<>();
+		this.x = 1;
 	}
 	
 	
