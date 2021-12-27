@@ -18,15 +18,17 @@ public class DeliveryManImpl implements DeliveryMan {
 	private List<Order> ordersInBag;
 	private double money;
 	private int bagCapacity;
+	private String name;
 	
 	private static final int MAXCAPACITY = 100;
 	
 	/**
 	 * Constructor.
 	 */
-	public DeliveryManImpl() {
+	public DeliveryManImpl(String name) {
 		this.ordersInBag = new ArrayList<>();
 		this.money = 0;
+		this.name = name;
 	}
 
 

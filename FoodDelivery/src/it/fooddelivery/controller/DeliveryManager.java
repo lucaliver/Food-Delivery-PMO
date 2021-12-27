@@ -5,28 +5,44 @@
 package it.fooddelivery.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+import it.fooddelivery.model.DeliveryMan;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.Zone;
+import it.fooddelivery.model.implementation.DeliveryManImpl;
+import it.fooddelivery.model.implementation.ZoneImpl;
 
 /**
  * Controller of a food delivery management software.
  *
  */
 public class DeliveryManager {
-	private List<Order> waitingOrders = new ArrayList<>();
-	private List<Zone> zones = new ArrayList<>();
-	private List<Restaurant> restaurants = new ArrayList<>();
+	//TODO Forse applicare il design pattern Singleton al controller, tanto ce ne deve essere uno solo.
+
+	//private List<Zone> zones;
+	private Map<ZoneImpl, List<DeliveryMan>> deliveryMap;
+
+	private List<Order> waitingOrders = new ArrayList<>();	
+	private List<Restaurant> restaurants;
 	
 	/**
 	 * The constructor inizializes all the lists.
 	 */
 	public DeliveryManager(){
 		this.waitingOrders = new ArrayList<>();
-		this.zones = new ArrayList<>();
+		//this.zones = new ArrayList<>();
+		this.deliveryMap = new HashMap<>();
 		this.restaurants = new ArrayList<>();
+		
+		//DA RIMUOVERE, STO SOLO PROVANDO UNA COSA
+		List<DeliveryMan> listaProva = new ArrayList<>();
+		listaProva.add(new DeliveryManImpl("Bogliolo"));
+		this.deliveryMap.put(ZoneImpl.URBANIA, listaProva);
 	}
 	
 	/**
@@ -39,11 +55,10 @@ public class DeliveryManager {
 	 */
 	public boolean assignOrder(Order order) {
 		//TODO implementarla
-		// Cercare la zona corrispondente a order.destination()
-		// Ottenere la lista di deliveryMen di quella città
-		// Filtrare quelli con spazio sufficente all'order.size()
-		// Sort per il guadagno crescente
-		// Prendo il primo fattorino
+		Optional<DeliveryMan> selected = this.deliveryMap.get(order.getDestination()).stream() // Ottenere la lista di deliveryMen della città di destinazione
+		.filter(x->x.capacity()>=order.getSize())		// Filtrare quelli con spazio sufficente all'order.size()
+		.sorted((o1, o2)->o1.profit()>o2.profit())	// Sort per il guadagno crescente, DA SISTEMARE
+		.findFirst();	// Prendo il primo fattorino
 		
 		// Assegno l'ordine a quel fattorino
 		
