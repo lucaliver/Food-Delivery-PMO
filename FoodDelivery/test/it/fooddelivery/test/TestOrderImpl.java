@@ -1,4 +1,6 @@
-// TOMBARI GIACOMO
+/**
+ * * @author Giacomo Tombari
+ */
 package it.fooddelivery.test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,6 +47,7 @@ class TestOrderImpl {
 		o.addMenu(m1);
 		o.addMenu(m2);
 		o.removeMenu(m1);
+		assertTrue(!o.menusList().isEmpty());
 		assertEquals(1, o.menusList().size());
 		o.removeMenu(m2);
 		assertTrue(o.menusList().isEmpty());
