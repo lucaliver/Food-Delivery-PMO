@@ -12,6 +12,7 @@ public class OrderImpl implements Order{
 	private final String idOrder;
 	private final ZoneImpl destination;
 	private final List<Menu> menus;
+	public int x;
 	
 	// Costruttore
 	public OrderImpl(String id, ZoneImpl dest) {		
