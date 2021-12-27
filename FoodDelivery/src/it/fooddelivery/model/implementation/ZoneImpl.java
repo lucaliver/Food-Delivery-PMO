@@ -1,8 +1,14 @@
+/**
+ * @author Giulia Costa
+ */
 package it.fooddelivery.model.implementation;
 
 import java.util.List;
 
-// Giulia Costa
+/**
+ * Enum used for Cities.
+ *
+ */
 public enum ZoneImpl {
 	
 	FERMIGNANO("Fermignano"),
