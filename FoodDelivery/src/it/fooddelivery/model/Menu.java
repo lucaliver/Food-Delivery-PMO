@@ -3,6 +3,11 @@
  */
 package it.fooddelivery.model;
 
+/**
+ * 
+ * Interface for a menu
+ *
+ */
 public interface Menu {
 
 	/**
