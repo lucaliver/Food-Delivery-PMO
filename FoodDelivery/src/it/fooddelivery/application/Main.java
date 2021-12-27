@@ -5,6 +5,7 @@
 package it.fooddelivery.application;
 
 import it.fooddelivery.controller.DeliveryManager;
+import it.fooddelivery.view.View;
 
 public class Main {
 
@@ -12,8 +13,9 @@ public class Main {
 		// TODO Scrivere main
 		final DeliveryManager manager = new DeliveryManager();
 
-		// Quì andrà inizializzata la view (ma la GUI la si scriverà per ultima)
+		final View view = new View();
 		
+		//TODO Finire main.
 	}
 
 }
