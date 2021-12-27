@@ -10,8 +10,8 @@ import it.fooddelivery.view.View;
 public class Main {
 
 	public static void main(String[] args) {
-		final DeliveryManager manager = new DeliveryManager();
-		final View view = new View();
+		final DeliveryManager controller = new DeliveryManager();
+		final View view = new View(controller);
 		
 		//TODO Finire main.
 	}
