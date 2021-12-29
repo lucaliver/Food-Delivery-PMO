@@ -35,6 +35,13 @@ public class OrderImpl implements Order{
 	public void removeMenu(Menu m) {
 		this.menus.remove(m);
 	}
+	
+	@Override
+	public void removeAllMenu() {
+		if(!this.menusList().isEmpty()) {	
+			this.menusList().removeAll(menus);
+		}		
+	}
 
 	@Override
 	public int getSize() {
@@ -63,5 +70,8 @@ public class OrderImpl implements Order{
 	public ZoneImpl getDestination() {
 		return this.destination;		
 	}
+
+
+	
 
 }

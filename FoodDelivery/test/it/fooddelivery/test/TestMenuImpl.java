@@ -12,6 +12,7 @@ class TestMenuImpl {
 	@Test
 	void testMenuImpl() {
 		final MenuImpl m = new MenuImpl("Name1", 23.70, 10);
+		assertNotNull(m);
 		assertEquals("Name1", m.getName());
 		assertEquals(23.70, m.getPrice());
 		assertEquals(10, m.getSize());
@@ -20,6 +21,7 @@ class TestMenuImpl {
 	@Test
 	void testGetPrice() {
 		final MenuImpl m = new MenuImpl("Name1", 10.35, 10);
+		assertNotNull(m);
 		assertEquals(10.35, m.getPrice());
 	}
 

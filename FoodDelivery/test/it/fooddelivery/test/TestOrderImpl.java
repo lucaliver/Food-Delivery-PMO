@@ -52,6 +52,17 @@ class TestOrderImpl {
 		o.removeMenu(m2);
 		assertTrue(o.menusList().isEmpty());
 	}
+	
+	@Test
+	void testRemoveAll() {
+		OrderImpl o = new OrderImpl("abcde", ZoneImpl.CAGLI);
+		o.addMenu(new MenuImpl("a", 2.6, 5));
+		o.addMenu(new MenuImpl("b", 2.7, 12));
+		o.addMenu(new MenuImpl("c", 7.4, 7));
+		o.addMenu(new MenuImpl("d", 5.0, 51));
+		o.removeAllMenu();
+		assertTrue(o.menusList().isEmpty());
+	}
 
 	@Test
 	void testGetSize() {

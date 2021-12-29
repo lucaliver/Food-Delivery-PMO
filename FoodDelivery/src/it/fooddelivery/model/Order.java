@@ -27,6 +27,11 @@ public interface Order{
 	void removeMenu(Menu m);
 	
 	/**
+	 * Remove all the menu from the order
+	 */
+	void removeAllMenu();
+	
+	/**
 	 * @return the size of the order
 	 */
 	int getSize();
