@@ -1,5 +1,7 @@
 package it.fooddelivery.view;
 
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import it.fooddelivery.controller.DeliveryManager;
 
 /**
@@ -9,8 +11,18 @@ import it.fooddelivery.controller.DeliveryManager;
 public class View {
 
 	public View(DeliveryManager controller) {
-		new ViewForCustomer(controller);
-		new ViewForWorker(controller);
+		createViews(
+				new ViewForCustomer(controller),
+				new ViewForWorker(controller)
+				);
+	}
+
+	private void createViews(JFrame... views) {
+		for(JFrame view : views) {
+			view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			view.setVisible(true);
+		}
+		
 	}
 	
 }
