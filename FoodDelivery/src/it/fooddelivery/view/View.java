@@ -11,10 +11,8 @@ import it.fooddelivery.controller.DeliveryManager;
 public class View {
 
 	public View(DeliveryManager controller) {
-		createViews(
-				new ViewForCustomer(controller),
-				new ViewForWorker(controller)
-				);
+		createViews(new ViewForCustomer(controller),
+				    new ViewForWorker(controller));								
 	}
 
 	private void createViews(JFrame... views) {

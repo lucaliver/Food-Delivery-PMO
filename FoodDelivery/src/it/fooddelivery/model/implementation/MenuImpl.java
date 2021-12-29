@@ -1,8 +1,12 @@
-// TOMBARI GIACOMO
+
 package it.fooddelivery.model.implementation;
 
 import it.fooddelivery.model.Menu;
-
+/**
+ * 
+ * @author Tombari Giacomo
+ *
+ */
 public class MenuImpl implements Menu{
 	
 	// Campi
