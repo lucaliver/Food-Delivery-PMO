@@ -1,7 +1,6 @@
 package it.fooddelivery.view;
 
 import javax.swing.JFrame;
-
 import it.fooddelivery.controller.DeliveryManager;
 
 public class ViewForWorker extends JFrame{
