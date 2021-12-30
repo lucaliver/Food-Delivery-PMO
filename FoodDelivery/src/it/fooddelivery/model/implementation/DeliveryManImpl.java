@@ -1,5 +1,5 @@
 /**
- * @author Giulia Costa
+ /* @author Giulia Costa
  */
 
 package it.fooddelivery.model.implementation;
@@ -10,75 +10,47 @@ import java.util.List;
 import it.fooddelivery.model.DeliveryMan;
 import it.fooddelivery.model.Order;
 
-/**
- * A class that represents a delivery man.
- *
- */
-public class DeliveryManImpl implements DeliveryMan {
-	private List<Order> ordersInBag;
-	private double money;
-	private int bagCapacity;
-	private String name;
+public class DeliveryManImpl implements DeliveryMan{
+	private int capacity;
+	private double profit;
+	private List<Order> orderList;
 	
-	private static final int MAXCAPACITY = 100;
-	
-	/**
-	 * Constructor.
-	 */
-	public DeliveryManImpl(String name) {
-		this.ordersInBag = new ArrayList<>();
-		this.money = 0;
-		this.name = name;
-	}
-
-
-	@Override
-	public List<Order> bag() {
-		return this.getOrdersInBag();
-	}
-
-	@Override
-	public boolean addOrder(Order o) {
-		this.ordersInBag.add(o);
-		
-		//TODO Gestione errori e ritorno dell'esito dell'operazione.
-		return true;
-	}
-
-	@Override
-	public boolean deliverOrder(Order o) {
-		this.ordersInBag.remove(o);
-		this.money += o.totalPrice()/10;
-		
-		//TODO Gestione errori e ritorno dell'esito dell'operazione.
-		return true;
+	public DeliveryManImpl(final int capacity) {
+		this.profit = 0;
+		this.capacity = capacity;
+		orderList = new ArrayList<>();
 	}
 
 	@Override
 	public double profit() {
-		return this.money;
+		return profit;
+	}
+
+	@Override
+	public List<Order> orderInBag() {
+		return orderList;
+	}
+
+	@Override
+	public void addOrder(Order o) {
+		orderList.add(o);
+	}
+
+	@Override
+	public void deliverOrder(Order o) {
+		// eliminato l'ordine consegnato dalla lista precedente
+		orderList.remove(o);	
+		// aggiunto il guadagno al fattorino
 	}
 
 	@Override
 	public int capacity() {
-		return this.bagCapacity;
+		return capacity;
 	}
 
 	@Override
 	public boolean isFull() {
-		if (this.bagCapacity == this.MAXCAPACITY)
-			return true;
-		else 
-			return false;
+		return orderList.size() == capacity;
 	}
 
-
-	public List<Order> getOrdersInBag() {
-		return ordersInBag;
-	}
-
-
-	public void setOrdersInBag(List<Order> ordersInBag) {
-		this.ordersInBag = ordersInBag;
-	}
 }
