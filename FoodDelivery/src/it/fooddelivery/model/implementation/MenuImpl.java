@@ -28,7 +28,7 @@ public class MenuImpl implements Menu{
 
 	@Override
 	public String getName() {
-		return name;
+		return "uno";
 	}
 
 	@Override
