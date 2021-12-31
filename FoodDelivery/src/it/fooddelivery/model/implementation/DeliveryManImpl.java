@@ -11,19 +11,17 @@ import it.fooddelivery.model.DeliveryMan;
 import it.fooddelivery.model.Order;
 
 public class DeliveryManImpl implements DeliveryMan{
-	private int capacity;
-	private double profit;
-	private List<Order> orderList;
 	
-	public DeliveryManImpl(final int capacity) {
-		this.profit = 0;
-		this.capacity = capacity;
-		orderList = new ArrayList<>();
-	}
-
-	@Override
-	public double profit() {
-		return profit;
+	static final int MAX_CAPACITY = 100;
+	
+	private double profit;
+	private final String name;
+	private List<Order> orderList;
+		
+	public DeliveryManImpl(double p, String n) {
+		this.profit = p;
+		this.name = n;
+		this.orderList = new ArrayList<>();
 	}
 
 	@Override
@@ -36,21 +34,47 @@ public class DeliveryManImpl implements DeliveryMan{
 		orderList.add(o);
 	}
 
+	//aggiunto il prezzo dell'ordine consegnato
+	public double totalProfit(Order o) {
+		return profit += o.totalPrice();
+	}
+	
+	// eliminato l'ordine consegnato dalla lista precedente
+	public List<Order> removeToBag(Order o){
+		orderList.remove(o);
+		return orderList;
+	}
+	
 	@Override
 	public void deliverOrder(Order o) {
-		// eliminato l'ordine consegnato dalla lista precedente
-		orderList.remove(o);	
-		// aggiunto il guadagno al fattorino
-	}
-
-	@Override
-	public int capacity() {
-		return capacity;
+		removeToBag(o);
+		totalProfit(o);
 	}
 
 	@Override
 	public boolean isFull() {
-		return orderList.size() == capacity;
+		return orderList.size() == MAX_CAPACITY;
 	}
-
+	
+	// restituisce il profitto totale di ogni fatttorino
+	@Override
+	public double getProfit() {
+		return profit;
+	}
+	
+	public void printProfit(double p) {
+		if(p > 0)
+			System.out.println(getProfit());
+		else
+			System.out.println("ERRORE! Valore negativo!");
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+	
+	public static int getMaxCapacity() {
+		return MAX_CAPACITY;
+	}
 }
