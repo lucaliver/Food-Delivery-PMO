@@ -14,10 +14,10 @@ public interface Restaurant {
 	/**
 	 * @return the restaurant's name.
 	 */
-	public String getName();
+	String getName();
 	
 	/**
 	 * @return a list of the menus offered by the restaurant.
 	 */
-	public List<Menu> getMenuOffer();
+	List<Menu> getMenuOffer();
 }

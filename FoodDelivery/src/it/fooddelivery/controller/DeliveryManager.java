@@ -5,15 +5,12 @@
 package it.fooddelivery.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
-import it.fooddelivery.model.City;
 
 /**
  * Controller of a food delivery management software.

@@ -1,5 +1,8 @@
-package it.fooddelivery.view;
+/**
+ * @author Luca Procicchiani
+ */
 
+package it.fooddelivery.view;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

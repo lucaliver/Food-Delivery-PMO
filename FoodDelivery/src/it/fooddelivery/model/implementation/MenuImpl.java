@@ -1,20 +1,25 @@
+/**
+ * @author Giacomo Tombari
+ */
 
 package it.fooddelivery.model.implementation;
 
 import it.fooddelivery.model.Menu;
+
 /**
- * 
- * @author Tombari Giacomo
- *
+ * A class to represent a menu.
  */
 public class MenuImpl implements Menu{
-	
-	// Campi
 	private final String name;
 	private final double price;
 	private final int size;
 	
-	// Costruttore
+	/**
+	 * Constructor, initializes all the fields.
+	 * @param n = name of the menu.
+	 * @param p = price of the menu.
+	 * @param s = size of the menu.
+	 */
 	public MenuImpl(String n, double p, int s) {		
 		this.name = n;
 		this.price = p;
@@ -38,6 +43,6 @@ public class MenuImpl implements Menu{
 
 	@Override
 	public String show() {
-		return("Name: " +getName()+	" Price: " +getPrice()+	" Size: " +getSize());
+		return("Name: " +getName()+	", Price: " +getPrice()+ "€, Size: " +getSize());
 	}
 }

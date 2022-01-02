@@ -1,6 +1,7 @@
 /**
 * @author Giulia Costa
  */
+
 package it.fooddelivery.model;
 
 /**
@@ -8,16 +9,23 @@ package it.fooddelivery.model;
  *
  */
 public enum City {
-	
 	FERMIGNANO("Fermignano"),
 	CAGLI("Cagli"),
 	TAVULLIA("Tavullia"),
 	URBANIA("Urbania"),
 	FOSSOMBRONE("Fossombrone");	
 	
-	private final String description;
+	private final String name;
 	
-	City(final String description) {
-		this.description = description;
+	/**
+	 * 
+	 * @param nome città.
+	 */
+	City(final String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

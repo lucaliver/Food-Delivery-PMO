@@ -12,7 +12,6 @@ import it.fooddelivery.model.City;
 import it.fooddelivery.model.Order;
 
 public class RiderImpl implements Rider{
-	
 	static final int MAX_CAPACITY = 100;
 	static final double PERCENTAGE = 0.20;
 	
@@ -21,7 +20,12 @@ public class RiderImpl implements Rider{
 	private int capacity;
 	private List<Order> orderList;
 	private List<City> cities;
-		
+	
+	/**
+	 * Costurttore.
+	 * @param n = nome del rider.
+	 * @param c = lista delle città in cui egli consegna.
+	 */
 	public RiderImpl(String n, List<City> c) {
 		this.profit = 0;
 		this.capacity = 0;
@@ -88,8 +92,8 @@ public class RiderImpl implements Rider{
 	}
 
 	/**
-	 *  
-	 * @param o viene aggiunto il profitto al fattorino per ogni ordine 
+	 * Il fattorino incassa una parte del costo dell'ordine.
+	 * @param o = ordine di cui incassare il guadagno. 
 	 */
 	private void addProfit(Order o) {
 		this.profit += o.totalPrice() * PERCENTAGE;

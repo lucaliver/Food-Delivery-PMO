@@ -1,20 +1,28 @@
+/**
+ * @author Giacomo Tombari 
+ */
+
 package it.fooddelivery.model.implementation;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.City;
 
+/**
+ * A class to represent an order.
+ */
 public class OrderImpl implements Order{
-
-	// Campi
 	private final String idOrder;
 	private final City destination;
 	private final List<Menu> menus;
 	
-	// Costruttore
+	/**
+	 * Constructor.
+	 * @param id = id of the order.
+	 * @param dest = city of destination.
+	 */
 	public OrderImpl(String id, City dest) {		
 		this.idOrder = id;
 		this.destination = dest;
