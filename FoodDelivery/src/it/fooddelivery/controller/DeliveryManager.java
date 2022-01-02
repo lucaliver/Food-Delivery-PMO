@@ -14,19 +14,16 @@ import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.City;
-import it.fooddelivery.model.implementation.RiderImpl;
 
 /**
  * Controller of a food delivery management software.
  *
  */
 public class DeliveryManager {
-	//TODO Forse applicare il design pattern Singleton al controller, tanto ce ne deve essere uno solo.
-
-	//private List<Zone> zones;
-	private Map<City, List<Rider>> deliveryMap;
-
-	private List<Order> waitingOrders = new ArrayList<>();	
+	//TODO Forse applicare il design pattern Singleton al controller.
+	
+	private List<Rider> riders;
+	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
 	
 	/**
@@ -34,8 +31,7 @@ public class DeliveryManager {
 	 */
 	public DeliveryManager(){
 		this.waitingOrders = new ArrayList<>();
-		//this.zones = new ArrayList<>();
-		this.deliveryMap = new HashMap<>();
+		this.riders = new ArrayList<>();
 		this.restaurants = new ArrayList<>();
 	}
 	
@@ -48,11 +44,11 @@ public class DeliveryManager {
 	 * false if the order was put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
-		Optional<Rider> selected = this.deliveryMap.get(order.getDestination()).stream() 
+		Optional<Rider> selected = this.riders.stream()
+		.filter(x->x.getCities().contains(order.getDestination()))
 		.filter(x->x.canFit(order))	
 		.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
 		.findFirst();
-		
 		
 		if (selected.isPresent()) {
 			selected.get().addOrder(order);

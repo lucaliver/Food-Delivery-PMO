@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import it.fooddelivery.controller.DeliveryManager;
+
 class TestDeliveryManager {
 
 	@Test
@@ -14,13 +16,16 @@ class TestDeliveryManager {
 
 	@Test
 	void testGetWaitingOrders() {
-		//TODO Implementare.
-		fail("Not yet implemented");
+		//TODO Finire di implementare.
+		DeliveryManager dm = new DeliveryManager();
+		assertNotNull(dm);
 	}
 
-	// TODO Finire tutti i test.
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testGetRestaurants() {
+		//TODO Finire di implementare.
+		DeliveryManager dm = new DeliveryManager();
+		assertNotNull(dm);
+		assertEquals(dm.getRestaurants(), null);
 	}
 }

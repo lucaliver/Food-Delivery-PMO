@@ -18,25 +18,17 @@ public class RestaurantImpl implements Restaurant {
 	
 	public RestaurantImpl(String name, List<Menu> menuOffer) {
 		this.name = name;
-		this.setMenuOffer(menuOffer);
+		this.menuOffer = menuOffer;
 	}
 	
 	@Override
-	public String name() {
+	public String getName() {
 		return this.name;
 	}
 
 	@Override
-	public List<Menu> menuOffer() {
-		return this.getMenuOffer();
-	}
-
 	public List<Menu> getMenuOffer() {
-		return menuOffer;
-	}
-
-	public void setMenuOffer(List<Menu> menuOffer) {
-		this.menuOffer = menuOffer;
+		return this.menuOffer;
 	}
 
 }
