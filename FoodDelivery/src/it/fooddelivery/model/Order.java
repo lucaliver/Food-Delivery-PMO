@@ -5,6 +5,8 @@ package it.fooddelivery.model;
 
 import java.util.List;
 
+import it.fooddelivery.model.ZoneType;
+
 /**
  * Interface for a order
  */
