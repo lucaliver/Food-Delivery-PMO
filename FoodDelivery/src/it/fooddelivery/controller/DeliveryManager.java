@@ -37,11 +37,6 @@ public class DeliveryManager {
 		//this.zones = new ArrayList<>();
 		this.deliveryMap = new HashMap<>();
 		this.restaurants = new ArrayList<>();
-		
-		//DA RIMUOVERE, STO SOLO PROVANDO UNA COSA
-		List<DeliveryMan> listaProva = new ArrayList<>();
-		listaProva.add(new DeliveryManImpl(0, "Bogliolo"));
-		this.deliveryMap.put(ZoneType.URBANIA, listaProva);
 	}
 	
 	/**
@@ -53,10 +48,9 @@ public class DeliveryManager {
 	 * false if the order was put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
-		/*
 		Optional<DeliveryMan> selected = this.deliveryMap.get(order.getDestination()).stream() 
-		.filter(x->x.capacity()>=order.getSize())	
-		.sorted((o1, o2)->{return (int) (o1.profit() - o2.profit());})	
+		.filter(x->x.canFit(order))	
+		.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
 		.findFirst();
 		
 		
@@ -68,8 +62,6 @@ public class DeliveryManager {
 			this.waitingOrders.add(order);
 			return false;
 		}
-		*/
-		return true;
 	}
 
 	public List<Order> getWaitingOrders() {
