@@ -13,7 +13,6 @@ import java.util.Optional;
 import it.fooddelivery.model.DeliveryMan;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
-import it.fooddelivery.model.DeliveryManType;
 import it.fooddelivery.model.ZoneType;
 import it.fooddelivery.model.implementation.DeliveryManImpl;
 
@@ -41,7 +40,7 @@ public class DeliveryManager {
 		
 		//DA RIMUOVERE, STO SOLO PROVANDO UNA COSA
 		List<DeliveryMan> listaProva = new ArrayList<>();
-		listaProva.add(new DeliveryManImpl("Bogliolo"));
+		listaProva.add(new DeliveryManImpl(0, "Bogliolo"));
 		this.deliveryMap.put(ZoneType.URBANIA, listaProva);
 	}
 	
@@ -54,17 +53,23 @@ public class DeliveryManager {
 	 * false if the order was put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
-		//TODO implementarla
-		Optional<DeliveryMan> selected = this.deliveryMap.get(order.getDestination()).stream() // Ottenere la lista di deliveryMen della città di destinazione
-		.filter(x->x.capacity()>=order.getSize())		// Filtrare quelli con spazio sufficente all'order.size()
-		.sorted((o1, o2)->o1.profit()>o2.profit())	// Sort per il guadagno crescente, DA SISTEMARE
-		.findFirst();	// Prendo il primo fattorino
+		/*
+		Optional<DeliveryMan> selected = this.deliveryMap.get(order.getDestination()).stream() 
+		.filter(x->x.capacity()>=order.getSize())	
+		.sorted((o1, o2)->{return (int) (o1.profit() - o2.profit());})	
+		.findFirst();
 		
-		// Assegno l'ordine a quel fattorino
 		
-		// Se non c'è un fattorino, aggiungo l'ordine a waitingOrders
-		
-		return false;
+		if (selected.isPresent()) {
+			selected.get().addOrder(order);
+			return true;
+		}
+		else {
+			this.waitingOrders.add(order);
+			return false;
+		}
+		*/
+		return true;
 	}
 
 	public List<Order> getWaitingOrders() {
@@ -73,14 +78,6 @@ public class DeliveryManager {
 
 	public void setWaitingOrders(List<Order> waitingOrders) {
 		this.waitingOrders = waitingOrders;
-	}
-
-	public List<DeliveryManType> getZones() {
-		return zones;
-	}
-
-	public void setZones(List<DeliveryManType> zones) {
-		this.zones = zones;
 	}
 
 	public List<Restaurant> getRestaurants() {
