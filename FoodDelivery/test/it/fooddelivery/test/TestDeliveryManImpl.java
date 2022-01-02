@@ -36,15 +36,17 @@ class TestDeliveryManImpl {
 	void testAddOrder(Order o) {
 		DeliveryManImpl man2 = new DeliveryManImpl(0, "Fattorino_2");
 		man2.addOrder(o);
-		assertTrue(man2.orderInBag().isEmpty());
+		assertTrue(man2.getBag().isEmpty());
 		assertFalse(man2.isFull());
-		assertEquals(1, man2.orderInBag().size());
+		assertEquals(1, man2.getBag().size());
 	}
 
 	@Test
 	void testDeliverOrder(Order o) {
-		List<Order> orderList = new ArrayList<Order>();
-		assertTrue(orderList.remove(o));
+		DeliveryManImpl delivery = new DeliveryManImpl(0, "Fattorino");
+		delivery.addOrder(o);
+		delivery.deliverOrder(o);
+		assertTrue(delivery.getBag().isEmpty());
 	}
 
 	@Test
@@ -54,24 +56,14 @@ class TestDeliveryManImpl {
 		assertFalse(bagMan.isFull());
 	}
 
-	@Test
+/*	@Test
 	void testTotalProfit(Order o) {
 		DeliveryManImpl man6 = new DeliveryManImpl(0, "Fattorino_6");
 		assertNotNull(man6);
 		assertEquals(123,00, man6.totalProfit(o));
 		assertNotEquals(-859,00, man6.totalProfit(o));
-	}
-	
-	@Test
-	void testRemoveToBag(Order o){
-		List<Order> orderList = new ArrayList<Order>();
-		DeliveryManImpl man7 = new DeliveryManImpl(0, "Fattorino_7");
-		assertTrue(orderList.remove(o));
-		assertFalse(!orderList.remove(o));
-		assertFalse(orderList.add(o));
-		assertNotEquals(orderList, man7.orderInBag());
-	}
-		
+	}*/
+			
 	@Test
 	void testGetMaxCapacity() {
 		DeliveryManImpl man3 = new DeliveryManImpl(0, "Fattorino_3");
