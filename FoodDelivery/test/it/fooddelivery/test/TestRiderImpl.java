@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ class TestRiderImpl {
 
 	@Test
 	void testDeliveryManImpl() {
-		RiderImpl man = new RiderImpl(0, "Fattorino_1");
+		RiderImpl man = new RiderImpl("Fattorino_1", null);
 		assertNotNull(man);
 		assertEquals("Fattorino_1", man.getName());
 		assertNotEquals(12, man.getName());
@@ -33,55 +32,61 @@ class TestRiderImpl {
 	}
 
 	@Test
-	void testAddOrder(Order o) {
-		RiderImpl man2 = new RiderImpl(0, "Fattorino_2");
+	void testAddOrder() {
+		RiderImpl man2 = new RiderImpl("Fattorino_2", null);
+		OrderImpl o = new OrderImpl("iehfkj568", City.CAGLI);
 		man2.addOrder(o);
-		assertTrue(man2.getBag().isEmpty());
-		assertFalse(man2.isFull());
+		assertFalse(man2.getBag().isEmpty());
 		assertEquals(1, man2.getBag().size());
 	}
 
 	@Test
-	void testDeliverOrder(Order o) {
-		RiderImpl delivery = new RiderImpl(0, "Fattorino");
+	void testDeliverOrder() {
+		RiderImpl delivery = new RiderImpl("Fattorino", null);
+		OrderImpl o = new OrderImpl("67tyv90", City.FERMIGNANO);
+		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
+		MenuImpl m2 = new MenuImpl("yuyub", 80.00, 40);				
+		o.addMenu(m);
+		o.addMenu(m2);
 		delivery.addOrder(o);
 		delivery.deliverOrder(o);
-		assertTrue(delivery.getBag().remove(o));
+		assertFalse(delivery.getBag().contains(o));
+		assertEquals(o.totalPrice()*RiderImpl.getPercentage(), delivery.getProfit());
 	}
 
 	@Test
 	void testIsFull() {
-		RiderImpl bagMan = new RiderImpl(0, "Fattorino_5");
+		RiderImpl bagMan = new RiderImpl("Fattorino_5", null);
 		assertTrue(!bagMan.isFull());
 		assertFalse(bagMan.isFull());
 	}
-
-/*	@Test
-	void testTotalProfit(Order o) {
-		DeliveryManImpl man6 = new DeliveryManImpl(0, "Fattorino_6");
-		assertNotNull(man6);
-		assertEquals(123,00, man6.totalProfit(o));
-		assertNotEquals(-859,00, man6.totalProfit(o));
-	}*/
 			
 	@Test
 	void testGetProfit() {
-		RiderImpl man4 = new RiderImpl(0, "Fattorino_4");
+		RiderImpl man4 = new RiderImpl("Fattorino_4", null);
 		assertEquals(0, man4.getProfit());
 		assertNotEquals(-485,00, man4.getProfit());
 	}
 
 	@Test
 	void testGetName() {
-		RiderImpl man5 = new RiderImpl(0, "Fattorino_5");
+		RiderImpl man5 = new RiderImpl("Fattorino_5", null);
 		assertEquals("Fattorino_5", man5.getName());
 		assertNotEquals(24, man5.getName());
 	}	
 	
 	@Test
-	void testCanFit(Order o) {
-		RiderImpl man = new RiderImpl(0, "Fattorino");
-		assertTrue(!man.canFit(o));
+	void testCanFit() {
+		RiderImpl man = new RiderImpl("Fattorino", null);
+		OrderImpl o = new OrderImpl("oiu78", City.FOSSOMBRONE);
+		MenuImpl m = new MenuImpl("Dfgheu", 80.00, 50);
+		MenuImpl m2 = new MenuImpl("Sushi", 50.00, 50);
+		MenuImpl m3 = new MenuImpl("Pizzeria", 80.00, 101);
+		o.addMenu(m);
+		o.addMenu(m2);
+		assertTrue(man.canFit(o));
+		o.removeAllMenu();
+		o.addMenu(m3);
 		assertFalse(man.canFit(o));
 	}
 }

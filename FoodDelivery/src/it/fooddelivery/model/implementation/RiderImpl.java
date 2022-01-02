@@ -83,6 +83,10 @@ public class RiderImpl implements Rider{
 		return MAX_CAPACITY;
 	}
 
+	public static double getPercentage() {
+		return PERCENTAGE;
+	}
+
 	/**
 	 *  
 	 * @param o viene aggiunto il profitto al fattorino per ogni ordine 
