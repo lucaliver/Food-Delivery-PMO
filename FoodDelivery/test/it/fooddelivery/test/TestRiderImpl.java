@@ -9,7 +9,7 @@ import java.util.function.BooleanSupplier;
 import org.junit.jupiter.api.Test;
 
 import it.fooddelivery.model.Order;
-import it.fooddelivery.model.ZoneType;
+import it.fooddelivery.model.City;
 import it.fooddelivery.model.implementation.RiderImpl;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;

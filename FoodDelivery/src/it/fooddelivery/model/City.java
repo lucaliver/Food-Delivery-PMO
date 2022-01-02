@@ -7,7 +7,7 @@ package it.fooddelivery.model;
  * Enum used for Cities.
  *
  */
-public enum ZoneType {
+public enum City {
 	
 	FERMIGNANO("Fermignano"),
 	CAGLI("Cagli"),
@@ -17,7 +17,7 @@ public enum ZoneType {
 	
 	private final String description;
 	
-	ZoneType(final String description) {
+	City(final String description) {
 		this.description = description;
 	}
 }

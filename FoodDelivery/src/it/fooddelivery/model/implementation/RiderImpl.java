@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.fooddelivery.model.Rider;
+import it.fooddelivery.model.City;
 import it.fooddelivery.model.Order;
 
 public class RiderImpl implements Rider{
@@ -19,11 +20,13 @@ public class RiderImpl implements Rider{
 	private final String name;
 	private int capacity;
 	private List<Order> orderList;
+	private List<City> cities;
 		
-	public RiderImpl(double p, String n) {
-		this.profit = p;
-		this.name = n;
+	public RiderImpl(String n, List<City> c) {
+		this.profit = 0;
 		this.capacity = 0;
+		this.name = n;
+		this.cities = c;
 		this.orderList = new ArrayList<>();
 	}
 	
@@ -69,6 +72,11 @@ public class RiderImpl implements Rider{
 	@Override
 	public boolean canFit(Order o) {		// ci entra nello zaino?
 		return (this.capacity + o.getSize()) <= MAX_CAPACITY;
+	}
+	
+	@Override
+	public List<City> getCities() {
+		return cities;
 	}
 	
 	public static int getMaxCapacity() {

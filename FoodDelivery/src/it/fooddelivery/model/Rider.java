@@ -50,5 +50,11 @@ public interface Rider {
 	 * @return true se entra l'ordine 
 	 */
 	boolean canFit(Order o);
+	
+	/**
+	 * 
+	 * @return lista delle città relative ad ogni fattorino
+	 */
+	List<City> getCities(); 
 
 }

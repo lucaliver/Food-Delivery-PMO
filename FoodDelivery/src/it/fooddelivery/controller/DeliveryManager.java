@@ -13,7 +13,7 @@ import java.util.Optional;
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
-import it.fooddelivery.model.ZoneType;
+import it.fooddelivery.model.City;
 import it.fooddelivery.model.implementation.RiderImpl;
 
 /**
@@ -24,7 +24,7 @@ public class DeliveryManager {
 	//TODO Forse applicare il design pattern Singleton al controller, tanto ce ne deve essere uno solo.
 
 	//private List<Zone> zones;
-	private Map<ZoneType, List<Rider>> deliveryMap;
+	private Map<City, List<Rider>> deliveryMap;
 
 	private List<Order> waitingOrders = new ArrayList<>();	
 	private List<Restaurant> restaurants;
