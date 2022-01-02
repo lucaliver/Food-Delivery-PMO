@@ -11,12 +11,14 @@ import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.DeliveryManager;
 
-public class ViewForCustomer extends JFrame {
+public class ViewWelcome extends JFrame {
 	private final DeliveryManager controller;
-
-	ViewForCustomer(final DeliveryManager controller){
+	private final String title = "Customer Screen";
+	
+	ViewWelcome(final DeliveryManager controller){
 		this.controller = controller;
-		this.setTitle("Customer Screen");
+		this.setTitle(this.title);
+		this.setSize(600, 400);
 		
 		final JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -32,8 +34,7 @@ public class ViewForCustomer extends JFrame {
 		mainPanel.add(button);
 		getContentPane().add(mainPanel);
 		
-		this.setVisible(true);
-		this.pack();
+		//this.pack();
 	}
 	
 	
