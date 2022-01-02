@@ -4,7 +4,7 @@
 package it.fooddelivery.model;
 
 import java.util.List;
-import it.fooddelivery.model.implementation.ZoneImpl;
+import it.fooddelivery.model.ZoneType;
 
 /**
  * Interface for a order
@@ -51,6 +51,6 @@ public interface Order{
 	 * 
 	 * @return the destination of the order
 	 */
-	ZoneImpl getDestination();
+	ZoneType getDestination();
 		
 }

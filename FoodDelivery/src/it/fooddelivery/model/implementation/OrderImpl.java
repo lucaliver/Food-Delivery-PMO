@@ -5,16 +5,17 @@ import java.util.Iterator;
 import java.util.List;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
+import it.fooddelivery.model.ZoneType;
 
 public class OrderImpl implements Order{
 
 	// Campi
 	private final String idOrder;
-	private final ZoneImpl destination;
+	private final ZoneType destination;
 	private final List<Menu> menus;
 	
 	// Costruttore
-	public OrderImpl(String id, ZoneImpl dest) {		
+	public OrderImpl(String id, ZoneType dest) {		
 		this.idOrder = id;
 		this.destination = dest;
 		this.menus = new ArrayList<>();	
@@ -67,7 +68,7 @@ public class OrderImpl implements Order{
 	}
 
 	@Override
-	public ZoneImpl getDestination() {
+	public ZoneType getDestination() {
 		return this.destination;		
 	}
 

@@ -7,22 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
-import it.fooddelivery.model.implementation.ZoneImpl;
+import it.fooddelivery.model.ZoneType;
 
 class TestOrderImpl {
 
 	@Test
 	void testOrderImpl() {
-		OrderImpl o = new OrderImpl("8ft9", ZoneImpl.CAGLI);
+		OrderImpl o = new OrderImpl("8ft9", ZoneType.CAGLI);
 		assertNotNull(o);
 		assertEquals("8ft9", o.getIdOrder());
-		assertEquals(ZoneImpl.CAGLI, o.getDestination());
+		assertEquals(ZoneType.CAGLI, o.getDestination());
 		assertTrue(o.menusList().isEmpty());
 	}
 
 	@Test
 	void testMenusList() {
-		OrderImpl o = new OrderImpl("88ty", ZoneImpl.FOSSOMBRONE);
+		OrderImpl o = new OrderImpl("88ty", ZoneType.FOSSOMBRONE);
 		assertTrue(o.menusList().isEmpty());		
 		o.addMenu(new MenuImpl("M1", 0.40, 55));
 		assertNotNull(o.menusList());
@@ -31,7 +31,7 @@ class TestOrderImpl {
 
 	@Test
 	void testAddMenu() {
-		OrderImpl o = new OrderImpl("oo9i8", ZoneImpl.FOSSOMBRONE);
+		OrderImpl o = new OrderImpl("oo9i8", ZoneType.FOSSOMBRONE);
 		assertTrue(o.menusList().isEmpty()); 
 		MenuImpl m = new MenuImpl("Name", 0.20, 3);
 		o.addMenu(m);
@@ -41,7 +41,7 @@ class TestOrderImpl {
 
 	@Test
 	void testRemoveMenu() {
-		OrderImpl o = new OrderImpl("abcde", ZoneImpl.CAGLI);
+		OrderImpl o = new OrderImpl("abcde", ZoneType.CAGLI);
 		MenuImpl m1 = new MenuImpl("M1", 42.10, 12);
 		MenuImpl m2 = new MenuImpl("M2", 21.00, 7);
 		o.addMenu(m1);
@@ -55,7 +55,7 @@ class TestOrderImpl {
 	
 	@Test
 	void testRemoveAll() {
-		OrderImpl o = new OrderImpl("abcde", ZoneImpl.CAGLI);
+		OrderImpl o = new OrderImpl("abcde", ZoneType.CAGLI);
 		o.addMenu(new MenuImpl("a", 2.6, 5));
 		o.addMenu(new MenuImpl("b", 2.7, 12));
 		o.addMenu(new MenuImpl("c", 7.4, 7));
@@ -66,7 +66,7 @@ class TestOrderImpl {
 
 	@Test
 	void testGetSize() {
-		OrderImpl o = new OrderImpl("88ty", ZoneImpl.FOSSOMBRONE);
+		OrderImpl o = new OrderImpl("88ty", ZoneType.FOSSOMBRONE);
 		o.addMenu(new MenuImpl("Name0", 11.00, 7)); 
 		o.addMenu(new MenuImpl("Name1", 19.60, 14)); 
 		o.addMenu(new MenuImpl("Name2", 1.99, 23)); 
@@ -77,7 +77,7 @@ class TestOrderImpl {
 
 	@Test
 	void testTotalPrice() {
-		OrderImpl o = new OrderImpl("45lk", ZoneImpl.URBANIA);
+		OrderImpl o = new OrderImpl("45lk", ZoneType.URBANIA);
 		o.addMenu(new MenuImpl("Name0", 12.60, 7)); 
 		o.addMenu(new MenuImpl("Name1", 17.23, 14)); 
 		o.addMenu(new MenuImpl("Name2", 1.47, 23)); 
@@ -88,9 +88,9 @@ class TestOrderImpl {
 
 	@Test
 	void testGetIdOrder() {
-		OrderImpl o1 = new OrderImpl("ll31q", ZoneImpl.URBANIA);
-		OrderImpl o2 = new OrderImpl("xxx56t", ZoneImpl.TAVULLIA);
-		OrderImpl o3 = new OrderImpl("khj67q", ZoneImpl.URBANIA);
+		OrderImpl o1 = new OrderImpl("ll31q", ZoneType.URBANIA);
+		OrderImpl o2 = new OrderImpl("xxx56t", ZoneType.TAVULLIA);
+		OrderImpl o3 = new OrderImpl("khj67q", ZoneType.URBANIA);
 		assertEquals("ll31q", o1.getIdOrder());
 		assertEquals("xxx56t", o2.getIdOrder());
 		assertEquals("khj67q", o3.getIdOrder());
@@ -98,10 +98,10 @@ class TestOrderImpl {
 
 	@Test
 	void testGetDestination() {
-		OrderImpl o1 = new OrderImpl("sei", ZoneImpl.FERMIGNANO);
-		OrderImpl o2 = new OrderImpl("ste", ZoneImpl.URBANIA);
-		assertEquals(ZoneImpl.FERMIGNANO, o1.getDestination());
-		assertEquals(ZoneImpl.URBANIA, o2.getDestination());
+		OrderImpl o1 = new OrderImpl("sei", ZoneType.FERMIGNANO);
+		OrderImpl o2 = new OrderImpl("ste", ZoneType.URBANIA);
+		assertEquals(ZoneType.FERMIGNANO, o1.getDestination());
+		assertEquals(ZoneType.URBANIA, o2.getDestination());
 	}
 
 }
