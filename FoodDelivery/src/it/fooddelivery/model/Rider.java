@@ -7,7 +7,7 @@ package it.fooddelivery.model;
 import java.util.List;
 
 // Giulia Costa
-public interface DeliveryMan {
+public interface Rider {
 	/** 
 	 * 
 	 * @return lista degli ordini nello zaino del fattorino

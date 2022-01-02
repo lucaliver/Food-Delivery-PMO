@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.ZoneType;
-import it.fooddelivery.model.implementation.DeliveryManImpl;
+import it.fooddelivery.model.implementation.RiderImpl;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
 
-class TestDeliveryManImpl {
+class TestRiderImpl {
 
 	@Test
 	void testDeliveryManImpl() {
-		DeliveryManImpl man = new DeliveryManImpl(0, "Fattorino_1");
+		RiderImpl man = new RiderImpl(0, "Fattorino_1");
 		assertNotNull(man);
 		assertEquals("Fattorino_1", man.getName());
 		assertNotEquals(12, man.getName());
@@ -27,14 +27,14 @@ class TestDeliveryManImpl {
 	}
 
 	@Test
-	void testOrderInBag() {
+	void testgetBag() {
 		List<Order> orderList = new ArrayList<Order>();
 		assertNotNull(orderList);
 	}
 
 	@Test
 	void testAddOrder(Order o) {
-		DeliveryManImpl man2 = new DeliveryManImpl(0, "Fattorino_2");
+		RiderImpl man2 = new RiderImpl(0, "Fattorino_2");
 		man2.addOrder(o);
 		assertTrue(man2.getBag().isEmpty());
 		assertFalse(man2.isFull());
@@ -43,15 +43,15 @@ class TestDeliveryManImpl {
 
 	@Test
 	void testDeliverOrder(Order o) {
-		DeliveryManImpl delivery = new DeliveryManImpl(0, "Fattorino");
+		RiderImpl delivery = new RiderImpl(0, "Fattorino");
 		delivery.addOrder(o);
 		delivery.deliverOrder(o);
-		assertTrue(delivery.getBag().isEmpty());
+		assertTrue(delivery.getBag().remove(o));
 	}
 
 	@Test
 	void testIsFull() {
-		DeliveryManImpl bagMan = new DeliveryManImpl(0, "Fattorino_5");
+		RiderImpl bagMan = new RiderImpl(0, "Fattorino_5");
 		assertTrue(!bagMan.isFull());
 		assertFalse(bagMan.isFull());
 	}
@@ -65,25 +65,23 @@ class TestDeliveryManImpl {
 	}*/
 			
 	@Test
-	void testGetMaxCapacity() {
-		DeliveryManImpl man3 = new DeliveryManImpl(0, "Fattorino_3");
-		assertEquals(100, man3.getMaxCapacity());
-		assertNotEquals(-1, man3.getMaxCapacity());
-		assertNotEquals(101, man3.getMaxCapacity());
-	}
-
-	@Test
 	void testGetProfit() {
-		DeliveryManImpl man4 = new DeliveryManImpl(0, "Fattorino_4");
+		RiderImpl man4 = new RiderImpl(0, "Fattorino_4");
 		assertEquals(0, man4.getProfit());
 		assertNotEquals(-485,00, man4.getProfit());
 	}
 
 	@Test
 	void testGetName() {
-		DeliveryManImpl man5 = new DeliveryManImpl(0, "Fattorino_5");
+		RiderImpl man5 = new RiderImpl(0, "Fattorino_5");
 		assertEquals("Fattorino_5", man5.getName());
 		assertNotEquals(24, man5.getName());
+	}	
+	
+	@Test
+	void testCanFit(Order o) {
+		RiderImpl man = new RiderImpl(0, "Fattorino");
+		assertTrue(!man.canFit(o));
+		assertFalse(man.canFit(o));
 	}
-
 }

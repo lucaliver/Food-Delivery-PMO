@@ -7,10 +7,10 @@ package it.fooddelivery.model.implementation;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.fooddelivery.model.DeliveryMan;
+import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.Order;
 
-public class DeliveryManImpl implements DeliveryMan{
+public class RiderImpl implements Rider{
 	
 	static final int MAX_CAPACITY = 100;
 	static final double PERCENTAGE = 0.20;
@@ -20,7 +20,7 @@ public class DeliveryManImpl implements DeliveryMan{
 	private int capacity;
 	private List<Order> orderList;
 		
-	public DeliveryManImpl(double p, String n) {
+	public RiderImpl(double p, String n) {
 		this.profit = p;
 		this.name = n;
 		this.capacity = 0;

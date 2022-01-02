@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import it.fooddelivery.model.DeliveryMan;
+import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.ZoneType;
-import it.fooddelivery.model.implementation.DeliveryManImpl;
+import it.fooddelivery.model.implementation.RiderImpl;
 
 /**
  * Controller of a food delivery management software.
@@ -24,7 +24,7 @@ public class DeliveryManager {
 	//TODO Forse applicare il design pattern Singleton al controller, tanto ce ne deve essere uno solo.
 
 	//private List<Zone> zones;
-	private Map<ZoneType, List<DeliveryMan>> deliveryMap;
+	private Map<ZoneType, List<Rider>> deliveryMap;
 
 	private List<Order> waitingOrders = new ArrayList<>();	
 	private List<Restaurant> restaurants;
@@ -48,7 +48,7 @@ public class DeliveryManager {
 	 * false if the order was put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
-		Optional<DeliveryMan> selected = this.deliveryMap.get(order.getDestination()).stream() 
+		Optional<Rider> selected = this.deliveryMap.get(order.getDestination()).stream() 
 		.filter(x->x.canFit(order))	
 		.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
 		.findFirst();
