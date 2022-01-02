@@ -16,7 +16,7 @@ import it.fooddelivery.model.Restaurant;
  * Controller of a food delivery management software.
  *
  */
-public class DeliveryManager {
+public class Manager {
 	//TODO Forse applicare il design pattern Singleton al controller.
 	
 	private List<Rider> riders;
@@ -26,7 +26,7 @@ public class DeliveryManager {
 	/**
 	 * The constructor inizializes all the lists.
 	 */
-	public DeliveryManager(){
+	public Manager(){
 		this.waitingOrders = new ArrayList<>();
 		this.riders = new ArrayList<>();
 		this.restaurants = new ArrayList<>();
@@ -71,6 +71,14 @@ public class DeliveryManager {
 
 	public void setRestaurants(List<Restaurant> restaurants) {
 		this.restaurants = restaurants;
+	}
+	
+	public List<Rider> getRiders() {
+		return riders;
+	}
+	
+	public void setRiders(List<Rider> riders) {
+		this.riders = riders;
 	}
 	
 	

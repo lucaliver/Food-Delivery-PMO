@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import it.fooddelivery.controller.DeliveryManager;
+import it.fooddelivery.controller.Manager;
 
 class TestDeliveryManager {
 
@@ -21,14 +21,14 @@ class TestDeliveryManager {
 	@Test
 	void testGetWaitingOrders() {
 		//TODO Finire di implementare.
-		DeliveryManager dm = new DeliveryManager();
+		Manager dm = new Manager();
 		assertNotNull(dm);
 	}
 
 	@Test
 	void testGetRestaurants() {
 		//TODO Finire di implementare.
-		DeliveryManager dm = new DeliveryManager();
+		Manager dm = new Manager();
 		assertNotNull(dm);
 		assertEquals(dm.getRestaurants(), null);
 	}

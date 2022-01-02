@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import it.fooddelivery.controller.DeliveryManager;
+import it.fooddelivery.controller.Manager;
 
 public class ViewWelcome extends JFrame {
-	private final DeliveryManager controller;
+	private final Manager controller;
 	private final String title = "Customer Screen";
 	
-	ViewWelcome(final DeliveryManager controller){
+	ViewWelcome(final Manager controller){
 		this.controller = controller;
 		this.setTitle(this.title);
 		this.setSize(600, 400);
