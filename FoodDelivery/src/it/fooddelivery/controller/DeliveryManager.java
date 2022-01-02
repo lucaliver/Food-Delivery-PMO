@@ -13,9 +13,9 @@ import java.util.Optional;
 import it.fooddelivery.model.DeliveryMan;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
-import it.fooddelivery.model.Zone;
+import it.fooddelivery.model.DeliveryManType;
+import it.fooddelivery.model.ZoneType;
 import it.fooddelivery.model.implementation.DeliveryManImpl;
-import it.fooddelivery.model.implementation.ZoneImpl;
 
 /**
  * Controller of a food delivery management software.
@@ -25,7 +25,7 @@ public class DeliveryManager {
 	//TODO Forse applicare il design pattern Singleton al controller, tanto ce ne deve essere uno solo.
 
 	//private List<Zone> zones;
-	private Map<ZoneImpl, List<DeliveryMan>> deliveryMap;
+	private Map<ZoneType, List<DeliveryMan>> deliveryMap;
 
 	private List<Order> waitingOrders = new ArrayList<>();	
 	private List<Restaurant> restaurants;
@@ -42,7 +42,7 @@ public class DeliveryManager {
 		//DA RIMUOVERE, STO SOLO PROVANDO UNA COSA
 		List<DeliveryMan> listaProva = new ArrayList<>();
 		listaProva.add(new DeliveryManImpl("Bogliolo"));
-		this.deliveryMap.put(ZoneImpl.URBANIA, listaProva);
+		this.deliveryMap.put(ZoneType.URBANIA, listaProva);
 	}
 	
 	/**
@@ -75,11 +75,11 @@ public class DeliveryManager {
 		this.waitingOrders = waitingOrders;
 	}
 
-	public List<Zone> getZones() {
+	public List<DeliveryManType> getZones() {
 		return zones;
 	}
 
-	public void setZones(List<Zone> zones) {
+	public void setZones(List<DeliveryManType> zones) {
 		this.zones = zones;
 	}
 
