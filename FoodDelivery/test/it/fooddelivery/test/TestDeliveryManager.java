@@ -21,14 +21,14 @@ class TestDeliveryManager {
 	@Test
 	void testGetWaitingOrders() {
 		//TODO Finire di implementare.
-		Manager dm = new Manager();
+		Manager dm = new Manager(null, null);
 		assertNotNull(dm);
 	}
 
 	@Test
 	void testGetRestaurants() {
 		//TODO Finire di implementare.
-		Manager dm = new Manager();
+		Manager dm = new Manager(null, null);
 		assertNotNull(dm);
 		assertEquals(dm.getRestaurants(), null);
 	}

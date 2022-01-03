@@ -26,17 +26,19 @@ import it.fooddelivery.model.implementation.RestaurantImpl;
  * View component for the welcome screen that the customer will see at first.
  *
  */
+@SuppressWarnings("serial")
 public class ViewWelcome extends JFrame implements ActionListener {
 	private final Manager controller;
 	private final String title = "Benvenuto, inizia ad ordinare!";
-	private JPanel mainPanel;
-	private JButton proceedButton;
 	private JComboBox<City> citiesCombo;
-	private JLabel citiesLabel;
-	private JLabel restaurantLabel;
 	private JComboBox<Restaurant> restaurantCombo;
 	private JTextField addressField;
+	private JButton proceedButton;
 	
+	/**
+	 * Constructor.
+	 * @param controller for the MVC pattern.
+	 */
 	ViewWelcome(final Manager controller){
 		this.controller = controller;
 		this.Init();
@@ -46,28 +48,30 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	 * It initializes all the GUI.
 	 */
 	private void Init() {
-		//TODO Finire GUI.
 		this.setTitle(this.title);
 		this.setSize(400, 200);
-		mainPanel = new JPanel();
+		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
-		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
-		citiesLabel = new JLabel("Selezionare la destinazione:");
+		JLabel citiesLabel = new JLabel("Selezionare la destinazione:");
 		citiesCombo = new JComboBox<>();
 		for(City c: City.values())
 			citiesCombo.addItem(c);
-		restaurantLabel = new JLabel("Selezionare il ristorante:");
+		addressField = new JTextField("Inserire indirizzo qui");
+		
+		JLabel restaurantLabel = new JLabel("Selezionare il ristorante:");
 		restaurantCombo = new JComboBox<>();
 		for(Restaurant r: controller.getRestaurants())
 			restaurantCombo.addItem(r);
+		
 		proceedButton = new JButton("Procedi"); 
 		proceedButton.addActionListener(this);
-		addressField = new JTextField("Inserire indirizzo qui");
 		
 		JPanel citiesPanel = new JPanel();
 		citiesPanel.setLayout(new BoxLayout(citiesPanel, BoxLayout.Y_AXIS));
 		citiesPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		
 		JPanel restaurantPanel = new JPanel();
 		restaurantPanel.setLayout(new BoxLayout(restaurantPanel, BoxLayout.Y_AXIS));
 		restaurantPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -88,10 +92,12 @@ public class ViewWelcome extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==proceedButton)
-			System.out.println(citiesCombo.getSelectedItem() + ", " 
-					+ addressField.getText() + ", "
-					+ restaurantCombo.getSelectedItem().toString());
+		if (e.getSource()==proceedButton) {
+			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
+			this.setVisible(false);
+			this.dispose();
+		}
+
 	}
 	
 }

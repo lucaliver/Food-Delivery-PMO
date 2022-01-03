@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
+import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
 import it.fooddelivery.model.City;
+import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
@@ -24,6 +26,7 @@ public class Manager {
 	private List<Rider> riders;
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
+	private Order currentOrder;
 	
 	/**
 	 * 
@@ -62,10 +65,39 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * It creates a new order.
+	 * @param destination.
+	 * @param address.
+	 * @param restuarant.
+	 */
+	public void createOrder(City destination, String address, Restaurant restuarant) {
+		this.currentOrder = new OrderImpl("01", destination); //TODO Creare generatore ID
+		System.out.println("Ordine corrente: "	//DEBUG
+				+ this.currentOrder.getIdOrder() + " "
+				+ this.currentOrder.getDestination().toString());
+	}
+	
+
+	/**
+	 * @return the list of menus offered by the restaurant of the current order.
+	 */
+	public List<Menu> getCurrentOffer(){
+		//return this.currentOrder.getRestaurant().getMenuOffer();
+		return null;
+	}
+	
+
+	
+
+	public Order getCurrentOrder() {
+		return currentOrder;
+	}
+	
 	public List<Order> getWaitingOrders() {
 		return waitingOrders;
 	}
-
+	
 	public void setWaitingOrders(List<Order> waitingOrders) {
 		this.waitingOrders = waitingOrders;
 	}
@@ -85,14 +117,5 @@ public class Manager {
 	public void setRiders(List<Rider> riders) {
 		this.riders = riders;
 	}
-	
-	//PROVA
-	public List<String> allCities(){
-		List<String> result = new ArrayList<>();
-		for (City c : City.values())
-			result.add(c.getName());
-		return result;
-	}
-	
 	
 }

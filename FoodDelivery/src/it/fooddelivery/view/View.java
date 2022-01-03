@@ -28,7 +28,7 @@ public class View {
 
 	private void createViews(JFrame... views) {
 		for(JFrame view : views) {
-			view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			view.setVisible(true);
 		}
 		
