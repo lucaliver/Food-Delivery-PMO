@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
+import it.fooddelivery.model.implementation.RestaurantImpl;
+import it.fooddelivery.model.City;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
@@ -24,12 +26,15 @@ public class Manager {
 	private List<Restaurant> restaurants;
 	
 	/**
-	 * The constructor inizializes all the lists.
+	 * 
+	 * @param riders = list of all riders.
+	 * @param restaurants = list of all restaurants.
 	 */
-	public Manager(){
+	public Manager(List<Rider> riders, List <Restaurant> restaurants){
+		this.riders = riders;
+		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
-		this.riders = new ArrayList<>();
-		this.restaurants = new ArrayList<>();
+		//this.restaurants.add(new RestaurantImpl("INDIANO", null));
 	}
 	
 	/**
@@ -79,6 +84,14 @@ public class Manager {
 	
 	public void setRiders(List<Rider> riders) {
 		this.riders = riders;
+	}
+	
+	//PROVA
+	public List<String> allCities(){
+		List<String> result = new ArrayList<>();
+		for (City c : City.values())
+			result.add(c.getName());
+		return result;
 	}
 	
 	

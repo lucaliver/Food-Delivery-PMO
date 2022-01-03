@@ -35,5 +35,9 @@ public class RestaurantImpl implements Restaurant {
 	public List<Menu> getMenuOffer() {
 		return this.menuOffer;
 	}
+	
+	public String toString() {
+		return this.name;
+	}
 
 }
