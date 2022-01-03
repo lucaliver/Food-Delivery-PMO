@@ -7,6 +7,7 @@ package it.fooddelivery.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -34,6 +35,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	private JLabel citiesLabel;
 	private JLabel restaurantLabel;
 	private JComboBox<Restaurant> restaurantCombo;
+	private JTextField addressField;
 	
 	ViewWelcome(final Manager controller){
 		this.controller = controller;
@@ -61,6 +63,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 			restaurantCombo.addItem(r);
 		proceedButton = new JButton("Procedi"); 
 		proceedButton.addActionListener(this);
+		addressField = new JTextField("Inserire indirizzo qui");
 		
 		JPanel citiesPanel = new JPanel();
 		citiesPanel.setLayout(new BoxLayout(citiesPanel, BoxLayout.Y_AXIS));
@@ -71,6 +74,8 @@ public class ViewWelcome extends JFrame implements ActionListener {
 		
 		citiesPanel.add(citiesLabel);
 		citiesPanel.add(citiesCombo);
+	    citiesPanel.add(Box.createVerticalStrut(20));
+		citiesPanel.add(addressField);
 		restaurantPanel.add(restaurantLabel);
 		restaurantPanel.add(restaurantCombo);
 		mainPanel.add(citiesPanel);
@@ -84,7 +89,8 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==proceedButton)
-			System.out.println(citiesCombo.getSelectedItem() + " " 
+			System.out.println(citiesCombo.getSelectedItem() + ", " 
+					+ addressField.getText() + ", "
 					+ restaurantCombo.getSelectedItem().toString());
 	}
 	
