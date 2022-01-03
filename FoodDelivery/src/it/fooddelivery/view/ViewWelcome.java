@@ -16,10 +16,14 @@ import it.fooddelivery.controller.Manager;
 
 public class ViewWelcome extends JFrame {
 	private final Manager controller;
-	private final String title = "Customer Screen";
+	private final String title = "Benvenuto, inizia ad ordinare!";
 	
 	ViewWelcome(final Manager controller){
 		this.controller = controller;
+		this.Init();
+	}
+	
+	private void Init() {
 		this.setTitle(this.title);
 		this.setSize(600, 400);
 		
@@ -39,6 +43,5 @@ public class ViewWelcome extends JFrame {
 		
 		//this.pack();
 	}
-	
 	
 }

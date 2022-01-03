@@ -19,14 +19,16 @@ public class View {
 	 * It creates the first windows for the customer and the window for the workers.
 	 * @param controller
 	 */
-	public View(Manager controller) {
+	public View(Manager controller) { //Al momento crea tutte e 4 le finestre
 		createViews(new ViewWelcome(controller),
-				    new ViewForWorker(controller));								
+				    new ViewForWorker(controller),
+				    new ViewPlacing(controller, null),
+				    new ViewRecap(controller));								
 	}
 
 	private void createViews(JFrame... views) {
 		for(JFrame view : views) {
-			view.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+			view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			view.setVisible(true);
 		}
 		
