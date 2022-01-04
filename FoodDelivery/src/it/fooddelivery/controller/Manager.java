@@ -10,7 +10,6 @@ import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.OrderImpl;
-import it.fooddelivery.model.implementation.RestaurantImpl;
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
@@ -79,14 +78,15 @@ public class Manager {
 	}
 	
 
+	
 	/**
 	 * @return the list of menus offered by the restaurant of the current order.
 	 */
-	public List<Menu> getCurrentOffer(){
+	/*public List<Menu> getCurrentOffer(){
 		//return this.currentOrder.getRestaurant().getMenuOffer();
 		return null;
 	}
-	
+	*/
 
 	
 
