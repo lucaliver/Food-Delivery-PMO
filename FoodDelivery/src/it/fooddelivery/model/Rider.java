@@ -52,6 +52,8 @@ public interface Rider {
 	/**
 	 * @return lista delle città in cui il fattorino consegna.
 	 */
-	List<City> getCities(); 
+	List<City> getCities();
+
+	 
 
 }

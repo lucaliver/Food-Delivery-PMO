@@ -42,6 +42,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	ViewWelcome(final Manager controller){
 		this.controller = controller;
 		this.Init();
+		this.pack();
 	}
 	
 	/**

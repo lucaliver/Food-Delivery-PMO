@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
+import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.City;
 
 /**
@@ -17,6 +18,8 @@ public class OrderImpl implements Order{
 	private final String idOrder;
 	private final City destination;
 	private final List<Menu> menus;
+	private String adress;
+	private Restaurant restaurant;
 	
 	/**
 	 * Constructor.
@@ -81,6 +84,26 @@ public class OrderImpl implements Order{
 	}
 
 
+	public String getAdress() {
+		return adress;
+	}
+
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+	
 	
 
 }

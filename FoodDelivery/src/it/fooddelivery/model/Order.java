@@ -50,5 +50,29 @@ public interface Order{
 	 * @return the destination of the order.
 	 */
 	City getDestination();
+	
+	/**
+	 * 
+	 * @return the adress of the order
+	 */
+	public String getAdress(); 
 		
+	/**
+	 * 
+	 * @param adress = thedestination adress of the order
+	 */
+	public void setAdress(String adress); 
+	
+	/**
+	 * 
+	 * @return the rastaurant that make the order
+	 */
+	public Restaurant getRestaurant(); 
+	
+	/**
+	 * 
+	 * @param restaurant = the restaurant that made this order
+	 */
+	public void setRestaurant(Restaurant restaurant); 
+	
 }
