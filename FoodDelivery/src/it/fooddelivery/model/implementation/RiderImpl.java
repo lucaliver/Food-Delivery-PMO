@@ -83,6 +83,14 @@ public class RiderImpl implements Rider{
 		return cities;
 	}
 	
+	/**
+	 * Il fattorino incassa una parte del costo dell'ordine.
+	 * @param o = ordine di cui incassare il guadagno. 
+	 */
+	private void addProfit(Order o) {
+		this.profit += o.totalPrice() * PERCENTAGE;
+	}
+	
 	public static int getMaxCapacity() {
 		return MAX_CAPACITY;
 	}
@@ -91,11 +99,5 @@ public class RiderImpl implements Rider{
 		return PERCENTAGE;
 	}
 
-	/**
-	 * Il fattorino incassa una parte del costo dell'ordine.
-	 * @param o = ordine di cui incassare il guadagno. 
-	 */
-	private void addProfit(Order o) {
-		this.profit += o.totalPrice() * PERCENTAGE;
-	}
+	
 }
