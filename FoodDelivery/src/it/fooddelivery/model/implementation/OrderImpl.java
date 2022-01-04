@@ -18,7 +18,7 @@ public class OrderImpl implements Order{
 	private final String idOrder;
 	private final City destination;
 	private final List<Menu> menus;
-	private String adress;
+	private String address;
 	private Restaurant restaurant;
 	
 	/**
@@ -26,9 +26,11 @@ public class OrderImpl implements Order{
 	 * @param id = id of the order.
 	 * @param dest = city of destination.
 	 */
-	public OrderImpl(String id, City dest) {		
+	public OrderImpl(String id, City destination, String address, Restaurant restaurant) {		
 		this.idOrder = id;
-		this.destination = dest;
+		this.destination = destination;
+		this.address = address;
+		this.restaurant = restaurant;
 		this.menus = new ArrayList<>();	
 	}
 	
@@ -85,12 +87,12 @@ public class OrderImpl implements Order{
 
 
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 
 
 	public void setAdress(String adress) {
-		this.adress = adress;
+		this.address = adress;
 	}
 
 

@@ -36,7 +36,6 @@ public class Manager {
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
-		//this.restaurants.add(new RestaurantImpl("INDIANO", null));
 	}
 	
 	/**
@@ -70,24 +69,16 @@ public class Manager {
 	 * @param address.
 	 * @param restuarant.
 	 */
-	public void createOrder(City destination, String address, Restaurant restuarant) {
-		this.currentOrder = new OrderImpl("01", destination); //TODO Creare generatore ID
-		System.out.println("Ordine corrente: "	//DEBUG
+	public void createOrder(City destination, String address, Restaurant restaurant) {
+		this.currentOrder = new OrderImpl("01", destination, address, restaurant); //TODO Creare generatore ID
+		// STAMPA DI DEBUG
+		System.out.println("Ordine corrente: "
 				+ this.currentOrder.getIdOrder() + " "
-				+ this.currentOrder.getDestination().toString());
+				+ this.currentOrder.getDestination().toString() + " "
+				+ this.currentOrder.getAdress() + " "
+				+ this.currentOrder.getRestaurant() + " ");
 	}
 	
-
-	
-	/**
-	 * @return the list of menus offered by the restaurant of the current order.
-	 */
-	/*public List<Menu> getCurrentOffer(){
-		//return this.currentOrder.getRestaurant().getMenuOffer();
-		return null;
-	}
-	*/
-
 	
 
 	public Order getCurrentOrder() {
