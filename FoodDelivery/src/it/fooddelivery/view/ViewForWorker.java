@@ -33,7 +33,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private JTextArea orderInfo;
 	private JTextArea waitingOrders;
 	private JButton startDelivery;
-	private List<Order> waitingList;
 	private JTextArea profitInfo;
 	//private JScrollPane waitingOrder;
 	private JTextArea capacityInfo;
@@ -94,7 +93,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	
 	private JPanel createWaitingOrder() {
 		waitingOrders = new JTextArea(10,30);
-		waitingList = this.controller.getWaitingOrders();
 		JPanel waitingSection = new JPanel();
 		waitingSection.setBorder(new EmptyBorder(10,10,10,10));
 		final GroupLayout waitingSectionLayout = new GroupLayout(waitingSection);

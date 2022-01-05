@@ -20,6 +20,7 @@ public class ManagerFactory {
 	 * It creates a Manager, configurated with restaurants and riders.
 	 */
 	public static Manager create(){
+		//TODO Finire configurazione ristoranti
 		List<Restaurant> restaurants = new ArrayList<>();
 		List<Rider> riders = new ArrayList<>();
 		
