@@ -100,7 +100,6 @@ public class ViewWelcome extends JFrame implements ActionListener {
 		mainPanel.add(buttonsPanel);
 		
 		this.getContentPane().add(mainPanel);
-		this.pack();
 	}
 
 	@Override

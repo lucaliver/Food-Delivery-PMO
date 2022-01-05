@@ -67,7 +67,6 @@ public class ViewRecap extends JFrame implements ActionListener {
 				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
 				);
 		infoArea.setText(sbInfo.toString());
-		
 
 		proceedButton = new JButton("Procedi"); 
 		proceedButton.addActionListener(this);
