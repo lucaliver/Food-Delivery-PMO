@@ -34,6 +34,13 @@ public class RiderImpl implements Rider{
 		this.orderList = new ArrayList<>();
 	}
 	
+	public void deliverAll() {
+		for (Order o : orderList) {
+			this.deliverOrder(o);
+		}
+	}
+	
+	
 	@Override
 	public List<Order> getBag() {
 		return orderList;

@@ -28,6 +28,11 @@ public interface Rider {
 	void deliverOrder(Order o);				// rimuove dallo zaino e aggiunge il guadagno --> libero!!
 	
 	/**
+	 * It delivers every order of this rider.
+	 */
+	void deliverAll();
+	
+	/**
 	 * @return true se la bag è piena, altrimenti false.
 	 */
 	boolean isFull();

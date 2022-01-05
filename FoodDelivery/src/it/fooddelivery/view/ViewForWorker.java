@@ -52,7 +52,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		for (Rider r : this.controller.getRiders()) {
+		for (Rider r : this.controller.getRiders().values()) {
 			mainPanel.add(createRiderData(r));
 		}
 		mainPanel.add(createWaitingOrder());
@@ -75,7 +75,10 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		riderInfo.setText(printRiderInfo(r));
 		//profitInfo.setText(r.getProfit()+"");
 		orderInfo.setText("PROVA");
-		startDelivery.addActionListener(this);
+		
+		startDelivery.addActionListener(e -> r.deliverAll());  //IMPLEMENTATO L.
+		
+		
 			riderDataLayout.setHorizontalGroup(
 					riderDataLayout.createSequentialGroup()
 					.addComponent(riderInfo)
