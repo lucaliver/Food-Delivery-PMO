@@ -26,15 +26,11 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	
 	private final Manager controller;
 	private final String title = "Seleziona il menù più adatto a te!";
-	private JLabel titleLabel;
-	private Order nuovoOrdine;
+	private JTextArea quantityArea;
+	private JTextArea totalOrderArea;
+	private JTextArea sizeOrderArea;
 	private JButton addButton;
 	private JButton removeButton;
-	private JTextArea description;
-	private JTextArea descriptionPrice;
-	private JTextArea descriptionSize;
-	private JTextArea totalOrder;
-	private JTextArea sizeOrder;
 	private JButton confirmButton;
 	private JButton comeBackButton;
 	private JButton emptyButton;
@@ -45,16 +41,12 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 * @param controller.
 	 * @param menuOffer = lista menù offerti dal ristorante (già) selezionato dall'utente.
 	 */
-	ViewPlacing(final Manager controller, Menu menuSelected, Order newOrder){
+	ViewPlacing(final Manager controller){
 		this.controller 	= controller;
-		this.titleLabel 	= new JLabel(title);
-		this.nuovoOrdine 	= newOrder;
-		this.Init(menuSelected);
-		
-		titleLabel.setFont(new Font("Arial", Font.ITALIC, 50));
+		this.Init();
 	}
 	
-	private void Init(Menu menuSelected) {
+	private void Init() {
 		// setto le dimensioni e il titlo del JFrame
 		this.setTitle(this.title);
 		
@@ -65,32 +57,33 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		
 		// creo e aggiungo i bottoni per gestire incremento e decremento dell'ordine
 
-		for(int i = 0; i < 10; i++) {
+		for (Menu m : controller.getCurrentOrder().getRestaurant().getMenuOffer()) {
+					
 			final JPanel quantityPanel = new JPanel();
 			quantityPanel.setLayout(new FlowLayout());
 			quantityPanel.setBorder(new EmptyBorder(10, 20, 20, 10));	
+			quantityPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 			panel.add(quantityPanel);
+			
+			final JTextArea descriptionArea;
 			
 			addButton 			= new JButton("+");
 			removeButton 		= new JButton("-");
-			description 		= new JTextArea("");
-			descriptionPrice 	= new JTextArea();
-			descriptionSize  	= new JTextArea();
+			quantityArea 		= new JTextArea("");
+			descriptionArea 	= new JTextArea();
 			
-			description.setPreferredSize(new Dimension(50, 20));
-			descriptionPrice.setPreferredSize(new Dimension(50, 20));
-			descriptionSize.setPreferredSize(new Dimension(50, 20));
-			
-			quantityPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-			
-			addButton.addActionListener( event -> nuovoOrdine.addMenu(menuSelected));
-			removeButton.addActionListener( event -> nuovoOrdine.removeMenu(menuSelected));	
-				
 			quantityPanel.add(addButton);
-			quantityPanel.add(description);
+			quantityPanel.add(quantityArea);
 			quantityPanel.add(removeButton);
-			quantityPanel.add(descriptionPrice);
-			quantityPanel.add(descriptionSize);
+			quantityPanel.add(descriptionArea);
+			
+			quantityArea.setPreferredSize(new Dimension(30, 20));
+			descriptionArea.setPreferredSize(new Dimension(50, 20));
+			descriptionArea.setText(m.show());
+			
+			/*// TODO modificare 
+			addButton.addActionListener();
+			removeButton.addActionListener( event -> nuovoOrdine.removeMenu(menuSelected));	*/
 		}
 		
 		// creo una textArea nella quale stampare totOrdine e dimensioneOrdine
@@ -99,14 +92,17 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		result.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		panel.add(result);
 		
-		totalOrder 	= new JTextArea("Totale: ");
-		sizeOrder 	= new JTextArea("Dimensione: ");
+		totalOrderArea 	= new JTextArea("Totale: ");
+		sizeOrderArea 	= new JTextArea("Dimensione: ");
 		
-		totalOrder.setPreferredSize(new Dimension(80, 30));
-		sizeOrder.setPreferredSize(new Dimension(80, 30));
+		totalOrderArea.setPreferredSize(new Dimension(80, 30));
+		sizeOrderArea.setPreferredSize(new Dimension(80, 30));
+		totalOrderArea.setEditable(false);
+		sizeOrderArea.setEditable(false);
 
-		result.add(totalOrder);
-		result.add(sizeOrder, BorderLayout.PAGE_END);
+		result.add(totalOrderArea);
+		result.add(Box.createHorizontalStrut(50));
+		result.add(sizeOrderArea, BorderLayout.PAGE_END);
 		
 		// creo bottoni per 
 		final JPanel dispositionBotton = new JPanel();
@@ -123,7 +119,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		dispositionBotton.add(confirmButton, BorderLayout.LINE_END);
 		dispositionBotton.add(comeBackButton, BorderLayout.LINE_START);
 		
-		emptyButton.addActionListener(this::emptyHandler);
+		//emptyButton.addActionListener(this::emptyHandler);
 		
 		panel.add(emptyButton, BoxLayout.X_AXIS);
 		
@@ -142,7 +138,6 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		
 	public void comeBackHandler(final ActionEvent e) {
 		ViewWelcome comeBack;
-		
 		if (e.getSource() == comeBackButton) {
 			comeBack = new ViewWelcome(controller);
 			this.setVisible(false);
@@ -150,11 +145,11 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		}
 	}
 	
-	public void emptyHandler(final ActionEvent e) {
+/*	public void emptyHandler(final ActionEvent e) {
 		if(e.getSource() == emptyButton) {
 			nuovoOrdine.removeAllMenu();
 			this.setVisible(false);
 			this.dispose();	
 		}
-	}
+	}*/
 }

@@ -91,6 +91,10 @@ public class RiderImpl implements Rider{
 		this.profit += o.getTotalPrice() * PERCENTAGE;
 	}
 	
+	public int getCapacity() {
+		return capacity;
+	}	
+	
 	public static int getMaxCapacity() {
 		return MAX_CAPACITY;
 	}
@@ -98,6 +102,4 @@ public class RiderImpl implements Rider{
 	public static double getPercentage() {
 		return PERCENTAGE;
 	}
-
-	
 }
