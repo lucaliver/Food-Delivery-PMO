@@ -6,6 +6,7 @@ package it.fooddelivery.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
@@ -22,7 +23,8 @@ import it.fooddelivery.model.Restaurant;
 public class Manager {
 	//TODO Forse applicare il design pattern Singleton al controller.
 	
-	private List<Rider> riders;
+	private Map<String, Rider> riders;
+
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
 	private Order currentOrder; 	//TODO Forse dovrebbe essere optional
@@ -32,7 +34,7 @@ public class Manager {
 	 * @param riders = list of all riders.
 	 * @param restaurants = list of all restaurants.
 	 */
-	public Manager(List<Rider> riders, List <Restaurant> restaurants){
+	public Manager(Map<String, Rider> riders, List <Restaurant> restaurants){
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
@@ -47,11 +49,13 @@ public class Manager {
 	 * false if the order was put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
-		Optional<Rider> selected = this.riders.stream()
-		.filter(x->x.getCities().contains(order.getDestination()))
-		.filter(x->x.canFit(order))	
-		.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
-		.findFirst();
+		Optional<Rider> selected = this.riders
+				.values()
+				.stream()
+				.filter(x->x.getCities().contains(order.getDestination()))
+				.filter(x->x.canFit(order))	
+				.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
+				.findFirst();
 		
 		if (selected.isPresent()) {
 			selected.get().addOrder(order);
@@ -74,7 +78,6 @@ public class Manager {
 		this.currentOrder = new OrderImpl("01", destination, address, restaurant); 
 	}
 	
-
 	/**
 	 * It assigns the current order (to a rider or to waiting list) 
 	 * and empties the current order slot.
@@ -105,11 +108,11 @@ public class Manager {
 		this.restaurants = restaurants;
 	}
 	
-	public List<Rider> getRiders() {
+	public Map<String, Rider> getRiders() {
 		return riders;
 	}
-	
-	public void setRiders(List<Rider> riders) {
+
+	public void setRiders(Map<String, Rider> riders) {
 		this.riders = riders;
 	}
 	
