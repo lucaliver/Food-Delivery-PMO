@@ -2,6 +2,9 @@
  * @author Giulia Costa
  */
 
+// SISTEMARE LA GUI, APPENA SI DECIDE COME GESTIRE I PRODOTTI DI OGNI MENU
+// DEFINIRE METODO PER PRESSIONE + O - -> AGGIUNTA DEL PREZZO E DELLA DIMENSIONE ALLA PRESSIONE DEL PULSANTE
+
 package it.fooddelivery.view;
 
 import java.awt.*;
@@ -54,46 +57,51 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private void Init(Menu menuSelected) {
 		// setto le dimensioni e il titlo del JFrame
 		this.setTitle(this.title);
-		this.setSize(400, 200);
 		
 		// aggiungo il pannello interno
 		final JPanel panel = new JPanel();	// pannello
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new EmptyBorder(200, 100, 200, 100));
+		panel.setBorder(new EmptyBorder(10, 20, 10, 20));
 		
 		// creo e aggiungo i bottoni per gestire incremento e decremento dell'ordine
-		final JPanel quantityPanel = new JPanel();
-		quantityPanel.setLayout(new FlowLayout());
-		quantityPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		panel.add(quantityPanel);
-		
-		//for(int i = 0; i < 10; i++) {
-			addButton 		= new JButton("+");
-			removeButton 	= new JButton("-");
-			description 	= new JTextArea("BHJGCCBVCV");
-			descriptionPrice = new JTextArea();
-			descriptionSize = new JTextArea();
+
+		for(int i = 0; i < 10; i++) {
+			final JPanel quantityPanel = new JPanel();
+			quantityPanel.setLayout(new FlowLayout());
+			quantityPanel.setBorder(new EmptyBorder(10, 20, 20, 10));	
+			panel.add(quantityPanel);
+			
+			addButton 			= new JButton("+");
+			removeButton 		= new JButton("-");
+			description 		= new JTextArea("");
+			descriptionPrice 	= new JTextArea();
+			descriptionSize  	= new JTextArea();
+			
 			description.setPreferredSize(new Dimension(50, 20));
 			descriptionPrice.setPreferredSize(new Dimension(50, 20));
 			descriptionSize.setPreferredSize(new Dimension(50, 20));
+			
+			quantityPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+			
 			addButton.addActionListener( event -> nuovoOrdine.addMenu(menuSelected));
 			removeButton.addActionListener( event -> nuovoOrdine.removeMenu(menuSelected));	
-	//	}
-		
-		quantityPanel.add(addButton);
-		quantityPanel.add(description);
-		quantityPanel.add(removeButton);
-		quantityPanel.add(descriptionPrice);
-		quantityPanel.add(descriptionSize);
+				
+			quantityPanel.add(addButton);
+			quantityPanel.add(description);
+			quantityPanel.add(removeButton);
+			quantityPanel.add(descriptionPrice);
+			quantityPanel.add(descriptionSize);
+		}
 		
 		// creo una textArea nella quale stampare totOrdine e dimensioneOrdine
 		final JPanel result = new JPanel();
 		result.setLayout(new FlowLayout());
-		result.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK));
+		result.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		panel.add(result);
 		
 		totalOrder 	= new JTextArea("Totale: ");
 		sizeOrder 	= new JTextArea("Dimensione: ");
+		
 		totalOrder.setPreferredSize(new Dimension(80, 30));
 		sizeOrder.setPreferredSize(new Dimension(80, 30));
 
@@ -104,6 +112,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		final JPanel dispositionBotton = new JPanel();
 		confirmButton 	= new JButton("Conferma");
 		comeBackButton 	= new JButton("Indietro");
+		
 		dispositionBotton.setLayout(new BorderLayout());
 		panel.add(dispositionBotton);
 		
@@ -112,12 +121,10 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		confirmButton.addActionListener(this::actionPerformed);
 		comeBackButton.addActionListener(this::comeBackHandler);
 		dispositionBotton.add(confirmButton, BorderLayout.LINE_END);
-		//resultPanel.add(Box.createHorizontalStrut(50));
 		dispositionBotton.add(comeBackButton, BorderLayout.LINE_START);
 		
 		emptyButton.addActionListener(this::emptyHandler);
 		
-		//panel.add(Box.createHorizontalStrut(20));
 		panel.add(emptyButton, BoxLayout.X_AXIS);
 		
 		this.getContentPane().add(panel);
