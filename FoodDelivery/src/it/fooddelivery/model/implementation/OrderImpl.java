@@ -51,7 +51,7 @@ public class OrderImpl implements Order{
 	}
 	
 	@Override
-	public void removeAllMenu() {
+	public void removeAllMenus() {
 		if(!this.getMenusList().isEmpty()) {	
 			this.getMenusList().removeAll(menus);
 		}		
@@ -65,7 +65,8 @@ public class OrderImpl implements Order{
 		}
 		return size;
 	}
-
+	
+	// TODO cambiare il tipo di price per gestire meglio la valuta
 	@Override
 	public double getTotalPrice() {
 		double totPrice = 0;

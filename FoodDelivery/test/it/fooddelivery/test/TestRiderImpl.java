@@ -89,7 +89,7 @@ class TestRiderImpl {
 		o.addMenu(m);
 		o.addMenu(m2);
 		assertTrue(man.canFit(o));
-		o.removeAllMenu();
+		o.removeAllMenus();
 		o.addMenu(m3);
 		assertFalse(man.canFit(o));
 	}

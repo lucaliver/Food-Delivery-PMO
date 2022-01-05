@@ -43,6 +43,6 @@ public class MenuImpl implements Menu{
 
 	@Override
 	public String show() {
-		return("Name: " +getName()+	", Price: " +getPrice()+ "€, Size: " +getSize());
+		return(getName()+" - "+getPrice()+"€ - "+getSize()+"u");
 	}
 }

@@ -29,7 +29,7 @@ public interface Order{
 	/**
 	 * Remove all the menus from the order.
 	 */
-	void removeAllMenu();
+	void removeAllMenus();
 	
 	/**
 	 * @return the size of the whole order.

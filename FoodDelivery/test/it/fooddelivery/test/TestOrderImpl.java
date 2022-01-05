@@ -62,7 +62,7 @@ class TestOrderImpl {
 		o.addMenu(new MenuImpl("b", 2.7, 12));
 		o.addMenu(new MenuImpl("c", 7.4, 7));
 		o.addMenu(new MenuImpl("d", 5.0, 51));
-		o.removeAllMenu();
+		o.removeAllMenus();
 		assertTrue(o.getMenusList().isEmpty());
 	}
 
