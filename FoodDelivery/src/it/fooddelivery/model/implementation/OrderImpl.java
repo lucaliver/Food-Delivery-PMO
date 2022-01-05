@@ -20,6 +20,7 @@ public class OrderImpl implements Order{
 	private final List<Menu> menus;
 	private String address;
 	private Restaurant restaurant;
+	private int quantity;
 	
 	/**
 	 * Constructor.
@@ -104,6 +105,19 @@ public class OrderImpl implements Order{
 
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
+	}
+	
+	/**
+	 * Metodo di prova per la quantità dello stesso menu nell'ordine
+	 */
+	public int quantity(Menu menu) {
+		this.quantity = 0;
+		for(Menu m: this.menus) {
+			if(menu.getName().equals(m.getName())) {
+				quantity++;
+			}
+		}
+		return quantity;
 	}
 
 	
