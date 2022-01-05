@@ -63,7 +63,7 @@ public class ViewRecap extends JFrame implements ActionListener {
 		sbInfo.append("Destinazione: " + this.controller.getCurrentOrder().getDestination() + ", "
 				+ this.controller.getCurrentOrder().getAdress() + '\n'
 				+ "Ristorante: " + this.controller.getCurrentOrder().getRestaurant() + '\n'
-				+ "Totale: " + this.controller.getCurrentOrder().totalPrice() + "€" + '\n'
+				+ "Totale: " + this.controller.getCurrentOrder().getTotalPrice() + "€" + '\n'
 				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
 				);
 		infoArea.setText(sbInfo.toString());
