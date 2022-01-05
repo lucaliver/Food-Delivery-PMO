@@ -19,26 +19,26 @@ class TestOrderImpl {
 		assertNotNull(o);
 		assertEquals("8ft9", o.getIdOrder());
 		assertEquals(City.CAGLI, o.getDestination());
-		assertTrue(o.menusList().isEmpty());
+		assertTrue(o.getMenusList().isEmpty());
 	}
 
 	@Test
 	void testMenusList() {
 		OrderImpl o = new OrderImpl("88ty", City.FOSSOMBRONE, null, null);
-		assertTrue(o.menusList().isEmpty());		
+		assertTrue(o.getMenusList().isEmpty());		
 		o.addMenu(new MenuImpl("M1", 0.40, 55));
-		assertNotNull(o.menusList());
+		assertNotNull(o.getMenusList());
 				
 	}
 
 	@Test
 	void testAddMenu() {
 		OrderImpl o = new OrderImpl("oo9i8", City.FOSSOMBRONE, null, null);
-		assertTrue(o.menusList().isEmpty()); 
+		assertTrue(o.getMenusList().isEmpty()); 
 		MenuImpl m = new MenuImpl("Name", 0.20, 3);
 		o.addMenu(m);
-		assertTrue(!o.menusList().isEmpty());
-		assertEquals(1, o.menusList().size());
+		assertTrue(!o.getMenusList().isEmpty());
+		assertEquals(1, o.getMenusList().size());
 	}
 
 	@Test
@@ -49,10 +49,10 @@ class TestOrderImpl {
 		o.addMenu(m1);
 		o.addMenu(m2);
 		o.removeMenu(m1);
-		assertTrue(!o.menusList().isEmpty());
-		assertEquals(1, o.menusList().size());
+		assertTrue(!o.getMenusList().isEmpty());
+		assertEquals(1, o.getMenusList().size());
 		o.removeMenu(m2);
-		assertTrue(o.menusList().isEmpty());
+		assertTrue(o.getMenusList().isEmpty());
 	}
 	
 	@Test
@@ -63,7 +63,7 @@ class TestOrderImpl {
 		o.addMenu(new MenuImpl("c", 7.4, 7));
 		o.addMenu(new MenuImpl("d", 5.0, 51));
 		o.removeAllMenu();
-		assertTrue(o.menusList().isEmpty());
+		assertTrue(o.getMenusList().isEmpty());
 	}
 
 	@Test
@@ -85,7 +85,7 @@ class TestOrderImpl {
 		o.addMenu(new MenuImpl("Name2", 1.47, 23)); 
 		o.addMenu(new MenuImpl("Name3", 133.61, 8));
 		double priceTot = 12.60+17.23+1.47+133.61;
-		assertEquals(priceTot, o.totalPrice());
+		assertEquals(priceTot, o.getTotalPrice());
 	}
 
 	@Test

@@ -36,7 +36,7 @@ public class OrderImpl implements Order{
 	
 	
 	@Override
-	public List<Menu> menusList() {		
+	public List<Menu> getMenusList() {		
 		return this.menus;
 	}
 	
@@ -52,8 +52,8 @@ public class OrderImpl implements Order{
 	
 	@Override
 	public void removeAllMenu() {
-		if(!this.menusList().isEmpty()) {	
-			this.menusList().removeAll(menus);
+		if(!this.getMenusList().isEmpty()) {	
+			this.getMenusList().removeAll(menus);
 		}		
 	}
 
@@ -67,7 +67,7 @@ public class OrderImpl implements Order{
 	}
 
 	@Override
-	public double totalPrice() {
+	public double getTotalPrice() {
 		double totPrice = 0;
 		for(Menu m : menus) {
 			totPrice += m.getPrice();

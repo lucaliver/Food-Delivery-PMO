@@ -19,6 +19,8 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Rider;
@@ -31,7 +33,10 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private JTextArea orderInfo;
 	private JTextArea waitingOrders;
 	private JButton startDelivery;
+	private List<Order> waitingList;
+	private JTextArea profitInfo;
 	//private JScrollPane waitingOrder;
+	private JTextArea capacityInfo;
 	
 	/**
 	 * 
@@ -57,7 +62,9 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	}
 
 	private JPanel createRiderData(Rider r) {
-		riderInfo = new JTextArea(3,10);
+		riderInfo = new JTextArea();
+		profitInfo = new JTextArea(r.getProfit()+"");
+		capacityInfo = new JTextArea("0");
 		orderInfo = new JTextArea(5,30);
 		startDelivery = new JButton("Parti e consegna!!!");
 		
@@ -66,18 +73,20 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		final GroupLayout riderDataLayout = new GroupLayout(riderData);
 		riderInfo.setEditable(false);
 		orderInfo.setEditable(false);
-		riderInfo.setText(r.getName()+'\n'+"Profito: "+r.getProfit()+
-				             "€"+'\n'+"Capacità: "+"0/"+RiderImpl.getMaxCapacity());
+		riderInfo.setText(printRiderInfo(r));
+		//profitInfo.setText(r.getProfit()+"");
 		orderInfo.setText("PROVA");
-		startDelivery.addActionListener(this::confirmDelivery);
+		startDelivery.addActionListener(this);
 			riderDataLayout.setHorizontalGroup(
 					riderDataLayout.createSequentialGroup()
 					.addComponent(riderInfo)
+					.addComponent(profitInfo)
 					.addComponent(orderInfo)
 					.addComponent(startDelivery));	
 			riderDataLayout.setVerticalGroup(
 					riderDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 					.addComponent(riderInfo)
+					.addComponent(profitInfo)
 					.addComponent(orderInfo)
 					.addComponent(startDelivery));	
 		return riderData;
@@ -85,6 +94,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	
 	private JPanel createWaitingOrder() {
 		waitingOrders = new JTextArea(10,30);
+		waitingList = this.controller.getWaitingOrders();
 		JPanel waitingSection = new JPanel();
 		waitingSection.setBorder(new EmptyBorder(10,10,10,10));
 		final GroupLayout waitingSectionLayout = new GroupLayout(waitingSection);
@@ -100,19 +110,34 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	
 	private void confirmDelivery(final ActionEvent event) {
 		//Rider r
-		String orders = orderInfo.getText();
-		boolean resText = !orderInfo.getText().isEmpty(); 
-				
-		if(resText) {
-			JOptionPane.showMessageDialog(this, "Consegna effettuata");
-			orderInfo.setText("");
-		}else {
-			JOptionPane.showMessageDialog(this, "Error...!!!");
+		//String orders = orderInfo.getText();
+		
 		}
-	}
+	
 
 	@Override
-	public void actionPerformed(ActionEvent e) {	
+	public void actionPerformed(ActionEvent e) {
+		boolean resText = !orderInfo.getText().isEmpty(); 
+		
+		if(e.getActionCommand().equals("Parti e consegna!!!")){
+			if(resText) {
+				JOptionPane.showMessageDialog(this, "Consegna effettuata");
+				this.orderInfo.setText("");
+				this.profitInfo.setText("50");
+			}else {
+				JOptionPane.showMessageDialog(this, "Error...!!!");
+			}
+		}
 	}
 	
+	/**
+	 * 
+	 * @param r = rider that gives the info
+	 * @return a string with his info
+	 */
+	private String printRiderInfo(Rider r) {
+		return r.getName()+'\n'+"Profito: "+profitInfo.getText()+
+	             "€"+'\n'+"Capacità: "+"0/"+RiderImpl.getMaxCapacity();
+	}
 }
+

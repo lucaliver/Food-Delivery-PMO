@@ -88,7 +88,7 @@ public class RiderImpl implements Rider{
 	 * @param o = ordine di cui incassare il guadagno. 
 	 */
 	private void addProfit(Order o) {
-		this.profit += o.totalPrice() * PERCENTAGE;
+		this.profit += o.getTotalPrice() * PERCENTAGE;
 	}
 	
 	public static int getMaxCapacity() {

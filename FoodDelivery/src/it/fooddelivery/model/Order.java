@@ -14,7 +14,7 @@ public interface Order{
 	/**
 	 * @return all the menus in the order.
 	 */
-	List<Menu> menusList();	
+	List<Menu> getMenusList();	
 	
 	/**
 	 * @param m = menu to add at the order.
@@ -39,7 +39,7 @@ public interface Order{
 	/**
 	 * @return the price of the whole order.
 	 */
-	double totalPrice();
+	double getTotalPrice();
 	
 	/**
 	 * @return the ID of the order.
