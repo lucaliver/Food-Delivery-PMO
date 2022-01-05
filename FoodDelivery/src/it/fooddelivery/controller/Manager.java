@@ -57,6 +57,8 @@ public class Manager {
 				.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
 				.findFirst();
 		
+		System.out.println("Rider selezionato: " + selected.get().getName());
+		
 		if (selected.isPresent()) {
 			selected.get().addOrder(order);
 			return true;

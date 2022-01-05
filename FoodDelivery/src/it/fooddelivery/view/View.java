@@ -19,7 +19,7 @@ public class View {
 	 * It creates the first windows for the customer and the window for the workers.
 	 * @param controller
 	 */
-	public View(final Manager controller) { //Al momento crea tutte e 4 le finestre
+	public View(final Manager controller) {
 		createViews(new ViewWelcome(controller),
 				    new ViewForWorker(controller));								
 	}

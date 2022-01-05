@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.Manager;
@@ -38,6 +39,9 @@ public class ViewRecap extends JFrame implements ActionListener {
 	ViewRecap(final Manager controller){
 		this.controller = controller;
 		this.Init();
+		this.pack();
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
 	}
 	
 	/**
@@ -75,9 +79,19 @@ public class ViewRecap extends JFrame implements ActionListener {
 		infoArea.setText(sbInfo.toString());
 
 		proceedButton = new JButton("Procedi"); 
-		proceedButton.addActionListener(this);
+		proceedButton.addActionListener(event ->{
+			this.controller.assignOrder(this.controller.getCurrentOrder());
+			this.setVisible(false);
+			this.dispose();	
+		});
+		
+		
 		backButton = new JButton("Indietro"); 
-		backButton.addActionListener(this);
+		backButton.addActionListener(event -> {
+			this.setVisible(false);
+			this.dispose();	
+			new ViewPlacing(this.controller);
+		});
 
 		mainPanel.add(backButton);
 		mainPanel.add(Box.createHorizontalStrut(30));
@@ -88,7 +102,6 @@ public class ViewRecap extends JFrame implements ActionListener {
 		mainPanel.add(proceedButton);
 
 		this.getContentPane().add(mainPanel);
-		this.pack();
 	}
 
 	@Override

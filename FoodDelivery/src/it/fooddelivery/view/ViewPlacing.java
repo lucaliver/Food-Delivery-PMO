@@ -48,6 +48,9 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	ViewPlacing(final Manager controller){
 		this.controller 	= controller;
 		this.Init();
+		this.pack();
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
 	}
 	
 	private void Init() {
@@ -145,30 +148,29 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
-			controller.getCurrentOrder();
 			this.setVisible(false);
 			this.dispose();	
 			ViewRecap v = new ViewRecap(this.controller);
-			v.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			v.setVisible(true);
 		}
 	}
 		
 	public void comeBackHandler(final ActionEvent e) {
 		if (e.getSource() == comeBackButton) {
-			ViewWelcome comeBack = new ViewWelcome(this.controller);
-			comeBack.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			comeBack.setVisible(true);
+			this.controller.getCurrentOrder().removeAllMenus();
+			this.setVisible(false);
+			this.dispose();
+			new ViewWelcome(this.controller);
 		}
 	}
 	
+	/*
 	public void emptyHandler(final ActionEvent e) {
 		if(e.getSource() == emptyButton) {
 			controller.getCurrentOrder().removeAllMenus();
 			this.setVisible(false);
 			this.dispose();	
 		}
-	}
+	} */
 	
 	private void updateInfo() {
 		this.totalOrderArea.setText("Totale: " + controller.getCurrentOrder().getTotalPrice() + "€");

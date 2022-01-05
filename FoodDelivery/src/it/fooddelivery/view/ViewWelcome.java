@@ -43,6 +43,8 @@ public class ViewWelcome extends JFrame implements ActionListener {
 		this.controller = controller;
 		this.Init();
 		this.pack();
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
 	}
 	
 	/**
@@ -52,6 +54,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 		this.setTitle(this.title);
 		this.setSize(400, 200);
 		this.setLocation(700, 100);
+		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
