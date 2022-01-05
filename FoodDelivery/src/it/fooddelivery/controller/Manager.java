@@ -25,10 +25,10 @@ public class Manager {
 	private List<Rider> riders;
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
-	private Order currentOrder;
+	private Order currentOrder; 	//TODO Forse dovrebbe essere optional
 	
 	/**
-	 * 
+	 * Constructor.
 	 * @param riders = list of all riders.
 	 * @param restaurants = list of all restaurants.
 	 */
@@ -64,21 +64,25 @@ public class Manager {
 	}
 
 	/**
-	 * It creates a new order.
+	 * It creates a new current order.
 	 * @param destination.
 	 * @param address.
 	 * @param restuarant.
 	 */
 	public void createOrder(City destination, String address, Restaurant restaurant) {
-		this.currentOrder = new OrderImpl("01", destination, address, restaurant); //TODO Creare generatore ID
-		// STAMPA DI DEBUG
-		System.out.println("Ordine corrente: "
-				+ this.currentOrder.getIdOrder() + " "
-				+ this.currentOrder.getDestination().toString() + " "
-				+ this.currentOrder.getAdress() + " "
-				+ this.currentOrder.getRestaurant() + " ");
+		//TODO Creare generatore ID
+		this.currentOrder = new OrderImpl("01", destination, address, restaurant); 
 	}
 	
+
+	/**
+	 * It assigns the current order (to a rider or to waiting list) 
+	 * and empties the current order slot.
+	 */
+	public void placeCurrentOrder() {
+		this.assignOrder(this.currentOrder);
+		this.currentOrder = null;
+	}
 	
 
 	public Order getCurrentOrder() {
