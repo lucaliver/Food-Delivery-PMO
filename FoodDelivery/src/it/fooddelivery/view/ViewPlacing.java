@@ -78,7 +78,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			quantityPanel.add(descriptionArea);
 			
 			quantityArea.setPreferredSize(new Dimension(30, 20));
-			descriptionArea.setPreferredSize(new Dimension(50, 20));
+			descriptionArea.setPreferredSize(new Dimension(100, 20));
 			descriptionArea.setText(m.show());
 			
 			/*// TODO modificare 
@@ -133,13 +133,16 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			controller.getCurrentOrder();
 			this.setVisible(false);
 			this.dispose();	
+			ViewRecap v = new ViewRecap(this.controller);
+			v.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			v.setVisible(true);
 		}
 	}
 		
 	public void comeBackHandler(final ActionEvent e) {
 		ViewWelcome comeBack;
 		if (e.getSource() == comeBackButton) {
-			comeBack = new ViewWelcome(controller);
+			comeBack = new ViewWelcome(this.controller);
 			this.setVisible(false);
 			this.dispose();	
 		}
