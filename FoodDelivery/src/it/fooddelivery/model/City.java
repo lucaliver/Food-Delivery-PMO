@@ -4,6 +4,8 @@
 
 package it.fooddelivery.model;
 
+import org.junit.platform.commons.util.ToStringBuilder;
+
 /**
  * Enum used for Cities.
  *
@@ -18,7 +20,6 @@ public enum City {
 	private final String name;
 	
 	/**
-	 * 
 	 * @param nome città.
 	 */
 	City(final String name) {
@@ -28,4 +29,5 @@ public enum City {
 	public String getName() {
 		return name;
 	}
+	
 }

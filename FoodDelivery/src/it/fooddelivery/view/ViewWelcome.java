@@ -23,7 +23,7 @@ import it.fooddelivery.model.City;
 import it.fooddelivery.model.Restaurant;
 
 /**
- * View component for the welcome screen that the customer will see at first.
+ * First window: welcome screen that the customer will see first.
  *
  */
 @SuppressWarnings("serial")
@@ -51,6 +51,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	private void Init() {
 		this.setTitle(this.title);
 		this.setSize(400, 200);
+		this.setLocation(700, 100);
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));

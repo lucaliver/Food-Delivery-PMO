@@ -53,6 +53,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private void Init() {
 		// setto le dimensioni e il titlo del JFrame
 		this.setTitle(this.title);
+		this.setLocation(700, 100);
 		
 		// aggiungo il pannello interno
 		final JPanel panel = new JPanel();	// pannello
@@ -86,9 +87,16 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			descriptionArea.setPreferredSize(new Dimension(300, 20));
 			descriptionArea.setText(m.show());
 			
-			// TODO modificare 
-			addButton.addActionListener(event -> controller.getCurrentOrder().addMenu(m));
-			//removeButton.addActionListener( event -> nuovoOrdine.removeMenu(menuSelected));	
+			// TODO I tasti + e - aggiornano totale e dimensione ad ogni click. 
+			addButton.addActionListener(event -> {
+				controller.getCurrentOrder().addMenu(m);
+				this.updateInfo();
+			});
+			
+			removeButton.addActionListener(event -> {
+				controller.getCurrentOrder().removeMenu(m);
+				this.updateInfo();
+			});
 		}
 		
 		// creo una textArea nella quale stampare totOrdine e dimensioneOrdine
@@ -97,11 +105,11 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		result.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		panel.add(result);
 		
-		totalOrderArea 	= new JTextArea("Totale: ");
-		sizeOrderArea 	= new JTextArea("Dimensione: ");
+		totalOrderArea 	= new JTextArea("Totale: 0€");
+		sizeOrderArea 	= new JTextArea("Dimensione: 0u.");
 		
-		totalOrderArea.setPreferredSize(new Dimension(80, 30));
-		sizeOrderArea.setPreferredSize(new Dimension(80, 30));
+		totalOrderArea.setPreferredSize(new Dimension(100, 30));
+		sizeOrderArea.setPreferredSize(new Dimension(100, 30));
 		totalOrderArea.setEditable(false);
 		sizeOrderArea.setEditable(false);
 
@@ -118,13 +126,15 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		panel.add(dispositionBotton);
 		
 		emptyButton 	= new JButton("Svuota tutto");
+		emptyButton.addActionListener(event -> {
+			controller.getCurrentOrder().removeAllMenus();
+			this.updateInfo();
+		});
 		
 		confirmButton.addActionListener(this::actionPerformed);
 		comeBackButton.addActionListener(this::comeBackHandler);
 		dispositionBotton.add(confirmButton, BorderLayout.LINE_END);
 		dispositionBotton.add(comeBackButton, BorderLayout.LINE_START);
-		
-		//emptyButton.addActionListener(this::emptyHandler);
 		
 		panel.add(emptyButton, BoxLayout.X_AXIS);
 		
@@ -158,5 +168,10 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			this.setVisible(false);
 			this.dispose();	
 		}
+	}
+	
+	private void updateInfo() {
+		this.totalOrderArea.setText("Totale: " + controller.getCurrentOrder().getTotalPrice() + "€");
+		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getSize() + "u.");
 	}
 }

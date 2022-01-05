@@ -46,11 +46,13 @@ public class ViewRecap extends JFrame implements ActionListener {
 	private void Init() {
 		this.setTitle(this.title);
 		this.setSize(600, 400);
+		this.setLocation(700, 100);
+		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
-		JTextArea menusArea = new JTextArea("Qui andranno i vari menu...");
+		JTextArea menusArea = new JTextArea("Questo ordine è vuoto?");
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
 		StringBuilder sbMenus = new StringBuilder();
