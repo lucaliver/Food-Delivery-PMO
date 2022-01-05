@@ -109,11 +109,6 @@ public class ViewWelcome extends JFrame implements ActionListener {
 			this.setVisible(false);
 			this.dispose();
 			
-
-			ViewRecap v = new ViewRecap(this.controller);
-			v.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			v.setVisible(true);
-			
 			ViewPlacing w = new ViewPlacing(this.controller);
 			w.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			w.setVisible(true);
