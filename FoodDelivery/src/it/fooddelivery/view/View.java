@@ -21,9 +21,7 @@ public class View {
 	 */
 	public View(final Manager controller) { //Al momento crea tutte e 4 le finestre
 		createViews(new ViewWelcome(controller),
-				    new ViewForWorker(controller),
-				    new ViewPlacing(controller)
-				    );								
+				    new ViewForWorker(controller));								
 	}
 
 	private void createViews(final JFrame... views) {

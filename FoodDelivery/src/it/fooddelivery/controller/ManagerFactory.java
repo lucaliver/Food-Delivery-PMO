@@ -27,7 +27,7 @@ public class ManagerFactory {
 		menusForMc.add(new MenuImpl("HappyMeal", 5, 2));
 		menusForMc.add(new MenuImpl("BigMac Menu", 10, 4));
 				
-		restaurants.add(new RestaurantImpl("McDonalds", null));
+		restaurants.add(new RestaurantImpl("McDonalds", menusForMc));
 		restaurants.add(new RestaurantImpl("KFC", null));
 		restaurants.add(new RestaurantImpl("Pizzeria da Mario", null));
 		restaurants.add(new RestaurantImpl("Sushino", null));

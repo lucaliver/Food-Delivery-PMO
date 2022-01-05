@@ -108,9 +108,15 @@ public class ViewWelcome extends JFrame implements ActionListener {
 			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
 			this.setVisible(false);
 			this.dispose();
-			ViewPlacing v = new ViewPlacing(this.controller);
+			
+
+			ViewRecap v = new ViewRecap(this.controller);
 			v.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			v.setVisible(true);
+			
+			ViewPlacing w = new ViewPlacing(this.controller);
+			w.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			w.setVisible(true);
 		}
 
 	}
