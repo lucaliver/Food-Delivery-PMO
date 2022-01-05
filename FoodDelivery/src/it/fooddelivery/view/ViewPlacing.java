@@ -5,6 +5,13 @@
 // SISTEMARE LA GUI, APPENA SI DECIDE COME GESTIRE I PRODOTTI DI OGNI MENU
 // DEFINIRE METODO PER PRESSIONE + O - -> AGGIUNTA DEL PREZZO E DELLA DIMENSIONE ALLA PRESSIONE DEL PULSANTE
 
+// PER INTERFACCIA: CREO 2 PANNELLI DIVISI: 
+//1 FLOWLAYOUT(necessario per mettere la descrizione dell'articolo (menu)
+//1 LAYOUT VERTICALE (necessario per inserire prezzo, collegato a totPrezzo)
+//1 LAYOUT VERTICALE (necesssario per inserire dimensione ordine, collegato a totSize)
+
+// COLLEGARE BOTTONI +,- PER VISUALIZZARE A SCHERMO LE QUANTITA' SELEZIONATE
+
 package it.fooddelivery.view;
 
 import java.awt.*;
@@ -13,13 +20,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.DimensionUIResource;
 
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Menu;
-import it.fooddelivery.model.Order;
 
 @SuppressWarnings("serial")
 public class ViewPlacing extends JFrame implements ActionListener {
@@ -68,22 +72,22 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			
 			final JTextArea descriptionArea;
 			
-			addButton 			= new JButton("+");
 			removeButton 		= new JButton("-");
+			addButton 			= new JButton("+");
 			quantityArea 		= new JTextArea("");
 			descriptionArea 	= new JTextArea();
 			
-			quantityPanel.add(addButton);
-			quantityPanel.add(quantityArea);
 			quantityPanel.add(removeButton);
+			quantityPanel.add(quantityArea);
+			quantityPanel.add(addButton);
 			quantityPanel.add(descriptionArea);
 			
 			quantityArea.setPreferredSize(new Dimension(30, 20));
-			descriptionArea.setPreferredSize(new Dimension(100, 20));
+			descriptionArea.setPreferredSize(new Dimension(300, 20));
 			descriptionArea.setText(m.show());
 			
 			// TODO modificare 
-			//addButton.addActionListener();
+			addButton.addActionListener(event -> controller.getCurrentOrder().addMenu(m));
 			//removeButton.addActionListener( event -> nuovoOrdine.removeMenu(menuSelected));	
 		}
 		
@@ -102,7 +106,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		sizeOrderArea.setEditable(false);
 
 		result.add(totalOrderArea);
-		result.add(Box.createHorizontalStrut(50));
+		result.add(Box.createHorizontalStrut(30));
 		result.add(sizeOrderArea, BorderLayout.PAGE_END);
 		
 		// creo bottoni per 
@@ -127,7 +131,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		this.getContentPane().add(panel);
 		this.pack();
 	}
-
+	
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
@@ -141,19 +145,18 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	}
 		
 	public void comeBackHandler(final ActionEvent e) {
-		ViewWelcome comeBack;
 		if (e.getSource() == comeBackButton) {
-			comeBack = new ViewWelcome(this.controller);
+			ViewWelcome comeBack = new ViewWelcome(this.controller);
+			comeBack.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			comeBack.setVisible(true);
+		}
+	}
+	
+	public void emptyHandler(final ActionEvent e) {
+		if(e.getSource() == emptyButton) {
+			controller.getCurrentOrder().removeAllMenus();
 			this.setVisible(false);
 			this.dispose();	
 		}
 	}
-	
-/*	public void emptyHandler(final ActionEvent e) {
-		if(e.getSource() == emptyButton) {
-			nuovoOrdine.removeAllMenu();
-			this.setVisible(false);
-			this.dispose();	
-		}
-	}*/
 }
