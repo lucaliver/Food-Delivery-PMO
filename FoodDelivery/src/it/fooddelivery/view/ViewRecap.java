@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.Manager;
+import it.fooddelivery.model.Menu;
 
 /**
  * View component for the recap screen for the customer.
@@ -53,8 +54,11 @@ public class ViewRecap extends JFrame implements ActionListener {
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
 		StringBuilder sbMenus = new StringBuilder();
-		//for (Menu m: controller.getCurrentOrder().getMenus()
-		//		sbMenus.append(m.show());
+		for (Menu m: controller.getCurrentOrder().getMenusList()) {
+			sbMenus.append(m.show());
+			sbMenus.append('\n');
+		}
+		menusArea.setText(sbMenus.toString());
 		
 		JTextArea infoArea = new JTextArea();
 		infoArea.setEditable(false);
