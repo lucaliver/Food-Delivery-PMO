@@ -57,6 +57,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		
 		// creo e aggiungo i bottoni per gestire incremento e decremento dell'ordine
 
+	
 		for (Menu m : controller.getCurrentOrder().getRestaurant().getMenuOffer()) {
 					
 			final JPanel quantityPanel = new JPanel();
@@ -81,9 +82,9 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			descriptionArea.setPreferredSize(new Dimension(50, 20));
 			descriptionArea.setText(m.show());
 			
-			/*// TODO modificare 
-			addButton.addActionListener();
-			removeButton.addActionListener( event -> nuovoOrdine.removeMenu(menuSelected));	*/
+			// TODO modificare 
+			//addButton.addActionListener();
+			//removeButton.addActionListener( event -> nuovoOrdine.removeMenu(menuSelected));	
 		}
 		
 		// creo una textArea nella quale stampare totOrdine e dimensioneOrdine
