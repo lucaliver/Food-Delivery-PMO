@@ -55,10 +55,16 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		this.setSize(100, 50);
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+<<<<<<< HEAD
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		for (Rider r : this.controller.getRiders()) {
 			mainPanel.add(createRiderPanel(r));
+=======
+		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
+		for (Rider r : this.controller.getRiders().values()) {
+			mainPanel.add(createRiderData(r));
+>>>>>>> refs/remotes/origin/master
 		}
 		mainPanel.add(createWaitingOrderPanel());
 		
@@ -71,6 +77,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		riderPanel.setBorder(BorderFactory.createTitledBorder(r.getName()));
 		final GroupLayout riderDataLayout = new GroupLayout(riderPanel);
 		
+<<<<<<< HEAD
 		riderArea = new JTextArea();
 		riderArea.setEditable(false);
 		riderArea.setText(printRiderInfo(r));
@@ -97,6 +104,20 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			}		
 		});	
 	
+=======
+		JPanel riderData = new JPanel();
+		riderData.setBorder(new EmptyBorder(20, 20, 20, 0));
+		final GroupLayout riderDataLayout = new GroupLayout(riderData);
+		riderInfo.setEditable(false);
+		orderInfo.setEditable(false);
+		riderInfo.setText(printRiderInfo(r));
+		//profitInfo.setText(r.getProfit()+"");
+		orderInfo.setText("PROVA");
+		
+		startDelivery.addActionListener(e -> r.deliverAll());  //IMPLEMENTATO L.
+		
+		
+>>>>>>> refs/remotes/origin/master
 			riderDataLayout.setHorizontalGroup(
 					riderDataLayout.createSequentialGroup()
 					.addComponent(riderArea)
