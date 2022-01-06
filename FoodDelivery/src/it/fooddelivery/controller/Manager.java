@@ -28,6 +28,7 @@ public class Manager {
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
 	private Order currentOrder; 	//TODO Forse dovrebbe essere optional
+	private Optional<String> lastOrderAssign;
 	
 	/**
 	 * Constructor.
@@ -38,6 +39,7 @@ public class Manager {
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
+		this.lastOrderAssign.empty();
 	}
 	
 	/**
@@ -61,12 +63,18 @@ public class Manager {
 		
 		if (selected.isPresent()) {
 			selected.get().addOrder(order);
+			lastOrderAssign.of(selected.get().getName());
 			return true;
 		}
 		else {
 			this.waitingOrders.add(order);
+			lastOrderAssign.empty();
 			return false;
 		}
+	}
+	
+	public Optional<String> getLastOrderAssign(){
+		return this.lastOrderAssign;
 	}
 
 	/**

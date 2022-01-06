@@ -137,8 +137,16 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) { 
 		
-		if(e.getActionCommand().equals("Conferma")){
-			
+		if(e.getActionCommand().equals("Procedi")){
+			if(this.controller.getLastOrderAssign().isEmpty()) {
+				this.waitingOrdersArea.setText(this.controller.getWaitingOrders().toString());
+			}else {
+				this.infoRider.get(this.controller.getRiders()
+							  .get(this.controller.getLastOrderAssign()
+							  .get())).setText(this.controller.getRiders()
+							  .get(this.controller.getLastOrderAssign()
+							  .get()).getBag().toString());
+			}
 		}							
 	}
 	/**
