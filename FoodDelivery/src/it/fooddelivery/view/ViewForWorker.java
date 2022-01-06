@@ -89,7 +89,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		startDeliveryButton.addActionListener(e ->{
 			//TODO mettere ! nella 1° istr quando arrivano effettivamente gli ordini
 			if(r.getBag().isEmpty() && !orderArea.getText().isEmpty()){
-				r.deliverAll();
+				this.controller.getRiders().get(r.getName()).deliverAll();
 				infoRiders.get(r).setText("");
 				riderArea.setText(printRiderInfo(r));
 				JOptionPane.showMessageDialog(this, "Consegna effettuata");
