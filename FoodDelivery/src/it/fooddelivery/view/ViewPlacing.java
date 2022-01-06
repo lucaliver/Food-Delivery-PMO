@@ -95,7 +95,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			addButton.addActionListener(event -> {
 				controller.getCurrentOrder().addMenu(m);
 				// TODO usato come suggerito da Giulia un metodo quantity di order, funzionamento parziale
-				/*this.quantityArea.setText(this.controller.getCurrentOrder().quantity(m)+"");
+				/*this.quantityArea.setText(this.controller.getCurrentOrder().quantity(m.getName())+"");
 				// Altrimenti metodo alternativo
 				int i = Integer.parseInt(quantityArea.getText())+1;
 				this.quantityArea.setText(i+"");*/
@@ -105,7 +105,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			removeButton.addActionListener(event -> {
 				controller.getCurrentOrder().removeMenu(m);
 				// TODO usato come suggerito da Giulia un metodo quantity di order, funzionamento parziale
-				/*this.quantityArea.setText(this.controller.getCurrentOrder().quantity(m)+"");
+				/*this.quantityArea.setText(this.controller.getCurrentOrder().quantity(m.getName())+"");
 				// Altrimenti metodo alternativo
 				int i = Integer.parseInt(quantityArea.getText())-1;
 				this.quantityArea.setText(i+"");*/

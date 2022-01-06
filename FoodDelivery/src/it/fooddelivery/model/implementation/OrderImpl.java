@@ -22,6 +22,7 @@ public class OrderImpl implements Order{
 	private Restaurant restaurant;
 	private int quantity;
 	
+	
 	/**
 	 * Constructor.
 	 * @param id = id of the order.
@@ -107,20 +108,23 @@ public class OrderImpl implements Order{
 		this.restaurant = restaurant;
 	}
 	
-	/**
-	 * Metodo di prova per la quantità dello stesso menu nell'ordine
-	 */
-	public int quantity(Menu menu) {
+	public int quantity(String menuName) {
 		this.quantity = 0;
-		for(Menu m: this.menus) {
-			if(menu.getName().equals(m.getName())) {
+		for(Menu m : this.menus) {
+			if(menuName.equals(m.getName())) {
 				quantity++;
 			}
 		}
 		return quantity;
 	}
 
-	
-	
 
+	@Override
+	public String showOrder() {	
+		String orderInfo = ""; 
+		for (Menu m : this.menus){
+			orderInfo += m.show()+'\n';
+		}
+		return orderInfo;
+	}			
 }

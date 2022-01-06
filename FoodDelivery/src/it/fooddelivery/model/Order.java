@@ -75,6 +75,17 @@ public interface Order{
 	 */
 	public void setRestaurant(Restaurant restaurant); 
 	
-	public int quantity(Menu menu);
+	/**
+	 * 
+	 * @param name of the menu
+	 * @return the quantity of the menu with that name
+	 */
+	public int quantity(String menuName);
+	
+	/**
+	 * 
+	 * @return the info of all the menu in the order
+	 */
+	public String showOrder();
 	
 }
