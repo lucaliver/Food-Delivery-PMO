@@ -40,14 +40,16 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
 	private JButton startDeliveryButton;
-	private Map<Rider, JTextArea> infoRiders;
+	private Map<Rider, JTextArea> infoOrder;
+	private Map<Rider, JTextArea> infoRider;
 	/**
 	 * 
 	 * @param controller 
 	 */
 	ViewForWorker (final Manager controller){
 		this.controller = controller;
-		this.infoRiders = new HashMap<>();
+		this.infoOrder = new HashMap<>();
+		this.infoRider = new HashMap<>();
 		this.Init();	
 	}
 	
@@ -77,21 +79,22 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		riderArea.setText(printRiderInfo(r));
 		//riderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		riderArea.setBackground(getBackground());
+		infoRider.put(r, riderArea);
 		
 		orderArea = new JTextArea(5,20);
 		orderArea.setEditable(false);
 		orderArea.setAutoscrolls(true);
 		orderArea.setText("PROVA");
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		infoRiders.put(r, orderArea);
+		infoOrder.put(r, orderArea);
 		
 		startDeliveryButton = new JButton("Parti e consegna!!!");
 		startDeliveryButton.addActionListener(e ->{
 			//TODO mettere ! nella 1° istr quando arrivano effettivamente gli ordini
 			if(r.getBag().isEmpty() && !orderArea.getText().isEmpty()){
-				this.controller.getRiders().get(r.getName()).deliverAll();
-				infoRiders.get(r).setText("");
-				riderArea.setText(printRiderInfo(r));
+				//this.controller.getRiders().get(r.getName()).deliverAll();
+				infoOrder.get(r).setText("");
+				infoRider.get(r).setText(printRiderInfo(r));
 				JOptionPane.showMessageDialog(this, "Consegna effettuata");
 			}else{
 				JOptionPane.showMessageDialog(this, "Error...!!!");
