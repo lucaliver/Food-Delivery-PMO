@@ -5,6 +5,8 @@
 package it.fooddelivery.controller;
 
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +52,7 @@ public class ManagerFactory {
 		List<City> citiesForGiacomo = new ArrayList<>();
 		citiesForGiacomo.add(City.TAVULLIA);
 		citiesForGiacomo.add(City.FERMIGNANO);
-		riders.put("GIacomo", new RiderImpl("Giacomo", citiesForGiacomo));
+		riders.put("Giacomo", new RiderImpl("Giacomo", citiesForGiacomo));
 
 		return riders;
 	}
@@ -62,7 +64,7 @@ public class ManagerFactory {
 		List<Restaurant> restaurants = new ArrayList<>();
 		
 		List<Menu> menusForMc = new ArrayList<>();
-		menusForMc.add(new MenuImpl("HappyMeal", 5, 2));
+		menusForMc.add(new MenuImpl("HappyMeal", 5, 6));
 		menusForMc.add(new MenuImpl("BigMac Menu", 10, 4));
 		restaurants.add(new RestaurantImpl("McDonalds", menusForMc));
 
