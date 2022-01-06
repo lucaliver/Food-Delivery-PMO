@@ -110,9 +110,4 @@ public class RiderImpl implements Rider{
 		return PERCENTAGE;
 	}
 	
-	public void deliveryAllOrders() {
-		for(Order o : this.orderList) {
-			this.deliverOrder(o);
-		}
-	}
 }

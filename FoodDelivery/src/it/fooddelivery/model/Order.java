@@ -75,4 +75,6 @@ public interface Order{
 	 */
 	public void setRestaurant(Restaurant restaurant); 
 	
+	public int quantity(Menu menu);
+	
 }

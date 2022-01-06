@@ -59,10 +59,7 @@ public interface Rider {
 	 */
 	List<City> getCities();
 	
-	/**
-	 *  consegna tutti gli ordini 
-	 */
-	void deliveryAllOrders();
+	int getCapacity();
 
 	 
 

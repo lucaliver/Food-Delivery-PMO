@@ -17,9 +17,10 @@ package it.fooddelivery.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.Manager;
@@ -78,7 +79,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			
 			removeButton 		= new JButton("-");
 			addButton 			= new JButton("+");
-			quantityArea 		= new JTextArea("");
+			quantityArea 		= new JTextArea("0");
 			descriptionArea 	= new JTextArea();
 			
 			quantityPanel.add(removeButton);
@@ -93,11 +94,15 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			// TODO I tasti + e - aggiornano totale e dimensione ad ogni click. 
 			addButton.addActionListener(event -> {
 				controller.getCurrentOrder().addMenu(m);
+				// TODO usato come suggerito da Giulia un metodo quantity di order, funzionamento parziale
+				//this.quantityArea.setText(this.controller.getCurrentOrder().quantity(m)+"");
 				this.updateInfo();
 			});
 			
 			removeButton.addActionListener(event -> {
 				controller.getCurrentOrder().removeMenu(m);
+				// TODO usato come suggerito da Giulia un metodo quantity di order, funzionamento parziale
+				//this.quantityArea.setText(this.controller.getCurrentOrder().quantity(m)+"");
 				this.updateInfo();
 			});
 		}

@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.awt.BorderLayout;
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Order;
@@ -55,19 +56,13 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		this.setSize(100, 50);
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-<<<<<<< HEAD
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		
-		for (Rider r : this.controller.getRiders()) {
-			mainPanel.add(createRiderPanel(r));
-=======
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		for (Rider r : this.controller.getRiders().values()) {
-			mainPanel.add(createRiderData(r));
->>>>>>> refs/remotes/origin/master
-		}
-		mainPanel.add(createWaitingOrderPanel());
 		
+		for (Rider r : this.controller.getRiders().values()) {
+			mainPanel.add(createRiderPanel(r));
+		}
+		mainPanel.add(createWaitingOrderPanel());		
 		this.getContentPane().add(mainPanel);
 		this.pack();
 	}
@@ -75,9 +70,8 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private JPanel createRiderPanel(Rider r) {
 		JPanel riderPanel = new JPanel();
 		riderPanel.setBorder(BorderFactory.createTitledBorder(r.getName()));
-		final GroupLayout riderDataLayout = new GroupLayout(riderPanel);
+		final GroupLayout riderPanelLayout = new GroupLayout(riderPanel);
 		
-<<<<<<< HEAD
 		riderArea = new JTextArea();
 		riderArea.setEditable(false);
 		riderArea.setText(printRiderInfo(r));
@@ -95,7 +89,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		startDeliveryButton.addActionListener(e ->{
 			//TODO mettere ! nella 1° istr quando arrivano effettivamente gli ordini
 			if(r.getBag().isEmpty() && !orderArea.getText().isEmpty()){
-				r.deliveryAllOrders();
+				r.deliverAll();
 				orderArea.setText("");
 				riderArea.setText(printRiderInfo(r));
 				JOptionPane.showMessageDialog(this, "Consegna effettuata");
@@ -103,31 +97,18 @@ public class ViewForWorker extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "Error...!!!");
 			}		
 		});	
-	
-=======
-		JPanel riderData = new JPanel();
-		riderData.setBorder(new EmptyBorder(20, 20, 20, 0));
-		final GroupLayout riderDataLayout = new GroupLayout(riderData);
-		riderInfo.setEditable(false);
-		orderInfo.setEditable(false);
-		riderInfo.setText(printRiderInfo(r));
-		//profitInfo.setText(r.getProfit()+"");
-		orderInfo.setText("PROVA");
 		
-		startDelivery.addActionListener(e -> r.deliverAll());  //IMPLEMENTATO L.
-		
-		
->>>>>>> refs/remotes/origin/master
-			riderDataLayout.setHorizontalGroup(
-					riderDataLayout.createSequentialGroup()
-					.addComponent(riderArea)
-					.addComponent(orderArea)
-					.addComponent(startDeliveryButton));	
-			riderDataLayout.setVerticalGroup(
-					riderDataLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(riderArea)
-					.addComponent(orderArea)
-					.addComponent(startDeliveryButton));
+		//startDeliveryButton.addActionListener(e -> r.deliverAll());  //IMPLEMENTATO L.	
+		riderPanelLayout.setHorizontalGroup(
+				riderPanelLayout.createSequentialGroup()
+				.addComponent(riderArea)
+				.addComponent(orderArea)
+				.addComponent(startDeliveryButton));	
+		riderPanelLayout.setVerticalGroup(
+				riderPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addComponent(riderArea)
+				.addComponent(orderArea)
+				.addComponent(startDeliveryButton));
 		return riderPanel;
 	}
 	
@@ -166,7 +147,8 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 */
 	private String printRiderInfo(Rider r) {
 		return "Profito: "+r.getProfit()+
-	           "€"+'\n'+"Capacità: "+"0/"+RiderImpl.getMaxCapacity();
+	           "€"+'\n'+"Capacità: "+r.getCapacity()+
+				"/"+RiderImpl.getMaxCapacity();
 	}
 }
 
