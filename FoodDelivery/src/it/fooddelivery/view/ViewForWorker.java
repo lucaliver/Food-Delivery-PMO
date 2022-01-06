@@ -132,14 +132,12 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		boolean resText = !orderArea.getText().isEmpty(); 
+	public void actionPerformed(ActionEvent e) { 
 		
-		if(e.getActionCommand().equals("Parti e consegna!!!")){
-			if(resText) {
-				JOptionPane.showMessageDialog(this, "Consegna effettuata");
-				this.orderArea.setText("");
-	}}}	
+		if(e.getActionCommand().equals("Conferma")){
+			
+		}							
+	}
 	/**
 	 * 
 	 * @param r = rider that gives the info

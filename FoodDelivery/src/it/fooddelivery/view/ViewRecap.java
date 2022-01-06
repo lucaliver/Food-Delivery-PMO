@@ -84,9 +84,7 @@ public class ViewRecap extends JFrame implements ActionListener {
 			this.setVisible(false);
 			this.dispose();	
 		});
-		//proceedButton.addActionListener(ViewForWorker v);
-		
-		
+						
 		backButton = new JButton("Indietro"); 
 		backButton.addActionListener(event -> {
 			this.setVisible(false);
