@@ -18,6 +18,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.RiderImpl;
@@ -141,14 +143,16 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		
 		if(e.getActionCommand().equals("Procedi")){
-			if(this.controller.getLastOrderAssign().isEmpty()) {
+			Optional<Rider> riderWithLastOrder = this.controller.getRiderWithLastOrder();
+			if(riderWithLastOrder.isEmpty()) {
 				this.waitingOrdersArea.setText(this.controller.getWaitingOrders().toString());
 			}else {
-				this.infoRider.get(this.controller.getRiders()
+				this.infoOrder.get(riderWithLastOrder.get()).setText(riderWithLastOrder.get().getBag().toString());
+				/*this.infoRider.get(this.controller.getRiders()
 							  .get(this.controller.getLastOrderAssign()
 							  .get())).setText(this.controller.getRiders()
 							  .get(this.controller.getLastOrderAssign()
-							  .get()).getBag().toString());
+							  .get()).getBag().toString());*/
 			}
 		}							
 	}

@@ -12,6 +12,7 @@ import java.util.Optional;
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.City;
+import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
@@ -27,7 +28,7 @@ public class Manager {
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
 	private Order currentOrder; 	//TODO Forse dovrebbe essere optional
-	private Optional<String> lastOrderAssignedTo;
+	private Optional<Rider> riderWithLastOrder;
 	
 	/**
 	 * Constructor.
@@ -38,7 +39,7 @@ public class Manager {
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
-		this.lastOrderAssignedTo.empty();
+		Optional.empty();
 	}
 	
 	/**
@@ -57,25 +58,23 @@ public class Manager {
 				.filter(x->x.canFit(order))	
 				.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
 				.findFirst();
-		
-		System.out.println("Rider selezionato: " + selected.get().getName()); //LOG PER TESTARE
-		
-		if (selected.isPresent()) {
+		riderWithLastOrder = selected;
+		if(selected.isPresent()) {
+			System.out.println("Rider selezionato: " + selected.get().getName());
 			selected.get().addOrder(order);
-			lastOrderAssignedTo.of(selected.get().getName());
 			return true;
-		}
-		else {
+		}else { 
+			// 1# - HO CAMBIATO UN PO ALTRIMENTI DAVA ERRORE SE SELECTED ERA NULL: GIACOMO
+			System.out.println("Nessun rider disponibile, ordine in attesa!!!");
 			this.waitingOrders.add(order);
-			lastOrderAssignedTo.empty();
 			return false;
 		}
 	}
-	
-	public Optional<String> getLastOrderAssign(){
-		return this.lastOrderAssignedTo;
+	/* Metodo cge ritorna il possibile nome del fattorino */
+	public Optional<Rider> getRiderWithLastOrder(){
+		return this.riderWithLastOrder;
 	}
-
+	
 	/**
 	 * It creates a new current order.
 	 * @param destination.
