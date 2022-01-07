@@ -4,9 +4,6 @@
 
 package it.fooddelivery.controller;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +27,6 @@ public class ManagerFactory {
 	}
 
 	/**
-	 * 
 	 * @return a Map of riders with their names as key.
 	 */
 	private static Map<String, Rider> createRiders() {

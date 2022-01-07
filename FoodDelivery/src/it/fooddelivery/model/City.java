@@ -4,8 +4,6 @@
 
 package it.fooddelivery.model;
 
-import org.junit.platform.commons.util.ToStringBuilder;
-
 /**
  * Enum used for Cities.
  *

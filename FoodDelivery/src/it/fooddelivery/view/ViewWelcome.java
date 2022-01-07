@@ -51,6 +51,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	 * It initializes all the GUI.
 	 */
 	private void Init() {
+		// TODO Usare un altro Layout e meno panel.
 		this.setTitle(this.title);
 		this.setSize(400, 200);
 		this.setLocation(700, 100);

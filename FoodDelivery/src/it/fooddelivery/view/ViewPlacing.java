@@ -2,29 +2,27 @@
  * @author Giulia Costa
  */
 
-// SISTEMARE LA GUI, APPENA SI DECIDE COME GESTIRE I PRODOTTI DI OGNI MENU
-// DEFINIRE METODO PER PRESSIONE + O - -> AGGIUNTA DEL PREZZO E DELLA DIMENSIONE ALLA PRESSIONE DEL PULSANTE
-
-// PER INTERFACCIA: CREO 2 PANNELLI DIVISI: 
-//1 FLOWLAYOUT(necessario per mettere la descrizione dell'articolo (menu)
-//1 LAYOUT VERTICALE (necessario per inserire prezzo, collegato a totPrezzo)
-//1 LAYOUT VERTICALE (necesssario per inserire dimensione ordine, collegato a totSize)
-
-// COLLEGARE BOTTONI +,- PER VISUALIZZARE A SCHERMO LE QUANTITA' SELEZIONATE
-
 package it.fooddelivery.view;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Menu;
+
+//PER INTERFACCIA: CREO 2 PANNELLI DIVISI: 
+//1 FLOWLAYOUT(necessario per mettere la descrizione dell'articolo (menu)
+//1 LAYOUT VERTICALE (necessario per inserire prezzo, collegato a totPrezzo)
+//1 LAYOUT VERTICALE (necesssario per inserire dimensione ordine, collegato a totSize)
+
+//COLLEGARE BOTTONI +,- PER VISUALIZZARE A SCHERMO LE QUANTITA' SELEZIONATE
 
 @SuppressWarnings("serial")
 public class ViewPlacing extends JFrame implements ActionListener {
@@ -41,10 +39,8 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private JButton emptyButton;
 		
 	/**
-	 * Al costruttore viene passato il controller,
-	 * ed i menu offerti dal ristorante selezionato nella schermata precedente.
+	 * Constructor.
 	 * @param controller.
-	 * @param menuOffer = lista menù offerti dal ristorante (già) selezionato dall'utente.
 	 */
 	ViewPlacing(final Manager controller){
 		this.controller 	= controller;
@@ -54,6 +50,9 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 	
+	/**
+	 * It initializes all the window.
+	 */
 	private void Init() {
 		// setto le dimensioni e il titlo del JFrame
 		this.setTitle(this.title);
@@ -91,7 +90,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			descriptionArea.setPreferredSize(new Dimension(300, 20));
 			descriptionArea.setText(m.show());
 			
-			// TODO I tasti + e - aggiornano totale e dimensione ad ogni click. 
+			// TODO I tasti + e - devono aggiornare totale e dimensione ad ogni click. 
 			addButton.addActionListener(event -> {
 				controller.getCurrentOrder().addMenu(m);
 				// TODO usato come suggerito da Giulia un metodo quantity di order, funzionamento parziale
@@ -161,10 +160,14 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		if (e.getSource() == confirmButton) {
 			this.setVisible(false);
 			this.dispose();	
-			ViewRecap v = new ViewRecap(this.controller);
+			new ViewRecap(this.controller);
 		}
 	}
-		
+	
+	/**
+	 * Handler for the event of the "back" button being pressed.
+	 * @param event.
+	 */
 	public void comeBackHandler(final ActionEvent e) {
 		if (e.getSource() == comeBackButton) {
 			this.controller.getCurrentOrder().removeAllMenus();
@@ -183,6 +186,9 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		}
 	} */
 	
+	/**
+	 * It updates the price area and the size area.
+	 */
 	private void updateInfo() {
 		this.totalOrderArea.setText("Totale: " + controller.getCurrentOrder().getTotalPrice() + "€");
 		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getSize() + "u.");

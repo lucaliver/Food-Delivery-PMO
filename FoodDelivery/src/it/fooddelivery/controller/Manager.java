@@ -12,7 +12,6 @@ import java.util.Optional;
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.City;
-import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
@@ -28,7 +27,7 @@ public class Manager {
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
 	private Order currentOrder; 	//TODO Forse dovrebbe essere optional
-	private Optional<String> lastOrderAssign;
+	private Optional<String> lastOrderAssignedTo;
 	
 	/**
 	 * Constructor.
@@ -39,7 +38,7 @@ public class Manager {
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
-		this.lastOrderAssign.empty();
+		this.lastOrderAssignedTo.empty();
 	}
 	
 	/**
@@ -59,22 +58,22 @@ public class Manager {
 				.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
 				.findFirst();
 		
-		System.out.println("Rider selezionato: " + selected.get().getName());
+		System.out.println("Rider selezionato: " + selected.get().getName()); //LOG PER TESTARE
 		
 		if (selected.isPresent()) {
 			selected.get().addOrder(order);
-			lastOrderAssign.of(selected.get().getName());
+			lastOrderAssignedTo.of(selected.get().getName());
 			return true;
 		}
 		else {
 			this.waitingOrders.add(order);
-			lastOrderAssign.empty();
+			lastOrderAssignedTo.empty();
 			return false;
 		}
 	}
 	
 	public Optional<String> getLastOrderAssign(){
-		return this.lastOrderAssign;
+		return this.lastOrderAssignedTo;
 	}
 
 	/**

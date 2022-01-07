@@ -13,7 +13,6 @@ import it.fooddelivery.controller.Manager;
  *
  */
 public class View {
-	//TODO Sistemare chiusura finestre.
 	
 	/**
 	 * It creates the first windows for the customer and the window for the workers.

@@ -4,35 +4,25 @@
 
 package it.fooddelivery.view;
 
-import java.awt.Component;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import javax.swing.colorchooser.ColorSelectionModel;
-import javax.swing.text.AttributeSet.ColorAttribute;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.awt.BorderLayout;
 import it.fooddelivery.controller.Manager;
-import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.RiderImpl;
 
+@SuppressWarnings("serial")
 public class ViewForWorker extends JFrame implements ActionListener{
 	private final Manager controller;
 	private final String TITLE = "Rider Screen";
@@ -42,9 +32,10 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private JButton startDeliveryButton;
 	private Map<Rider, JTextArea> infoOrder;
 	private Map<Rider, JTextArea> infoRider;
+	
 	/**
-	 * 
-	 * @param controller 
+	 * Constructor.
+	 * @param controller .
 	 */
 	ViewForWorker (final Manager controller){
 		this.controller = controller;
@@ -53,6 +44,9 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		this.Init();	
 	}
 	
+	/**
+	 * It initializes the window.
+	 */
 	private void Init(){
 		this.setTitle(this.TITLE);
 		this.setSize(100, 50);
@@ -69,6 +63,11 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		this.pack();
 	}
 
+	/**
+	 * It creates the GUI for one rider (text and button).
+	 * @param r is the rider.
+	 * @return the panel itself?
+	 */
 	private JPanel createRiderPanel(Rider r) {
 		JPanel riderPanel = new JPanel();
 		riderPanel.setBorder(BorderFactory.createTitledBorder(r.getName()));
@@ -115,6 +114,10 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		return riderPanel;
 	}
 	
+	/**
+	 * It creates the GUI for the waiting list of orders.
+	 * @return the panel itself?
+	 */
 	private JPanel createWaitingOrderPanel() {
 		JPanel waitingSection = new JPanel();
 		waitingSection.setBorder(BorderFactory.createTitledBorder("Ordini in attesa"));
@@ -149,12 +152,12 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			}
 		}							
 	}
+	
 	/**
-	 * 
-	 * @param r = rider that gives the info
-	 * @return a string with his info
+	 * @param r = rider.
+	 * @return a string with his info.
 	 */
-	private String printRiderInfo(Rider r) {
+	private String printRiderInfo(Rider r) {	// UN METODO DEL GENERE PENSO STIA MEGLIO NEL MANAGER NO?
 		return "Profito: "+r.getProfit()+
 	           "€"+'\n'+"Capacità: "+r.getCapacity()+
 				"/"+RiderImpl.getMaxCapacity();

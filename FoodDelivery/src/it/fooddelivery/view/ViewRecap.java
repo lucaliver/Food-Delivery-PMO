@@ -12,7 +12,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
@@ -105,11 +104,9 @@ public class ViewRecap extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Se ho cliccato procedi, l'ordine viene piazzato con successo.
+		// TODO Se ho cliccato procedi, l'ordine deve essere inviato.
 		
-		/*
 		if (e.getSource()==proceedButton)
 			this.controller.placeCurrentOrder();
-		*/
 	}
 }

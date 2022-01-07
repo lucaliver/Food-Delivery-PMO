@@ -10,24 +10,22 @@ import org.junit.jupiter.api.Test;
 
 import it.fooddelivery.controller.Manager;
 
-class TestDeliveryManager {
+class TestManager {
+	// TODO Implementare i test per tutti i metodi di Manager.
 
 	@Test
 	void testAssignOrder() {
-		//TODO Implementare.
 		fail("Not yet implemented");
 	}
 
 	@Test
 	void testGetWaitingOrders() {
-		//TODO Finire di implementare.
 		Manager dm = new Manager(null, null);
 		assertNotNull(dm);
 	}
 
 	@Test
 	void testGetRestaurants() {
-		//TODO Finire di implementare.
 		Manager dm = new Manager(null, null);
 		assertNotNull(dm);
 		assertEquals(dm.getRestaurants(), null);

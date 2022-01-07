@@ -16,6 +16,7 @@ import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
 
 class TestRestaurantImpl {
+	// TODO Implementare i test per tutti i metodi di RestaurantImpl.
 
 	@Test
 	void testGetName() {
@@ -25,7 +26,6 @@ class TestRestaurantImpl {
 	
 	@Test
 	void testGetMenuOffer() {
-		//TODO implementare meglio
 		Menu m = new MenuImpl("HappyMeal", 5, 2);
 		List<Menu> mList = new ArrayList<>();
 		mList.add(m);

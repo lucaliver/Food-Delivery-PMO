@@ -4,7 +4,6 @@
 
 package it.fooddelivery.model;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ public interface Rider {
 	 * Consegna l'ordine rimuovendolo dallo zaino e aggiungendo il guadagno al fattorino.
 	 * @param o = ordine da consegnare.
 	 */
-	void deliverOrder(Order o);				// rimuove dallo zaino e aggiunge il guadagno --> libero!!
+	void deliverOrder(Order o);	
 	
 	/**
 	 * It delivers every order of this rider.
@@ -39,7 +38,6 @@ public interface Rider {
 	boolean isFull();
 
 	/**
-	 * 
 	 * @return il nome del fattorino.
 	 */
 	String getName();
