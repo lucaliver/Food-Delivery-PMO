@@ -120,11 +120,9 @@ public class OrderImpl implements Order{
 
 
 	@Override
-	public String showOrder() {	
-		String orderInfo = ""; 
-		for (Menu m : this.menus){
-			orderInfo += m.show()+'\n';
-		}
-		return orderInfo;
+	public String showOrderInfo() {	
+		StringBuilder sb = new StringBuilder();
+		this.menus.forEach(m -> sb.append('\t'+m.showMenuInfo()));					
+		return sb.toString();
 	}			
 }

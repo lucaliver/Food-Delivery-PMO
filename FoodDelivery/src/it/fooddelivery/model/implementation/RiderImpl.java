@@ -111,10 +111,17 @@ public class RiderImpl implements Rider{
 	}
 
 	@Override
-	public String getInfo() {
+	public String showRiderInfo() {
 		return "Profito: "+this.getProfit()+
 		       "€"+'\n'+"Capacità: "+this.getCapacity()+
 		       "/"+RiderImpl.getMaxCapacity();
 	}
+	
+	public String showBagInfo() {
+		StringBuilder sb = new StringBuilder();
+		this.orderList.forEach(o-> sb.append((this.orderList.indexOf(o)+1)+"° Ordine:"+'\n'+o.showOrderInfo()));
+		return sb.toString();
+	}
+	
 	
 }

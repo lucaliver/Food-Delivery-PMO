@@ -86,6 +86,6 @@ public interface Order{
 	 * 
 	 * @return the info of all the menu in the order
 	 */
-	public String showOrder();
+	public String showOrderInfo();
 	
 }

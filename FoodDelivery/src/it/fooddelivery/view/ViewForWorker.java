@@ -77,7 +77,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 		riderArea = new JTextArea();
 		riderArea.setEditable(false);
-		riderArea.setText(r.getInfo());
+		riderArea.setText(r.showRiderInfo());
 		//riderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		riderArea.setBackground(getBackground());
 		infoRider.put(r, riderArea);
@@ -95,7 +95,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			if(r.getBag().isEmpty() && !orderArea.getText().isEmpty()){
 				//this.controller.getRiders().get(r.getName()).deliverAll();
 				infoOrder.get(r).setText("");
-				infoRider.get(r).setText(r.getInfo());
+				infoRider.get(r).setText(r.showRiderInfo());
 				JOptionPane.showMessageDialog(this, "Consegna effettuata");
 			}else{
 				JOptionPane.showMessageDialog(this, "Error...!!!");
@@ -156,6 +156,21 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			}
 		}							
 	}
-	
+	// TODO in teoria questo sarebbe
+	public void updateTextArea(Optional<Rider> r) {
+		final StringBuilder sb = new StringBuilder();
+		
+		if(r.isPresent()) {
+			sb.append(r.get().getBag().size()+"° ordine:"+'\n');
+			
+			r.get().getBag().forEach(o -> {
+				if(o.getMenusList().size() != 0) {
+					sb.append(o.showOrderInfo());
+				}
+			});
+			infoOrder.get(r).setText(sb.toString());
+		}else {		 
+		}
+	}
 }
 

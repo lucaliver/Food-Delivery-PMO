@@ -62,6 +62,8 @@ public class Manager {
 		if(selected.isPresent()) {
 			System.out.println("Rider selezionato: " + selected.get().getName());
 			selected.get().addOrder(order);
+			//TODO mostra come viene stampato il contenuto dellabag di un rider, da rimuovere in seguito
+			System.out.println(selected.get().showBagInfo());
 			return true;
 		}else { 
 			// 1# - HO CAMBIATO UN PO ALTRIMENTI DAVA ERRORE SE SELECTED ERA NULL: GIACOMO

@@ -32,5 +32,5 @@ public interface Menu {
 	 * 
 	 * @return all the info of the menu (name, price, size).
 	 */
-	String show();
+	String showMenuInfo();
 }

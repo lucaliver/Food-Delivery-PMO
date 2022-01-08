@@ -60,7 +60,7 @@ public class ViewRecap extends JFrame implements ActionListener {
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
 		StringBuilder sbMenus = new StringBuilder();
 		for (Menu m: controller.getCurrentOrder().getMenusList()) {
-			sbMenus.append(m.show());
+			sbMenus.append(m.showMenuInfo());
 			sbMenus.append('\n');
 		}
 		menusArea.setText(sbMenus.toString());

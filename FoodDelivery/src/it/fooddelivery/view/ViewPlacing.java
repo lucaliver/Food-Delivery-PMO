@@ -88,7 +88,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			
 			quantityArea.setPreferredSize(new Dimension(30, 20));
 			descriptionArea.setPreferredSize(new Dimension(300, 20));
-			descriptionArea.setText(m.show());
+			descriptionArea.setText(m.showMenuInfo());
 			
 			// TODO I tasti + e - devono aggiornare totale e dimensione ad ogni click. 
 			addButton.addActionListener(event -> {

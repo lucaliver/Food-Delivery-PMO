@@ -66,10 +66,13 @@ public interface Rider {
 	
 	/**
 	 * 
-	 * @return allthe info in that moment
+	 * @return all the of this rider info in that moment
 	 */
-	String getInfo();
-
-	 
-
+	String showRiderInfo();
+	
+	/**
+	 * 
+	 * @return the content of the rider's bag
+	 */
+	String showBagInfo();
 }
