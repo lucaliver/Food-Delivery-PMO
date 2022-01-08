@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.OrderImpl;
+import it.fooddelivey.utils.RiderObserver;
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
@@ -20,7 +21,7 @@ import it.fooddelivery.model.Restaurant;
  * Controller of a food delivery management software.
  *
  */
-public class Manager {
+public class Manager{
 	//TODO Forse applicare il design pattern Singleton al controller.
 	
 	private Map<String, Rider> riders;
@@ -62,13 +63,14 @@ public class Manager {
 		if(selected.isPresent()) {
 			System.out.println("Rider selezionato: " + selected.get().getName());
 			selected.get().addOrder(order);
-			//TODO mostra come viene stampato il contenuto dellabag di un rider, da rimuovere in seguito
+			//TODO mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
 			System.out.println(selected.get().showBagInfo());
 			return true;
 		}else { 
 			// 1# - HO CAMBIATO UN PO ALTRIMENTI DAVA ERRORE SE SELECTED ERA NULL: GIACOMO
 			System.out.println("Nessun rider disponibile, ordine in attesa!!!");
 			this.waitingOrders.add(order);
+			System.out.println(this.showWaitingOrder());
 			return false;
 		}
 	}

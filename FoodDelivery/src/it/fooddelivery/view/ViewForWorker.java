@@ -23,9 +23,10 @@ import java.util.Optional;
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.RiderImpl;
+import it.fooddelivey.utils.RiderObserver;
 
 @SuppressWarnings("serial")
-public class ViewForWorker extends JFrame implements ActionListener{
+public class ViewForWorker extends JFrame implements ActionListener,RiderObserver{
 	private final Manager controller;
 	private final String TITLE = "Rider Screen";
 	private JTextArea riderArea;
@@ -159,6 +160,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	// TODO in teoria questo sarebbe il metodo da chiamare quando si è finito di creare un ordine, ma non mi è chiaro dove chiamarlo
 	// Forse il parametro Optional non serve visto che il controller mi da anche il rider con l'ultimo ordine assegnato
 	// Non so se questo deve essere un metodo a se o se metterlo in actionPerformed
+	@Override
 	public void updateTextArea(Optional<Rider> r) {
 	
 		if(r.isPresent()) {

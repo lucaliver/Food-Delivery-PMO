@@ -47,7 +47,8 @@ public class ManagerFactory {
 
 		List<City> citiesForGiacomo = new ArrayList<>();
 		citiesForGiacomo.add(City.TAVULLIA);
-		citiesForGiacomo.add(City.FERMIGNANO);
+		//TODO commento per simulare fattorini non disponibili e avere ordini nella waitingList
+		//citiesForGiacomo.add(City.FERMIGNANO);
 		riders.put("Giacomo", new RiderImpl("Giacomo", citiesForGiacomo));
 
 		return riders;

@@ -12,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
@@ -79,9 +80,15 @@ public class ViewRecap extends JFrame implements ActionListener {
 
 		proceedButton = new JButton("Procedi"); 
 		proceedButton.addActionListener(event ->{
-			this.controller.assignOrder(this.controller.getCurrentOrder());
+			boolean res = this.controller.assignOrder(this.controller.getCurrentOrder());
+			if(res) {
+				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());
+			}else {
+				JOptionPane.showMessageDialog(this, "Ordine in attesa...");
+			}
 			this.setVisible(false);
 			this.dispose();	
+			// TODO quando si finisce di creare un ordine bisogna anche aprire una nuova ViewWelcome/ViewPlacing per ordini multipli
 		});
 						
 		backButton = new JButton("Indietro"); 
