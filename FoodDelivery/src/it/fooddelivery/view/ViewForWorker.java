@@ -142,22 +142,23 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) { 
 		
-		if(e.getActionCommand().equals("Procedi")){
+		/*if(e.getActionCommand().equals("Procedi")){
 			Optional<Rider> riderWithLastOrder = this.controller.getRiderWithLastOrder();
 			if(riderWithLastOrder.isEmpty()) {
 				this.waitingOrdersArea.setText(this.controller.getWaitingOrders().toString());
 			}else {
 				this.infoOrder.get(riderWithLastOrder.get()).setText(riderWithLastOrder.get().getBag().toString());
-				/*this.infoRider.get(this.controller.getRiders()
+				this.infoRider.get(this.controller.getRiders()
 							  .get(this.controller.getLastOrderAssign()
 							  .get())).setText(this.controller.getRiders()
 							  .get(this.controller.getLastOrderAssign()
-							  .get()).getBag().toString());*/
+							  .get()).getBag().toString());
 			}
-		}							
+		}*/							
 	}
 	// TODO in teoria questo sarebbe il metodo da chiamare quando si è finito di creare un ordine, ma non mi è chiaro dove chiamarlo
 	// Forse il parametro Optional non serve visto che il controller mi da anche il rider con l'ultimo ordine assegnato
+	// Non so se questo deve essere un metodo a se o se metterlo in actionPerformed
 	public void updateTextArea(Optional<Rider> r) {
 	
 		if(r.isPresent()) {
