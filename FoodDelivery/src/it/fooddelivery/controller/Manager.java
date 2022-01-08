@@ -126,4 +126,10 @@ public class Manager {
 		this.riders = riders;
 	}
 	
+	public String showWaitingOrder() {
+		StringBuilder sb = new StringBuilder();
+		this.waitingOrders.forEach(o -> sb.append(this.waitingOrders.indexOf(o)+1+"# - "+o.showOrderInfo()));
+		return sb.toString();
+	}
+	
 }

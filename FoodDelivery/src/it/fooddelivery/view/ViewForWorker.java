@@ -156,20 +156,14 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			}
 		}							
 	}
-	// TODO in teoria questo sarebbe
+	// TODO in teoria questo sarebbe il metodo da chiamare quando si è finito di creare un ordine, ma non mi è chiaro dove chiamarlo
+	// Forse il parametro Optional non serve visto che il controller mi da anche il rider con l'ultimo ordine assegnato
 	public void updateTextArea(Optional<Rider> r) {
-		final StringBuilder sb = new StringBuilder();
-		
+	
 		if(r.isPresent()) {
-			sb.append(r.get().getBag().size()+"° ordine:"+'\n');
-			
-			r.get().getBag().forEach(o -> {
-				if(o.getMenusList().size() != 0) {
-					sb.append(o.showOrderInfo());
-				}
-			});
-			infoOrder.get(r).setText(sb.toString());
-		}else {		 
+			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());		 
+		}else {
+			this.waitingOrdersArea.setText(this.controller.showWaitingOrder());
 		}
 	}
 }
