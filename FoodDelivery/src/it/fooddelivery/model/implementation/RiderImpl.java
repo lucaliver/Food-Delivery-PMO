@@ -109,5 +109,12 @@ public class RiderImpl implements Rider{
 	public static double getPercentage() {
 		return PERCENTAGE;
 	}
+
+	@Override
+	public String getInfo() {
+		return "Profito: "+this.getProfit()+
+		       "€"+'\n'+"Capacità: "+this.getCapacity()+
+		       "/"+RiderImpl.getMaxCapacity();
+	}
 	
 }

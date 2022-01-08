@@ -77,7 +77,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 		riderArea = new JTextArea();
 		riderArea.setEditable(false);
-		riderArea.setText(printRiderInfo(r));
+		riderArea.setText(r.getInfo());
 		//riderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		riderArea.setBackground(getBackground());
 		infoRider.put(r, riderArea);
@@ -95,7 +95,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			if(r.getBag().isEmpty() && !orderArea.getText().isEmpty()){
 				//this.controller.getRiders().get(r.getName()).deliverAll();
 				infoOrder.get(r).setText("");
-				infoRider.get(r).setText(printRiderInfo(r));
+				infoRider.get(r).setText(r.getInfo());
 				JOptionPane.showMessageDialog(this, "Consegna effettuata");
 			}else{
 				JOptionPane.showMessageDialog(this, "Error...!!!");
@@ -157,14 +157,5 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		}							
 	}
 	
-	/**
-	 * @param r = rider.
-	 * @return a string with his info.
-	 */
-	private String printRiderInfo(Rider r) {	// UN METODO DEL GENERE PENSO STIA MEGLIO NEL MANAGER NO?
-		return "Profito: "+r.getProfit()+
-	           "€"+'\n'+"Capacità: "+r.getCapacity()+
-				"/"+RiderImpl.getMaxCapacity();
-	}
 }
 

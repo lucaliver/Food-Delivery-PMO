@@ -58,7 +58,17 @@ public interface Rider {
 	 */
 	List<City> getCities();
 	
+	/**
+	 * 
+	 * @return the capacity in that moment
+	 */
 	int getCapacity();
+	
+	/**
+	 * 
+	 * @return allthe info in that moment
+	 */
+	String getInfo();
 
 	 
 
