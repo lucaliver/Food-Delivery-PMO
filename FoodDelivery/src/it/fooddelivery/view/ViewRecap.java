@@ -60,7 +60,7 @@ public class ViewRecap extends JFrame implements ActionListener {
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
 		StringBuilder sbMenus = new StringBuilder();
-		for (Menu m: controller.getCurrentOrder().getMenusList()) {
+		for (Menu m: controller.getCurrentOrder().getMenus()) {
 			sbMenus.append(m.showMenuInfo());
 			sbMenus.append('\n');
 		}
@@ -73,7 +73,7 @@ public class ViewRecap extends JFrame implements ActionListener {
 		sbInfo.append("Destinazione: " + this.controller.getCurrentOrder().getDestination() + ", "
 				+ this.controller.getCurrentOrder().getAdress() + '\n'
 				+ "Ristorante: " + this.controller.getCurrentOrder().getRestaurant() + '\n'
-				+ "Totale: " + this.controller.getCurrentOrder().getTotalPrice() + "€" + '\n'
+				+ "Totale: " + this.controller.getCurrentOrder().getOrderPrice() + "€" + '\n'
 				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
 				);
 		infoArea.setText(sbInfo.toString());

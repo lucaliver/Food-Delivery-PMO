@@ -82,7 +82,7 @@ public class RiderImpl implements Rider{
 		
 	@Override
 	public boolean canFit(Order o) {		// ci entra nello zaino?
-		return (this.capacity + o.getSize()) <= MAX_CAPACITY;
+		return (this.capacity + o.getOrderSize()) <= MAX_CAPACITY;
 	}
 	
 	@Override
@@ -95,7 +95,7 @@ public class RiderImpl implements Rider{
 	 * @param o = ordine di cui incassare il guadagno. 
 	 */
 	private void addProfit(Order o) {
-		this.profit += o.getTotalPrice() * PERCENTAGE;
+		this.profit += o.getOrderPrice() * PERCENTAGE;
 	}
 	
 	public int getCapacity() {

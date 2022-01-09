@@ -189,7 +189,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 * It updates the price area and the size area.
 	 */
 	private void updateInfo() {
-		this.totalOrderArea.setText("Totale: " + controller.getCurrentOrder().getTotalPrice() + "€");
-		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getSize() + "u.");
+		this.totalOrderArea.setText("Totale: " + controller.getCurrentOrder().getOrderPrice() + "€");
+		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getOrderSize() + "u.");
 	}
 }

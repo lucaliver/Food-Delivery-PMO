@@ -55,7 +55,7 @@ class TestRiderImpl {
 		delivery.addOrder(o);
 		delivery.deliverOrder(o);
 		assertFalse(delivery.getBag().contains(o));
-		assertEquals(o.getTotalPrice()*RiderImpl.getPercentage(), delivery.getProfit());
+		assertEquals(o.getOrderPrice()*RiderImpl.getPercentage(), delivery.getProfit());
 	}
 
 	@Test

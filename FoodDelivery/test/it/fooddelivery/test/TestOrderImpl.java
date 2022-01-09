@@ -19,26 +19,26 @@ class TestOrderImpl {
 		assertNotNull(o);
 		assertEquals("8ft9", o.getIdOrder());
 		assertEquals(City.CAGLI, o.getDestination());
-		assertTrue(o.getMenusList().isEmpty());
+		assertTrue(o.getMenus().isEmpty());
 	}
 
 	@Test
 	void testMenusList() {
 		OrderImpl o = new OrderImpl("88ty", City.FOSSOMBRONE, null, null);
-		assertTrue(o.getMenusList().isEmpty());		
+		assertTrue(o.getMenus().isEmpty());		
 		o.addMenu(new MenuImpl("M1", 0.40, 55));
-		assertNotNull(o.getMenusList());
+		assertNotNull(o.getMenus());
 				
 	}
 
 	@Test
 	void testAddMenu() {
 		OrderImpl o = new OrderImpl("oo9i8", City.FOSSOMBRONE, null, null);
-		assertTrue(o.getMenusList().isEmpty()); 
+		assertTrue(o.getMenus().isEmpty()); 
 		MenuImpl m = new MenuImpl("Name", 0.20, 3);
 		o.addMenu(m);
-		assertTrue(!o.getMenusList().isEmpty());
-		assertEquals(1, o.getMenusList().size());
+		assertTrue(!o.getMenus().isEmpty());
+		assertEquals(1, o.getMenus().size());
 	}
 
 	@Test
@@ -49,10 +49,10 @@ class TestOrderImpl {
 		o.addMenu(m1);
 		o.addMenu(m2);
 		o.removeMenu(m1);
-		assertTrue(!o.getMenusList().isEmpty());
-		assertEquals(1, o.getMenusList().size());
+		assertTrue(!o.getMenus().isEmpty());
+		assertEquals(1, o.getMenus().size());
 		o.removeMenu(m2);
-		assertTrue(o.getMenusList().isEmpty());
+		assertTrue(o.getMenus().isEmpty());
 	}
 	
 	@Test
@@ -63,7 +63,7 @@ class TestOrderImpl {
 		o.addMenu(new MenuImpl("c", 7.4, 7));
 		o.addMenu(new MenuImpl("d", 5.0, 51));
 		o.removeAllMenus();
-		assertTrue(o.getMenusList().isEmpty());
+		assertTrue(o.getMenus().isEmpty());
 	}
 
 	@Test
@@ -74,7 +74,7 @@ class TestOrderImpl {
 		o.addMenu(new MenuImpl("Name2", 1.99, 23)); 
 		o.addMenu(new MenuImpl("Name3", 15.30, 8));
 		int sizeTot = 7+14+23+8; 
-		assertEquals(sizeTot, o.getSize());
+		assertEquals(sizeTot, o.getOrderSize());
 	}
 
 	@Test
@@ -85,7 +85,7 @@ class TestOrderImpl {
 		o.addMenu(new MenuImpl("Name2", 1.47, 23)); 
 		o.addMenu(new MenuImpl("Name3", 133.61, 8));
 		double priceTot = 12.60+17.23+1.47+133.61;
-		assertEquals(priceTot, o.getTotalPrice());
+		assertEquals(priceTot, o.getOrderPrice());
 	}
 
 	@Test

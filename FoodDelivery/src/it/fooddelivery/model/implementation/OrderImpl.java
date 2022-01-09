@@ -18,9 +18,11 @@ public class OrderImpl implements Order{
 	private final String idOrder;
 	private final City destination;
 	private final List<Menu> menus;
-	private String address;
-	private Restaurant restaurant;
+	private final String address;
+	private final Restaurant restaurant;
 	private int quantity;
+	private int size;
+	private double price;
 	
 	
 	/**
@@ -33,12 +35,14 @@ public class OrderImpl implements Order{
 		this.destination = destination;
 		this.address = address;
 		this.restaurant = restaurant;
+		this.size = 0;
+		this.price = 0;
 		this.menus = new ArrayList<>();	
 	}
 	
 	
 	@Override
-	public List<Menu> getMenusList() {		
+	public List<Menu> getMenus() {		
 		return this.menus;
 	}
 	
@@ -54,28 +58,22 @@ public class OrderImpl implements Order{
 	
 	@Override
 	public void removeAllMenus() {
-		if(!this.getMenusList().isEmpty()) {	
-			this.getMenusList().removeAll(menus);
+		if(!this.getMenus().isEmpty()) {	
+			this.getMenus().removeAll(menus);
 		}		
 	}
 
 	@Override
-	public int getSize() {
-		int size = 0;
-		for(Menu m : menus) {
-			size += m.getSize();
-		}
+	public int getOrderSize() {
+		this.menus.forEach(m -> size += m.getSize());
 		return size;
 	}
 	
 	// TODO cambiare il tipo di price per gestire meglio la valuta
 	@Override
-	public double getTotalPrice() {
-		double totPrice = 0;
-		for(Menu m : menus) {
-			totPrice += m.getPrice();
-		}
-		return totPrice;
+	public double getOrderPrice() {
+		this.menus.forEach(m -> price += m.getPrice());
+		return price;
 	}
 
 	@Override
@@ -93,22 +91,11 @@ public class OrderImpl implements Order{
 		return address;
 	}
 
-
-	public void setAdress(String adress) {
-		this.address = adress;
-	}
-
-
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
 
-
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
-	}
-	
-	public int quantity(String menuName) {
+	public int menuQuantity(String menuName) {
 		this.quantity = 0;
 		for(Menu m : this.menus) {
 			if(menuName.equals(m.getName())) {

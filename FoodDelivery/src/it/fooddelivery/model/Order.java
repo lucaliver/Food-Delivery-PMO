@@ -14,7 +14,7 @@ public interface Order{
 	/**
 	 * @return all the menus in the order.
 	 */
-	List<Menu> getMenusList();	
+	List<Menu> getMenus();	
 	
 	/**
 	 * @param m = menu to add at the order.
@@ -34,12 +34,12 @@ public interface Order{
 	/**
 	 * @return the size of the whole order.
 	 */
-	int getSize();
+	int getOrderSize();
 	
 	/**
 	 * @return the price of the whole order.
 	 */
-	double getTotalPrice();
+	double getOrderPrice();
 	
 	/**
 	 * @return the ID of the order.
@@ -55,13 +55,7 @@ public interface Order{
 	 * 
 	 * @return the adress of the order
 	 */
-	public String getAdress(); 
-		
-	/**
-	 * 
-	 * @param adress = thedestination adress of the order
-	 */
-	public void setAdress(String adress); 
+	public String getAdress();  
 	
 	/**
 	 * 
@@ -71,16 +65,10 @@ public interface Order{
 	
 	/**
 	 * 
-	 * @param restaurant = the restaurant that made this order
-	 */
-	public void setRestaurant(Restaurant restaurant); 
-	
-	/**
-	 * 
 	 * @param name of the menu
 	 * @return the quantity of the menu with that name
 	 */
-	public int quantity(String menuName);
+	public int menuQuantity(String menuName);
 	
 	/**
 	 * 
