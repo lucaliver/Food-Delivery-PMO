@@ -117,6 +117,7 @@ public class RiderImpl implements Rider{
 		       "/"+RiderImpl.getMaxCapacity();
 	}
 	
+	@Override
 	public String showBagInfo() {
 		StringBuilder sb = new StringBuilder();
 		this.orderList.forEach(o-> sb.append((this.orderList.indexOf(o)+1)+"° Ordine:"+'\n'+o.showOrderInfo()));
