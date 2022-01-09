@@ -69,7 +69,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	/**
 	 * It creates the GUI for one rider (text and button).
 	 * @param r is the rider.
-	 * @return the panel itself?
+	 * @return the panel itself
 	 */
 	private JPanel createRiderPanel(Rider r) {
 		JPanel riderPanel = new JPanel();
@@ -79,7 +79,6 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		riderArea = new JTextArea();
 		riderArea.setEditable(false);
 		riderArea.setText(r.showRiderInfo());
-		//riderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		riderArea.setBackground(getBackground());
 		infoRider.put(r, riderArea);
 		
@@ -119,7 +118,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	
 	/**
 	 * It creates the GUI for the waiting list of orders.
-	 * @return the panel itself?
+	 * @return the panel itself
 	 */
 	private JPanel createWaitingOrderPanel() {
 		JPanel waitingSection = new JPanel();

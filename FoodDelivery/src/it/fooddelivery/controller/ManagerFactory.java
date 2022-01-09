@@ -61,23 +61,23 @@ public class ManagerFactory {
 		List<Restaurant> restaurants = new ArrayList<>();
 		
 		List<Menu> menusForMc = new ArrayList<>();
-		menusForMc.add(new MenuImpl("HappyMeal", 5, 6));
-		menusForMc.add(new MenuImpl("BigMac Menu", 10, 4));
+		menusForMc.add(new MenuImpl("HappyMeal", 5.00, 6));
+		menusForMc.add(new MenuImpl("BigMac Menu", 10.00, 4));
 		restaurants.add(new RestaurantImpl("McDonalds", menusForMc));
 
 		List<Menu> menusForKFC = new ArrayList<>();
-		menusForKFC.add(new MenuImpl("Pollo crudo", 5, 2));
+		menusForKFC.add(new MenuImpl("Pollo crudo", 5.30, 2));
 		menusForKFC.add(new MenuImpl("Pollo fritto", 10, 66));
 		restaurants.add(new RestaurantImpl("KFC", menusForKFC));
 
 		List<Menu> menusForPizzeria = new ArrayList<>();
-		menusForPizzeria.add(new MenuImpl("Margherita", 5, 2));
-		menusForPizzeria.add(new MenuImpl("Diavola", 100, 4));
+		menusForPizzeria.add(new MenuImpl("Margherita", 5.60, 2));
+		menusForPizzeria.add(new MenuImpl("Diavola", 100.00, 4));
 		restaurants.add(new RestaurantImpl("Pizzeria da Mario", menusForPizzeria));
 		
 		List<Menu> menusForSushi = new ArrayList<>();
-		menusForSushi.add(new MenuImpl("Sushi", 5, 9));
-		menusForSushi.add(new MenuImpl("Ramen", 10, 7));
+		menusForSushi.add(new MenuImpl("Sushi", 5.90, 9));
+		menusForSushi.add(new MenuImpl("Ramen", 10.30, 7));
 		restaurants.add(new RestaurantImpl("Sushino", menusForSushi));
 		
 		return restaurants;

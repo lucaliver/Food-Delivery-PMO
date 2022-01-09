@@ -35,8 +35,6 @@ public class OrderImpl implements Order{
 		this.destination = destination;
 		this.address = address;
 		this.restaurant = restaurant;
-		this.size = 0;
-		this.price = 0;
 		this.menus = new ArrayList<>();	
 	}
 	
@@ -65,6 +63,7 @@ public class OrderImpl implements Order{
 
 	@Override
 	public int getOrderSize() {
+		this.size = 0;
 		this.menus.forEach(m -> size += m.getSize());
 		return size;
 	}
@@ -72,6 +71,7 @@ public class OrderImpl implements Order{
 	// TODO cambiare il tipo di price per gestire meglio la valuta
 	@Override
 	public double getOrderPrice() {
+		this.price = 0;
 		this.menus.forEach(m -> price += m.getPrice());
 		return price;
 	}
@@ -109,7 +109,7 @@ public class OrderImpl implements Order{
 	@Override
 	public String showOrderInfo() {	
 		StringBuilder sb = new StringBuilder();
-		this.menus.forEach(m -> sb.append('\t'+m.showMenuInfo()));					
+		this.menus.forEach(m -> sb.append('\t'+m.showMenuInfo()+'\n'));					
 		return sb.toString();
 	}			
 }
