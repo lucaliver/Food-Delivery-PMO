@@ -22,15 +22,15 @@ public class RiderImpl implements Rider{
 	private List<City> cities;
 	
 	/**
-	 * Costurttore.
-	 * @param n = nome del rider.
-	 * @param c = lista delle città in cui egli consegna.
+	 * Costruttore.
+	 * @param name = nome del rider.
+	 * @param cities = lista delle città in cui egli consegna.
 	 */
-	public RiderImpl(String n, List<City> c) {
+	public RiderImpl(String name, List<City> cities) {
 		this.profit = 0;
 		this.capacity = 0;
-		this.name = n;
-		this.cities = c;
+		this.name = name;
+		this.cities = cities;
 		this.orderList = new ArrayList<>();
 	}
 	

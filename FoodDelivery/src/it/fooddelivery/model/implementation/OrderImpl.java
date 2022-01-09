@@ -97,11 +97,11 @@ public class OrderImpl implements Order{
 
 	public int menuQuantity(String menuName) {
 		this.quantity = 0;
-		for(Menu m : this.menus) {
-			if(menuName.equals(m.getName())) {
-				quantity++;
+		this.menus.forEach(m -> {
+			if(m.getName().equals(menuName)) {
+				this.quantity++;
 			}
-		}
+		});					
 		return quantity;
 	}
 
