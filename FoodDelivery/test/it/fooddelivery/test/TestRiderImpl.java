@@ -49,7 +49,7 @@ class TestRiderImpl {
 		RiderImpl delivery = new RiderImpl("Fattorino", null);
 		OrderImpl o = new OrderImpl("67tyv90", City.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
-		MenuImpl m2 = new MenuImpl("yuyub", 80.00, 40);				
+		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
 		o.addMenu(m);
 		o.addMenu(m2);
 		delivery.addOrder(o);

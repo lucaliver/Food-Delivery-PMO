@@ -87,8 +87,8 @@ public class ViewRecap extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Ordine in attesa...");
 			}
 			this.setVisible(false);
-			this.dispose();	
-			// TODO quando si finisce di creare un ordine bisogna anche aprire una nuova ViewWelcome/ViewPlacing per ordini multipli
+			this.dispose();
+			new ViewWelcome(this.controller);
 		});
 						
 		backButton = new JButton("Indietro"); 
