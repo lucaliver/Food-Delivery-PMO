@@ -4,15 +4,20 @@
 
 package it.fooddelivery.model.implementation;
 
+import java.text.DecimalFormat;
+
 import it.fooddelivery.model.Menu;
 
 /**
  * A class to represent a menu.
  */
 public class MenuImpl implements Menu{
+	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
+	
 	private final String name;
 	private final double price;
 	private final int size;
+	
 	
 	/**
 	 * Constructor, initializes all the fields.
@@ -42,7 +47,7 @@ public class MenuImpl implements Menu{
 	}
 
 	@Override
-	public String show() {
-		return(getName()+" - "+getPrice()+"€ - "+getSize()+"u");
+	public String showMenuInfo() {
+		return(getName()+" - "+ df.format(getPrice())+"€ - "+getSize()+"u");
 	}
 }

@@ -4,8 +4,7 @@
 
 package it.fooddelivery.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -23,12 +22,13 @@ import it.fooddelivery.model.Menu;
 
 /**
  * View component for the recap screen for the customer.
- *
  */
 @SuppressWarnings("serial")
-public class ViewRecap extends JFrame implements ActionListener {
+public class ViewRecap extends JFrame {
+	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
+	
 	private final Manager controller;
-	private final String title = "Il mio ordine :)";
+	private final String title = "Il tuo ordine :)";
 	private JButton proceedButton;
 	private JButton backButton;
 	
@@ -73,7 +73,7 @@ public class ViewRecap extends JFrame implements ActionListener {
 		sbInfo.append("Destinazione: " + this.controller.getCurrentOrder().getDestination() + ", "
 				+ this.controller.getCurrentOrder().getAdress() + '\n'
 				+ "Ristorante: " + this.controller.getCurrentOrder().getRestaurant() + '\n'
-				+ "Totale: " + this.controller.getCurrentOrder().getOrderPrice() + "€" + '\n'
+				+ "Totale: " + df.format(controller.getCurrentOrder().getOrderPrice()) + "€" + '\n'
 				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
 				);
 		infoArea.setText(sbInfo.toString());
@@ -82,9 +82,9 @@ public class ViewRecap extends JFrame implements ActionListener {
 		proceedButton.addActionListener(event ->{
 			boolean res = this.controller.assignOrder(this.controller.getCurrentOrder());
 			if(res) {
-				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());
+				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().getName());
 			}else {
-				JOptionPane.showMessageDialog(this, "Ordine in attesa...");
+				JOptionPane.showMessageDialog(this, "Ordine in attesa che si liberi un fattorino.");
 			}
 			this.setVisible(false);
 			this.dispose();
@@ -107,13 +107,5 @@ public class ViewRecap extends JFrame implements ActionListener {
 		mainPanel.add(proceedButton);
 
 		this.getContentPane().add(mainPanel);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Se ho cliccato procedi, l'ordine deve essere inviato.
-		
-		if (e.getSource()==proceedButton)
-			this.controller.placeCurrentOrder();
 	}
 }

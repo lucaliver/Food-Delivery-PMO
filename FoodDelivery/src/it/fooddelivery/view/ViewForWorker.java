@@ -22,9 +22,11 @@ import java.util.Optional;
 
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Rider;
-import it.fooddelivery.model.implementation.RiderImpl;
 import it.fooddelivey.utils.RiderObserver;
 
+/**
+ * The only screen riders will see. It shows the bag of everyone and let them empty it.
+ */
 @SuppressWarnings("serial")
 public class ViewForWorker extends JFrame implements ActionListener,RiderObserver{
 	private final Manager controller;
@@ -156,12 +158,14 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 			}
 		}*/							
 	}
-	// TODO in teoria questo sarebbe il metodo da chiamare quando si è finito di creare un ordine, ma non mi è chiaro dove chiamarlo
+	
+	
+	// TODO in teoria questo sarebbe il metodo da chiamare quando si è finito di creare un ordine,
+	// ma non mi è chiaro dove chiamarlo
 	// Forse il parametro Optional non serve visto che il controller mi da anche il rider con l'ultimo ordine assegnato
 	// Non so se questo deve essere un metodo a se o se metterlo in actionPerformed
 	@Override
 	public void updateTextArea(Optional<Rider> r) {
-	
 		if(r.isPresent()) {
 			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());		 
 		}else {

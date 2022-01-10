@@ -23,8 +23,7 @@ import it.fooddelivery.model.City;
 import it.fooddelivery.model.Restaurant;
 
 /**
- * First window: welcome screen that the customer will see first.
- *
+ * Welcome screen for the customer, used to select restaurant and destination.
  */
 @SuppressWarnings("serial")
 public class ViewWelcome extends JFrame implements ActionListener {
@@ -109,14 +108,13 @@ public class ViewWelcome extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// Potrei implementare questo metodo con una lamdba come per gli
+		// altri bottoni delle altre view, non so quale sia migliore.
 		if (e.getSource()==proceedButton) {
 			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
 			this.setVisible(false);
 			this.dispose();
-			
-			ViewPlacing w = new ViewPlacing(this.controller);
-			w.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			w.setVisible(true);
+			new ViewPlacing(this.controller);
 		}
 
 	}

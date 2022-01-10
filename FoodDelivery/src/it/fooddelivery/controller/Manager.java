@@ -11,9 +11,7 @@ import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.OrderImpl;
-import it.fooddelivey.utils.RiderObserver;
 import it.fooddelivery.model.City;
-import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
@@ -22,13 +20,13 @@ import it.fooddelivery.model.Restaurant;
  *
  */
 public class Manager{
-	//TODO Forse applicare il design pattern Singleton al controller.
+	//TODO Forse applicare il Singleton al controller.
 	
 	private Map<String, Rider> riders;
 
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
-	private Order currentOrder; 	//TODO Forse dovrebbe essere optional
+	private Order currentOrder;
 	private Optional<Rider> riderWithLastOrder;
 	
 	/**
@@ -40,16 +38,15 @@ public class Manager{
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
-		Optional.empty();
+		this.currentOrder = null;
+		this.riderWithLastOrder = Optional.empty();
 	}
 	
 	/**
 	 * It tries to assign the order to a delivery man of the correct city.
-	 * He needs to have enough bag space.
-	 * It select the delivery man with the lower profit.
+	 * He needs to have enough bag space. It select the delivery man with the lower profit.
 	 * @param order is the order to assign
-	 * @return true if assigned to a delivery man,
-	 * false if the order was put into the waiting list.
+	 * @return true if assigned to a delivery man, false if put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
 		Optional<Rider> selected = this.riders
@@ -57,26 +54,26 @@ public class Manager{
 				.stream()
 				.filter(x->x.getCities().contains(order.getDestination()))
 				.filter(x->x.canFit(order))	
-				.sorted((o1, o2)->{return (int) (o1.getProfit() - o2.getProfit());})	
+				.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
 				.findFirst();
-		riderWithLastOrder = selected;
+		this.riderWithLastOrder = selected;
 		if(selected.isPresent()) {
-			System.out.println("Rider selezionato: " + selected.get().getName());
+			System.out.println("[DEBUG] Rider selezionato: " + selected.get().getName()); //DEBUG
 			selected.get().addOrder(order);
 			//TODO mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
 			System.out.println(selected.get().showBagInfo());
 			return true;
-		}else { 
-			// 1# - HO CAMBIATO UN PO ALTRIMENTI DAVA ERRORE SE SELECTED ERA NULL: GIACOMO
-			System.out.println("Nessun rider disponibile, ordine in attesa!!!");
+		}else {
+			System.out.println("Nessun rider disponibile, ordine in attesa!!!"); //DEBUG
 			this.waitingOrders.add(order);
 			System.out.println(this.showWaitingOrder());
 			return false;
 		}
 	}
-	/* Metodo cge ritorna il possibile nome del fattorino */
-	public Optional<Rider> getRiderWithLastOrder(){
-		return this.riderWithLastOrder;
+	
+	
+	public Rider getRiderWithLastOrder(){
+		return this.riderWithLastOrder.get();
 	}
 	
 	/**

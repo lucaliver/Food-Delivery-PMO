@@ -31,24 +31,22 @@ public class ManagerFactory {
 	 */
 	private static Map<String, Rider> createRiders() {
 		Map<String, Rider> riders = new HashMap<>();
+		// TODO Aggiorneremo poi gli assegnamenti delle città
 		
 		List<City> citiesForLuca = new ArrayList<>();
 		citiesForLuca.add(City.CAGLI);
 		citiesForLuca.add(City.URBANIA);
-		citiesForLuca.add(City.FOSSOMBRONE);
 		riders.put("Luca", new RiderImpl("Luca", citiesForLuca));
 		
 		List<City> citiesForGiulia = new ArrayList<>();
-		citiesForGiulia.add(City.CAGLI);
-		citiesForGiulia.add(City.URBANIA);
-		citiesForGiulia.add(City.FOSSOMBRONE);
+		citiesForGiulia.add(City.TAVULLIA);;
+		citiesForGiulia.add(City.URBANIA);;
 		riders.put("Giulia", new RiderImpl("Giulia", citiesForGiulia));
 		
 
 		List<City> citiesForGiacomo = new ArrayList<>();
-		citiesForGiacomo.add(City.TAVULLIA);
-		//TODO commento per simulare fattorini non disponibili e avere ordini nella waitingList
-		//citiesForGiacomo.add(City.FERMIGNANO);
+		citiesForGiacomo.add(City.FERMIGNANO);
+		citiesForGiacomo.add(City.URBANIA);
 		riders.put("Giacomo", new RiderImpl("Giacomo", citiesForGiacomo));
 
 		return riders;

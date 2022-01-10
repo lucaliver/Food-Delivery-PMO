@@ -6,6 +6,7 @@ package it.fooddelivery.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -24,8 +25,12 @@ import it.fooddelivery.model.Menu;
 
 //COLLEGARE BOTTONI +,- PER VISUALIZZARE A SCHERMO LE QUANTITA' SELEZIONATE
 
+/**
+ * Second window for the customer, used to select menus.
+ */
 @SuppressWarnings("serial")
 public class ViewPlacing extends JFrame implements ActionListener {
+	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
 	
 	private final Manager controller;
 	private final String title = "Seleziona il menù più adatto a te!";
@@ -45,6 +50,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	ViewPlacing(final Manager controller){
 		this.controller 	= controller;
 		this.Init();
+		this.updateInfo();
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
@@ -64,8 +70,6 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		panel.setBorder(new EmptyBorder(10, 20, 10, 20));
 		
 		// creo e aggiungo i bottoni per gestire incremento e decremento dell'ordine
-
-	
 		for (Menu m : controller.getCurrentOrder().getRestaurant().getMenuOffer()) {
 					
 			final JPanel quantityPanel = new JPanel();
@@ -117,8 +121,8 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		result.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		panel.add(result);
 		
-		totalOrderArea 	= new JTextArea("Totale: 0€");
-		sizeOrderArea 	= new JTextArea("Dimensione: 0u.");
+		totalOrderArea 	= new JTextArea();
+		sizeOrderArea 	= new JTextArea();
 		
 		totalOrderArea.setPreferredSize(new Dimension(100, 30));
 		sizeOrderArea.setPreferredSize(new Dimension(100, 30));
@@ -129,7 +133,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		result.add(Box.createHorizontalStrut(30));
 		result.add(sizeOrderArea, BorderLayout.PAGE_END);
 		
-		// creo bottoni per 
+		// creo bottoni
 		final JPanel dispositionBotton = new JPanel();
 		confirmButton 	= new JButton("Conferma");
 		comeBackButton 	= new JButton("Indietro");
@@ -157,9 +161,13 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
-			this.setVisible(false);
-			this.dispose();	
-			new ViewRecap(this.controller);
+			if (controller.getCurrentOrder().getMenus().size() > 0) {
+				this.setVisible(false);
+				this.dispose();	
+				new ViewRecap(this.controller);
+			} else {
+				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
+			}
 		}
 	}
 	
@@ -189,7 +197,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 * It updates the price area and the size area.
 	 */
 	private void updateInfo() {
-		this.totalOrderArea.setText("Totale: " + controller.getCurrentOrder().getOrderPrice() + "€");
+		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().getOrderPrice()) + "€");
 		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getOrderSize() + "u.");
 	}
 }
