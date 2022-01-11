@@ -147,6 +147,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//TODO qui in teoria dovrei intercettare l'evento generato dal pulsante "Procedi" in ViewRecap
+		// ma come lo intercetto?
 		//if(e.getSource() == proceedButton) {
 		this.updateTextArea();
 		//}								
