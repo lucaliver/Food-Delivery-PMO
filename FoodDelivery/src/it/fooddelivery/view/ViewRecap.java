@@ -82,7 +82,7 @@ public class ViewRecap extends JFrame {
 		proceedButton.addActionListener(event ->{
 			boolean res = this.controller.assignOrder(this.controller.getCurrentOrder());
 			if(res) {
-				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().getName());
+				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());
 			}else {
 				JOptionPane.showMessageDialog(this, "Ordine in attesa che si liberi un fattorino.");
 			}

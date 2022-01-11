@@ -112,7 +112,7 @@ public class RiderImpl implements Rider{
 
 	@Override
 	public String showRiderInfo() {
-		return "Profito: "+this.getProfit()+
+		return "Profito: "+String.format("%.2f", getProfit())+
 		       "€"+'\n'+"Capacità: "+this.getCapacity()+
 		       "/"+RiderImpl.getMaxCapacity();
 	}

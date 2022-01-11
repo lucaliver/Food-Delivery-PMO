@@ -12,7 +12,6 @@ import it.fooddelivery.model.Menu;
  * A class to represent a menu.
  */
 public class MenuImpl implements Menu{
-	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
 	
 	private final String name;
 	private final double price;
@@ -21,14 +20,14 @@ public class MenuImpl implements Menu{
 	
 	/**
 	 * Constructor, initializes all the fields.
-	 * @param n = name of the menu.
-	 * @param p = price of the menu.
-	 * @param s = size of the menu.
+	 * @param name = name of the menu.
+	 * @param price = price of the menu.
+	 * @param size = size of the menu.
 	 */
-	public MenuImpl(String n, double p, int s) {		
-		this.name = n;
-		this.price = p;
-		this.size = s;
+	public MenuImpl(String name, double price, int size) {		
+		this.name = name;
+		this.price = price;
+		this.size = size;
 	}
 
 	@Override
@@ -48,6 +47,7 @@ public class MenuImpl implements Menu{
 
 	@Override
 	public String showMenuInfo() {
-		return(getName()+" - "+ df.format(getPrice())+"€ - "+getSize()+"u");
+		return(getName()+" - "+ String.format("%.2f",getPrice())+"€ - "+getSize()+"u");
+		
 	}
 }

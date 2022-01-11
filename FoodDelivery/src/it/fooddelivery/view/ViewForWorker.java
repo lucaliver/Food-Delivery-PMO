@@ -37,6 +37,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	private JButton startDeliveryButton;
 	private Map<Rider, JTextArea> infoOrder;
 	private Map<Rider, JTextArea> infoRider;
+	private static JPanel mainPanel;
 	
 	/**
 	 * Constructor.
@@ -55,7 +56,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	private void Init(){
 		this.setTitle(this.TITLE);
 		this.setSize(100, 50);
-		JPanel mainPanel = new JPanel();
+		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
@@ -129,6 +130,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		
 		waitingOrdersArea = new JTextArea(10,30);
 		waitingOrdersArea.setText("Prova");
+		waitingOrdersArea.setLineWrap(true);
 		waitingOrdersArea.setAutoscrolls(true);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
@@ -141,22 +143,14 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		return waitingSection;
 	}
 	
+	public static JPanel getViewForWorker() {
+		return mainPanel;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) { 
-		
-		/*if(e.getActionCommand().equals("Procedi")){
-			Optional<Rider> riderWithLastOrder = this.controller.getRiderWithLastOrder();
-			if(riderWithLastOrder.isEmpty()) {
-				this.waitingOrdersArea.setText(this.controller.getWaitingOrders().toString());
-			}else {
-				this.infoOrder.get(riderWithLastOrder.get()).setText(riderWithLastOrder.get().getBag().toString());
-				this.infoRider.get(this.controller.getRiders()
-							  .get(this.controller.getLastOrderAssign()
-							  .get())).setText(this.controller.getRiders()
-							  .get(this.controller.getLastOrderAssign()
-							  .get()).getBag().toString());
-			}
-		}*/							
+		this.updateTextArea();
+								
 	}
 	
 	
@@ -165,7 +159,8 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	// Forse il parametro Optional non serve visto che il controller mi da anche il rider con l'ultimo ordine assegnato
 	// Non so se questo deve essere un metodo a se o se metterlo in actionPerformed
 	@Override
-	public void updateTextArea(Optional<Rider> r) {
+	public void updateTextArea() {
+		Optional<Rider> r = this.controller.getRiderWithLastOrder();
 		if(r.isPresent()) {
 			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());		 
 		}else {

@@ -72,8 +72,8 @@ public class Manager{
 	}
 	
 	
-	public Rider getRiderWithLastOrder(){
-		return this.riderWithLastOrder.get();
+	public Optional<Rider> getRiderWithLastOrder(){
+		return this.riderWithLastOrder;
 	}
 	
 	/**
