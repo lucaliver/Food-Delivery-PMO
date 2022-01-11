@@ -143,14 +143,13 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		return waitingSection;
 	}
 	
-	public static JPanel getViewForWorker() {
-		return mainPanel;
-	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) { 
+	public void actionPerformed(ActionEvent e) {
+		//TODO qui in teoria dovrei intercettare l'evento generato dal pulsante "Procedi" in ViewRecap
+		//if(e.getSource() == proceedButton) {
 		this.updateTextArea();
-								
+		//}								
 	}
 	
 	
