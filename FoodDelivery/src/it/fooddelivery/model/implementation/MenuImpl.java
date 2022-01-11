@@ -13,10 +13,10 @@ import it.fooddelivery.model.Menu;
  */
 public class MenuImpl implements Menu{
 	
+	private int quantity;
 	private final String name;
 	private final double price;
-	private final int size;
-	
+	private final int size;	
 	
 	/**
 	 * Constructor, initializes all the fields.
@@ -28,6 +28,7 @@ public class MenuImpl implements Menu{
 		this.name = name;
 		this.price = price;
 		this.size = size;
+		this.quantity = 0;
 	}
 
 	@Override
@@ -50,4 +51,28 @@ public class MenuImpl implements Menu{
 		return(getName()+" - "+ String.format("%.2f",getPrice())+"€ - "+getSize()+"u");
 		
 	}
+
+	@Override
+	public int getQuantityPlus() {
+		++quantity;
+		System.out.println(quantity);
+		return quantity;
+	}
+
+	@Override
+	public int getQuantityMinus() {
+		quantity--;
+		System.out.println(quantity);
+		return quantity;
+	}
+
+	@Override
+	public int getQuantity() {
+		if(quantity == 0) {
+			System.out.println("0");
+		}
+		return quantity;
+	}
+
+	
 }

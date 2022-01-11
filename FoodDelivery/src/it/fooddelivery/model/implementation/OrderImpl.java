@@ -20,7 +20,6 @@ public class OrderImpl implements Order{
 	private final List<Menu> menus;
 	private final String address;
 	private final Restaurant restaurant;
-	private int quantity;
 	private int size;
 	private double price;
 	
@@ -95,6 +94,7 @@ public class OrderImpl implements Order{
 		return restaurant;
 	}
 
+<<<<<<< Upstream, based on origin/master
 	public int menuQuantity(String menuName) {
 		this.quantity = 0;
 		this.menus.forEach(m -> {
@@ -103,13 +103,31 @@ public class OrderImpl implements Order{
 			}
 		});					
 		return quantity;
+=======
+	@Override
+	public int incrementalMenu(String menuName) {
+		return menus.stream()
+				.filter(m -> m.getName().equals(menuName))
+				.findFirst()
+				.get()
+				.getQuantityPlus();
+>>>>>>> 757d96c MenuImpl: aggiunti metodi:  getQuantity, getQuantityPlus, getQuantityMinus OrderImpl: aggiunti metodi: decremenatlMenu, incrementalMenu ViewPlacing: Bottoni +/- funzionano, ma viene aggiornato solo l'ultima riga e non ognuna
 	}
-
+	
+	@Override
+	public int decrementalMenu(String menuName) {
+		return menus.stream()
+				.filter(m -> m.getName().equals(menuName))
+				.filter(m -> m.getQuantity() > 0)
+				.findFirst()
+				.get()
+				.getQuantityMinus();
+	}
 
 	@Override
 	public String showOrderInfo() {	
 		StringBuilder sb = new StringBuilder();
 		this.menus.forEach(m -> sb.append('\t'+m.showMenuInfo()+'\n'));					
 		return sb.toString();
-	}			
+	}
 }

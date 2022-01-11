@@ -63,12 +63,6 @@ public interface Order{
 	 */
 	public Restaurant getRestaurant(); 
 	
-	/**
-	 * 
-	 * @param name of the menu
-	 * @return the quantity of the menu with that name
-	 */
-	public int menuQuantity(String menuName);
 	
 	/**
 	 * 
@@ -76,4 +70,17 @@ public interface Order{
 	 */
 	public String showOrderInfo();
 	
+	/**
+	 * 
+	 * @param name of the menu
+	 * @return the the increased quantity of the menu with that name
+	 */
+	int incrementalMenu(String menuName);
+	
+	/**
+	 * 
+	 * @param name of the menu
+	 * @return the the decrement quantity of the menu with that name
+	 */
+	int decrementalMenu(String menuName);
 }

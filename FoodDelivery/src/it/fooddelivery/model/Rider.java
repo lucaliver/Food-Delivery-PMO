@@ -75,4 +75,5 @@ public interface Rider {
 	 * @return the content of the rider's bag
 	 */
 	String showBagInfo();
+	
 }
