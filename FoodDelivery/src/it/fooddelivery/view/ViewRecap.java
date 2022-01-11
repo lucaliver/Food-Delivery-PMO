@@ -105,7 +105,10 @@ public class ViewRecap extends JFrame {
 		mainPanel.add(menusArea);
 		mainPanel.add(Box.createHorizontalStrut(30));
 		mainPanel.add(proceedButton);
+		
 
 		this.getContentPane().add(mainPanel);
 	}
+	
+	
 }
