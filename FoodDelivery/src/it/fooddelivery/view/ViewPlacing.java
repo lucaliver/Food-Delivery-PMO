@@ -94,25 +94,19 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			descriptionArea.setPreferredSize(new Dimension(300, 20));
 			descriptionArea.setText(m.showMenuInfo());
 			
-			// TODO I tasti + e - devono aggiornare totale e dimensione ad ogni click. 
 			addButton.addActionListener(event -> {
 				controller.getCurrentOrder().addMenu(m);
-				// TODO usato come suggerito da Giulia un metodo quantity di order, funzionamento parziale
-				//this.quantityArea.setText(this.controller.getCurrentOrder().menuQuantity(m.getName())+"");
-				// Altrimenti metodo alternativo;
-				//this.quantityArea.setText(Integer.parseInt(quantityArea.getText())+1+"");
 				this.updateInfo();
+				this.quantityArea.setText(" " + controller.getCurrentOrder().incrementalMenu(m.getName()));
 			});
 			
+
 			removeButton.addActionListener(event -> {
-				//if(Integer.parseInt(quantityArea.getText() ) > 0) {
+				this.quantityArea.setText(" " + controller.getCurrentOrder().decrementalMenu(m.getName()));
 				controller.getCurrentOrder().removeMenu(m);
-				// TODO usato come suggerito da Giulia un metodo quantity di order, funzionamento parziale
-				//this.quantityArea.setText(this.controller.getCurrentOrder().menuQuantity(m.getName())+"");
-				// Altrimenti metodo alternativo
-				/*this.quantityArea.setText(Integer.parseInt(quantityArea.getText())-1+"");*/
 				this.updateInfo();
 			});
+
 		}
 		
 		// creo una textArea nella quale stampare totOrdine e dimensioneOrdine
@@ -183,15 +177,6 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			new ViewWelcome(this.controller);
 		}
 	}
-	
-	/*
-	public void emptyHandler(final ActionEvent e) {
-		if(e.getSource() == emptyButton) {
-			controller.getCurrentOrder().removeAllMenus();
-			this.setVisible(false);
-			this.dispose();	
-		}
-	} */
 	
 	/**
 	 * It updates the price area and the size area.
