@@ -21,8 +21,7 @@ public class OrderImpl implements Order{
 	private final String address;
 	private final Restaurant restaurant;
 	private int size;
-	private double price;
-	
+	private double price;	
 	
 	/**
 	 * Constructor.
@@ -56,8 +55,9 @@ public class OrderImpl implements Order{
 	@Override
 	public void removeAllMenus() {
 		if(!this.getMenus().isEmpty()) {	
+			this.menus.forEach(m -> m.setQuantity(0));
 			this.getMenus().removeAll(menus);
-		}		
+		}	
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class OrderImpl implements Order{
 	public int decrementalMenu(String menuName) {
 		return menus.stream()
 				.filter(m -> m.getName().equals(menuName))
-				.filter(m -> m.getQuantity() > 0)
+				.filter(m -> m.getQuantity() >= 0)
 				.findFirst()
 				.get()
 				.getQuantityMinus();

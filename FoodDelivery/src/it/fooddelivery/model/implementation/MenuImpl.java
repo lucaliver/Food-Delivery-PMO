@@ -74,5 +74,9 @@ public class MenuImpl implements Menu{
 		return quantity;
 	}
 
+	@Override
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	
 }
