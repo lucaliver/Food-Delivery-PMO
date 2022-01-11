@@ -99,7 +99,7 @@ public class OrderImpl implements Order{
 		this.quantity = 0;
 		this.menus.forEach(m -> {
 			if(m.getName().equals(menuName)) {
-				this.quantity++;
+				this.quantity = this.quantity+1;
 			}
 		});					
 		return quantity;
