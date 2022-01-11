@@ -76,7 +76,9 @@ public class MenuImpl implements Menu{
 
 	@Override
 	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+		// TODO Auto-generated method stub
+		
 	}
+
 	
 }
