@@ -7,6 +7,8 @@ package it.fooddelivery.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -18,12 +20,7 @@ import javax.swing.border.EmptyBorder;
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Menu;
 
-//PER INTERFACCIA: CREO 2 PANNELLI DIVISI: 
-//1 FLOWLAYOUT(necessario per mettere la descrizione dell'articolo (menu)
-//1 LAYOUT VERTICALE (necessario per inserire prezzo, collegato a totPrezzo)
-//1 LAYOUT VERTICALE (necesssario per inserire dimensione ordine, collegato a totSize)
-
-//COLLEGARE BOTTONI +,- PER VISUALIZZARE A SCHERMO LE QUANTITA' SELEZIONATE
+// TODO- gestire eccezione nel momento in cui si spinge il bottone - e esce eccezione
 
 /**
  * Second window for the customer, used to select menus.
@@ -34,7 +31,6 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	
 	private final Manager controller;
 	private final String title = "Seleziona il menù più adatto a te!";
-	private JTextArea quantityArea;
 	private JTextArea totalOrderArea;
 	private JTextArea sizeOrderArea;
 	private JButton addButton;
@@ -42,6 +38,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private JButton confirmButton;
 	private JButton comeBackButton;
 	private JButton emptyButton;
+	private Map<JButton, JTextArea> infoQuantityMenu;
 		
 	/**
 	 * Constructor.
@@ -54,6 +51,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
+		this.infoQuantityMenu = new HashMap<>();
 	}
 	
 	/**
@@ -68,7 +66,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		final JPanel panel = new JPanel();	// pannello
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBorder(new EmptyBorder(10, 20, 10, 20));
-		
+	
 		// creo e aggiungo i bottoni per gestire incremento e decremento dell'ordine
 		for (Menu m : controller.getCurrentOrder().getRestaurant().getMenuOffer()) {
 					
@@ -79,10 +77,12 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			panel.add(quantityPanel);
 			
 			final JTextArea descriptionArea;
+			final JTextArea quantityArea;
+		
 			
 			removeButton 		= new JButton("-");
 			addButton 			= new JButton("+");
-			quantityArea 		= new JTextArea("0");
+			quantityArea 		= new JTextArea();
 			descriptionArea 	= new JTextArea();
 			
 			quantityPanel.add(removeButton);
@@ -92,21 +92,28 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			
 			quantityArea.setPreferredSize(new Dimension(30, 20));
 			descriptionArea.setPreferredSize(new Dimension(300, 20));
+			
 			descriptionArea.setText(m.showMenuInfo());
+			quantityArea.setText("0");
 			
 			addButton.addActionListener(event -> {
 				controller.getCurrentOrder().addMenu(m);
 				this.updateInfo();
-				this.quantityArea.setText(" " + controller.getCurrentOrder().incrementalMenu(m.getName()));
+				 
+				controller.getCurrentOrder().incrementalMenu(m.getName());
+				infoQuantityMenu.put(addButton, quantityArea);
+				infoQuantityMenu.get(addButton).setText("" + m.getQuantity());								
 			});
 			
-
 			removeButton.addActionListener(event -> {
-				this.quantityArea.setText(" " + controller.getCurrentOrder().decrementalMenu(m.getName()));
+				//quantityArea.setText(" " + 
+				controller.getCurrentOrder().decrementalMenu(m.getName());//);
+				infoQuantityMenu.put(removeButton, quantityArea);
+				infoQuantityMenu.get(removeButton).setText("" + m.getQuantity());								
+	
 				controller.getCurrentOrder().removeMenu(m);
 				this.updateInfo();
 			});
-
 		}
 		
 		// creo una textArea nella quale stampare totOrdine e dimensioneOrdine
@@ -138,6 +145,12 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		emptyButton 	= new JButton("Svuota tutto");
 		emptyButton.addActionListener(event -> {
 			controller.getCurrentOrder().removeAllMenus();
+			
+			//infoQuantityMenu.values().forEach(t -> t.setText("0"));
+			//infoQuantityMenu.values().stream().findAny().get().setText("0");
+			
+			//.values().stream().map(t -> t + "0").forEach(System.out::print);	
+			// prima potevo fare: quantityArea.setText("0");
 			this.updateInfo();
 		});
 		
@@ -152,6 +165,10 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		this.pack();
 	}
 	
+	/**
+	 * Handler for the event of  "confirm" button being pressed.
+	 * @param event.
+	 */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
@@ -162,6 +179,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
 			}
+			controller.getCurrentOrder().removeAllMenus();
 		}
 	}
 	

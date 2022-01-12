@@ -36,7 +36,6 @@ public class OrderImpl implements Order{
 		this.menus = new ArrayList<>();	
 	}
 	
-	
 	@Override
 	public List<Menu> getMenus() {		
 		return this.menus;
@@ -54,7 +53,7 @@ public class OrderImpl implements Order{
 	
 	@Override
 	public void removeAllMenus() {
-		if(!this.getMenus().isEmpty()) {	
+		if(!this.getMenus().isEmpty()) {
 			this.menus.forEach(m -> m.setQuantity(0));
 			this.getMenus().removeAll(menus);
 		}	
