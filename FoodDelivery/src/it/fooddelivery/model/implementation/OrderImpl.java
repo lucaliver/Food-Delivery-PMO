@@ -5,7 +5,9 @@
 package it.fooddelivery.model.implementation;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
@@ -17,7 +19,7 @@ import it.fooddelivery.model.City;
 public class OrderImpl implements Order{
 	private final String idOrder;
 	private final City destination;
-	private final List<Menu> menus;
+	private final Map<Menu, Integer> menus;
 	private final String address;
 	private final Restaurant restaurant;
 	private int size;
@@ -33,36 +35,41 @@ public class OrderImpl implements Order{
 		this.destination = destination;
 		this.address = address;
 		this.restaurant = restaurant;
-		this.menus = new ArrayList<>();	
+		this.menus = new HashMap<>();	
 	}
 	
 	@Override
-	public List<Menu> getMenus() {		
+	public Map<Menu, Integer> getMenus() {		
 		return this.menus;
 	}
 	
 	@Override
 	public void addMenu(Menu m) {
-		this.menus.add(m);
+		if (menus.containsKey(m))
+			this.menus.put(m, menus.get(m)+1);
+		else
+			this.menus.put(m, 1);
 	}
 
 	@Override
 	public void removeMenu(Menu m) {
-		this.menus.remove(m);
+		if (menus.containsKey(m))
+			this.menus.put(m, menus.get(m)-1);
+		// TODO Gestione errore
+		//else
 	}
 	
 	@Override
 	public void removeAllMenus() {
 		if(!this.getMenus().isEmpty()) {
-			this.menus.forEach(m -> m.setQuantity(0));
-			this.getMenus().removeAll(menus);
+			this.menus.clear();
 		}	
 	}
 
 	@Override
 	public int getOrderSize() {
 		this.size = 0;
-		this.menus.forEach(m -> size += m.getSize());
+		//this.menus.entrySet().
 		return size;
 	}
 	

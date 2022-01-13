@@ -33,8 +33,6 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private final String title = "Seleziona il menù più adatto a te!";
 	private JTextArea totalOrderArea;
 	private JTextArea sizeOrderArea;
-	private JButton addButton;
-	private JButton removeButton;
 	private JButton confirmButton;
 	private JButton comeBackButton;
 	private JButton emptyButton;
@@ -46,12 +44,12 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 */
 	ViewPlacing(final Manager controller){
 		this.controller 	= controller;
+		this.infoQuantityMenu = new HashMap<>();
 		this.Init();
 		this.updateInfo();
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
-		this.infoQuantityMenu = new HashMap<>();
 	}
 	
 	/**
@@ -80,8 +78,8 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			final JTextArea quantityArea;
 		
 			
-			removeButton 		= new JButton("-");
-			addButton 			= new JButton("+");
+			JButton removeButton 		= new JButton("-");
+			JButton addButton 			= new JButton("+");
 			quantityArea 		= new JTextArea();
 			descriptionArea 	= new JTextArea();
 			
@@ -96,22 +94,24 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			descriptionArea.setText(m.showMenuInfo());
 			quantityArea.setText("0");
 			
+			// Mappatura bottoni
+			infoQuantityMenu.put(addButton, quantityArea);
+			infoQuantityMenu.put(removeButton, quantityArea);	
+			
 			addButton.addActionListener(event -> {
 				controller.getCurrentOrder().addMenu(m);
 				this.updateInfo();
-				 
-				controller.getCurrentOrder().incrementalMenu(m.getName());
-				infoQuantityMenu.put(addButton, quantityArea);
-				infoQuantityMenu.get(addButton).setText("" + m.getQuantity());								
+
+				controller.getCurrentOrder().incrementalMenu(m.getName());	
+				infoQuantityMenu.get(addButton).setText("" + m.getQuantity());							
 			});
 			
 			removeButton.addActionListener(event -> {
 				//quantityArea.setText(" " + 
-				controller.getCurrentOrder().decrementalMenu(m.getName());//);
-				infoQuantityMenu.put(removeButton, quantityArea);
-				infoQuantityMenu.get(removeButton).setText("" + m.getQuantity());								
-	
+				controller.getCurrentOrder().decrementalMenu(m.getName());//);							
+
 				controller.getCurrentOrder().removeMenu(m);
+				infoQuantityMenu.get(removeButton).setText("" + m.getQuantity());
 				this.updateInfo();
 			});
 		}
@@ -146,7 +146,8 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		emptyButton.addActionListener(event -> {
 			controller.getCurrentOrder().removeAllMenus();
 			
-			//infoQuantityMenu.values().forEach(t -> t.setText("0"));
+			System.out.println("SIZE: " + infoQuantityMenu.size());
+			infoQuantityMenu.values().forEach(t -> t.setText("0"));
 			//infoQuantityMenu.values().stream().findAny().get().setText("0");
 			
 			//.values().stream().map(t -> t + "0").forEach(System.out::print);	

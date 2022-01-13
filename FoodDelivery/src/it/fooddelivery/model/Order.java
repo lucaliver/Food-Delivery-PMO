@@ -4,7 +4,7 @@
 
 package it.fooddelivery.model;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * Interface to represent an order.
@@ -14,7 +14,7 @@ public interface Order{
 	/**
 	 * @return all the menus in the order.
 	 */
-	List<Menu> getMenus();	
+	Map<Menu, Integer> getMenus();	
 	
 	/**
 	 * @param m = menu to add at the order.
