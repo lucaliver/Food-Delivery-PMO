@@ -90,6 +90,10 @@ public class ViewRecap extends JFrame {
 			boolean res = this.controller.assignOrder(this.controller.getCurrentOrder());
 			if(res) {
 				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());
+				// TODO stampa dubug, il currentOrder credo sia vuoto
+				System.out.println("Ordine: "+this.controller.getCurrentOrder().showOrderInfo()+
+							       "Size: "+this.controller.getCurrentOrder().getOrderSize());
+						          
 			}else {
 				JOptionPane.showMessageDialog(this, "Ordine in attesa che si liberi un fattorino.");
 			}

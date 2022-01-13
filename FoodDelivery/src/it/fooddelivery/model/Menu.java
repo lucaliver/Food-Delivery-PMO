@@ -34,27 +34,4 @@ public interface Menu {
 	 */
 	String showMenuInfo();
 	
-	/**
-	 * 
-	 * @return the incremental quantity of menu.
-	 */
-	int getQuantityPlus();
-	
-	/**
-	 * 
-	 * @return the decremental quantity of menu.
-	 */
-	int getQuantityMinus();
-	
-	/**
-	 * 
-	 * @return the quantity of menu.
-	 */
-	int getQuantity();
-	
-	/**
-	 * 
-	 * set quantity of menu.
-	 */
-	void setQuantity(int quantity);
 }

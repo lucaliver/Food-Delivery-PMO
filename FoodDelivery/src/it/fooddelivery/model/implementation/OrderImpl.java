@@ -126,9 +126,9 @@ public class OrderImpl implements Order{
 
 	@Override
 	public String showOrderInfo() {
-		StringBuilder sb = new StringBuilder(); // TODO forse bastava String
+		StringBuilder sb = new StringBuilder(); 
 		this.menus.entrySet()
-			.forEach(m -> sb.append(m.getValue() + "x " + m.getKey().showMenuInfo()+'\n'));					
+			.forEach(m -> sb.append(m.getValue() + "x " + m.getKey().showMenuInfo()+'\n'));	
 		return sb.toString();
 	}
 }

@@ -120,8 +120,7 @@ public class RiderImpl implements Rider{
 	@Override
 	public String showBagInfo() {
 		StringBuilder sb = new StringBuilder();
-		this.orderList.forEach(o-> sb.append(o.getIdOrder()));
-		//this.orderList.forEach(o-> sb.append((this.orderList.indexOf(o)+1)+"° Ordine:"+o.showOrderInfo()));
+		this.orderList.forEach(o -> sb.append(this.orderList.indexOf(o)+1+"° Ordine: " + o.showOrderInfo()));
 		return sb.toString();
 	}
 	

@@ -62,15 +62,17 @@ public class Manager{
 				.findFirst();
 		this.riderWithLastOrder = selected;
 		if(selected.isPresent()) {
-			System.out.println("[DEBUG] Rider selezionato: " + selected.get().getName()); //DEBUG
 			selected.get().addOrder(order);
 			//TODO mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
-			System.out.println(selected.get().showBagInfo());
+			System.out.println("[DEBUG] Rider selezionato: " + selected.get().getName()+'\n'+selected.get().showBagInfo()); //DEBUG
+			System.out.println("SIZE: "+selected.get().getBag().size());
+			System.out.println("INFO: "+selected.get().getBag().get(0).showOrderInfo());
+			
 			return true;
 		}else {
 			System.out.println("Nessun rider disponibile, ordine in attesa!!!"); //DEBUG
 			this.waitingOrders.add(order);
-			System.out.println(this.showWaitingOrder());
+			System.out.println(this.showWaitingOrder()+'\n'+waitingOrders.size());
 			return false;
 		}
 	}
