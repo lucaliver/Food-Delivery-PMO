@@ -69,18 +69,4 @@ public interface Order{
 	 * @return the info of all the menu in the order
 	 */
 	public String showOrderInfo();
-	
-	/**
-	 * 
-	 * @param name of the menu
-	 * @return the the increased quantity of the menu with that name
-	 */
-	int incrementalMenu(String menuName);
-	
-	/**
-	 * 
-	 * @param name of the menu
-	 * @return the the decrement quantity of the menu with that name
-	 */
-	int decrementalMenu(String menuName);
 }

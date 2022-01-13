@@ -10,8 +10,10 @@ import java.util.Map;
 import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
+import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.City;
+import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
@@ -131,4 +133,11 @@ public class Manager{
 		return sb.toString();
 	}
 	
+	public void addToCurrent(Menu menu) {
+		this.currentOrder.addMenu(menu);
+	}
+
+	public void removeFromCurrent(Menu menu) {
+		this.currentOrder.removeMenu(menu);
+	}
 }

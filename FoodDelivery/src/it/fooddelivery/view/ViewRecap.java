@@ -60,7 +60,8 @@ public class ViewRecap extends JFrame {
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
 		StringBuilder sbMenus = new StringBuilder();
-		for (Menu m: controller.getCurrentOrder().getMenus()) {
+		for (Menu m: controller.getCurrentOrder().getMenus().keySet()) {
+			// SISTEMARE ORA è MAPPA, MOSTRARE QUANTITà ETC
 			sbMenus.append(m.showMenuInfo());
 			sbMenus.append('\n');
 		}

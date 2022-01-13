@@ -69,7 +69,7 @@ public class OrderImpl implements Order{
 	@Override
 	public int getOrderSize() {
 		this.size = 0;
-		//this.menus.entrySet().
+		this.menus.entrySet().forEach(m->size += m.getKey().getSize()*m.getValue());
 		return size;
 	}
 	
@@ -77,7 +77,7 @@ public class OrderImpl implements Order{
 	@Override
 	public double getOrderPrice() {
 		this.price = 0;
-		this.menus.forEach(m -> price += m.getPrice());
+		this.menus.entrySet().forEach(m->price += m.getKey().getPrice()*m.getValue());
 		return price;
 	}
 
@@ -101,6 +101,7 @@ public class OrderImpl implements Order{
 	}
 
 
+	/*
 	@Override
 	public int incrementalMenu(String menuName) {
 		return menus.stream()
@@ -118,12 +119,13 @@ public class OrderImpl implements Order{
 				.findFirst()
 				.get()
 				.getQuantityMinus();
-	}
+	} */
 
 	@Override
-	public String showOrderInfo() {	
-		StringBuilder sb = new StringBuilder();
-		this.menus.forEach(m -> sb.append('\t'+m.showMenuInfo()+'\n'));					
+	public String showOrderInfo() {
+		StringBuilder sb = new StringBuilder(); // TODO forse bastava String
+		this.menus.entrySet()
+			.forEach(m -> sb.append(m.getValue() + "x " + '\t'+m.getKey().showMenuInfo()+'\n'));					
 		return sb.toString();
 	}
 }

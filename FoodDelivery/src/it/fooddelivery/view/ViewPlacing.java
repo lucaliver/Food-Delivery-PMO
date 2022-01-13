@@ -99,18 +99,14 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			infoQuantityMenu.put(removeButton, quantityArea);	
 			
 			addButton.addActionListener(event -> {
-				controller.getCurrentOrder().addMenu(m);
+				controller.addToCurrent(m);
 				this.updateInfo();
 
-				controller.getCurrentOrder().incrementalMenu(m.getName());	
 				infoQuantityMenu.get(addButton).setText("" + m.getQuantity());							
 			});
 			
-			removeButton.addActionListener(event -> {
-				//quantityArea.setText(" " + 
-				controller.getCurrentOrder().decrementalMenu(m.getName());//);							
-
-				controller.getCurrentOrder().removeMenu(m);
+			removeButton.addActionListener(event -> {		
+				controller.removeFromCurrent(m);
 				infoQuantityMenu.get(removeButton).setText("" + m.getQuantity());
 				this.updateInfo();
 			});
