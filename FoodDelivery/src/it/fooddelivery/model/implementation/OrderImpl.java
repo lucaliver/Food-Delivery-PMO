@@ -51,11 +51,15 @@ public class OrderImpl implements Order{
 	}
 
 	@Override
-	public void removeMenu(Menu m) {
-		if (menus.containsKey(m))
+	public boolean removeMenu(Menu m) {
+		if (menus.containsKey(m) && menus.get(m)>0) {
 			this.menus.put(m, menus.get(m)-1);
+			if (menus.get(m)==0)
+				menus.remove(m);
+			return true;
+		}
 		// TODO Gestione errore
-		//else
+		return false;
 	}
 	
 	@Override
@@ -124,7 +128,7 @@ public class OrderImpl implements Order{
 	public String showOrderInfo() {
 		StringBuilder sb = new StringBuilder(); // TODO forse bastava String
 		this.menus.entrySet()
-			.forEach(m -> sb.append(m.getValue() + "x " + '\t'+m.getKey().showMenuInfo()+'\n'));					
+			.forEach(m -> sb.append(m.getValue() + "x " + m.getKey().showMenuInfo()+'\n'));					
 		return sb.toString();
 	}
 }

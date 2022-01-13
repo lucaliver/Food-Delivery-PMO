@@ -24,7 +24,7 @@ public interface Order{
 	/**
 	 * @param m = menu to remove from the order.
 	 */
-	void removeMenu(Menu m);
+	boolean removeMenu(Menu m);
 	
 	/**
 	 * Remove all the menus from the order.

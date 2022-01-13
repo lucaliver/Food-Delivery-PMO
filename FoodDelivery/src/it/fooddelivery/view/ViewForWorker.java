@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -39,9 +40,10 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	private Map<Rider, JTextArea> infoRider;
 	private static JPanel mainPanel;
 	
+	
 	/**
 	 * Constructor.
-	 * @param controller .
+	 * @param controller.
 	 */
 	ViewForWorker (final Manager controller){
 		this.controller = controller;
@@ -56,6 +58,8 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	private void Init(){
 		this.setTitle(this.TITLE);
 		this.setSize(100, 50);
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		this.setVisible(true);
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));

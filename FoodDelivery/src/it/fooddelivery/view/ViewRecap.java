@@ -18,7 +18,6 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.Manager;
-import it.fooddelivery.model.Menu;
 
 /**
  * View component for the recap screen for the customer.
@@ -31,17 +30,21 @@ public class ViewRecap extends JFrame {
 	private final String title = "Il tuo ordine :)";
 	private JButton proceedButton;
 	private JButton backButton;
+	private ViewForWorker viewForWorker;
+	private ViewPlacing viewPlacing;
 	
 	/**
 	 * Constructor.
 	 * @param controller for the MVC pattern.
 	 */
-	ViewRecap(final Manager controller){
+	ViewRecap(final Manager controller, final ViewPlacing viewPlacing){
 		this.controller = controller;
 		this.Init();
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
+		this.viewForWorker = new ViewForWorker(this.controller);
+		this.viewPlacing = viewPlacing;
 	}
 	
 	/**
@@ -59,6 +62,7 @@ public class ViewRecap extends JFrame {
 		JTextArea menusArea = new JTextArea("Questo ordine è vuoto?");
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
+		/*
 		StringBuilder sbMenus = new StringBuilder();
 		for (Menu m: controller.getCurrentOrder().getMenus().keySet()) {
 			// SISTEMARE ORA è MAPPA, MOSTRARE QUANTITà ETC
@@ -66,6 +70,8 @@ public class ViewRecap extends JFrame {
 			sbMenus.append('\n');
 		}
 		menusArea.setText(sbMenus.toString());
+		*/
+		menusArea.setText(controller.getCurrentOrder().showOrderInfo());
 		
 		JTextArea infoArea = new JTextArea();
 		infoArea.setEditable(false);
@@ -90,13 +96,17 @@ public class ViewRecap extends JFrame {
 			this.setVisible(false);
 			this.dispose();
 			new ViewWelcome(this.controller);
+			
+			viewForWorker.updateTextArea();
 		});
 						
 		backButton = new JButton("Indietro"); 
 		backButton.addActionListener(event -> {
 			this.setVisible(false);
 			this.dispose();	
-			new ViewPlacing(this.controller);
+			//new ViewPlacing(this.controller);
+			// TODO Tornando indietro non dovrei creare una ViewPlacing nuova, ma rendere visibile la vecchia
+			this.viewPlacing.setVisible(true);
 		});
 
 		mainPanel.add(backButton);

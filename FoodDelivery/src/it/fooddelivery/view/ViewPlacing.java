@@ -100,14 +100,13 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			
 			addButton.addActionListener(event -> {
 				controller.addToCurrent(m);
-				this.updateInfo();
-
-				infoQuantityMenu.get(addButton).setText("" + m.getQuantity());							
+				infoQuantityMenu.get(addButton).setText("" + controller.howManyInCurrent(m));	
+				this.updateInfo();						
 			});
 			
 			removeButton.addActionListener(event -> {		
-				controller.removeFromCurrent(m);
-				infoQuantityMenu.get(removeButton).setText("" + m.getQuantity());
+				if (controller.removeFromCurrent(m))
+					infoQuantityMenu.get(removeButton).setText("" + controller.howManyInCurrent(m));
 				this.updateInfo();
 			});
 		}
@@ -171,8 +170,9 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		if (e.getSource() == confirmButton) {
 			if (controller.getCurrentOrder().getMenus().size() > 0) {
 				this.setVisible(false);
-				this.dispose();	
-				new ViewRecap(this.controller);
+				//this.dispose();	
+				new ViewRecap(this.controller, this);
+
 			} else {
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
 			}

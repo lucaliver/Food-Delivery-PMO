@@ -30,6 +30,7 @@ public class Manager{
 	private List<Restaurant> restaurants;
 	private Order currentOrder;
 	private Optional<Rider> riderWithLastOrder;
+	private int counterID;
 	
 	/**
 	 * Constructor.
@@ -42,6 +43,7 @@ public class Manager{
 		this.waitingOrders = new ArrayList<>();
 		this.currentOrder = null;
 		this.riderWithLastOrder = Optional.empty();
+		this.counterID = 0;
 	}
 	
 	/**
@@ -85,8 +87,8 @@ public class Manager{
 	 * @param restuarant.
 	 */
 	public void createOrder(City destination, String address, Restaurant restaurant) {
-		//TODO Creare generatore ID
-		this.currentOrder = new OrderImpl("01", destination, address, restaurant); 
+		this.counterID += 1;
+		this.currentOrder = new OrderImpl(this.counterID+"", destination, address, restaurant); 
 	}
 	
 	/**
@@ -137,7 +139,13 @@ public class Manager{
 		this.currentOrder.addMenu(menu);
 	}
 
-	public void removeFromCurrent(Menu menu) {
-		this.currentOrder.removeMenu(menu);
+	public boolean removeFromCurrent(Menu menu) {
+		return this.currentOrder.removeMenu(menu);
+	}
+	
+	public int howManyInCurrent(Menu menu) {
+		if (this.currentOrder.getMenus().containsKey(menu))
+			return this.currentOrder.getMenus().get(menu);
+		else return 0;
 	}
 }
