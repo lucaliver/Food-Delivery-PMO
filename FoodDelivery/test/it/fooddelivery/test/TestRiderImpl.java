@@ -48,6 +48,7 @@ class TestRiderImpl {
 	void testDeliverOrder() {
 		RiderImpl delivery = new RiderImpl("Fattorino", null);
 		OrderImpl o = new OrderImpl(22, City.FERMIGNANO, null, null);
+		OrderImpl o1 = new OrderImpl(25, City.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
 		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
 		o.addMenu(m);
@@ -56,6 +57,25 @@ class TestRiderImpl {
 		delivery.deliverOrder(o);
 		assertFalse(delivery.getBag().contains(o));
 		assertEquals(o.getOrderPrice()*RiderImpl.getPercentage(), delivery.getProfit());
+		delivery.deliverOrder(o1);
+		assertFalse(delivery.getBag().contains(o1));
+	}
+	
+	@Test
+	void testDeliveryAll() {
+		RiderImpl delivery = new RiderImpl("Fattorino", null);
+		OrderImpl o = new OrderImpl(22, City.FERMIGNANO, null, null);
+		OrderImpl o1 = new OrderImpl(25, City.FERMIGNANO, null, null);
+		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
+		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
+		o.addMenu(m);
+		o1.addMenu(m2);
+		delivery.addOrder(o);
+		delivery.addOrder(o1);
+		assertTrue(delivery.getBag().contains(o1));
+		assertTrue(delivery.getBag().contains(o));
+		delivery.deliverAll();
+		assertTrue(delivery.getBag().isEmpty());
 	}
 
 	@Test

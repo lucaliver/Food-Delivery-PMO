@@ -52,19 +52,21 @@ public class Manager{
 	 */
 	public boolean assignOrder(Order order) {
 		System.out.println("[DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
-		Optional<Rider> selected = this.riders
+		this.riderWithLastOrder = this.riders
 				.values()
 				.stream()
 				.filter(x->x.getCities().contains(order.getDestination()))
 				.filter(x->x.canFit(order))	
 				.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
 				.findFirst();
-		this.riderWithLastOrder = selected;
-		if(selected.isPresent()) {
-			selected.get().addOrder(order);
+		// TODO penso che optional sia superfluo 
+		//Optional<Rider> selected = this.riderWithLastOrder ;
+		if(riderWithLastOrder.isPresent()) {
+			riderWithLastOrder.get().addOrder(order);
 			//TODO mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
-			System.out.println("[DEBUG manager] Rider selezionato: " + selected.get().getName());
+			System.out.println("[DEBUG manager] Rider selezionato: " + riderWithLastOrder.get().getName());
 			System.out.println("[DEBUG manager] L'ordine " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
+			System.out.println("[DEBUG manager] Info ultimo ordine: " + riderWithLastOrder.get().showBagInfo());
 			
 			return true;
 		}else {
