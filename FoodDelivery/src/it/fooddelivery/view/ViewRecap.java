@@ -28,7 +28,7 @@ public class ViewRecap extends JFrame {
 	
 	private final Manager controller;
 	private final String title = "Il tuo ordine :)";
-	private JButton proceedButton;
+	private JButton sendButton;
 	private JButton backButton;
 	private ViewForWorker viewForWorker;
 	private ViewPlacing viewPlacing;
@@ -62,54 +62,43 @@ public class ViewRecap extends JFrame {
 		JTextArea menusArea = new JTextArea("Questo ordine è vuoto?");
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
-		/*
-		StringBuilder sbMenus = new StringBuilder();
-		for (Menu m: controller.getCurrentOrder().getMenus().keySet()) {
-			// SISTEMARE ORA è MAPPA, MOSTRARE QUANTITà ETC
-			sbMenus.append(m.showMenuInfo());
-			sbMenus.append('\n');
-		}
-		menusArea.setText(sbMenus.toString());
-		*/
 		menusArea.setText(controller.getCurrentOrder().showOrderInfo());
 		
 		JTextArea infoArea = new JTextArea();
 		infoArea.setEditable(false);
 		infoArea.setBorder(BorderFactory.createTitledBorder("Info ordine: "));
+		// TODO Aggiungere a Order un metodo che restituisca queste info, magari chiamandolo showOrderInfo e rinominando l'altro showOrderContent
 		StringBuilder sbInfo = new StringBuilder();
 		sbInfo.append("Destinazione: " + this.controller.getCurrentOrder().getDestination() + ", "
-				+ this.controller.getCurrentOrder().getAdress() + '\n'
+				+ this.controller.getCurrentOrder().getAdress() + "  " + '\n'
 				+ "Ristorante: " + this.controller.getCurrentOrder().getRestaurant() + '\n'
 				+ "Totale: " + df.format(controller.getCurrentOrder().getOrderPrice()) + "€" + '\n'
 				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
 				);
 		infoArea.setText(sbInfo.toString());
+		System.out.println("[DEBUG recap] OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
+				+ controller.getCurrentOrder().getMenus().size()); // DEBUG
 
-		proceedButton = new JButton("Procedi"); 
-		proceedButton.addActionListener(event ->{
-			boolean res = this.controller.assignOrder(this.controller.getCurrentOrder());
+		sendButton = new JButton("Invia ordine"); 
+		sendButton.addActionListener(event ->{
+			System.out.println("[DEBUG recap] NON-OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
+					+ controller.getCurrentOrder().getMenus().size()); // DEBUG
+			boolean res = this.controller.assignOrder(controller.getCurrentOrder());
 			if(res) {
-				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());
-				// TODO stampa dubug, il currentOrder credo sia vuoto
-				System.out.println("Ordine: "+this.controller.getCurrentOrder().showOrderInfo()+
-							       "Size: "+this.controller.getCurrentOrder().getOrderSize());
-						          
+				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());						          
 			}else {
-				JOptionPane.showMessageDialog(this, "Ordine in attesa che si liberi un fattorino.");
+				JOptionPane.showMessageDialog(this, "Ordine ricevuto, in attesa che si liberi un fattorino.");
 			}
 			this.setVisible(false);
 			this.dispose();
 			new ViewWelcome(this.controller);
-			
-			viewForWorker.updateTextArea();
+			this.viewForWorker.updateTextArea();
 		});
 						
 		backButton = new JButton("Indietro"); 
 		backButton.addActionListener(event -> {
 			this.setVisible(false);
 			this.dispose();	
-			//new ViewPlacing(this.controller);
-			// TODO Tornando indietro non dovrei creare una ViewPlacing nuova, ma rendere visibile la vecchia
 			this.viewPlacing.setVisible(true);
 		});
 
@@ -119,11 +108,7 @@ public class ViewRecap extends JFrame {
 		mainPanel.add(Box.createHorizontalStrut(30));
 		mainPanel.add(menusArea);
 		mainPanel.add(Box.createHorizontalStrut(30));
-		mainPanel.add(proceedButton);
-		
-
+		mainPanel.add(sendButton);
 		this.getContentPane().add(mainPanel);
 	}
-	
-	
 }

@@ -4,8 +4,6 @@
 
 package it.fooddelivery.model.implementation;
 
-import java.text.DecimalFormat;
-
 import it.fooddelivery.model.Menu;
 
 /**

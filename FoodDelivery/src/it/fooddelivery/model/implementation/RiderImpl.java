@@ -13,7 +13,7 @@ import it.fooddelivery.model.Order;
 
 public class RiderImpl implements Rider{
 	static final int MAX_CAPACITY = 100;
-	static final double PERCENTAGE = 0.20;
+	private static final double PERCENTAGE = 0.20;
 	
 	private double profit;
 	private final String name;
@@ -34,12 +34,12 @@ public class RiderImpl implements Rider{
 		this.orderList = new ArrayList<>();
 	}
 	
+	@Override
 	public void deliverAll() {
-		for (Order o : orderList) {
+		for (Order o: orderList) {
 			this.deliverOrder(o);
 		}
 	}
-	
 	
 	@Override
 	public List<Order> getBag() {
@@ -68,13 +68,6 @@ public class RiderImpl implements Rider{
 		return profit;
 	}
 	
-	/*public void printProfit(double p) {
-		if(p > 0)
-			System.out.println(getProfit());
-		else
-			System.out.println("ERRORE! Valore negativo!");
-	}*/
-	
 	@Override
 	public String getName() {
 		return name;
@@ -95,33 +88,36 @@ public class RiderImpl implements Rider{
 	 * @param o = ordine di cui incassare il guadagno. 
 	 */
 	private void addProfit(Order o) {
-		this.profit += o.getOrderPrice() * PERCENTAGE;
+		this.profit += o.getOrderPrice() * getPercentage();
 	}
 	
 	public int getCapacity() {
 		return capacity;
 	}	
-	
-	public static int getMaxCapacity() {
-		return MAX_CAPACITY;
-	}
-
-	public static double getPercentage() {
-		return PERCENTAGE;
-	}
 
 	@Override
 	public String showRiderInfo() {
 		return "Profito: "+String.format("%.2f", getProfit())+
 		       "€"+'\n'+"Capacità: "+this.getCapacity()+
-		       "/"+RiderImpl.getMaxCapacity();
+		       "/"+RiderImpl.MAX_CAPACITY;
 	}
 	
 	@Override
 	public String showBagInfo() {
 		StringBuilder sb = new StringBuilder();
-		this.orderList.forEach(o -> sb.append(this.orderList.indexOf(o)+1+"° Ordine: " + o.showOrderInfo()));
+
+		//STAMPE DI DEBUG
+		System.out.println("[DEBUG RiderImpl.showBagInfo()] " 
+				+ this.name + " ha " + this.orderList.size() + " ordini. ");
+		this.orderList.forEach(o -> System.out.println("[DEBUG RiderImpl.showBagInfo()] L'ordine "
+				+ o.getIdOrder() + " ha tot menu: " + o.getMenus().size()));
+		
+		this.orderList.forEach(o -> sb.append("[Ordine: " + o.getIdOrder() + "]\n"));
 		return sb.toString();
+	}
+
+	public static double getPercentage() {
+		return PERCENTAGE;
 	}
 	
 	

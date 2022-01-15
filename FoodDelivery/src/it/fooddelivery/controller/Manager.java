@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import it.fooddelivery.model.Rider;
-import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
@@ -23,7 +22,6 @@ import it.fooddelivery.model.Restaurant;
  */
 public class Manager{
 	//TODO Forse applicare il Singleton al controller.
-	// PROVA PROVA
 	private Map<String, Rider> riders;
 
 	private List<Order> waitingOrders;	
@@ -53,6 +51,7 @@ public class Manager{
 	 * @return true if assigned to a delivery man, false if put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
+		System.out.println("[DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
 		Optional<Rider> selected = this.riders
 				.values()
 				.stream()
@@ -64,15 +63,14 @@ public class Manager{
 		if(selected.isPresent()) {
 			selected.get().addOrder(order);
 			//TODO mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
-			System.out.println("[DEBUG] Rider selezionato: " + selected.get().getName()+'\n'+selected.get().showBagInfo()); //DEBUG
-			System.out.println("SIZE: "+selected.get().getBag().size());
-			System.out.println("INFO: "+selected.get().getBag().get(0).showOrderInfo());
+			System.out.println("[DEBUG manager] Rider selezionato: " + selected.get().getName());
+			System.out.println("[DEBUG manager] L'ordine " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
 			
 			return true;
 		}else {
-			System.out.println("Nessun rider disponibile, ordine in attesa!!!"); //DEBUG
 			this.waitingOrders.add(order);
-			System.out.println(this.showWaitingOrder()+'\n'+waitingOrders.size());
+			System.out.println("[DEBUG Manager] L'ordine " + order.getIdOrder() + " è stato messo in attesa.");
+			System.out.println("[DEBUG Manager] In waiting list al momento: " + this.showWaitingOrders()+'\n'+waitingOrders.size());
 			return false;
 		}
 	}
@@ -90,16 +88,17 @@ public class Manager{
 	 */
 	public void createOrder(City destination, String address, Restaurant restaurant) {
 		this.counterID += 1;
-		this.currentOrder = new OrderImpl(this.counterID+"", destination, address, restaurant); 
+		this.currentOrder = new OrderImpl(this.counterID, destination, address, restaurant); 
 	}
 	
 	/**
 	 * It assigns the current order (to a rider or to waiting list) 
 	 * and empties the current order slot.
 	 */
-	public void placeCurrentOrder() {
-		this.assignOrder(this.currentOrder);
-		this.currentOrder = null;
+	public boolean assignCurrentOrder() {
+		boolean result = this.assignOrder(this.currentOrder);
+		//this.currentOrder = null;
+		return result;
 	}
 	
 
@@ -131,9 +130,9 @@ public class Manager{
 		this.riders = riders;
 	}
 	
-	public String showWaitingOrder() {
+	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append(this.waitingOrders.indexOf(o)+1+"# - "+o.showOrderInfo()));
+		this.waitingOrders.forEach(o -> sb.append("[Ordine " + o.getIdOrder() + "] \n"));
 		return sb.toString();
 	}
 	

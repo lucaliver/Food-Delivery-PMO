@@ -55,18 +55,18 @@ public interface Order{
 	 * 
 	 * @return the adress of the order
 	 */
-	public String getAdress();  
+	String getAdress();  
 	
 	/**
 	 * 
 	 * @return the rastaurant that make the order
 	 */
-	public Restaurant getRestaurant(); 
+	Restaurant getRestaurant(); 
 	
 	
 	/**
 	 * 
 	 * @return the info of all the menu in the order
 	 */
-	public String showOrderInfo();
+	String showOrderInfo();
 }

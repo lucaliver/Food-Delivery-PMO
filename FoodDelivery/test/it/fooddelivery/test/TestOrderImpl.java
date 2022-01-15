@@ -15,7 +15,7 @@ class TestOrderImpl {
 
 	@Test
 	void testOrderImpl() {
-		OrderImpl o = new OrderImpl("8ft9", City.CAGLI, null, null);
+		OrderImpl o = new OrderImpl(01, City.CAGLI, null, null);
 		assertNotNull(o);
 		assertEquals("8ft9", o.getIdOrder());
 		assertEquals(City.CAGLI, o.getDestination());
@@ -24,7 +24,7 @@ class TestOrderImpl {
 
 	@Test
 	void testMenusList() {
-		OrderImpl o = new OrderImpl("88ty", City.FOSSOMBRONE, null, null);
+		OrderImpl o = new OrderImpl(02, City.FOSSOMBRONE, null, null);
 		assertTrue(o.getMenus().isEmpty());		
 		o.addMenu(new MenuImpl("M1", 0.40, 55));
 		assertNotNull(o.getMenus());
@@ -33,7 +33,7 @@ class TestOrderImpl {
 
 	@Test
 	void testAddMenu() {
-		OrderImpl o = new OrderImpl("oo9i8", City.FOSSOMBRONE, null, null);
+		OrderImpl o = new OrderImpl(03, City.FOSSOMBRONE, null, null);
 		assertTrue(o.getMenus().isEmpty()); 
 		MenuImpl m = new MenuImpl("Name", 0.20, 3);
 		o.addMenu(m);
@@ -43,7 +43,7 @@ class TestOrderImpl {
 
 	@Test
 	void testRemoveMenu() {
-		OrderImpl o = new OrderImpl("abcde", City.CAGLI, null, null);
+		OrderImpl o = new OrderImpl(04, City.CAGLI, null, null);
 		MenuImpl m1 = new MenuImpl("M1", 42.10, 12);
 		MenuImpl m2 = new MenuImpl("M2", 21.00, 7);
 		o.addMenu(m1);
@@ -57,7 +57,7 @@ class TestOrderImpl {
 	
 	@Test
 	void testRemoveAll() {
-		OrderImpl o = new OrderImpl("abcde", City.CAGLI, null, null);
+		OrderImpl o = new OrderImpl(05, City.CAGLI, null, null);
 		o.addMenu(new MenuImpl("a", 2.6, 5));
 		o.addMenu(new MenuImpl("b", 2.7, 12));
 		o.addMenu(new MenuImpl("c", 7.4, 7));
@@ -68,7 +68,7 @@ class TestOrderImpl {
 
 	@Test
 	void testGetSize() {
-		OrderImpl o = new OrderImpl("88ty", City.FOSSOMBRONE, null, null);
+		OrderImpl o = new OrderImpl(06, City.FOSSOMBRONE, null, null);
 		o.addMenu(new MenuImpl("Name0", 11.00, 7)); 
 		o.addMenu(new MenuImpl("Name1", 19.60, 14)); 
 		o.addMenu(new MenuImpl("Name2", 1.99, 23)); 
@@ -79,7 +79,7 @@ class TestOrderImpl {
 
 	@Test
 	void testTotalPrice() {
-		OrderImpl o = new OrderImpl("45lk", City.URBANIA, null, null);
+		OrderImpl o = new OrderImpl(07, City.URBANIA, null, null);
 		o.addMenu(new MenuImpl("Name0", 12.60, 7)); 
 		o.addMenu(new MenuImpl("Name1", 17.23, 14)); 
 		o.addMenu(new MenuImpl("Name2", 1.47, 23)); 
@@ -90,9 +90,9 @@ class TestOrderImpl {
 
 	@Test
 	void testGetIdOrder() {
-		OrderImpl o1 = new OrderImpl("ll31q", City.URBANIA, null, null);
-		OrderImpl o2 = new OrderImpl("xxx56t", City.TAVULLIA, null, null);
-		OrderImpl o3 = new OrderImpl("khj67q", City.URBANIA, null, null);
+		OrderImpl o1 = new OrderImpl(8, City.URBANIA, null, null);
+		OrderImpl o2 = new OrderImpl(9, City.TAVULLIA, null, null);
+		OrderImpl o3 = new OrderImpl(10, City.URBANIA, null, null);
 		assertEquals("ll31q", o1.getIdOrder());
 		assertEquals("xxx56t", o2.getIdOrder());
 		assertEquals("khj67q", o3.getIdOrder());
@@ -100,8 +100,8 @@ class TestOrderImpl {
 
 	@Test
 	void testGetDestination() {
-		OrderImpl o1 = new OrderImpl("sei", City.FERMIGNANO, null, null);
-		OrderImpl o2 = new OrderImpl("ste", City.URBANIA, null, null);
+		OrderImpl o1 = new OrderImpl(11, City.FERMIGNANO, null, null);
+		OrderImpl o2 = new OrderImpl(12, City.URBANIA, null, null);
 		assertEquals(City.FERMIGNANO, o1.getDestination());
 		assertEquals(City.URBANIA, o2.getDestination());
 	}

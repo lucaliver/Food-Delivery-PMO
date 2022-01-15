@@ -38,7 +38,7 @@ class TestRiderImpl {
 	@Test
 	void testAddOrder() {
 		RiderImpl man2 = new RiderImpl("Fattorino_2", null);
-		OrderImpl o = new OrderImpl("iehfkj568", City.CAGLI, null, null);
+		OrderImpl o = new OrderImpl(21, City.CAGLI, null, null);
 		man2.addOrder(o);
 		assertFalse(man2.getBag().isEmpty());
 		assertEquals(1, man2.getBag().size());
@@ -47,7 +47,7 @@ class TestRiderImpl {
 	@Test
 	void testDeliverOrder() {
 		RiderImpl delivery = new RiderImpl("Fattorino", null);
-		OrderImpl o = new OrderImpl("67tyv90", City.FERMIGNANO, null, null);
+		OrderImpl o = new OrderImpl(22, City.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
 		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
 		o.addMenu(m);
@@ -82,7 +82,7 @@ class TestRiderImpl {
 	@Test
 	void testCanFit() {
 		RiderImpl man = new RiderImpl("Fattorino", null);
-		OrderImpl o = new OrderImpl("oiu78", City.FOSSOMBRONE, null, null);
+		OrderImpl o = new OrderImpl(23, City.FOSSOMBRONE, null, null);
 		MenuImpl m = new MenuImpl("Dfgheu", 80.00, 50);
 		MenuImpl m2 = new MenuImpl("Sushi", 50.00, 50);
 		MenuImpl m3 = new MenuImpl("Pizzeria", 80.00, 101);

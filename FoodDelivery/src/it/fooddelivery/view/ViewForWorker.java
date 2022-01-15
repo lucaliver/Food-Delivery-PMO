@@ -76,7 +76,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	/**
 	 * It creates the GUI for one rider (text and button).
 	 * @param r is the rider.
-	 * @return the panel itself
+	 * @return the panel itself.
 	 */
 	private JPanel createRiderPanel(Rider r) {
 		JPanel riderPanel = new JPanel();
@@ -96,19 +96,17 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		infoOrder.put(r, orderArea);
 		
-		startDeliveryButton = new JButton("Parti e consegna!!!");
+		startDeliveryButton = new JButton("Parti e consegna!");
 		startDeliveryButton.addActionListener(e ->{
-			//TODO mettere ! nella 1° istr quando arrivano effettivamente gli ordini
 			if(!r.getBag().isEmpty() && !infoOrder.get(r).getText().isEmpty()){
 				this.controller.getRiders().get(r.getName()).deliverAll();
-				infoRider.get(r).setText("" + r.showRiderInfo());
-				JOptionPane.showMessageDialog(this, "Consegna effettuata");
+				//infoRider.get(r).setText("" + r.showRiderInfo());
+				JOptionPane.showMessageDialog(this, "Consegna effettuata :)");
 			}else{
-				JOptionPane.showMessageDialog(this, "Error...!!!");
+				JOptionPane.showMessageDialog(this, "La tua bag è già vuota :(");
 			}		
 		});	
-		
-		//startDeliveryButton.addActionListener(e -> r.deliverAll());  //IMPLEMENTATO L.	
+			
 		riderPanelLayout.setHorizontalGroup(
 				riderPanelLayout.createSequentialGroup()
 				.addComponent(riderArea)
@@ -167,7 +165,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		if(r.isPresent()) {
 			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());		 
 		}else {
-			this.waitingOrdersArea.setText(this.controller.showWaitingOrder());
+			this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
 		}
 	}
 }
