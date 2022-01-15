@@ -103,7 +103,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 				//infoRider.get(r).setText("" + r.showRiderInfo());
 				JOptionPane.showMessageDialog(this, "Consegna effettuata :)");
 			}else{
-				JOptionPane.showMessageDialog(this, "La tua bag è già vuota :(");
+				JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
 			}		
 		});	
 			

@@ -85,7 +85,8 @@ public class ViewRecap extends JFrame {
 					+ controller.getCurrentOrder().getMenus().size()); // DEBUG
 			boolean res = this.controller.assignOrder(controller.getCurrentOrder());
 			if(res) {
-				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());						          
+				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName()
+						                      +" "+controller.getRiderWithLastOrder().get().getBag().size());						          
 			}else {
 				JOptionPane.showMessageDialog(this, "Ordine ricevuto, in attesa che si liberi un fattorino.");
 			}
