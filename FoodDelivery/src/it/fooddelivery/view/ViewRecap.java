@@ -32,18 +32,20 @@ public class ViewRecap extends JFrame {
 	private JButton backButton;
 	private ViewForWorker viewForWorker;
 	private ViewPlacing viewPlacing;
+	private ViewForWorker viewWorker;
 	
 	/**
 	 * Constructor.
 	 * @param controller for the MVC pattern.
 	 */
-	ViewRecap(final Manager controller, final ViewPlacing viewPlacing){
+	ViewRecap(final Manager controller, final ViewPlacing viewPlacing, ViewForWorker viewWorker){
 		this.controller = controller;
+		this.viewForWorker = viewWorker;
 		this.Init();
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
-		this.viewForWorker = new ViewForWorker(this.controller);
+		//this.viewForWorker = new ViewForWorker(this.controller);
 		this.viewPlacing = viewPlacing;
 		/*System.out.println("[DEBUG recap] OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
 				+ controller.getCurrentOrder().getMenus().size()); // DEBUG*/
@@ -93,7 +95,7 @@ public class ViewRecap extends JFrame {
 			}
 			this.setVisible(false);
 			this.dispose();
-			new ViewWelcome(this.controller);
+			new ViewWelcome(this.controller, this.viewForWorker);
 			this.viewForWorker.updateTextArea();
 		});
 						

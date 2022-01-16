@@ -17,6 +17,7 @@ public class View {
 	 * @param controller
 	 */
 	public View(final Manager controller) {
-		new ViewWelcome(controller);								
+		ViewForWorker viewWorker = new ViewForWorker(controller);
+		new ViewWelcome(controller, viewWorker);								
 	}
 }
