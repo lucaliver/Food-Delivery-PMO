@@ -51,7 +51,7 @@ public class Manager{
 	 * @return true if assigned to a delivery man, false if put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
-		System.out.println("[DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
+		System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
 		this.riderWithLastOrder = this.riders
 				.values()
 				.stream()

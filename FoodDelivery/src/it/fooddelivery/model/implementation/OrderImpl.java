@@ -60,7 +60,6 @@ public class OrderImpl implements Order{
 				menus.remove(m);
 			return true;
 		}
-		// TODO Gestione errore
 		return false;
 	}
 	

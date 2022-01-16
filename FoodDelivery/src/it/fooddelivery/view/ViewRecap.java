@@ -45,6 +45,8 @@ public class ViewRecap extends JFrame {
 		this.setVisible(true);
 		this.viewForWorker = new ViewForWorker(this.controller);
 		this.viewPlacing = viewPlacing;
+		System.out.println("[DEBUG recap] OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
+				+ controller.getCurrentOrder().getMenus().size()); // DEBUG
 	}
 	
 	/**
@@ -85,8 +87,7 @@ public class ViewRecap extends JFrame {
 					+ controller.getCurrentOrder().getMenus().size()); // DEBUG
 			boolean res = this.controller.assignOrder(controller.getCurrentOrder());
 			if(res) {
-				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName()
-						                      +" "+controller.getRiderWithLastOrder().get().getBag().size());						          
+				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());						          
 			}else {
 				JOptionPane.showMessageDialog(this, "Ordine ricevuto, in attesa che si liberi un fattorino.");
 			}
@@ -111,5 +112,6 @@ public class ViewRecap extends JFrame {
 		mainPanel.add(Box.createHorizontalStrut(30));
 		mainPanel.add(sendButton);
 		this.getContentPane().add(mainPanel);
+		
 	}
 }
