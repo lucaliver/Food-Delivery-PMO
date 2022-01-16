@@ -26,7 +26,7 @@ class TestStampa {
 	Rider r2 = new RiderImpl("Toby", cities);
 	Menu m1 = new MenuImpl("Menu1", 50.00, 20);
 	Menu m2 = new MenuImpl("Menu2", 10.00, 40);
-	Order o = new OrderImpl("01", City.CAGLI, "Strada", null);
+	Order o = new OrderImpl(01, City.CAGLI, "Strada", null);
 	Map<String, Rider> riders = new HashMap<>();
 	
 	

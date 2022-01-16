@@ -163,7 +163,8 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	public void updateTextArea() {
 		Optional<Rider> r = this.controller.getRiderWithLastOrder();
 		if(r.isPresent()) {
-			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());		 
+			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());
+			this.infoRider.get(r.get()).setText(r.get().showRiderInfo());
 		}else {
 			this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
 		}

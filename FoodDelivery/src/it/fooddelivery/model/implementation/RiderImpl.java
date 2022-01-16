@@ -49,12 +49,14 @@ public class RiderImpl implements Rider{
 	@Override
 	public void addOrder(Order o) {
 		orderList.add(o);
+		this.setCapacity(o.getOrderSize());
 	}
 	
 	@Override
 	public void deliverOrder(Order o) {
 		orderList.remove(o);
-		addProfit(o);
+		this.addProfit(o);
+		this.setCapacity(-o.getOrderSize());
 	}
 
 	@Override
@@ -89,6 +91,10 @@ public class RiderImpl implements Rider{
 	 */
 	private void addProfit(Order o) {
 		this.profit += o.getOrderPrice() * getPercentage();
+	}
+	
+	private void setCapacity(int size) {
+		this.capacity += size;
 	}
 	
 	public int getCapacity() {
