@@ -107,12 +107,12 @@ public class RiderImpl implements Rider{
 		StringBuilder sb = new StringBuilder();
 
 		//STAMPE DI DEBUG
-		System.out.println("[DEBUG RiderImpl.showBagInfo()] " 
+		/*System.out.println("[DEBUG RiderImpl.showBagInfo()] " 
 				+ this.name + " ha " + this.orderList.size() + " ordini. ");
 		this.orderList.forEach(o -> System.out.println("[DEBUG RiderImpl.showBagInfo()] L'ordine "
-				+ o.getIdOrder() + " ha tot menu: " + o.getMenus().size()));
+				+ o.getIdOrder() + " ha tot menu: " + o.getMenus().size()));*/
 		
-		this.orderList.forEach(o -> sb.append("[Ordine: " + o.getIdOrder() + "]\n"));
+		this.orderList.forEach(o -> sb.append("Order "+o.getIdOrder()+":"+'\n'+o.showOrderInfo()));
 		return sb.toString();
 	}
 
