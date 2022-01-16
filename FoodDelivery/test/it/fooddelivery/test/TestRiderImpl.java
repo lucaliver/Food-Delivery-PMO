@@ -74,7 +74,9 @@ class TestRiderImpl {
 		delivery.addOrder(o1);
 		assertTrue(delivery.getBag().contains(o1));
 		assertTrue(delivery.getBag().contains(o));
+		System.out.println(delivery.showBagInfo());
 		delivery.deliverAll();
+		System.out.println(delivery.showBagInfo());
 		assertTrue(delivery.getBag().isEmpty());
 	}
 

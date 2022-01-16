@@ -34,12 +34,7 @@ public class RiderImpl implements Rider{
 		this.orderList = new ArrayList<>();
 	}
 	
-	@Override
-	public void deliverAll() {
-		for (Order o: orderList) {
-			this.deliverOrder(o);
-		}
-	}
+	
 	
 	@Override
 	public List<Order> getBag() {
@@ -54,9 +49,19 @@ public class RiderImpl implements Rider{
 	
 	@Override
 	public void deliverOrder(Order o) {
-		orderList.remove(o);
-		this.addProfit(o);
-		this.setCapacity(-o.getOrderSize());
+		if(this.orderList.contains(o)) {
+			this.addProfit(o);
+			this.setCapacity(-o.getOrderSize());
+			//orderList.remove(o);
+		}
+	}
+	// TODO #1# Problema con deliveryAll: non possiamo iterare una collection di cui andiamo a togliere i suoi elementi,
+	// una soluzione sarebbe commentare l'istruzione remove sopra e quando facciamo deliveryAll fare una clear
+	// non so quanto questoconcettualmente sia corretto
+	@Override
+	public void deliverAll() {
+		this.orderList.forEach(o -> deliverOrder(o));
+		this.orderList.clear();
 	}
 
 	@Override

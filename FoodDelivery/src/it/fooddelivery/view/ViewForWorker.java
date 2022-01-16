@@ -101,9 +101,10 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		startDeliveryButton = new JButton("Parti e consegna!");
 		startDeliveryButton.addActionListener(e ->{
 			if(!r.getBag().isEmpty() && !infoOrder.get(r).getText().isEmpty()){
-				this.controller.getRiders().get(r.getName()).deliverAll();
-				//infoRider.get(r).setText("" + r.showRiderInfo());
 				JOptionPane.showMessageDialog(this, "Consegna effettuata :)");
+				this.controller.getRiders().get(r.getName()).deliverAll();
+				infoRider.get(r).setText("" + r.showRiderInfo());
+				infoOrder.get(r).setText(TITLE_BAG_VUOTA);				
 			}else{
 				JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
 			}		
