@@ -86,8 +86,12 @@ public class OrderImpl implements Order{
 	}
 
 	@Override
-	public String getIdOrder() {
-		return String.format("%04d", this.idOrder);
+	public int getIdOrder() {
+		return this.idOrder;
+	}
+	
+	public String printIdOrder() {
+		return new String("[Ordine " + String.format("%03d", this.getIdOrder()) + "]: \n");
 	}
 
 	@Override

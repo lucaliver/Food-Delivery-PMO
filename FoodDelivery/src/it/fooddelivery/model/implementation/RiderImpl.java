@@ -123,7 +123,7 @@ public class RiderImpl implements Rider{
 		this.orderList.forEach(o -> System.out.println("[DEBUG RiderImpl.showBagInfo()] L'ordine "
 				+ o.getIdOrder() + " ha tot menu: " + o.getMenus().size()));*/
 		
-		this.orderList.forEach(o -> sb.append("Order "+o.getIdOrder()+":"+'\n'+o.showOrderInfo()));
+		this.orderList.forEach(o -> sb.append(o.printIdOrder()+o.showOrderInfo()));
 		return sb.toString();
 	}
 

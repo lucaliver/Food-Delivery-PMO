@@ -44,7 +44,12 @@ public interface Order{
 	/**
 	 * @return the ID of the order.
 	 */
-	String getIdOrder();
+	int getIdOrder();
+	/**
+	 * 
+	 * @return the string to print with the id
+	 */
+	public String printIdOrder();
 	
 	/**
 	 * @return the destination of the order.

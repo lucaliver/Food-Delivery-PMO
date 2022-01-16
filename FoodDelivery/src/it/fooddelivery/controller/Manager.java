@@ -134,7 +134,7 @@ public class Manager{
 	
 	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append("[Ordine " + o.getIdOrder() + "] \n"));
+		this.waitingOrders.forEach(o -> sb.append(o.printIdOrder()+o.showOrderInfo()));
 		return sb.toString();
 	}
 	

@@ -11,7 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -23,25 +25,25 @@ import java.util.Optional;
 
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Rider;
-import it.fooddelivey.utils.RiderObserver;
 
 /**
  * The only screen riders will see. It shows the bag of everyone and let them empty it.
  */
 @SuppressWarnings("serial")
-public class ViewForWorker extends JFrame implements ActionListener,RiderObserver{
+public class ViewForWorker extends JFrame implements ActionListener{
+	
+	private static final String TITLE_PANEL = "Rider Screen";
+	private static final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
+	private static final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
+	
 	private final Manager controller;
-	private final String TITLE_PANEL = "Rider Screen";
-	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
-	private final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
+	private  JPanel mainPanel;
 	private JTextArea riderArea;
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
 	private JButton startDeliveryButton;
 	private Map<Rider, JTextArea> infoOrder;
 	private Map<Rider, JTextArea> infoRider;
-	private static JPanel mainPanel;
-	
 	
 	/**
 	 * Constructor.
@@ -59,17 +61,15 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	 */
 	private void Init(){
 		this.setTitle(this.TITLE_PANEL);
-		this.setSize(100, 50);
+		this.setSize(100,50);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		//mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
-		for (Rider r : this.controller.getRiders().values()) {
-			mainPanel.add(createRiderPanel(r));
-		}
+		this.controller.getRiders().values().forEach(r -> mainPanel.add(createRiderPanel(r)));
 		mainPanel.add(createWaitingOrderPanel());		
 		this.getContentPane().add(mainPanel);
 		this.pack();
@@ -84,19 +84,23 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		JPanel riderPanel = new JPanel();
 		riderPanel.setBorder(BorderFactory.createTitledBorder(r.getName()));
 		final GroupLayout riderPanelLayout = new GroupLayout(riderPanel);
+		//riderPanel.setLayout(new BoxLayout(riderPanel, BoxLayout.Y_AXIS));
 		
-		riderArea = new JTextArea();
+		riderArea = new JTextArea(2,10);
 		riderArea.setEditable(false);
 		riderArea.setText(r.showRiderInfo());
 		riderArea.setBackground(getBackground());
 		infoRider.put(r, riderArea);
 		
-		orderArea = new JTextArea(5,20);
+		orderArea = new JTextArea(5,30);
 		orderArea.setEditable(false);
-		orderArea.setAutoscrolls(true);
+		//orderArea.setAutoscrolls(true);
 		orderArea.setText(TITLE_BAG_VUOTA);
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		infoOrder.put(r, orderArea);
+		
+		JScrollPane scrollOrderArea = new JScrollPane(orderArea);
+		scrollOrderArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		startDeliveryButton = new JButton("Parti e consegna!");
 		startDeliveryButton.addActionListener(e ->{
@@ -113,13 +117,16 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		riderPanelLayout.setHorizontalGroup(
 				riderPanelLayout.createSequentialGroup()
 				.addComponent(riderArea)
-				.addComponent(orderArea)
+				.addComponent(scrollOrderArea)
 				.addComponent(startDeliveryButton));	
 		riderPanelLayout.setVerticalGroup(
 				riderPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				.addComponent(riderArea)
-				.addComponent(orderArea)
+				.addComponent(scrollOrderArea)
 				.addComponent(startDeliveryButton));
+		/*riderPanel.add(riderArea);
+		riderPanel.add(orderArea);
+		riderPanel.add(startDeliveryButton);*/
 		return riderPanel;
 	}
 	
@@ -138,31 +145,23 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		waitingOrdersArea.setAutoscrolls(true);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
+		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
+		scrollWaitingArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
 		waitingSectionLayout.setHorizontalGroup(
 				waitingSectionLayout.createSequentialGroup()
-				.addComponent(waitingOrdersArea));
+				.addComponent(scrollWaitingArea));
 		waitingSectionLayout.setVerticalGroup(
 				waitingSectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addComponent(waitingOrdersArea));
+				.addComponent(scrollWaitingArea));
 		return waitingSection;
 	}
-	
-	
+		
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO qui in teoria dovrei intercettare l'evento generato dal pulsante "Procedi" in ViewRecap
-		// ma come lo intercetto?
-		//if(e.getSource() == proceedButton) {
-		this.updateTextArea();
-		//}								
+		
 	}
 	
-	
-	// TODO in teoria questo sarebbe il metodo da chiamare quando si è finito di creare un ordine,
-	// ma non mi è chiaro dove chiamarlo
-	// Forse il parametro Optional non serve visto che il controller mi da anche il rider con l'ultimo ordine assegnato
-	// Non so se questo deve essere un metodo a se o se metterlo in actionPerformed
-	@Override
 	public void updateTextArea() {
 		Optional<Rider> r = this.controller.getRiderWithLastOrder();
 		if(r.isPresent()) {
