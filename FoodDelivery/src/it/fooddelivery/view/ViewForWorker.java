@@ -161,7 +161,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 	}
-	
+	//
 	public void updateTextArea() {
 		Optional<Rider> r = this.controller.getRiderWithLastOrder();
 		if(r.isPresent()) {
