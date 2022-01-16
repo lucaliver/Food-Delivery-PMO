@@ -31,7 +31,9 @@ import it.fooddelivey.utils.RiderObserver;
 @SuppressWarnings("serial")
 public class ViewForWorker extends JFrame implements ActionListener,RiderObserver{
 	private final Manager controller;
-	private final String TITLE = "Rider Screen";
+	private final String TITLE_PANEL = "Rider Screen";
+	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
+	private final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
 	private JTextArea riderArea;
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
@@ -56,7 +58,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 	 * It initializes the window.
 	 */
 	private void Init(){
-		this.setTitle(this.TITLE);
+		this.setTitle(this.TITLE_PANEL);
 		this.setSize(100, 50);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
@@ -92,7 +94,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		orderArea = new JTextArea(5,20);
 		orderArea.setEditable(false);
 		orderArea.setAutoscrolls(true);
-		orderArea.setText("PROVA");
+		orderArea.setText(TITLE_BAG_VUOTA);
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		infoOrder.put(r, orderArea);
 		
@@ -130,7 +132,7 @@ public class ViewForWorker extends JFrame implements ActionListener,RiderObserve
 		final GroupLayout waitingSectionLayout = new GroupLayout(waitingSection);
 		
 		waitingOrdersArea = new JTextArea(10,30);
-		waitingOrdersArea.setText("Prova");
+		waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
 		waitingOrdersArea.setLineWrap(true);
 		waitingOrdersArea.setAutoscrolls(true);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
