@@ -50,6 +50,20 @@ public class Manager{
 	 * @param order is the order to assign
 	 * @return true if assigned to a delivery man, false if put into the waiting list.
 	 */
+	
+	/* TODO come rifarei gli assegnamenti degli ordini
+	 */ 
+	 /*public boolean canBeAssign(Order order){
+		 this.riderWithLastOrder = this.riders
+					.values()
+					.stream()
+					.filter(x->x.getCities().contains(order.getDestination()))
+					.filter(x->x.canFit(order))	
+					.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
+					.findFirst();
+		 return(riderWithLastOrder.isPresent());
+		 }*/
+						
 	public boolean assignOrder(Order order) {
 		//System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
 		this.riderWithLastOrder = this.riders
@@ -59,9 +73,7 @@ public class Manager{
 				.filter(x->x.canFit(order))	
 				.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
 				.findFirst();
-		// TODO penso che optional sia superfluo 
-		//Optional<Rider> selected = this.riderWithLastOrder ;
-		if(riderWithLastOrder.isPresent()) {
+		if(riderWithLastOrder.isPresent()) { // Diventerebbe if(canBeAssign(order))
 			riderWithLastOrder.get().addOrder(order);
 			//TODO mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
 			System.out.println("[DEBUG manager] Rider selezionato: " + riderWithLastOrder.get().getName());
