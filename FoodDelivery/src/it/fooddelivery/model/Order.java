@@ -66,8 +66,7 @@ public interface Order{
 	 * 
 	 * @return the rastaurant that make the order
 	 */
-	Restaurant getRestaurant(); 
-	
+	Restaurant getRestaurant(); 	
 	
 	/**
 	 * 

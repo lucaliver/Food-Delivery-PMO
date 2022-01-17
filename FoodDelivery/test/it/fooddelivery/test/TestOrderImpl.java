@@ -5,105 +5,110 @@
 package it.fooddelivery.test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
-
 import it.fooddelivery.model.City;
+import it.fooddelivery.model.Menu;
+import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
+import it.fooddelivery.model.implementation.RestaurantImpl;
 
 class TestOrderImpl {
+	
+	final private List<City> cities = Arrays.asList(City.values());
+	final private List<Menu> menus = new ArrayList<>();
+	final private RestaurantImpl restaurant = new RestaurantImpl("MasterChef", menus);
+	private OrderImpl o = new OrderImpl(01, City.CAGLI, "Strada_1", restaurant);
+	private MenuImpl m1 = new MenuImpl("Panino", 4.00, 3);
+	private MenuImpl m2 = new MenuImpl("Pizza", 7.00, 10);
+	private MenuImpl m3 = new MenuImpl("Pasta", 10.00, 8);
 
 	@Test
-	void testOrderImpl() {
-		OrderImpl o = new OrderImpl(01, City.CAGLI, null, null);
+	void testOrderImpl() {	
 		assertNotNull(o);
-		assertEquals("8ft9", o.getIdOrder());
-		assertEquals(City.CAGLI, o.getDestination());
 		assertTrue(o.getMenus().isEmpty());
 	}
 
 	@Test
 	void testMenusList() {
-		OrderImpl o = new OrderImpl(02, City.FOSSOMBRONE, null, null);
 		assertTrue(o.getMenus().isEmpty());		
-		o.addMenu(new MenuImpl("M1", 0.40, 55));
+		o.addMenu(m1);
 		assertNotNull(o.getMenus());
-				
+		assertTrue(o.getMenus().containsKey(m1));
 	}
 
 	@Test
 	void testAddMenu() {
-		OrderImpl o = new OrderImpl(03, City.FOSSOMBRONE, null, null);
 		assertTrue(o.getMenus().isEmpty()); 
-		MenuImpl m = new MenuImpl("Name", 0.20, 3);
-		o.addMenu(m);
+		o.addMenu(m1);
 		assertTrue(!o.getMenus().isEmpty());
 		assertEquals(1, o.getMenus().size());
+		assertTrue(o.getMenus().containsKey(m1));
+		assertEquals(o.getMenus().get(m1), 1);
+		o.addMenu(m2);
+		assertEquals(o.getMenus().get(m2), 1);
+		assertEquals(o.getMenus().get(m1), 1);
+		o.addMenu(m1);
+		assertEquals(o.getMenus().get(m1), 2);
 	}
 
 	@Test
 	void testRemoveMenu() {
-		OrderImpl o = new OrderImpl(04, City.CAGLI, null, null);
-		MenuImpl m1 = new MenuImpl("M1", 42.10, 12);
-		MenuImpl m2 = new MenuImpl("M2", 21.00, 7);
+		o.addMenu(m1);
+		o.addMenu(m2);
 		o.addMenu(m1);
 		o.addMenu(m2);
 		o.removeMenu(m1);
-		assertTrue(!o.getMenus().isEmpty());
-		assertEquals(1, o.getMenus().size());
+		assertTrue(o.getMenus().containsKey(m1));
+		assertEquals(o.getMenus().get(m1), 1);
+		o.removeMenu(m1);
+		assertFalse(o.getMenus().containsKey(m1));
+		o.removeMenu(m2);
 		o.removeMenu(m2);
 		assertTrue(o.getMenus().isEmpty());
 	}
 	
 	@Test
-	void testRemoveAll() {
-		OrderImpl o = new OrderImpl(05, City.CAGLI, null, null);
-		o.addMenu(new MenuImpl("a", 2.6, 5));
-		o.addMenu(new MenuImpl("b", 2.7, 12));
-		o.addMenu(new MenuImpl("c", 7.4, 7));
-		o.addMenu(new MenuImpl("d", 5.0, 51));
+	void testRemoveAllMenus() {
+		o.addMenu(m1);
+		o.addMenu(m1);
+		o.addMenu(m2);
+		o.addMenu(m3);
 		o.removeAllMenus();
 		assertTrue(o.getMenus().isEmpty());
 	}
 
 	@Test
 	void testGetSize() {
-		OrderImpl o = new OrderImpl(06, City.FOSSOMBRONE, null, null);
-		o.addMenu(new MenuImpl("Name0", 11.00, 7)); 
-		o.addMenu(new MenuImpl("Name1", 19.60, 14)); 
-		o.addMenu(new MenuImpl("Name2", 1.99, 23)); 
-		o.addMenu(new MenuImpl("Name3", 15.30, 8));
-		int sizeTot = 7+14+23+8; 
+		o.addMenu(m1); 
+		o.addMenu(m2); 
+		o.addMenu(m2); 
+		o.addMenu(m3);
+		int sizeTot = m1.getSize()+m2.getSize()+m2.getSize()+m3.getSize(); 
 		assertEquals(sizeTot, o.getOrderSize());
 	}
 
 	@Test
 	void testTotalPrice() {
-		OrderImpl o = new OrderImpl(07, City.URBANIA, null, null);
-		o.addMenu(new MenuImpl("Name0", 12.60, 7)); 
-		o.addMenu(new MenuImpl("Name1", 17.23, 14)); 
-		o.addMenu(new MenuImpl("Name2", 1.47, 23)); 
-		o.addMenu(new MenuImpl("Name3", 133.61, 8));
-		double priceTot = 12.60+17.23+1.47+133.61;
+		o.addMenu(m1); 
+		o.addMenu(m2); 
+		o.addMenu(m3); 
+		o.addMenu(m3);
+		double priceTot = m1.getPrice()+m2.getPrice()+m3.getPrice()+m3.getPrice();
 		assertEquals(priceTot, o.getOrderPrice());
 	}
 
 	@Test
 	void testGetIdOrder() {
-		OrderImpl o1 = new OrderImpl(8, City.URBANIA, null, null);
-		OrderImpl o2 = new OrderImpl(9, City.TAVULLIA, null, null);
-		OrderImpl o3 = new OrderImpl(10, City.URBANIA, null, null);
-		assertEquals("ll31q", o1.getIdOrder());
-		assertEquals("xxx56t", o2.getIdOrder());
-		assertEquals("khj67q", o3.getIdOrder());
+		assertEquals(01, o.getIdOrder());
 	}
 
 	@Test
 	void testGetDestination() {
-		OrderImpl o1 = new OrderImpl(11, City.FERMIGNANO, null, null);
-		OrderImpl o2 = new OrderImpl(12, City.URBANIA, null, null);
-		assertEquals(City.FERMIGNANO, o1.getDestination());
-		assertEquals(City.URBANIA, o2.getDestination());
+		assertEquals(City.CAGLI, o.getDestination());
 	}
 
 }

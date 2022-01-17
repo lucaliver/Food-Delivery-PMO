@@ -73,15 +73,14 @@ public class OrderImpl implements Order{
 	@Override
 	public int getOrderSize() {
 		this.size = 0;
-		this.menus.entrySet().forEach(m->size += m.getKey().getSize()*m.getValue());
+		this.menus.entrySet().forEach(m -> size += m.getKey().getSize()*m.getValue());
 		return size;
 	}
 	
-	// TODO cambiare il tipo di price per gestire meglio la valuta
 	@Override
 	public double getOrderPrice() {
 		this.price = 0;
-		this.menus.entrySet().forEach(m->price += m.getKey().getPrice()*m.getValue());
+		this.menus.entrySet().forEach(m -> price += m.getKey().getPrice()*m.getValue());
 		return price;
 	}
 
@@ -90,6 +89,7 @@ public class OrderImpl implements Order{
 		return this.idOrder;
 	}
 	
+	@Override
 	public String printIdOrder() {
 		return new String("[Ordine " + String.format("%03d", this.getIdOrder()) + "]: \n");
 	}
@@ -98,11 +98,13 @@ public class OrderImpl implements Order{
 	public City getDestination() {
 		return this.destination;		
 	}
-
+	
+	@Override
 	public String getAdress() {
 		return address;
 	}
-
+	
+	@Override
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
@@ -112,7 +114,6 @@ public class OrderImpl implements Order{
 		StringBuilder sb = new StringBuilder(); 
 		this.menus.entrySet()
 			.forEach(m -> sb.append(m.getValue() + "x " + m.getKey().showMenuInfo()+'\n'));	
-		System.out.println("[DEBUG OrderImpl] L'ordine " + this.getIdOrder() + " ha tot menu: " + this.getMenus().size());
 		return sb.toString();
 	}
 }
