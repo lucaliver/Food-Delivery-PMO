@@ -42,6 +42,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
 	private JButton startDeliveryButton;
+	private JButton refreshWaitingButton;
 	private Map<Rider, JTextArea> infoOrder;
 	private Map<Rider, JTextArea> infoRider;
 	
@@ -145,15 +146,20 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		waitingOrdersArea.setAutoscrolls(true);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
+		// TODO aggiungere eventi al pulsante
+		refreshWaitingButton = new JButton("Refresh");
+		
 		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
 		scrollWaitingArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		waitingSectionLayout.setHorizontalGroup(
 				waitingSectionLayout.createSequentialGroup()
-				.addComponent(scrollWaitingArea));
+				.addComponent(scrollWaitingArea)
+				.addComponent(refreshWaitingButton));
 		waitingSectionLayout.setVerticalGroup(
 				waitingSectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addComponent(scrollWaitingArea));
+				.addComponent(scrollWaitingArea)
+				.addComponent(refreshWaitingButton));
 		return waitingSection;
 	}
 		
