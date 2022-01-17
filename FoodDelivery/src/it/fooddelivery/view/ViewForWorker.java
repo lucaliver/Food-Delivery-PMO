@@ -148,6 +148,14 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 		// TODO aggiungere eventi al pulsante
 		refreshWaitingButton = new JButton("Refresh");
+		refreshWaitingButton.addActionListener(e ->{
+			if(!this.controller.getWaitingOrders().isEmpty() && !this.waitingOrdersArea.getText().isEmpty()) {
+				this.controller.getWaitingOrders().forEach(o ->{
+					this.controller.assignOrder(o);
+				});
+				
+			}
+		});
 		
 		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
 		scrollWaitingArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);

@@ -51,7 +51,7 @@ public class Manager{
 	 * @return true if assigned to a delivery man, false if put into the waiting list.
 	 */
 	public boolean assignOrder(Order order) {
-		System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
+		//System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
 		this.riderWithLastOrder = this.riders
 				.values()
 				.stream()
@@ -76,8 +76,7 @@ public class Manager{
 			return false;
 		}
 	}
-	
-	
+		
 	public Optional<Rider> getRiderWithLastOrder(){
 		return this.riderWithLastOrder;
 	}
@@ -99,7 +98,7 @@ public class Manager{
 	 */
 	public boolean assignCurrentOrder() {
 		boolean result = this.assignOrder(this.currentOrder);
-		//this.currentOrder = null;
+		this.currentOrder = null;
 		return result;
 	}
 	
@@ -110,6 +109,16 @@ public class Manager{
 	
 	public List<Order> getWaitingOrders() {
 		return waitingOrders;
+	}
+	
+	// TODO da finire
+	public List<Rider> refreshWaitingOrders() {
+		List<Rider> newRiders = new ArrayList<>();
+		this.getWaitingOrders().forEach(o -> {
+			this.assignOrder(o);
+			
+		});
+		return newRiders;
 	}
 	
 	public void setWaitingOrders(List<Order> waitingOrders) {
