@@ -62,7 +62,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 */
 	private void Init(){
 		this.setTitle(this.TITLE_PANEL);
-		this.setSize(100,50);
+		this.setSize(200,50);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		mainPanel = new JPanel();
@@ -93,7 +93,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		riderArea.setBackground(getBackground());
 		infoRider.put(r, riderArea);
 		
-		orderArea = new JTextArea(5,30);
+		orderArea = new JTextArea(7,30);
 		orderArea.setEditable(false);
 		//orderArea.setAutoscrolls(true);
 		orderArea.setText(TITLE_BAG_VUOTA);
@@ -128,6 +128,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		/*riderPanel.add(riderArea);
 		riderPanel.add(orderArea);
 		riderPanel.add(startDeliveryButton);*/
+		this.pack();
 		return riderPanel;
 	}
 	
@@ -150,12 +151,17 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		refreshWaitingButton = new JButton("Refresh");
 		refreshWaitingButton.addActionListener(e ->{
 			if(!this.controller.getWaitingOrders().isEmpty() && !this.waitingOrdersArea.getText().isEmpty()) {
-				this.controller.getWaitingOrders().forEach(o ->{
-					this.controller.assignOrder(o);
+				this.controller.refreshWaitingOrders().forEach(r -> {
+					this.updateTextArea(r);
 				});
-				
+				if(this.controller.getWaitingOrders().isEmpty()) {
+					this.waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
+				}else {
+				this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
+				}
 			}
 		});
+		
 		
 		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
 		scrollWaitingArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -176,8 +182,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 	}
 	//
-	public void updateTextArea() {
-		Optional<Rider> r = this.controller.getRiderWithLastOrder();
+	public void updateTextArea(Optional<Rider> r) {
 		if(r.isPresent()) {
 			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());
 			this.infoRider.get(r.get()).setText(r.get().showRiderInfo());

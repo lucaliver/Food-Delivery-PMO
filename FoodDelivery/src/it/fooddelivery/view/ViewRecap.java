@@ -96,7 +96,7 @@ public class ViewRecap extends JFrame {
 			this.setVisible(false);
 			this.dispose();
 			new ViewWelcome(this.controller, this.viewForWorker);
-			this.viewForWorker.updateTextArea();
+			this.viewForWorker.updateTextArea(this.controller.getRiderWithLastOrder());
 		});
 						
 		backButton = new JButton("Indietro"); 

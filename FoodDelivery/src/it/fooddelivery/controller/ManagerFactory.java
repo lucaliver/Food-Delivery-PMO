@@ -62,7 +62,7 @@ public class ManagerFactory {
 		menusForMc.add(new MenuImpl("HappyMeal", 5.00, 6));
 		menusForMc.add(new MenuImpl("BigMac Menu", 10.00, 4));
 		menusForMc.add(new MenuImpl("McChicken Menu", 8.00, 4));
-		menusForMc.add(new MenuImpl("Crispy McBacon Menu", 12.00, 4));
+		menusForMc.add(new MenuImpl("Crispy McBacon Menu", 12.00, 99));
 		restaurants.add(new RestaurantImpl("McDonalds", menusForMc));
 
 		List<Menu> menusForKFC = new ArrayList<>();

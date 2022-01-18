@@ -82,7 +82,8 @@ public class Manager{
 			
 			return true;
 		}else {
-			this.waitingOrders.add(order);
+			if(!this.waitingOrders.contains(order))
+				this.waitingOrders.add(order);
 			System.out.println("[DEBUG Manager] L'ordine " + order.getIdOrder() + " è stato messo in attesa.");
 			System.out.println("[DEBUG Manager] In waiting list al momento: " + this.showWaitingOrders()+'\n'+waitingOrders.size());
 			return false;
@@ -123,13 +124,21 @@ public class Manager{
 		return waitingOrders;
 	}
 	
-	// TODO da finire
-	public List<Rider> refreshWaitingOrders() {
-		List<Rider> newRiders = new ArrayList<>();
-		this.getWaitingOrders().forEach(o -> {
+	// TODO #2# sembra funzionare in parte
+	// Assegna correttamente gli ordini ai vari fattorini, però nel caso in cui nella waitingList ci siano contemporaneamente
+	// ordini assegnabili e non per la stassa persona da errore
+	public List<Optional<Rider>> refreshWaitingOrders() {
+		List<Order> waitinigCopy = this.getWaitingOrders();
+		List<Optional<Rider>> newRiders = new ArrayList<>();
+		this.waitingOrders.forEach(o -> {
 			this.assignOrder(o);
-			
+			if(this.getRiderWithLastOrder().isPresent()) {
+				newRiders.add(riderWithLastOrder);
+			}else {
+				waitinigCopy.add(o);
+			}
 		});
+		this.waitingOrders.removeAll(waitinigCopy);
 		return newRiders;
 	}
 	
