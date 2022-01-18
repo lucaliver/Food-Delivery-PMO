@@ -37,7 +37,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private JButton comeBackButton;
 	private JButton emptyButton;
 	private Map<JButton, JTextArea> infoQuantityMenu;
-	private ViewForWorker viewWorker; //frfrrr
+	private ViewForWorker viewWorker; //frfrrrssss
 		
 	/**
 	 * Constructor.
