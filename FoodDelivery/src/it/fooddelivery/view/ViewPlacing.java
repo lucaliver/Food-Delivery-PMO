@@ -37,13 +37,15 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private JButton comeBackButton;
 	private JButton emptyButton;
 	private Map<JButton, JTextArea> infoQuantityMenu;
+	private ViewForWorker viewWorker; //frfrrr
 		
 	/**
 	 * Constructor.
 	 * @param controller.
 	 */
-	ViewPlacing(final Manager controller){
-		this.controller 	= controller;
+	ViewPlacing(final Manager controller,ViewForWorker viewWorker){
+		this.controller = controller;
+		this.viewWorker = viewWorker;
 		this.infoQuantityMenu = new HashMap<>();
 		this.Init();
 		this.updateInfo();
@@ -170,13 +172,16 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		if (e.getSource() == confirmButton) {
 			if (controller.getCurrentOrder().getMenus().size() > 0) {
 				this.setVisible(false);
+				// TODO da eliminare, debug
+				System.out.println(controller.getCurrentOrder().showOrderInfo());
 				//this.dispose();	
-				new ViewRecap(this.controller, this);
+				new ViewRecap(this.controller,this,this.viewWorker);
 
 			} else {
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
 			}
-			controller.getCurrentOrder().removeAllMenus();
+			// TODO credo che sia da cancellare
+			//controller.getCurrentOrder().removeAllMenus();
 		}
 	}
 	
@@ -189,7 +194,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			this.controller.getCurrentOrder().removeAllMenus();
 			this.setVisible(false);
 			this.dispose();
-			new ViewWelcome(this.controller);
+			new ViewWelcome(this.controller, this.viewWorker);
 		}
 	}
 	
