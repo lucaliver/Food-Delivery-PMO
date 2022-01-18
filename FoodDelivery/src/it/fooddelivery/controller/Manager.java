@@ -134,7 +134,6 @@ public class Manager{
 			this.assignOrder(o);
 			if(this.getRiderWithLastOrder().isPresent()) {
 				newRiders.add(riderWithLastOrder);
-			}else {
 				waitinigCopy.add(o);
 			}
 		});
