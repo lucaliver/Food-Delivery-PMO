@@ -113,30 +113,14 @@ public class Manager{
 		return waitingOrders;
 	}
 	
-	// TODO Sembra funzionare in parte
-	// Assegna correttamente gli ordini ai vari fattorini, 
-	// però nel caso in cui nella waitingList ci siano contemporaneamente
-	// ordini assegnabili e non per la stassa persona da errore
-	/*public List<Optional<Rider>> refreshWaitingOrders() {
+	// TODO #3# non riesce a gestire assegnamenti doppi o nulli
+	public boolean refreshWaitingOrder(Rider freeRider) {
 		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
-		List<Optional<Rider>> newRiders = new ArrayList<>();
-		this.waitingOrders.forEach(o -> {
-			this.assignOrder(o);
-			if(this.getRiderWithLastOrder().isPresent()) {
-				newRiders.add(riderWithLastOrder);
+		this.getWaitingOrders().forEach(o ->{	
+			// TODO credo che l'errore sia qui nel caso che l'optional di canBeAssign sia nullo
+			if(this.canBeAssign(o).get().equals(freeRider)) {
 				noMoreWaitingOrders.add(o);
-			}
-		});
-		this.waitingOrders.removeAll(noMoreWaitingOrders);
-		return newRiders;
-	}*/
-	
-	public boolean refreshWaitingOrder(Rider r) {
-		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
-		this.getWaitingOrders().forEach(o ->{		
-			if(this.canBeAssign(o).get().equals(r)) {
-				noMoreWaitingOrders.add(o);
-				r.addOrder(o);
+				freeRider.addOrder(o);
 			}
 		});
 		this.waitingOrders.removeAll(noMoreWaitingOrders);
