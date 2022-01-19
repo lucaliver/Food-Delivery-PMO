@@ -170,7 +170,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
 		}		
 	}
-	
+	//
 	private void checkWaitingOrders(Rider r) {
 		if(!this.controller.getWaitingOrders().isEmpty()) {
 			if(this.controller.refreshWaitingOrder(r)) {
