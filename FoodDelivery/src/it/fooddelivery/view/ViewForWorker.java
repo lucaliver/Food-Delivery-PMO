@@ -152,6 +152,10 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * It checks where the last order was sent
+	 * @param r = rider who receives the last order, null if order is in waitingList
+	 */
 	public void receiveNewOrder(Optional<Rider> r) {
 		if(r.isPresent()) {
 			this.updateRiderData(r.get());
@@ -160,17 +164,24 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * It start a new delivery
+	 * @param r = rider who's making the delivery
+	 */
 	private void deliveryOrders (Rider r) {
 		if(!r.getBag().isEmpty()){
 			JOptionPane.showMessageDialog(this, "Consegna effettuata :)");
 			this.controller.getRiders().get(r.getName()).deliverAll();
-			infoRider.get(r).setText(r.showRiderInfo());
-			infoOrder.get(r).setText(TITLE_BAG_VUOTA);				
+			this.updateRiderData(r);
 		}else{
 			JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
 		}		
 	}
-	//
+	
+	/**
+	 * It checks if some orders in waiting can be assign to the given rider
+	 * @param r = rider who's finish the last delivery
+	 */
 	private void checkWaitingOrders(Rider r) {
 		if(!this.controller.getWaitingOrders().isEmpty()) {
 			if(this.controller.refreshWaitingOrder(r)) {
@@ -183,11 +194,21 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * It update the given rider data and bag 
+	 * @param r = given rider
+	 */
 	private void updateRiderData(Rider r) {
-		this.infoOrder.get(r).setText(r.showBagInfo());
+		if(!r.getBag().isEmpty())
+			this.infoOrder.get(r).setText(r.showBagInfo());
+		else
+			this.infoOrder.get(r).setText(TITLE_BAG_VUOTA);
 		this.infoRider.get(r).setText(r.showRiderInfo());
 	}
 	
+	/**
+	 * It update the waitingOrder area
+	 */
 	private void updateWaitingOrders() {
 		if(!this.controller.getWaitingOrders().isEmpty())
 			this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
