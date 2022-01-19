@@ -53,7 +53,7 @@ public class Manager{
 	
 	/* TODO come rifarei gli assegnamenti degli ordini
 	 */ 
-	 /*public boolean canBeAssign(Order order){
+	 public Optional<Rider> canBeAssign(Order order){
 		 this.riderWithLastOrder = this.riders
 					.values()
 					.stream()
@@ -61,30 +61,20 @@ public class Manager{
 					.filter(x->x.canFit(order))	
 					.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
 					.findFirst();
-		 return(riderWithLastOrder.isPresent());
-		 }*/
+		 return riderWithLastOrder;
+		 }
 						
 	public boolean assignOrder(Order order) {
 		//System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
-		this.riderWithLastOrder = this.riders
-				.values()
-				.stream()
-				.filter(x->x.getCities().contains(order.getDestination()))
-				.filter(x->x.canFit(order))	
-				.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
-				.findFirst();
-		if(riderWithLastOrder.isPresent()) { // Diventerebbe if(canBeAssign(order))
+		if(this.canBeAssign(order).isPresent()) { 
 			riderWithLastOrder.get().addOrder(order);
-			//DEBUG: Mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
-			//System.out.println("[DEBUG manager] Rider selezionato: " + riderWithLastOrder.get().getName());
-			//System.out.println("[DEBUG manager] L'ordine " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
-			//System.out.println("[DEBUG manager] Info ultimo ordine: " + riderWithLastOrder.get().showBagInfo());
 			return true;
 		}else {
-			if(!this.waitingOrders.contains(order))
+			if(!this.waitingOrders.contains(order)) {
 				this.waitingOrders.add(order);
-			System.out.println("[DEBUG Manager] L'ordine " + order.getIdOrder() + " è stato messo in attesa.");
-			System.out.println("[DEBUG Manager] In waiting list al momento: " + this.showWaitingOrders()+'\n'+waitingOrders.size());
+				System.out.println("[DEBUG Manager] L'ordine " + order.getIdOrder() + " è stato messo in attesa.");
+				System.out.println("[DEBUG Manager] In waiting list al momento: " + this.showWaitingOrders()+'\n'+waitingOrders.size());
+			}
 			return false;
 		}
 	}
@@ -127,7 +117,7 @@ public class Manager{
 	// Assegna correttamente gli ordini ai vari fattorini, 
 	// però nel caso in cui nella waitingList ci siano contemporaneamente
 	// ordini assegnabili e non per la stassa persona da errore
-	public List<Optional<Rider>> refreshWaitingOrders() {
+	/*public List<Optional<Rider>> refreshWaitingOrders() {
 		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
 		List<Optional<Rider>> newRiders = new ArrayList<>();
 		this.waitingOrders.forEach(o -> {
@@ -139,6 +129,18 @@ public class Manager{
 		});
 		this.waitingOrders.removeAll(noMoreWaitingOrders);
 		return newRiders;
+	}*/
+	
+	public boolean refreshWaitingOrder(Rider r) {
+		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
+		this.getWaitingOrders().forEach(o ->{		
+			if(this.canBeAssign(o).get().equals(r)) {
+				noMoreWaitingOrders.add(o);
+				r.addOrder(o);
+			}
+		});
+		this.waitingOrders.removeAll(noMoreWaitingOrders);
+		return(noMoreWaitingOrders.size()>=1);
 	}
 	
 	public void setWaitingOrders(List<Order> waitingOrders) {

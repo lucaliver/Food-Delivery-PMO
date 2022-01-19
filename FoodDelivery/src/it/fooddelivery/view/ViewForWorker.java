@@ -32,9 +32,9 @@ import it.fooddelivery.model.Rider;
 @SuppressWarnings("serial")
 public class ViewForWorker extends JFrame implements ActionListener{
 	
-	private static final String TITLE_PANEL = "Rider Screen";	// Non credo vadano statici questi
-	private static final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
-	private static final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
+	private final String TITLE_PANEL = "Rider Screen";	// Non credo vadano statici questi
+	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
+	private final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
 	
 	private final Manager controller;
 	private JPanel mainPanel;
@@ -42,7 +42,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
 	private JButton startDeliveryButton;
-	private JButton refreshWaitingButton;
 	private Map<Rider, JTextArea> infoOrder;
 	private Map<Rider, JTextArea> infoRider;
 	
@@ -67,7 +66,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		this.setVisible(true);
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		//mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
 		this.controller.getRiders().values().forEach(r -> mainPanel.add(createRiderPanel(r)));
@@ -85,7 +83,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		JPanel riderPanel = new JPanel();
 		riderPanel.setBorder(BorderFactory.createTitledBorder(r.getName()));
 		final GroupLayout riderPanelLayout = new GroupLayout(riderPanel);
-		//riderPanel.setLayout(new BoxLayout(riderPanel, BoxLayout.Y_AXIS));
 		
 		riderArea = new JTextArea(2,10);
 		riderArea.setEditable(false);
@@ -95,7 +92,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 		orderArea = new JTextArea(7,30);
 		orderArea.setEditable(false);
-		//orderArea.setAutoscrolls(true);
 		orderArea.setText(TITLE_BAG_VUOTA);
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		infoOrder.put(r, orderArea);
@@ -104,17 +100,11 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		scrollOrderArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		startDeliveryButton = new JButton("Parti e consegna!");
-		startDeliveryButton.addActionListener(e ->{
-			if(!r.getBag().isEmpty() && !infoOrder.get(r).getText().isEmpty()){
-				JOptionPane.showMessageDialog(this, "Consegna effettuata :)");
-				this.controller.getRiders().get(r.getName()).deliverAll();
-				infoRider.get(r).setText("" + r.showRiderInfo());
-				infoOrder.get(r).setText(TITLE_BAG_VUOTA);				
-			}else{
-				JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
-			}		
-		});	
-			
+		startDeliveryButton.addActionListener(e -> {
+			this.deliveryOrders(r);
+			this.checkWaitingOrders(r);			
+		});
+					
 		riderPanelLayout.setHorizontalGroup(
 				riderPanelLayout.createSequentialGroup()
 				.addComponent(riderArea)
@@ -125,10 +115,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 				.addComponent(riderArea)
 				.addComponent(scrollOrderArea)
 				.addComponent(startDeliveryButton));
-		/*riderPanel.add(riderArea);
-		riderPanel.add(orderArea);
-		riderPanel.add(startDeliveryButton);*/
-		this.pack();
+
 		return riderPanel;
 	}
 	
@@ -146,33 +133,17 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		waitingOrdersArea.setLineWrap(true);
 		waitingOrdersArea.setAutoscrolls(true);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		
-		// TODO aggiungere eventi al pulsante
-		refreshWaitingButton = new JButton("Refresh");
-		refreshWaitingButton.addActionListener(e ->{
-			if(!this.controller.getWaitingOrders().isEmpty() && !this.waitingOrdersArea.getText().isEmpty()) {
-				this.controller.refreshWaitingOrders().forEach(r -> {
-					this.updateTextArea(r);
-				});
-				if(this.controller.getWaitingOrders().isEmpty()) {
-					this.waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
-				}else {
-				this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
-				}
-			}
-		});
-		
+				
 		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
 		scrollWaitingArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		waitingSectionLayout.setHorizontalGroup(
 				waitingSectionLayout.createSequentialGroup()
-				.addComponent(scrollWaitingArea)
-				.addComponent(refreshWaitingButton));
+				.addComponent(scrollWaitingArea));				
 		waitingSectionLayout.setVerticalGroup(
 				waitingSectionLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addComponent(scrollWaitingArea)
-				.addComponent(refreshWaitingButton));
+				.addComponent(scrollWaitingArea));
+		
 		return waitingSection;
 	}
 		
@@ -181,13 +152,47 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 	}
 	
-	public void updateTextArea(Optional<Rider> r) {
+	public void receiveNewOrder(Optional<Rider> r) {
 		if(r.isPresent()) {
-			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());
-			this.infoRider.get(r.get()).setText(r.get().showRiderInfo());
+			this.updateRiderData(r.get());
 		}else {
-			this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
+			this.updateWaitingOrders();
 		}
+	}
+	
+	private void deliveryOrders (Rider r) {
+		if(!r.getBag().isEmpty()){
+			JOptionPane.showMessageDialog(this, "Consegna effettuata :)");
+			this.controller.getRiders().get(r.getName()).deliverAll();
+			infoRider.get(r).setText(r.showRiderInfo());
+			infoOrder.get(r).setText(TITLE_BAG_VUOTA);				
+		}else{
+			JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
+		}		
+	}
+	
+	private void checkWaitingOrders(Rider r) {
+		if(!this.controller.getWaitingOrders().isEmpty()) {
+			if(this.controller.refreshWaitingOrder(r)) {
+				JOptionPane.showMessageDialog(this, "Nuovi ordini aggiunti dalla lista d'attesa");
+				this.updateWaitingOrders();
+				this.receiveNewOrder(Optional.of(r));
+			}else {
+				JOptionPane.showMessageDialog(this, "Nessun nuovo ordine al momento");
+			}					
+		}
+	}
+	
+	private void updateRiderData(Rider r) {
+		this.infoOrder.get(r).setText(r.showBagInfo());
+		this.infoRider.get(r).setText(r.showRiderInfo());
+	}
+	
+	private void updateWaitingOrders() {
+		if(!this.controller.getWaitingOrders().isEmpty())
+			this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
+		else
+			this.waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
 	}
 }
 
