@@ -64,13 +64,20 @@ public interface Order{
 	
 	/**
 	 * 
-	 * @return the rastaurant that make the order
+	 * @return the restaurant that is making the order
 	 */
 	Restaurant getRestaurant(); 	
 	
 	/**
 	 * 
-	 * @return the info of all the menu in the order
+	 * @return the all the menus in the order
+	 */
+	String showOrderContent();
+	
+	/**
+	 * 
+	 * @return infos about the order (city and address of destination, restaurant, total price).
 	 */
 	String showOrderInfo();
+	
 }

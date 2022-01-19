@@ -173,7 +173,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			if (controller.getCurrentOrder().getMenus().size() > 0) {
 				this.setVisible(false);
 				// TODO da eliminare, debug
-				System.out.println(controller.getCurrentOrder().showOrderInfo());
+				System.out.println(controller.getCurrentOrder().showOrderContent());
 				//this.dispose();	
 				new ViewRecap(this.controller,this,this.viewWorker);
 

@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import it.fooddelivery.controller.Manager;
 
 /**
- * View component for the recap screen for the customer.
+ * Window for the recap screen of the current order for the customer.
  */
 @SuppressWarnings("serial")
 public class ViewRecap extends JFrame {
@@ -66,20 +66,12 @@ public class ViewRecap extends JFrame {
 		JTextArea menusArea = new JTextArea("Questo ordine è vuoto?");
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
-		menusArea.setText(controller.getCurrentOrder().showOrderInfo());
+		menusArea.setText(controller.getCurrentOrder().showOrderContent());
 		
 		JTextArea infoArea = new JTextArea();
 		infoArea.setEditable(false);
 		infoArea.setBorder(BorderFactory.createTitledBorder("Info ordine: "));
-		// TODO Aggiungere a Order un metodo che restituisca queste info, magari chiamandolo showOrderInfo e rinominando l'altro showOrderContent
-		StringBuilder sbInfo = new StringBuilder();
-		sbInfo.append("Destinazione: " + this.controller.getCurrentOrder().getDestination() + ", "
-				+ this.controller.getCurrentOrder().getAdress() + "  " + '\n'
-				+ "Ristorante: " + this.controller.getCurrentOrder().getRestaurant() + '\n'
-				+ "Totale: " + df.format(controller.getCurrentOrder().getOrderPrice()) + "€" + '\n'
-				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
-				);
-		infoArea.setText(sbInfo.toString());
+		infoArea.setText(this.controller.getCurrentOrder().showOrderInfo());
 		/*System.out.println("[DEBUG recap] OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
 				+ controller.getCurrentOrder().getMenus().size()); // DEBUG*/
 

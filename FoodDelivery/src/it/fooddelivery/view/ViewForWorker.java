@@ -32,12 +32,12 @@ import it.fooddelivery.model.Rider;
 @SuppressWarnings("serial")
 public class ViewForWorker extends JFrame implements ActionListener{
 	
-	private static final String TITLE_PANEL = "Rider Screen";
+	private static final String TITLE_PANEL = "Rider Screen";	// Non credo vadano statici questi
 	private static final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
 	private static final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
 	
 	private final Manager controller;
-	private  JPanel mainPanel;
+	private JPanel mainPanel;
 	private JTextArea riderArea;
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
@@ -61,7 +61,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 * It initializes the window.
 	 */
 	private void Init(){
-		this.setTitle(this.TITLE_PANEL);
+		this.setTitle(TITLE_PANEL);
 		this.setSize(200,50);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
@@ -133,8 +133,8 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	}
 	
 	/**
-	 * It creates the GUI for the waiting list of orders.
-	 * @return the panel itself
+	 * It creates part of the window that shows the waiting orders.
+	 * @return the panel itself.
 	 */
 	private JPanel createWaitingOrderPanel() {
 		JPanel waitingSection = new JPanel();
@@ -162,7 +162,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			}
 		});
 		
-		
 		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
 		scrollWaitingArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
@@ -181,7 +180,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 	}
-	//
+	
 	public void updateTextArea(Optional<Rider> r) {
 		if(r.isPresent()) {
 			this.infoOrder.get(r.get()).setText(r.get().showBagInfo());

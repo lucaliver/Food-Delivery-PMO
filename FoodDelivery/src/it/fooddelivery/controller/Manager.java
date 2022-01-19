@@ -75,11 +75,10 @@ public class Manager{
 				.findFirst();
 		if(riderWithLastOrder.isPresent()) { // Diventerebbe if(canBeAssign(order))
 			riderWithLastOrder.get().addOrder(order);
-			//TODO mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
-			System.out.println("[DEBUG manager] Rider selezionato: " + riderWithLastOrder.get().getName());
-			System.out.println("[DEBUG manager] L'ordine " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
-			System.out.println("[DEBUG manager] Info ultimo ordine: " + riderWithLastOrder.get().showBagInfo());
-			
+			//DEBUG: Mostra come viene stampato il contenuto della bag di un rider, da rimuovere in seguito
+			//System.out.println("[DEBUG manager] Rider selezionato: " + riderWithLastOrder.get().getName());
+			//System.out.println("[DEBUG manager] L'ordine " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
+			//System.out.println("[DEBUG manager] Info ultimo ordine: " + riderWithLastOrder.get().showBagInfo());
 			return true;
 		}else {
 			if(!this.waitingOrders.contains(order))
@@ -124,20 +123,21 @@ public class Manager{
 		return waitingOrders;
 	}
 	
-	// TODO #2# sembra funzionare in parte
-	// Assegna correttamente gli ordini ai vari fattorini, però nel caso in cui nella waitingList ci siano contemporaneamente
+	// TODO Sembra funzionare in parte
+	// Assegna correttamente gli ordini ai vari fattorini, 
+	// però nel caso in cui nella waitingList ci siano contemporaneamente
 	// ordini assegnabili e non per la stassa persona da errore
 	public List<Optional<Rider>> refreshWaitingOrders() {
-		List<Order> waitinigCopy = this.getWaitingOrders();
+		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
 		List<Optional<Rider>> newRiders = new ArrayList<>();
 		this.waitingOrders.forEach(o -> {
 			this.assignOrder(o);
 			if(this.getRiderWithLastOrder().isPresent()) {
 				newRiders.add(riderWithLastOrder);
-				waitinigCopy.add(o);
+				noMoreWaitingOrders.add(o);
 			}
 		});
-		this.waitingOrders.removeAll(waitinigCopy);
+		this.waitingOrders.removeAll(noMoreWaitingOrders);
 		return newRiders;
 	}
 	
@@ -163,7 +163,7 @@ public class Manager{
 	
 	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append(o.printIdOrder()+o.showOrderInfo()));
+		this.waitingOrders.forEach(o -> sb.append(o.printIdOrder()+o.showOrderContent()));
 		return sb.toString();
 	}
 	

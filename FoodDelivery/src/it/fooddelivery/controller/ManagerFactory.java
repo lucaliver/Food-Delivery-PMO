@@ -31,7 +31,7 @@ public class ManagerFactory {
 	 */
 	private static Map<String, Rider> createRiders() {
 		Map<String, Rider> riders = new HashMap<>();
-		// TODO Aggiorneremo poi gli assegnamenti delle città
+		// TODO Aggiorneremo poi più fattorini e assegnamenti sensati delle città
 		
 		List<City> citiesForLuca = new ArrayList<>();
 		citiesForLuca.add(City.CAGLI);

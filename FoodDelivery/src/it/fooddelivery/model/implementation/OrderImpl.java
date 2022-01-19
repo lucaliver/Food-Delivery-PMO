@@ -4,6 +4,7 @@
 
 package it.fooddelivery.model.implementation;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import it.fooddelivery.model.City;
  * A class to represent an order.
  */
 public class OrderImpl implements Order{
+	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
+	
 	private final int idOrder;
 	private final City destination;
 	private Map<Menu, Integer> menus;
@@ -110,10 +113,39 @@ public class OrderImpl implements Order{
 	}
 
 	@Override
-	public String showOrderInfo() {
+	public String showOrderContent() {
 		StringBuilder sb = new StringBuilder(); 
 		this.menus.entrySet()
 			.forEach(m -> sb.append(m.getValue() + "x " + m.getKey().showMenuInfo()+'\n'));	
 		return sb.toString();
+	}
+	
+
+	@Override
+	public String showOrderInfo() {
+		return "Destinazione: " + this.getDestination() + ", "
+				+ this.getAdress() + "  " + '\n'
+				+ "Ristorante: " + this.getRestaurant() + '\n'
+				+ "Totale: " + df.format(this.getOrderPrice()) + "€" + '\n'
+				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
+				;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof OrderImpl)) {
+			return false;
+		}
+		OrderImpl other = (OrderImpl) obj;
+		if (this.idOrder != other.getIdOrder()) {
+			return false;
+		}
+		return true;
 	}
 }
