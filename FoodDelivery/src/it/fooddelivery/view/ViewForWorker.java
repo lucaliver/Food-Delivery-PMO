@@ -23,7 +23,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Rider;
 
@@ -33,7 +32,9 @@ import it.fooddelivery.model.Rider;
 @SuppressWarnings("serial")
 public class ViewForWorker extends JFrame implements ActionListener{
 	
-	private final String TITLE_PANEL = "Rider Screen";	// Non credo vadano statici questi
+	private static ViewForWorker istance = null;
+	
+	private final String TITLE_PANEL = "Rider Screen";	
 	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
 	private final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
 	
@@ -50,11 +51,18 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 * Constructor.
 	 * @param controller.
 	 */
-	ViewForWorker (final Manager controller){
+	private ViewForWorker (final Manager controller){
 		this.controller = controller;
 		this.infoOrder = new HashMap<>();
 		this.infoRider = new HashMap<>();
 		this.Init();	
+	}
+	
+	public static ViewForWorker getInstance(final Manager controller) {
+		if(istance == null) {
+			istance = new ViewForWorker(controller);
+		}
+		return istance;
 	}
 	
 	/**
@@ -152,7 +160,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 	}
 	
 	/**

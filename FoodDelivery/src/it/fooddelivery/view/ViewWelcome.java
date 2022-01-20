@@ -33,15 +33,13 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	private JComboBox<Restaurant> restaurantCombo;
 	private JTextField addressField;
 	private JButton proceedButton;
-	private ViewForWorker viewWorker;
 	
 	/**
 	 * Constructor.
 	 * @param controller for the MVC pattern.
 	 */
-	ViewWelcome(final Manager controller,ViewForWorker viewWorker){
+	ViewWelcome(final Manager controller){
 		this.controller = controller;
-		this.viewWorker = viewWorker;
 		this.Init();
 		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -116,7 +114,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
 			this.setVisible(false);
 			this.dispose();
-			new ViewPlacing(this.controller, this.viewWorker);
+			new ViewPlacing(this.controller);
 		}
 
 	}
