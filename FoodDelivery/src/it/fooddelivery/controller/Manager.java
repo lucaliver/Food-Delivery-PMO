@@ -113,12 +113,11 @@ public class Manager{
 		return waitingOrders;
 	}
 	
-	// TODO #3# non riesce a gestire assegnamenti doppi o nulli
 	public boolean refreshWaitingOrder(Rider freeRider) {
 		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
 		this.getWaitingOrders().forEach(o ->{	
-			// TODO credo che l'errore sia qui nel caso che l'optional di canBeAssign sia nullo
-			if(this.canBeAssign(o).get().equals(freeRider)) {
+			if(this.canBeAssign(o).isPresent())
+				if(this.canBeAssign(o).get().equals(freeRider)) {
 				noMoreWaitingOrders.add(o);
 				freeRider.addOrder(o);
 			}
