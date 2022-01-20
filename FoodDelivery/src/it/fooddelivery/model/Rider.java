@@ -76,4 +76,6 @@ public interface Rider {
 	 */
 	String showBagInfo();
 	
+	double calculateBagProfit();
+	
 }

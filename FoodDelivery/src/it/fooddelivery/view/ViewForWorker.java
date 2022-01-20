@@ -5,6 +5,7 @@
 package it.fooddelivery.view;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -61,7 +62,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 */
 	private void Init(){
 		this.setTitle(TITLE_PANEL);
-		this.setSize(200,50);
+		this.setSize(200,70);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		mainPanel = new JPanel();
@@ -109,11 +110,13 @@ public class ViewForWorker extends JFrame implements ActionListener{
 				riderPanelLayout.createSequentialGroup()
 				.addComponent(riderArea)
 				.addComponent(scrollOrderArea)
+				.addComponent(Box.createHorizontalStrut(10))
 				.addComponent(startDeliveryButton));	
 		riderPanelLayout.setVerticalGroup(
 				riderPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				.addComponent(riderArea)
 				.addComponent(scrollOrderArea)
+				.addComponent(Box.createHorizontalStrut(10))
 				.addComponent(startDeliveryButton));
 
 		return riderPanel;
@@ -170,7 +173,8 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 */
 	private void deliveryOrders (Rider r) {
 		if(!r.getBag().isEmpty()){
-			JOptionPane.showMessageDialog(this, "Consegna effettuata :)");
+			JOptionPane.showMessageDialog(this, "Consegna effettuata :)\n"+
+		                                  "Hai guadagnato: " +String.format("%.2f", r.calculateBagProfit()+"€"));
 			this.controller.getRiders().get(r.getName()).deliverAll();
 			this.updateRiderData(r);
 		}else{

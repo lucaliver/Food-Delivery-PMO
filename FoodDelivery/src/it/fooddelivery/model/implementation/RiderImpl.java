@@ -43,14 +43,14 @@ public class RiderImpl implements Rider{
 	@Override
 	public void addOrder(Order o) {
 		orderList.add(o);
-		this.setCapacity(o.getOrderSize());
+		this.addCapacity(o.getOrderSize());
 	}
 	
 	@Override
 	public void deliverOrder(Order o) {
 		if(this.orderList.contains(o)) {
 			this.addProfit(o);
-			this.setCapacity(-o.getOrderSize());
+			this.addCapacity(-o.getOrderSize());
 			orderList.remove(o);
 		}
 		else {
@@ -95,10 +95,22 @@ public class RiderImpl implements Rider{
 	 * @param o = ordine di cui incassare il guadagno. 
 	 */
 	private void addProfit(Order o) {
-		this.profit += o.getOrderPrice() * getPercentage();
+		this.profit += this.calculateOrderProfit(o);
 	}
 	
-	private void setCapacity(int size) {
+	private double calculateOrderProfit(Order o) {
+		return o.getOrderPrice() * getPercentage();
+	}
+	
+	public double calculateBagProfit() {
+		double res = 0;
+		for(Order o : this.getBag()) {
+			res += this.calculateOrderProfit(o);
+		}
+		return res;
+	}
+	
+	private void addCapacity(int size) {
 		this.capacity += size;
 	}
 	
@@ -115,14 +127,7 @@ public class RiderImpl implements Rider{
 	
 	@Override
 	public String showBagInfo() {
-		StringBuilder sb = new StringBuilder();
-
-		//STAMPE DI DEBUG
-		/*System.out.println("[DEBUG RiderImpl.showBagInfo()] " 
-				+ this.name + " ha " + this.orderList.size() + " ordini. ");
-		this.orderList.forEach(o -> System.out.println("[DEBUG RiderImpl.showBagInfo()] L'ordine "
-				+ o.getIdOrder() + " ha tot menu: " + o.getMenus().size()));*/
-		
+		StringBuilder sb = new StringBuilder();		
 		this.orderList.forEach(o -> sb.append(o.printIdOrder()+o.showOrderContent()));
 		return sb.toString();
 	}

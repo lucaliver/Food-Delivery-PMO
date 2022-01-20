@@ -113,6 +113,11 @@ public class Manager{
 		return waitingOrders;
 	}
 	
+	/**
+	 * It check if any orders in waiting can be assign to the given rider
+	 * @param freeRider = rider who's just finish a delivery
+	 * @return true if at least one new order was given to freeRider
+	 */
 	public boolean refreshWaitingOrder(Rider freeRider) {
 		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
 		this.getWaitingOrders().forEach(o ->{	
