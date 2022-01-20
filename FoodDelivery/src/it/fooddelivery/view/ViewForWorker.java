@@ -174,7 +174,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private void deliveryOrders (Rider r) {
 		if(!r.getBag().isEmpty()){
 			JOptionPane.showMessageDialog(this, "Consegna effettuata :)\n"+
-		                                  "Hai guadagnato: " +String.format("%.2f", r.calculateBagProfit()+"€"));
+		                                  "Hai guadagnato: " +String.format("%.2f", r.calculateBagProfit())+"€");
 			this.controller.getRiders().get(r.getName()).deliverAll();
 			this.updateRiderData(r);
 		}else{
