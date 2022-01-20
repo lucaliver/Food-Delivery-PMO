@@ -48,7 +48,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	private Map<Rider, JTextArea> infoRider;
 	
 	/**
-	 * Constructor.
+	 * Private singleton Constructor.
 	 * @param controller.
 	 */
 	private ViewForWorker (final Manager controller){
@@ -58,6 +58,11 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		this.Init();	
 	}
 	
+	/**
+	 * It creates one and only one object with ViewForWorker type
+	 * @param controller
+	 * @return the same object every time
+	 */
 	public static ViewForWorker getInstance(final Manager controller) {
 		if(istance == null) {
 			istance = new ViewForWorker(controller);
@@ -73,6 +78,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		this.setSize(200,70);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
+		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
