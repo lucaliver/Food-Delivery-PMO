@@ -102,7 +102,7 @@ public class RiderImpl implements Rider{
 		return o.getOrderPrice() * getPercentage();
 	}
 	
-	public double calculateBagProfit() {
+	public double getBagProfit() {
 		double res = 0;
 		for(Order o : this.getBag()) {
 			res += this.calculateOrderProfit(o);

@@ -76,6 +76,10 @@ public interface Rider {
 	 */
 	String showBagInfo();
 	
-	double calculateBagProfit();
+	/**
+	 * 
+	 * @return the bag profit of the rider
+	 */
+	double getBagProfit();
 	
 }
