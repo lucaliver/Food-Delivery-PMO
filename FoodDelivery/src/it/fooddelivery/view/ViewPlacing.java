@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Menu;
+import it.fooddelivery.model.implementation.RiderImpl;
 
 // TODO- gestire eccezione nel momento in cui si spinge il bottone - e esce eccezione
 
@@ -168,15 +169,17 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
-			if (controller.getCurrentOrder().getMenus().size() > 0) {
+			if (controller.getCurrentOrder().getOrderSize() <= 0) {
+				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
+			} else if(this.controller.getCurrentOrder().getOrderSize() > RiderImpl.getMaxCapacity()) {
+				JOptionPane.showMessageDialog(this, "Capacità massima superata");
+			}
+			else {				
 				this.setVisible(false);
 				// TODO da eliminare, debug
 				System.out.println(controller.getCurrentOrder().showOrderContent());
 				//this.dispose();	
 				new ViewRecap(this.controller,this);
-
-			} else {
-				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
 			}
 			// TODO credo che sia da cancellare
 			//controller.getCurrentOrder().removeAllMenus();

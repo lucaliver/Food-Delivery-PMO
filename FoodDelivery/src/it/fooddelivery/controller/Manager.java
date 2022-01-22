@@ -119,7 +119,7 @@ public class Manager{
 	 * @return true if at least one new order was given to freeRider
 	 */
 	public boolean refreshWaitingOrder(Rider freeRider) {
-		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); //Ordini "non più in attesa"
+		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); 
 		this.getWaitingOrders().forEach(o ->{	
 			if(this.canBeAssign(o).isPresent())
 				if(this.canBeAssign(o).get().equals(freeRider)) {

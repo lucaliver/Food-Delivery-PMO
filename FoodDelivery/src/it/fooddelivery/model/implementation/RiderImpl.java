@@ -136,5 +136,9 @@ public class RiderImpl implements Rider{
 		return PERCENTAGE;
 	}
 	
+	public static int getMaxCapacity() {
+		return MAX_CAPACITY;
+	}
+	
 	
 }
