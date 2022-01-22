@@ -211,6 +211,8 @@ public class ViewForWorker extends JFrame implements ActionListener{
 			}else {
 				JOptionPane.showMessageDialog(this, "Nessun nuovo ordine al momento");
 			}					
+		}else {
+			JOptionPane.showMessageDialog(this, "Lista d'attesa vuota");
 		}
 	}
 	
