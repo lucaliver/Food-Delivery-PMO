@@ -49,7 +49,7 @@ public interface Order{
 	 * 
 	 * @return the string to print with the id
 	 */
-	public String printIdOrder();
+	public String printInfoForRider();
 	
 	/**
 	 * @return the destination of the order.

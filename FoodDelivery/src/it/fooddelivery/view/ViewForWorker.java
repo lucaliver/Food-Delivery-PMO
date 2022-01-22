@@ -116,7 +116,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 		startDeliveryButton = new JButton("Parti e consegna!");
 		startDeliveryButton.addActionListener(e -> {
-			this.deliveryOrders(r);
+			this.startDelivery(r);
 			this.checkWaitingOrders(r);			
 		});
 					
@@ -147,8 +147,6 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 		waitingOrdersArea = new JTextArea(10,30);
 		waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
-		waitingOrdersArea.setLineWrap(true);
-		waitingOrdersArea.setAutoscrolls(true);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				
 		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
@@ -184,12 +182,17 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 * It start a new delivery
 	 * @param r = rider who's making the delivery
 	 */
-	private void deliveryOrders (Rider r) {
+	private void startDelivery (Rider r) {
 		if(!r.getBag().isEmpty()){
-			JOptionPane.showMessageDialog(this, "Consegna effettuata :)\n"+
-		                                  "Hai guadagnato: " +String.format("%.2f", r.getBagProfit())+"€");
+			String bagProfit = String.format("%.2f",r.getBagProfit());
 			this.controller.getRiders().get(r.getName()).deliverAll();
 			this.updateRiderData(r);
+			if(r.getBag().isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Consegna effettuata :)\n"+
+	                                          "Hai guadagnato: " +bagProfit+"€");
+			}else {
+				JOptionPane.showMessageDialog(this,"Error...");
+			}
 		}else{
 			JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
 		}		
@@ -201,10 +204,10 @@ public class ViewForWorker extends JFrame implements ActionListener{
 	 */
 	private void checkWaitingOrders(Rider r) {
 		if(!this.controller.getWaitingOrders().isEmpty()) {
-			if(this.controller.refreshWaitingOrder(r)) {
-				JOptionPane.showMessageDialog(this, "Nuovi ordini aggiunti dalla lista d'attesa");
+			if(this.controller.refreshWaitingOrder(r)) {				
 				this.updateWaitingOrders();
 				this.receiveNewOrder(Optional.of(r));
+				JOptionPane.showMessageDialog(this, "Nuovi ordini aggiunti dalla lista d'attesa");
 			}else {
 				JOptionPane.showMessageDialog(this, "Nessun nuovo ordine al momento");
 			}					

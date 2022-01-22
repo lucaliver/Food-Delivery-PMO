@@ -153,7 +153,7 @@ public class Manager{
 	
 	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append(o.printIdOrder()+o.showOrderContent()));
+		this.waitingOrders.forEach(o -> sb.append(o.printInfoForRider()+o.showOrderContent()));
 		return sb.toString();
 	}
 	

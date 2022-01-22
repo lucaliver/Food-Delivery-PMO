@@ -93,8 +93,9 @@ public class OrderImpl implements Order{
 	}
 	
 	@Override
-	public String printIdOrder() {
-		return new String("[Ordine " + String.format("%03d", this.getIdOrder()) + "]: \n");
+	public String printInfoForRider() {
+		return new String("[ID: "+String.format("%03d", this.getIdOrder())+"] "
+		                  +this.getDestination()+" - "+this.getAdress()+'\n');
 	}
 
 	@Override
@@ -127,8 +128,7 @@ public class OrderImpl implements Order{
 				+ this.getAdress() + "  " + '\n'
 				+ "Ristorante: " + this.getRestaurant() + '\n'
 				+ "Totale: " + df.format(this.getOrderPrice()) + "€" + '\n'
-				//+ "Dimensione: " + this.controller.getCurrentOrder().getSize()
-				;
+				+ "Dimensione: " + this.getOrderSize();
 	}
 	
 	@Override

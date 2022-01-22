@@ -128,7 +128,7 @@ public class RiderImpl implements Rider{
 	@Override
 	public String showBagInfo() {
 		StringBuilder sb = new StringBuilder();		
-		this.orderList.forEach(o -> sb.append(o.printIdOrder()+o.showOrderContent()));
+		this.orderList.forEach(o -> sb.append(o.printInfoForRider()+o.showOrderContent()));
 		return sb.toString();
 	}
 
