@@ -95,7 +95,7 @@ public class OrderImpl implements Order{
 	@Override
 	public String printInfoForRider() {
 		return new String("[ID: "+String.format("%03d", this.getIdOrder())+"] "
-		                  +this.getDestination()+" - "+this.getAdress()+'\n');
+		                  +this.getDestination()+", "+this.getAdress()+'\n');
 	}
 
 	@Override
@@ -124,11 +124,10 @@ public class OrderImpl implements Order{
 
 	@Override
 	public String showOrderInfo() {
-		return "Destinazione: " + this.getDestination() + ", "
-				+ this.getAdress() + "  " + '\n'
-				+ "Ristorante: " + this.getRestaurant() + '\n'
-				+ "Totale: " + String.format("%.2f",this.getOrderPrice()) + "€" + '\n'
-				+ "Dimensione: " + this.getOrderSize();
+		return "Destinazione: " + this.getDestination() + ", "+ this.getAdress()
+				+ " \nRistorante: " + this.getRestaurant()
+				+ " \nTotale: " + String.format("%.2f",this.getOrderPrice())
+				+ "€ \nDimensione: " + this.getOrderSize();
 	}
 	
 	@Override
