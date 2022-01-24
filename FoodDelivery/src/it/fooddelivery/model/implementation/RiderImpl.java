@@ -34,10 +34,51 @@ public class RiderImpl implements Rider{
 		this.orderList = new ArrayList<>();
 	}
 	
+	public static double getPercentage() {
+		return PERCENTAGE;
+	}
 	
+	public static int getMaxCapacity() {
+		return MAX_CAPACITY;
+	}
+		
 	@Override
 	public List<Order> getBag() {
 		return orderList;
+	}
+	
+	public int getCapacity() {
+		return capacity;
+	}	
+	
+	// restituisce il profitto totale di ogni fatttorino
+	@Override
+	public double getProfit() {
+		return profit;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+	
+	@Override
+	public List<City> getCities() {
+		return cities;
+	}
+
+	@Override
+	public String showRiderInfo() {
+		return "Profito: "+String.format("%.2f", getProfit())+
+		       "€"+'\n'+"Capacità: "+this.getCapacity()+
+		       "/"+RiderImpl.MAX_CAPACITY;
+	}
+	
+	@Override
+	public String showBagInfo() {
+		StringBuilder sb = new StringBuilder();		
+		this.orderList.forEach(o -> sb.append(o.printInfoForRider()+o.showOrderContent()));
+		return sb.toString();
 	}
 
 	@Override
@@ -68,26 +109,18 @@ public class RiderImpl implements Rider{
 	public boolean isFull() {
 		return orderList.size() == MAX_CAPACITY;
 	}
-	
-	// restituisce il profitto totale di ogni fatttorino
-	@Override
-	public double getProfit() {
-		return profit;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-		
+			
 	@Override
 	public boolean canFit(Order o) {		// ci entra nello zaino?
 		return (this.capacity + o.getOrderSize()) <= MAX_CAPACITY;
 	}
 	
-	@Override
-	public List<City> getCities() {
-		return cities;
+	public double getBagProfit() {
+		double res = 0;
+		for(Order o : this.getBag()) {
+			res += this.calculateOrderProfit(o);
+		}
+		return res;
 	}
 	
 	/**
@@ -101,44 +134,10 @@ public class RiderImpl implements Rider{
 	private double calculateOrderProfit(Order o) {
 		return o.getOrderPrice() * getPercentage();
 	}
-	
-	public double getBagProfit() {
-		double res = 0;
-		for(Order o : this.getBag()) {
-			res += this.calculateOrderProfit(o);
-		}
-		return res;
-	}
-	
+		
 	private void addCapacity(int size) {
 		this.capacity += size;
 	}
-	
-	public int getCapacity() {
-		return capacity;
-	}	
 
-	@Override
-	public String showRiderInfo() {
-		return "Profito: "+String.format("%.2f", getProfit())+
-		       "€"+'\n'+"Capacità: "+this.getCapacity()+
-		       "/"+RiderImpl.MAX_CAPACITY;
-	}
-	
-	@Override
-	public String showBagInfo() {
-		StringBuilder sb = new StringBuilder();		
-		this.orderList.forEach(o -> sb.append(o.printInfoForRider()+o.showOrderContent()));
-		return sb.toString();
-	}
-
-	public static double getPercentage() {
-		return PERCENTAGE;
-	}
-	
-	public static int getMaxCapacity() {
-		return MAX_CAPACITY;
-	}
-	
 	
 }

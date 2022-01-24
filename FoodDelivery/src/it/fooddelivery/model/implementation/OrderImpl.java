@@ -4,7 +4,6 @@
 
 package it.fooddelivery.model.implementation;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import it.fooddelivery.model.City;
  * A class to represent an order.
  */
 public class OrderImpl implements Order{
-	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
 	
 	private final int idOrder;
 	private final City destination;
@@ -39,7 +37,9 @@ public class OrderImpl implements Order{
 		this.destination = destination;
 		this.address = address;
 		this.restaurant = restaurant;
-		this.menus = new HashMap<>();	
+		this.menus = new HashMap<>();
+		this.price = 0;
+		this.size = 0;
 	}
 	
 	@Override
@@ -75,14 +75,12 @@ public class OrderImpl implements Order{
 
 	@Override
 	public int getOrderSize() {
-		this.size = 0;
 		this.menus.entrySet().forEach(m -> size += m.getKey().getSize()*m.getValue());
 		return size;
 	}
 	
 	@Override
 	public double getOrderPrice() {
-		this.price = 0;
 		this.menus.entrySet().forEach(m -> price += m.getKey().getPrice()*m.getValue());
 		return price;
 	}
@@ -127,7 +125,7 @@ public class OrderImpl implements Order{
 		return "Destinazione: " + this.getDestination() + ", "
 				+ this.getAdress() + "  " + '\n'
 				+ "Ristorante: " + this.getRestaurant() + '\n'
-				+ "Totale: " + df.format(this.getOrderPrice()) + "€" + '\n'
+				+ "Totale: " + String.format("%.2f",this.getOrderPrice()) + "€" + '\n'
 				+ "Dimensione: " + this.getOrderSize();
 	}
 	

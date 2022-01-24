@@ -18,8 +18,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -30,7 +28,7 @@ import it.fooddelivery.model.Rider;
  * The only screen riders will see. It shows the bag of everyone and let them empty it.
  */
 @SuppressWarnings("serial")
-public class ViewForWorker extends JFrame implements ActionListener{
+public class ViewForWorker extends JFrame{
 	
 	private static ViewForWorker istance = null;
 	
@@ -161,11 +159,7 @@ public class ViewForWorker extends JFrame implements ActionListener{
 		
 		return waitingSection;
 	}
-		
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	}
-	
+			
 	/**
 	 * It checks where the last order was sent
 	 * @param r = rider who receives the last order, null if order is in waitingList
