@@ -18,7 +18,6 @@ import it.fooddelivery.model.Restaurant;
 
 /**
  * Controller of a food delivery management software.
- *
  */
 public class Manager{
 	//TODO Forse applicare il Singleton al controller.
@@ -45,25 +44,27 @@ public class Manager{
 	}
 	
 	/**
-	 * It tries to assign the order to a delivery man of the correct city.
-	 * He needs to have enough bag space. It select the delivery man with the lower profit.
-	 * @param order is the order to assign
-	 * @return true if assigned to a delivery man, false if put into the waiting list.
+	 * Check if a order can be assigned.
+	 * @param order to check.
+	 * @return an optional rider if there is one that can take the order, empty if not.
 	 */
-	
-	/* TODO come rifarei gli assegnamenti degli ordini
-	 */ 
-	 public Optional<Rider> canBeAssign(Order order){
-		 this.riderWithLastOrder = this.riders
+	public Optional<Rider> canBeAssign(Order order){
+		this.riderWithLastOrder = this.riders
 					.values()
 					.stream()
 					.filter(x->x.getCities().contains(order.getDestination()))
 					.filter(x->x.canFit(order))	
 					.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
 					.findFirst();
-		 return riderWithLastOrder;
-		 }
-						
+		return riderWithLastOrder;
+	}
+			
+	/**
+	* It tries to assign the order to a delivery man of the correct city.
+	* He needs to have enough bag space. It select the delivery man with the lower profit.
+	* @param order is the order to assign
+	* @return true if assigned to a rider, false if put into the waiting list.
+	*/
 	public boolean assignOrder(Order order) {
 		//System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
 		if(this.canBeAssign(order).isPresent()) { 
@@ -78,10 +79,6 @@ public class Manager{
 			return false;
 		}
 	}
-		
-	public Optional<Rider> getRiderWithLastOrder(){
-		return this.riderWithLastOrder;
-	}
 	
 	/**
 	 * It creates a new current order.
@@ -95,8 +92,9 @@ public class Manager{
 	}
 	
 	/**
-	 * It assigns the current order (to a rider or to waiting list) 
+	 * It assigns the current order (to a rider or to waiting list). 
 	 * and empties the current order slot.
+	 * @return true if assigned to a rider, false if put into the waiting list.
 	 */
 	public boolean assignCurrentOrder() {
 		boolean result = this.assignOrder(this.currentOrder);
@@ -104,13 +102,25 @@ public class Manager{
 		return result;
 	}
 	
-
-	public Order getCurrentOrder() {
-		return currentOrder;
+	/**
+	 * Show info about orders in waiting list.
+	 * @return string with info about all orders in waiting list.
+	 */
+	public String showWaitingOrders() {
+		StringBuilder sb = new StringBuilder();
+		this.waitingOrders.forEach(o -> sb.append(o.printInfoForRider()+o.showOrderContent()));
+		return sb.toString();
 	}
 	
-	public List<Order> getWaitingOrders() {
-		return waitingOrders;
+	/**
+	 * Returns how many menu of a specific type are in the current order.
+	 * @param menu.
+	 * @return number of quantity of that menu.
+	 */
+	public int howManyInCurrent(Menu menu) {
+		if (this.currentOrder.getMenus().containsKey(menu))
+			return this.currentOrder.getMenus().get(menu);
+		else return 0;
 	}
 	
 	/**
@@ -147,14 +157,20 @@ public class Manager{
 		return riders;
 	}
 
+	public Optional<Rider> getRiderWithLastOrder(){
+		return this.riderWithLastOrder;
+	}
+
 	public void setRiders(Map<String, Rider> riders) {
 		this.riders = riders;
 	}
+
+	public Order getCurrentOrder() {
+		return currentOrder;
+	}
 	
-	public String showWaitingOrders() {
-		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append(o.printInfoForRider()+o.showOrderContent()));
-		return sb.toString();
+	public List<Order> getWaitingOrders() {
+		return waitingOrders;
 	}
 	
 	public void addToCurrent(Menu menu) {
@@ -163,11 +179,5 @@ public class Manager{
 
 	public boolean removeFromCurrent(Menu menu) {
 		return this.currentOrder.removeMenu(menu);
-	}
-	
-	public int howManyInCurrent(Menu menu) {
-		if (this.currentOrder.getMenus().containsKey(menu))
-			return this.currentOrder.getMenus().get(menu);
-		else return 0;
 	}
 }

@@ -4,8 +4,6 @@
 
 package it.fooddelivery.view;
 
-import java.text.DecimalFormat;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,7 +22,6 @@ import it.fooddelivery.controller.Manager;
  */
 @SuppressWarnings("serial")
 public class ViewRecap extends JFrame {
-	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
 	
 	private final Manager controller;
 	private final String title = "Il tuo ordine :)";
