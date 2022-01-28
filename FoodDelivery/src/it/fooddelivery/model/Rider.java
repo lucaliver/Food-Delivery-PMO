@@ -12,12 +12,13 @@ import java.util.List;
 public interface Rider {
 	
 	/** 
-	 * @return lista di tutti gli ordini nella bag del fattorino.
+	 * @return list of all the orders in the rider's bag.
 	 */
 	List<Order> getBag();
 	
 	/**
-	 * @param o = ordine da aggiungere alla bag.
+	 * It adds the order to the rider's bag.
+	 * @param o = order to add.
 	 */
 	void addOrder(Order o);
 	
@@ -78,7 +79,7 @@ public interface Rider {
 	
 	/**
 	 * 
-	 * @return the bag profit of the rider
+	 * @return the bag profit of the rider.
 	 */
 	double getBagProfit();
 	

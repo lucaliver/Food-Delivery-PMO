@@ -93,7 +93,7 @@ public class OrderImpl implements Order{
 	}
 	
 	@Override
-	public String printInfoForRider() {
+	public String showInfoForRider() {
 		return new String("[ID: "+String.format("%03d", this.getIdOrder())+"] "
 		                  +this.getDestination()+", "+this.getAdress()+'\n');
 	}
@@ -121,7 +121,6 @@ public class OrderImpl implements Order{
 		return sb.toString();
 	}
 	
-
 	@Override
 	public String showOrderInfo() {
 		return "Destinazione: " + this.getDestination() + ", "+ this.getAdress()
@@ -129,7 +128,7 @@ public class OrderImpl implements Order{
 				+ " \nTotale: " + String.format("%.2f",this.getOrderPrice())
 				+ "€ \nDimensione: " + this.getOrderSize();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

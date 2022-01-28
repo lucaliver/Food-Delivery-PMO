@@ -30,7 +30,7 @@ import it.fooddelivery.model.Rider;
 @SuppressWarnings("serial")
 public class ViewForWorker extends JFrame{
 	
-	private static ViewForWorker istance = null;
+	private static ViewForWorker instance = null;
 	
 	private final String TITLE_PANEL = "Rider Screen";	
 	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
@@ -62,10 +62,10 @@ public class ViewForWorker extends JFrame{
 	 * @return the same object every time
 	 */
 	public static ViewForWorker getInstance(final Manager controller) {
-		if(istance == null) {
-			istance = new ViewForWorker(controller);
+		if(instance == null) {
+			instance = new ViewForWorker(controller);
 		}
-		return istance;
+		return instance;
 	}
 	
 	/**

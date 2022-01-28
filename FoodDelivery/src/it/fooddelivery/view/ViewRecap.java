@@ -41,8 +41,6 @@ public class ViewRecap extends JFrame {
 		this.setVisible(true);
 		//this.viewForWorker = new ViewForWorker(this.controller);
 		this.viewPlacing = viewPlacing;
-		/*System.out.println("[DEBUG recap] OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
-				+ controller.getCurrentOrder().getMenus().size()); // DEBUG*/
 	}
 	
 	/**
@@ -66,13 +64,9 @@ public class ViewRecap extends JFrame {
 		infoArea.setEditable(false);
 		infoArea.setBorder(BorderFactory.createTitledBorder("Info ordine: "));
 		infoArea.setText(this.controller.getCurrentOrder().showOrderInfo());
-		/*System.out.println("[DEBUG recap] OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
-				+ controller.getCurrentOrder().getMenus().size()); // DEBUG*/
 
 		sendButton = new JButton("Invia ordine"); 
 		sendButton.addActionListener(event ->{
-			/*System.out.println("[DEBUG recap] NON-OK Numero menu del currentOrder: " + controller.getCurrentOrder().getIdOrder() + ": " +
-					+ controller.getCurrentOrder().getMenus().size()); // DEBUG*/
 			boolean res = this.controller.assignOrder(controller.getCurrentOrder());
 			if(res) {
 				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());						          

@@ -36,6 +36,7 @@ public class RestaurantImpl implements Restaurant {
 		return this.menuOffer;
 	}
 	
+	@Override
 	public String toString() {
 		return this.name;
 	}

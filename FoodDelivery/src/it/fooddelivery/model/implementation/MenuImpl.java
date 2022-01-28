@@ -44,7 +44,7 @@ public class MenuImpl implements Menu{
 
 	@Override
 	public String showMenuInfo() {
-		return(getName()+" - "+ String.format("%.2f",getPrice())+"€ - "+getSize()+"u");
+		return(getName()+" - "+ String.format("%.2f",this.price)+"€ - "+getSize()+"u");
 		
 	}
 

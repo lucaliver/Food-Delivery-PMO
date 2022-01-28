@@ -21,8 +21,6 @@ import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.implementation.RiderImpl;
 
-// TODO- gestire eccezione nel momento in cui si spinge il bottone - e esce eccezione
-
 /**
  * Second window for the customer, used to select menus.
  */
@@ -176,13 +174,8 @@ public class ViewPlacing extends JFrame implements ActionListener {
 			}
 			else {				
 				this.setVisible(false);
-				// TODO da eliminare, debug
-				System.out.println(controller.getCurrentOrder().showOrderContent());
-				//this.dispose();	
 				new ViewRecap(this.controller,this);
 			}
-			// TODO credo che sia da cancellare
-			//controller.getCurrentOrder().removeAllMenus();
 		}
 	}
 	

@@ -45,11 +45,6 @@ public interface Order{
 	 * @return the ID of the order.
 	 */
 	int getIdOrder();
-	/**
-	 * 
-	 * @return the string to print with the id
-	 */
-	public String printInfoForRider();
 	
 	/**
 	 * @return the destination of the order.
@@ -80,4 +75,9 @@ public interface Order{
 	 */
 	String showOrderInfo();
 	
+	/**
+	 * 
+	 * @return the string to print with the id.
+	 */
+	String showInfoForRider();
 }

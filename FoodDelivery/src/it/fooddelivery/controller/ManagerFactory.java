@@ -18,11 +18,13 @@ import it.fooddelivery.model.implementation.RestaurantImpl;
 import it.fooddelivery.model.implementation.RiderImpl;
 
 public class ManagerFactory {
+	// TODO Factory pattern da guardare.
 
 	/**
 	 * It creates a Manager, configurated with restaurants and riders.
 	 */
 	public static Manager create(){
+		// TODO Prima di consegnare, aggiungere riders, ristoranti, menu, assegnamenti sensati.
 		return new Manager(createRiders(), createRestaurants());
 	}
 
@@ -31,7 +33,6 @@ public class ManagerFactory {
 	 */
 	private static Map<String, Rider> createRiders() {
 		Map<String, Rider> riders = new HashMap<>();
-		// TODO Aggiorneremo poi più fattorini e assegnamenti sensati delle città
 		
 		List<City> citiesForLuca = new ArrayList<>();
 		citiesForLuca.add(City.CAGLI);

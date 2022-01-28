@@ -6,7 +6,6 @@ package it.fooddelivery.model;
 
 /**
  * Enum used for Cities.
- *
  */
 public enum City {
 	FERMIGNANO("Fermignano"),
@@ -18,7 +17,8 @@ public enum City {
 	private final String name;
 	
 	/**
-	 * @param nome città.
+	 * Constructor, it sets the city's name.
+	 * @param name of the city.
 	 */
 	City(final String name) {
 		this.name = name;

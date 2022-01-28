@@ -14,5 +14,4 @@ public class Main {
 		final Manager controller = ManagerFactory.create();
 		new View(controller);
 	}
-
 }

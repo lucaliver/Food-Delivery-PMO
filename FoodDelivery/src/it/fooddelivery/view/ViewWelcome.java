@@ -108,8 +108,7 @@ public class ViewWelcome extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Potrei implementare questo metodo con una lamdba come per gli
-		// altri bottoni delle altre view, non so quale sia migliore.
+		// TODO Implementare questo metodo x evento con una lamdba
 		if (e.getSource()==proceedButton) {
 			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
 			this.setVisible(false);

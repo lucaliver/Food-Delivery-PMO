@@ -20,7 +20,7 @@ import it.fooddelivery.model.Restaurant;
  * Controller of a food delivery management software.
  */
 public class Manager{
-	//TODO Forse applicare il Singleton al controller.
+	//TODO Forse applicare il Singleton al controller?
 	private Map<String, Rider> riders;
 
 	private List<Order> waitingOrders;	
@@ -108,7 +108,7 @@ public class Manager{
 	 */
 	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append(o.printInfoForRider()+o.showOrderContent()));
+		this.waitingOrders.forEach(o -> sb.append(o.showInfoForRider()+o.showOrderContent()));
 		return sb.toString();
 	}
 	
