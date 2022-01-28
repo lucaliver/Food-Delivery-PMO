@@ -17,7 +17,7 @@ import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
 /**
- * Controller of a food delivery management software.
+ * Controller of the Food Delivery application. Controller component in the MVC pattern.
  */
 public class Manager{
 	//TODO Forse applicare il Singleton al controller?
@@ -25,14 +25,15 @@ public class Manager{
 
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
-	private Order currentOrder;
+	private Optional<Order> currentOrder;
 	private Optional<Rider> riderWithLastOrder;
-	private int counterID;
+	private int sequentialIdCounter;
 	
 	/**
-	 * Constructor.
-	 * @param riders = list of all riders.
-	 * @param restaurants = list of all restaurants.
+	 * Constructs a Manager with the specified riders and restaurants.
+	 * 
+	 * @param riders list of all riders
+	 * @param restaurants list of all restaurants
 	 */
 	public Manager(Map<String, Rider> riders, List <Restaurant> restaurants){
 		this.riders = riders;
@@ -40,13 +41,14 @@ public class Manager{
 		this.waitingOrders = new ArrayList<>();
 		this.currentOrder = null;
 		this.riderWithLastOrder = Optional.empty();
-		this.counterID = 0;
+		this.sequentialIdCounter = 0;
 	}
 	
 	/**
-	 * Check if a order can be assigned.
-	 * @param order to check.
-	 * @return an optional rider if there is one that can take the order, empty if not.
+	 * Checks if the order can be assigned.
+	 * 
+	 * @param order the order to check
+	 * @return an Optional Rider if there is one that can take the order, empty if not
 	 */
 	public Optional<Rider> canBeAssign(Order order){
 		this.riderWithLastOrder = this.riders
@@ -60,10 +62,12 @@ public class Manager{
 	}
 			
 	/**
-	* It tries to assign the order to a delivery man of the correct city.
-	* He needs to have enough bag space. It select the delivery man with the lower profit.
-	* @param order is the order to assign
-	* @return true if assigned to a rider, false if put into the waiting list.
+	* Tries to assign the order to a rider that delivers the order's city.
+	* He must have enough bag space, and the rider with the lowest profit has the priority.
+	* If no Rider can receive the Order, it will be put into the waiting list.
+	* 
+	* @param order the order to assign
+	* @return {@code true} if assigned to a Rider, {@code false} if put into the waiting list
 	*/
 	public boolean assignOrder(Order order) {
 		//System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
@@ -81,30 +85,32 @@ public class Manager{
 	}
 	
 	/**
-	 * It creates a new current order.
-	 * @param destination.
-	 * @param address.
-	 * @param restuarant.
+	 * Creates a new current order.
+	 * 
+	 * @param destination destination of the order
+	 * @param address address of the order
+	 * @param restuarant restaurant of the order
 	 */
 	public void createOrder(City destination, String address, Restaurant restaurant) {
-		this.counterID += 1;
-		this.currentOrder = new OrderImpl(this.counterID, destination, address, restaurant); 
+		this.sequentialIdCounter += 1;
+		this.currentOrder = Optional.of(new OrderImpl(this.sequentialIdCounter, destination, address, restaurant)); 
 	}
 	
 	/**
-	 * It assigns the current order (to a rider or to waiting list). 
-	 * and empties the current order slot.
-	 * @return true if assigned to a rider, false if put into the waiting list.
+	 * Assigns the current order (to a rider or to waiting list) and empties the current order slot.
+	 * 
+	 * @return {@code true} if assigned to a Rider, {@code false} if put into the waiting list
 	 */
 	public boolean assignCurrentOrder() {
-		boolean result = this.assignOrder(this.currentOrder);
+		boolean result = this.assignOrder(this.currentOrder.get());
 		this.currentOrder = null;
 		return result;
 	}
 	
 	/**
-	 * Show info about orders in waiting list.
-	 * @return string with info about all orders in waiting list.
+	 * Returns a String with info about the orders in the waiting list.
+	 * 
+	 * @return String with info about the orders in the waiting list
 	 */
 	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
@@ -113,20 +119,22 @@ public class Manager{
 	}
 	
 	/**
-	 * Returns how many menu of a specific type are in the current order.
-	 * @param menu.
-	 * @return number of quantity of that menu.
+	 * Returns the quantity of a specific menu in the current order.
+	 * 
+	 * @param menu menu to look for
+	 * @return quantity of that menu
 	 */
 	public int howManyInCurrent(Menu menu) {
-		if (this.currentOrder.getMenus().containsKey(menu))
-			return this.currentOrder.getMenus().get(menu);
+		if (this.currentOrder.get().getMenus().containsKey(menu))
+			return this.currentOrder.get().getMenus().get(menu);
 		else return 0;
 	}
 	
 	/**
-	 * It check if any orders in waiting can be assign to the given rider
-	 * @param freeRider = rider who's just finish a delivery
-	 * @return true if at least one new order was given to freeRider
+	 * Tries to assign the orders in the waiting list to the Rider.
+	 * 
+	 * @param freeRider Rider that we are checking
+	 * @return {@code true} if at least one new order was given to the Rider
 	 */
 	public boolean refreshWaitingOrder(Rider freeRider) {
 		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); 
@@ -165,7 +173,7 @@ public class Manager{
 		this.riders = riders;
 	}
 
-	public Order getCurrentOrder() {
+	public Optional<Order> getCurrentOrder() {
 		return currentOrder;
 	}
 	
@@ -174,10 +182,10 @@ public class Manager{
 	}
 	
 	public void addToCurrent(Menu menu) {
-		this.currentOrder.addMenu(menu);
+		this.currentOrder.get().addMenu(menu);
 	}
 
 	public boolean removeFromCurrent(Menu menu) {
-		return this.currentOrder.removeMenu(menu);
+		return this.currentOrder.get().removeMenu(menu);
 	}
 }

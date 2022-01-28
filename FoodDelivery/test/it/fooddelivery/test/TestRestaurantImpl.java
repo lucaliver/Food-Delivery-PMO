@@ -16,21 +16,23 @@ import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
 
 class TestRestaurantImpl {
-	// TODO Implementare i test per tutti i metodi di RestaurantImpl.
+	// TODO Serve test per il costruttore di RestuarantImpl?
 
 	@Test
 	void testGetName() {
 		final RestaurantImpl r = new RestaurantImpl("McDonald's", null);
+		
 		assertEquals("McDonald's", r.getName());
 	}
 	
 	@Test
 	void testGetMenuOffer() {
-		Menu m = new MenuImpl("HappyMeal", 5, 2);
-		List<Menu> mList = new ArrayList<>();
-		mList.add(m);
-		final RestaurantImpl r = new RestaurantImpl("", mList);
-		assertEquals(mList, r.getMenuOffer());
+		Menu menu = new MenuImpl("HappyMeal", 5, 2);
+		List<Menu> menuList = new ArrayList<>();
+		menuList.add(menu);
+		final RestaurantImpl r = new RestaurantImpl("", menuList);
+		
+		assertEquals(menuList, r.getMenuOffer());
 	}
 
 }

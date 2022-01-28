@@ -4,9 +4,6 @@
 
 package it.fooddelivery.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -26,7 +23,7 @@ import it.fooddelivery.model.Restaurant;
  * Welcome screen for the customer, used to select restaurant and destination.
  */
 @SuppressWarnings("serial")
-public class ViewWelcome extends JFrame implements ActionListener {
+public class ViewWelcome extends JFrame {
 	private final Manager controller;
 	private final String title = "Benvenuto, inizia ad ordinare!";
 	private JComboBox<City> citiesCombo;
@@ -35,8 +32,9 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	private JButton proceedButton;
 	
 	/**
-	 * Constructor.
-	 * @param controller for the MVC pattern.
+	 * Constructs a welcome screen for the user.
+	 * 
+	 * @param controller controller component for the MVC pattern.
 	 */
 	ViewWelcome(final Manager controller){
 		this.controller = controller;
@@ -47,10 +45,10 @@ public class ViewWelcome extends JFrame implements ActionListener {
 	}
 	
 	/**
-	 * It initializes all the GUI.
+	 * Initializes all its GUI.
 	 */
 	private void Init() {
-		// TODO Usare un altro Layout e meno panel.
+		// TODO Usare un altro Layout e meno panel?
 		this.setTitle(this.title);
 		this.setSize(400, 200);
 		this.setLocation(700, 100);
@@ -76,7 +74,12 @@ public class ViewWelcome extends JFrame implements ActionListener {
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 		buttonsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		proceedButton = new JButton("Procedi"); 
-		proceedButton.addActionListener(this);
+		proceedButton.addActionListener(event -> {
+			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
+			this.setVisible(false);
+			this.dispose();
+			new ViewPlacing(this.controller);
+		});
 		buttonsPanel.add(proceedButton);
 		
 		JPanel destinationPanel = new JPanel();
@@ -105,17 +108,4 @@ public class ViewWelcome extends JFrame implements ActionListener {
 		
 		this.getContentPane().add(mainPanel);
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Implementare questo metodo x evento con una lamdba
-		if (e.getSource()==proceedButton) {
-			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
-			this.setVisible(false);
-			this.dispose();
-			new ViewPlacing(this.controller);
-		}
-
-	}
-	
 }
