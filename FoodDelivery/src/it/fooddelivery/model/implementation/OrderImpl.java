@@ -19,7 +19,7 @@ public class OrderImpl implements Order{
 	
 	private final int idOrder;
 	private final City destination;
-	private Map<Menu, Integer> menus;
+	private final Map<Menu, Integer> menus;
 	private final String address;
 	private final Restaurant restaurant;
 	private int size;

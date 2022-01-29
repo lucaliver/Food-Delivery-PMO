@@ -167,17 +167,11 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
-<<<<<<< HEAD
 			if (controller.getCurrentOrder().getSize() <= 0) {
-=======
-			if (controller.getCurrentOrder().get().getOrderSize() <= 0) {
->>>>>>> branch 'master' of https://github.com/lucaliver/Food-Delivery-PMO.git
+			if (controller.getCurrentOrder().get().getSize() <= 0) {
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
-<<<<<<< HEAD
 			} else if(this.controller.getCurrentOrder().getSize() > RiderImpl.getMaxCapacity()) {
-=======
-			} else if(this.controller.getCurrentOrder().get().getOrderSize() > RiderImpl.getMaxCapacity()) {
->>>>>>> branch 'master' of https://github.com/lucaliver/Food-Delivery-PMO.git
+			} else if(this.controller.getCurrentOrder().get().getSize() > RiderImpl.getMaxCapacity()) {
 				JOptionPane.showMessageDialog(this, "Capacità massima superata");
 			}
 			else {				
@@ -204,12 +198,10 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 * It updates the price area and the size area.
 	 */
 	private void updateInfo() {
-<<<<<<< HEAD
 		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().getPrice()) + "€");
 		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getSize() + "u.");
-=======
-		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().get().getOrderPrice()) + "€");
-		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().get().getOrderSize() + "u.");
->>>>>>> branch 'master' of https://github.com/lucaliver/Food-Delivery-PMO.git
+		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().get().getPrice()) + "€");
+		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().get().getSize() + "u.");
+
 	}
 }
