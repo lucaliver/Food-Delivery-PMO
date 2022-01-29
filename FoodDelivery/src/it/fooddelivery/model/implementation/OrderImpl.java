@@ -27,10 +27,10 @@ public class OrderImpl implements Order{
 	
 	/**
 	 * Constructor.
-	 * @param id
-	 * @param destination
-	 * @param address
-	 * @param restaurant
+	 * @param id = id of the order
+	 * @param destination = destination of the order
+	 * @param address = address of the order
+	 * @param restaurant = resturant that made the order
 	 */
 	public OrderImpl(int id, City destination, String address, Restaurant restaurant) {		
 		this.idOrder = id;
@@ -40,11 +40,6 @@ public class OrderImpl implements Order{
 		this.menus = new HashMap<>();
 		this.price = 0;
 		this.size = 0;
-	}
-	
-	@Override
-	public Map<Menu, Integer> getMenus() {		
-		return this.menus;
 	}
 	
 	@Override
@@ -74,30 +69,52 @@ public class OrderImpl implements Order{
 	public void removeAllMenus() {
 		if(!this.getMenus().isEmpty()) {
 			this.menus.clear();
+			this.size = 0;
+			this.price = 0;
 		}	
-	}
-
-	@Override
-	public int getOrderSize() {
-		return size;
-	}
-	
-	@Override
-	public double getOrderPrice() {
-		return price;
-	}
-
-	@Override
-	public int getIdOrder() {
-		return this.idOrder;
 	}
 	
 	@Override
 	public String showInfoForRider() {
-		return new String("[ID: "+String.format("%03d", this.getIdOrder())+"] "
+		return new String("[ID: "+String.format("%03d", this.getId())+"] "
 		                  +this.getDestination()+", "+this.getAdress()+'\n');
 	}
+	
+	@Override
+	public String showOrderContent() {
+		StringBuilder sb = new StringBuilder(); 
+		this.menus.entrySet()
+			.forEach(m -> sb.append(m.getValue() + "x " + m.getKey().showMenuInfo()+'\n'));	
+		return sb.toString();
+	}
+	
+	@Override
+	public String showOrderInfo() {
+		return "Destinazione: " + this.getDestination() + ", "+ this.getAdress()
+				+ " \nRistorante: " + this.getRestaurant()
+				+ " \nTotale: " + String.format("%.2f",this.getPrice())
+				+ "€ \nDimensione: " + this.getSize();
+	}
 
+	@Override
+	public Map<Menu, Integer> getMenus() {		
+		return this.menus;
+	}
+	
+	@Override
+	public int getSize() {
+		return size;
+	}
+	
+	@Override
+	public double getPrice() {
+		return price;
+	}
+
+	@Override
+	public int getId() {
+		return this.idOrder;
+	}
 	@Override
 	public City getDestination() {
 		return this.destination;		
@@ -114,22 +131,6 @@ public class OrderImpl implements Order{
 	}
 
 	@Override
-	public String showOrderContent() {
-		StringBuilder sb = new StringBuilder(); 
-		this.menus.entrySet()
-			.forEach(m -> sb.append(m.getValue() + "x " + m.getKey().showMenuInfo()+'\n'));	
-		return sb.toString();
-	}
-	
-	@Override
-	public String showOrderInfo() {
-		return "Destinazione: " + this.getDestination() + ", "+ this.getAdress()
-				+ " \nRistorante: " + this.getRestaurant()
-				+ " \nTotale: " + String.format("%.2f",this.getOrderPrice())
-				+ "€ \nDimensione: " + this.getOrderSize();
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -141,7 +142,7 @@ public class OrderImpl implements Order{
 			return false;
 		}
 		OrderImpl other = (OrderImpl) obj;
-		if (this.idOrder != other.getIdOrder()) {
+		if (this.idOrder != other.getId()) {
 			return false;
 		}
 		return true;

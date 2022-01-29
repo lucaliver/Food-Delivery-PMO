@@ -73,7 +73,7 @@ public class Manager{
 		}else {
 			if(!this.waitingOrders.contains(order)) {
 				this.waitingOrders.add(order);
-				System.out.println("[DEBUG Manager] L'ordine " + order.getIdOrder() + " è stato messo in attesa.");
+				System.out.println("[DEBUG Manager] L'ordine " + order.getId() + " è stato messo in attesa.");
 				System.out.println("[DEBUG Manager] In waiting list al momento: " + this.showWaitingOrders()+'\n'+waitingOrders.size());
 			}
 			return false;

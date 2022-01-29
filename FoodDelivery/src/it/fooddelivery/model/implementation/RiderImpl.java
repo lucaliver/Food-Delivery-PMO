@@ -74,18 +74,18 @@ public class RiderImpl implements Rider{
 	@Override
 	public void addOrder(Order o) {
 		orderList.add(o);
-		this.capacity += o.getOrderSize();
+		this.capacity += o.getSize();
 	}
 	
 	@Override
 	public void deliverOrder(Order o) {
 		if(this.orderList.contains(o)) {
 			this.addProfit(o);
-			this.capacity -= o.getOrderSize();
+			this.capacity -= o.getSize();
 			orderList.remove(o);
 		}
 		else {
-			// TODO Gestione eccezione IllegalArgument?
+			throw new IllegalArgumentException();
 		}
 	}
 
@@ -102,7 +102,7 @@ public class RiderImpl implements Rider{
 			
 	@Override
 	public boolean canFit(Order o) {
-		return (this.capacity + o.getOrderSize()) <= MAX_CAPACITY;
+		return (this.capacity + o.getSize()) <= MAX_CAPACITY;
 	}
 	
 	/**
@@ -130,7 +130,7 @@ public class RiderImpl implements Rider{
 	 * @return
 	 */
 	private double calculateOrderProfit(Order o) {
-		return o.getOrderPrice() * getPercentage();
+		return o.getPrice() * getPercentage();
 	}
 
 	public int getCapacity() {

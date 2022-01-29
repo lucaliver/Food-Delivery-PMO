@@ -88,7 +88,7 @@ class TestOrderImpl {
 		o.addMenu(m2); 
 		o.addMenu(m3);
 		int sizeTot = m1.getSize()+m2.getSize()+m2.getSize()+m3.getSize(); 
-		assertEquals(sizeTot, o.getOrderSize());
+		assertEquals(sizeTot, o.getSize());
 	}
 
 	@Test
@@ -98,12 +98,12 @@ class TestOrderImpl {
 		o.addMenu(m3); 
 		o.addMenu(m3);
 		double priceTot = m1.getPrice()+m2.getPrice()+m3.getPrice()+m3.getPrice();
-		assertEquals(priceTot, o.getOrderPrice());
+		assertEquals(priceTot, o.getPrice());
 	}
 
 	@Test
 	void testGetIdOrder() {
-		assertEquals(01, o.getIdOrder());
+		assertEquals(01, o.getId());
 	}
 
 	@Test
