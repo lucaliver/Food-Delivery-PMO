@@ -58,16 +58,16 @@ public class ViewRecap extends JFrame {
 		JTextArea menusArea = new JTextArea("Questo ordine è vuoto?");
 		menusArea.setEditable(false);
 		menusArea.setBorder(BorderFactory.createTitledBorder("Contenuto: "));
-		menusArea.setText(controller.getCurrentOrder().showOrderContent());
+		menusArea.setText(controller.getCurrentOrder().get().showOrderContent());
 		
 		JTextArea infoArea = new JTextArea();
 		infoArea.setEditable(false);
 		infoArea.setBorder(BorderFactory.createTitledBorder("Info ordine: "));
-		infoArea.setText(this.controller.getCurrentOrder().showOrderInfo());
+		infoArea.setText(this.controller.getCurrentOrder().get().showOrderInfo());
 
 		sendButton = new JButton("Invia ordine"); 
 		sendButton.addActionListener(event ->{
-			boolean res = this.controller.assignOrder(controller.getCurrentOrder());
+			boolean res = this.controller.assignOrder(controller.getCurrentOrder().get());
 			if(res) {
 				JOptionPane.showMessageDialog(this, "Ordine assegnato a "+this.controller.getRiderWithLastOrder().get().getName());						          
 			}else {

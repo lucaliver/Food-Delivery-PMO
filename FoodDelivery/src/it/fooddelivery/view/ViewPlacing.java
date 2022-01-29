@@ -65,7 +65,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		panel.setBorder(new EmptyBorder(10, 20, 10, 20));
 	
 		// creo e aggiungo i bottoni per gestire incremento e decremento dell'ordine
-		for (Menu m : controller.getCurrentOrder().getRestaurant().getMenuOffer()) {
+		for (Menu m : controller.getCurrentOrder().get().getRestaurant().getMenuOffer()) {
 					
 			final JPanel quantityPanel = new JPanel();
 			quantityPanel.setLayout(new FlowLayout());
@@ -138,7 +138,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 		
 		emptyButton 	= new JButton("Svuota tutto");
 		emptyButton.addActionListener(event -> {
-			controller.getCurrentOrder().removeAllMenus();
+			controller.getCurrentOrder().get().removeAllMenus();
 			
 			System.out.println("SIZE: " + infoQuantityMenu.size());
 			infoQuantityMenu.values().forEach(t -> t.setText("0"));
@@ -167,9 +167,17 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
+<<<<<<< HEAD
 			if (controller.getCurrentOrder().getSize() <= 0) {
+=======
+			if (controller.getCurrentOrder().get().getOrderSize() <= 0) {
+>>>>>>> branch 'master' of https://github.com/lucaliver/Food-Delivery-PMO.git
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
+<<<<<<< HEAD
 			} else if(this.controller.getCurrentOrder().getSize() > RiderImpl.getMaxCapacity()) {
+=======
+			} else if(this.controller.getCurrentOrder().get().getOrderSize() > RiderImpl.getMaxCapacity()) {
+>>>>>>> branch 'master' of https://github.com/lucaliver/Food-Delivery-PMO.git
 				JOptionPane.showMessageDialog(this, "Capacità massima superata");
 			}
 			else {				
@@ -185,7 +193,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 */
 	public void comeBackHandler(final ActionEvent e) {
 		if (e.getSource() == comeBackButton) {
-			this.controller.getCurrentOrder().removeAllMenus();
+			this.controller.getCurrentOrder().get().removeAllMenus();
 			this.setVisible(false);
 			this.dispose();
 			new ViewWelcome(this.controller);
@@ -196,7 +204,12 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 * It updates the price area and the size area.
 	 */
 	private void updateInfo() {
+<<<<<<< HEAD
 		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().getPrice()) + "€");
 		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getSize() + "u.");
+=======
+		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().get().getOrderPrice()) + "€");
+		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().get().getOrderSize() + "u.");
+>>>>>>> branch 'master' of https://github.com/lucaliver/Food-Delivery-PMO.git
 	}
 }

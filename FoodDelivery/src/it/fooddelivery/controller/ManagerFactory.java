@@ -21,7 +21,7 @@ public class ManagerFactory {
 	// TODO Factory pattern da guardare.
 
 	/**
-	 * It creates a Manager, configurated with restaurants and riders.
+	 * Creates a Manager, configurated with restaurants and riders for the Pesaro and Urbino (PU) province.
 	 */
 	public static Manager create(){
 		// TODO Prima di consegnare, aggiungere riders, ristoranti, menu, assegnamenti sensati.
@@ -29,7 +29,9 @@ public class ManagerFactory {
 	}
 
 	/**
-	 * @return a Map of riders with their names as key.
+	 * Creates a Map of riders working in the PU province.
+	 * 
+	 * @return a Map of riders with their names as key
 	 */
 	private static Map<String, Rider> createRiders() {
 		Map<String, Rider> riders = new HashMap<>();
@@ -54,7 +56,9 @@ public class ManagerFactory {
 	}
 
 	/**
-	 * @return a list of restaurants.
+	 * Creates a list of restaurants located in the PU province.
+	 * 
+	 * @return a list of restaurants
 	 */
 	private static List<Restaurant> createRestaurants() {
 		List<Restaurant> restaurants = new ArrayList<>();

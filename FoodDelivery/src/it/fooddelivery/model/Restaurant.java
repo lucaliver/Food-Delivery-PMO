@@ -12,12 +12,12 @@ import java.util.List;
 public interface Restaurant {
 	
 	/**
-	 * @return the restaurant's name.
+	 * @return this restaurant's name
 	 */
 	String getName();
 	
 	/**
-	 * @return a list of the menus offered by the restaurant.
+	 * @return a list of the menus offered by this restaurant
 	 */
 	List<Menu> getMenuOffer();
 }
