@@ -18,7 +18,6 @@ import it.fooddelivery.model.implementation.RestaurantImpl;
 
 class TestOrderImpl {
 	
-	final private List<City> cities = Arrays.asList(City.values());
 	final private List<Menu> menus = new ArrayList<>();
 	final private RestaurantImpl restaurant = new RestaurantImpl("MasterChef", menus);
 	private OrderImpl o = new OrderImpl(01, City.CAGLI, "Strada_1", restaurant);
@@ -29,15 +28,13 @@ class TestOrderImpl {
 	@Test
 	void testOrderImpl() {	
 		assertNotNull(o);
+		assertEquals(o.getId(), 01);
+		assertEquals(o.getDestination(), City.CAGLI);
+		assertEquals(o.getAdress(), "Strada_1");
+		assertEquals(o.getRestaurant(), this.restaurant);
 		assertTrue(o.getMenus().isEmpty());
-	}
-
-	@Test
-	void testMenusList() {
-		assertTrue(o.getMenus().isEmpty());		
-		o.addMenu(m1);
-		assertNotNull(o.getMenus());
-		assertTrue(o.getMenus().containsKey(m1));
+		assertEquals(o.getPrice(), 0);
+		assertEquals(o.getSize(), 0);
 	}
 
 	@Test
@@ -79,6 +76,14 @@ class TestOrderImpl {
 		o.addMenu(m3);
 		o.removeAllMenus();
 		assertTrue(o.getMenus().isEmpty());
+	}
+	
+	@Test
+	void testGetMenus() {
+		assertTrue(o.getMenus().isEmpty());		
+		o.addMenu(m1);
+		assertNotNull(o.getMenus());
+		assertTrue(o.getMenus().containsKey(m1));
 	}
 
 	@Test

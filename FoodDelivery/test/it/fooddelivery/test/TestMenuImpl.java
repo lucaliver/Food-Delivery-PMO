@@ -15,6 +15,9 @@ class TestMenuImpl {
 	@Test
 	void testMenuImpl() {	
 		assertNotNull(m);
+		assertEquals(23.70, m.getPrice());
+		assertEquals("Panino", m.getName());
+		assertEquals(49, m.getSize());
 	}
 
 	@Test
