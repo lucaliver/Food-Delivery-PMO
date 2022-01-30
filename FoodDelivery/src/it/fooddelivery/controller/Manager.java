@@ -175,6 +175,8 @@ public class Manager{
 
 	public Optional<Order> getCurrentOrder() {
 		return currentOrder;
+		// TODO se facciamo return currentOrder.get()????
+		// In teoria prendiamo l'ordine corrente sempre quando è già stato creato
 	}
 	
 	public List<Order> getWaitingOrders() {
