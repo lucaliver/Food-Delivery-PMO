@@ -48,16 +48,12 @@ public class OrderImpl implements Order{
 			this.menus.put(m, menus.get(m)+1);
 		else
 			this.menus.put(m, 1);
-		this.size += m.getSize();
-		this.price += m.getPrice();
 	}
 
 	@Override
 	public boolean removeMenu(Menu m) {
 		if (menus.containsKey(m) && menus.get(m)>0) {
 			this.menus.put(m, menus.get(m)-1);
-			this.size -= m.getSize();
-			this.price -= m.getPrice();
 			if (menus.get(m)==0)
 				menus.remove(m);
 			return true;
@@ -103,11 +99,22 @@ public class OrderImpl implements Order{
 	
 	@Override
 	public int getSize() {
+		this.size = 0;
+		this.menus
+			.entrySet()
+			.stream()
+			.forEach(m -> this.size += m.getKey().getSize()*m.getValue());
 		return size;
+				   
 	}
 	
 	@Override
 	public double getPrice() {
+		this.price = 0;
+		this.menus
+			.entrySet()
+			.stream()
+			.forEach(m -> this.price += m.getKey().getPrice());
 		return price;
 	}
 
