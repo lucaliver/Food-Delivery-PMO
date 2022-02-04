@@ -167,10 +167,8 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		if (e.getSource() == confirmButton) {
-			if (controller.getCurrentOrder().getSize() <= 0) {
 			if (controller.getCurrentOrder().get().getSize() <= 0) {
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
-			} else if(this.controller.getCurrentOrder().getSize() > RiderImpl.getMaxCapacity()) {
 			} else if(this.controller.getCurrentOrder().get().getSize() > RiderImpl.getMaxCapacity()) {
 				JOptionPane.showMessageDialog(this, "Capacità massima superata");
 			}
@@ -198,8 +196,6 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 * It updates the price area and the size area.
 	 */
 	private void updateInfo() {
-		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().getPrice()) + "€");
-		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().getSize() + "u.");
 		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().get().getPrice()) + "€");
 		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().get().getSize() + "u.");
 
