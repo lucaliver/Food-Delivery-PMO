@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import it.fooddelivery.controller.Manager;
 
 class TestManager {
-	// TODO Implementare i test per tutti i metodi di Manager.
+	// TODO Implementare i test per tutti i metodi di Manager. Usando la factory?
 
 	@Test
 	void testAssignOrder() {

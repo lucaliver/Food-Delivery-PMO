@@ -22,8 +22,6 @@ public class OrderImpl implements Order{
 	private final Map<Menu, Integer> menus;
 	private final String address;
 	private final Restaurant restaurant;
-	private int size;
-	private double price;	
 	
 	/**
 	 * Constructor.
@@ -38,8 +36,6 @@ public class OrderImpl implements Order{
 		this.address = address;
 		this.restaurant = restaurant;
 		this.menus = new HashMap<>();
-		this.price = 0;
-		this.size = 0;
 	}
 	
 	@Override
@@ -65,8 +61,6 @@ public class OrderImpl implements Order{
 	public void removeAllMenus() {
 		if(!this.getMenus().isEmpty()) {
 			this.menus.clear();
-			this.size = 0;
-			this.price = 0;
 		}	
 	}
 	
@@ -99,23 +93,20 @@ public class OrderImpl implements Order{
 	
 	@Override
 	public int getSize() {
-		this.size = 0;
-		this.menus
+		return this.menus
 			.entrySet()
 			.stream()
-			.forEach(m -> this.size += m.getKey().getSize()*m.getValue());
-		return size;
-				   
+			.mapToInt(m -> m.getKey().getSize()*m.getValue())
+			.sum();	   
 	}
 	
 	@Override
 	public double getPrice() {
-		this.price = 0;
-		this.menus
+		return this.menus
 			.entrySet()
 			.stream()
-			.forEach(m -> this.price += m.getKey().getPrice());
-		return price;
+			.mapToDouble(m -> m.getKey().getPrice()*m.getValue())
+			.sum();
 	}
 
 	@Override

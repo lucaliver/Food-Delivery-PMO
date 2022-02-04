@@ -50,7 +50,7 @@ public class Manager{
 	 * @param order the order to check
 	 * @return an Optional Rider if there is one that can take the order, empty if not
 	 */
-	public Optional<Rider> canBeAssign(Order order){
+	public Optional<Rider> canBeAssigned(Order order){
 		this.riderWithLastOrder = this.riders
 					.values()
 					.stream()
@@ -70,15 +70,12 @@ public class Manager{
 	* @return {@code true} if assigned to a Rider, {@code false} if put into the waiting list
 	*/
 	public boolean assignOrder(Order order) {
-		//System.out.println("[1-DEBUG manager] L'ordine da assegnare " + order.getIdOrder() + " ha tot menu: " + order.getMenus().size());
-		if(this.canBeAssign(order).isPresent()) { 
+		if(this.canBeAssigned(order).isPresent()) { 
 			riderWithLastOrder.get().addOrder(order);
 			return true;
 		}else {
 			if(!this.waitingOrders.contains(order)) {
 				this.waitingOrders.add(order);
-				System.out.println("[DEBUG Manager] L'ordine " + order.getId() + " è stato messo in attesa.");
-				System.out.println("[DEBUG Manager] In waiting list al momento: " + this.showWaitingOrders()+'\n'+waitingOrders.size());
 			}
 			return false;
 		}
@@ -139,8 +136,8 @@ public class Manager{
 	public boolean refreshWaitingOrder(Rider freeRider) {
 		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); 
 		this.getWaitingOrders().forEach(o ->{	
-			if(this.canBeAssign(o).isPresent())
-				if(this.canBeAssign(o).get().equals(freeRider)) {
+			if(this.canBeAssigned(o).isPresent())
+				if(this.canBeAssigned(o).get().equals(freeRider)) {
 				noMoreWaitingOrders.add(o);
 				freeRider.addOrder(o);
 			}
@@ -177,6 +174,7 @@ public class Manager{
 		return currentOrder;
 		// TODO se facciamo return currentOrder.get()????
 		// In teoria prendiamo l'ordine corrente sempre quando è già stato creato
+		// Metterci un lancio di eccezione forse?
 	}
 	
 	public List<Order> getWaitingOrders() {
