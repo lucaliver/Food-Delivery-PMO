@@ -17,12 +17,10 @@ import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 
 /**
- * Controller of the Food Delivery application. Controller component in the MVC pattern.
+ * Controller component in the MVC pattern for the Food Delivery Application.
  */
 public class Manager{
-	//TODO Forse applicare il Singleton al controller?
 	private Map<String, Rider> riders;
-
 	private List<Order> waitingOrders;	
 	private List<Restaurant> restaurants;
 	private Optional<Order> currentOrder;
@@ -39,7 +37,7 @@ public class Manager{
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
-		this.currentOrder = null;
+		this.currentOrder = Optional.empty();
 		this.riderWithLastOrder = Optional.empty();
 		this.sequentialIdCounter = 0;
 	}
@@ -60,26 +58,6 @@ public class Manager{
 					.findFirst();
 		return riderWithLastOrder;
 	}
-			
-	/**
-	* Tries to assign the order to a rider that delivers the order's city.
-	* He must have enough bag space, and the rider with the lowest profit has the priority.
-	* If no Rider can receive the Order, it will be put into the waiting list.
-	* 
-	* @param order the order to assign
-	* @return {@code true} if assigned to a Rider, {@code false} if put into the waiting list
-	*/
-	public boolean assignOrder(Order order) {
-		if(this.canBeAssigned(order).isPresent()) { 
-			riderWithLastOrder.get().addOrder(order);
-			return true;
-		}else {
-			if(!this.waitingOrders.contains(order)) {
-				this.waitingOrders.add(order);
-			}
-			return false;
-		}
-	}
 	
 	/**
 	 * Creates a new current order.
@@ -88,7 +66,7 @@ public class Manager{
 	 * @param address address of the order
 	 * @param restuarant restaurant of the order
 	 */
-	public void createOrder(City destination, String address, Restaurant restaurant) {
+	public void createCurrentOrder(City destination, String address, Restaurant restaurant) {
 		this.sequentialIdCounter += 1;
 		this.currentOrder = Optional.of(new OrderImpl(this.sequentialIdCounter, destination, address, restaurant)); 
 	}
@@ -99,8 +77,8 @@ public class Manager{
 	 * @return {@code true} if assigned to a Rider, {@code false} if put into the waiting list
 	 */
 	public boolean assignCurrentOrder() {
-		boolean result = this.assignOrder(this.currentOrder.get());
-		this.currentOrder = null;
+		boolean result = this.assignOrder(this.getCurrentOrderPresent());
+		this.currentOrder = Optional.empty();
 		return result;
 	}
 	
@@ -146,6 +124,26 @@ public class Manager{
 		return(noMoreWaitingOrders.size()>=1);
 	}
 	
+	/**
+	* Tries to assign the order to a rider that delivers the order's city.
+	* He must have enough bag space. The rider with the lowest profit has the priority.
+	* If no Rider can receive the Order, it will be put into the waiting list.
+	* 
+	* @param order the order to assign
+	* @return {@code true} if assigned to a Rider, {@code false} if put into the waiting list
+	*/
+	private boolean assignOrder(Order order) {
+		if(this.canBeAssigned(order).isPresent()) { 
+			riderWithLastOrder.get().addOrder(order);
+			return true;
+		}else {
+			if(!this.waitingOrders.contains(order)) {
+				this.waitingOrders.add(order);
+			}
+			return false;
+		}
+	}
+	
 	public void setWaitingOrders(List<Order> waitingOrders) {
 		this.waitingOrders = waitingOrders;
 	}
@@ -170,11 +168,8 @@ public class Manager{
 		this.riders = riders;
 	}
 
-	public Optional<Order> getCurrentOrder() {
-		return currentOrder;
-		// TODO se facciamo return currentOrder.get()????
-		// In teoria prendiamo l'ordine corrente sempre quando è già stato creato
-		// Metterci un lancio di eccezione forse?
+	public Order getCurrentOrderPresent() {
+		return this.currentOrder.orElseThrow();
 	}
 	
 	public List<Order> getWaitingOrders() {

@@ -12,74 +12,71 @@ import java.util.List;
 public interface Rider {
 	
 	/** 
-	 * @return list of all the orders in the rider's bag.
+	 * @return a list of all the orders in the rider's bag.
 	 */
 	List<Order> getBag();
 	
 	/**
-	 * It adds the order to the rider's bag.
-	 * @param o = order to add.
+	 * Adds the order to the rider's bag.
+	 * @param order the order to add
 	 */
-	void addOrder(Order o);
+	void addOrder(Order order);
 	
 	/**
-	 * Consegna l'ordine rimuovendolo dallo zaino e aggiungendo il guadagno al fattorino.
-	 * @param o = ordine da consegnare.
+	 * Delivers the order, removing it from the bag and earning its part.
+	 * 
+	 * @param order the order to deliver
 	 */
-	void deliverOrder(Order o);	
+	void deliverOrder(Order order);	
 	
 	/**
-	 * It delivers every order of this rider.
+	 * Delivers every order of this rider.
 	 */
 	void deliverAll();
 	
 	/**
-	 * @return true se la bag è piena, altrimenti false.
+	 * @return {code true} if bag is full, {false} if it isn't
 	 */
 	boolean isFull();
 
 	/**
-	 * @return il nome del fattorino.
+	 * @return rider's name
 	 */
 	String getName();
 	
 	/** 
-	 * @return l'attuale guadagno del fattorino.
+	 * @return total rider's profit at the moment
 	 */
 	double getProfit();
 	
 	/**
-	 * @param o = ordine da controllare se entra in bag.
-	 * @return true se ci entra, altrimenti false.
+	 * @param order the order to check if can fit in this rider's bag
+	 * @return {true} if it could fit, {false} if it couldn't.
 	 */
-	boolean canFit(Order o);
+	boolean canFit(Order order);
 	
 	/**
-	 * @return lista delle città in cui il fattorino consegna.
+	 * @return a list of all the cities where this rider's can deliver
 	 */
 	List<City> getCities();
 	
 	/**
-	 * 
-	 * @return the capacity in that moment
+	 * @return the space used in this rider's bag at the moment
 	 */
 	int getCapacity();
 	
 	/**
-	 * 
-	 * @return all the of this rider info in that moment
+	 * @return a String with the info about this rider (profit and capacity)
 	 */
 	String showRiderInfo();
 	
 	/**
-	 * 
-	 * @return the content of the rider's bag
+	 * @return a String with the content of the rider's bag at the moment
 	 */
 	String showBagInfo();
 	
 	/**
-	 * 
-	 * @return the bag profit of the rider.
+	 * @return how much profit he will make with the orders that are in his bag right now
 	 */
 	double getBagProfit();
 	

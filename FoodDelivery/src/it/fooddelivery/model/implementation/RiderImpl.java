@@ -16,8 +16,7 @@ import it.fooddelivery.model.Order;
  */
 public class RiderImpl implements Rider{
 	static final int MAX_CAPACITY = 100;
-	private static final double PERCENTAGE = 0.20;
-	
+	private static final double PROFIT_PERCENTAGE = 0.20;
 	private double profit;
 	private final String name;
 	private int capacity;
@@ -26,8 +25,9 @@ public class RiderImpl implements Rider{
 	
 	/**
 	 * Constructor.
-	 * @param name = rider's name.
-	 * @param cities = list of all cities where he can deliver.
+	 * 
+	 * @param name the rider's name
+	 * @param cities a list of all cities where he can deliver
 	 */
 	public RiderImpl(String name, List<City> cities) {
 		this.profit = 0;
@@ -72,17 +72,17 @@ public class RiderImpl implements Rider{
 	}
 
 	@Override
-	public void addOrder(Order o) {
-		orderList.add(o);
-		this.capacity += o.getSize();
+	public void addOrder(Order order) {
+		orderList.add(order);
+		this.capacity += order.getSize();
 	}
 	
 	@Override
-	public void deliverOrder(Order o) {
-		if(this.orderList.contains(o)) {
-			this.addProfit(o);
-			this.capacity -= o.getSize();
-			orderList.remove(o);
+	public void deliverOrder(Order order) {
+		if(this.orderList.contains(order)) {
+			this.profit += this.calculateOrderProfit(order);
+			this.capacity -= order.getSize();
+			orderList.remove(order);
 		}
 		else {
 			throw new IllegalArgumentException();
@@ -96,18 +96,21 @@ public class RiderImpl implements Rider{
 	}
 
 	@Override
-	public boolean isFull() {
+	public boolean isFull() {	//TODO Lo rimuovo? Non si usa mai, abbiamo altri metodi per la capacità
 		return orderList.size() == MAX_CAPACITY;
 	}
 			
 	@Override
-	public boolean canFit(Order o) {
-		return (this.capacity + o.getSize()) <= MAX_CAPACITY;
+	public boolean canFit(Order order) {
+		return (this.capacity + order.getSize()) <= MAX_CAPACITY;
+	}
+
+	@Override
+	public int getCapacity() {
+		return capacity;
 	}
 	
-	/**
-	 * 
-	 */
+	@Override
 	public double getBagProfit() {
 		double res = 0;
 		for(Order o : this.getBag()) {
@@ -117,28 +120,17 @@ public class RiderImpl implements Rider{
 	}
 	
 	/**
-	 * Il fattorino incassa una parte del costo dell'ordine.
-	 * @param o = ordine di cui incassare il guadagno. 
-	 */
-	private void addProfit(Order o) {
-		this.profit += this.calculateOrderProfit(o);
-	}
-	
-	/**
+	 * Calculates the profit of the order.
 	 * 
-	 * @param o
-	 * @return
+	 * @param order the order
+	 * @return how much this rider can make out of this order
 	 */
-	private double calculateOrderProfit(Order o) {
-		return o.getPrice() * getPercentage();
-	}
-
-	public int getCapacity() {
-		return capacity;
+	private double calculateOrderProfit(Order order) {
+		return order.getPrice() * getPercentage();
 	}	
 	
 	public static double getPercentage() {
-		return PERCENTAGE;
+		return PROFIT_PERCENTAGE;
 	}
 	
 	public static int getMaxCapacity() {

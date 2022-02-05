@@ -75,7 +75,7 @@ public class ViewWelcome extends JFrame {
 		buttonsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		proceedButton = new JButton("Procedi"); 
 		proceedButton.addActionListener(event -> {
-			controller.createOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
+			controller.createCurrentOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
 			this.setVisible(false);
 			this.dispose();
 			new ViewPlacing(this.controller);

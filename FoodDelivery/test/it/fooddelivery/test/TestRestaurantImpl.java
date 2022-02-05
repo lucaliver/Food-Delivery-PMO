@@ -16,12 +16,15 @@ import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
 
 class TestRestaurantImpl {
-	// TODO Serve test per il costruttore di RestuarantImpl?
+	final RestaurantImpl r = new RestaurantImpl("McDonald's", null);
 
 	@Test
+	void testRestaurantImpl() {
+		assertNotNull(r);
+	}
+	
+	@Test
 	void testGetName() {
-		final RestaurantImpl r = new RestaurantImpl("McDonald's", null);
-		
 		assertEquals("McDonald's", r.getName());
 	}
 	

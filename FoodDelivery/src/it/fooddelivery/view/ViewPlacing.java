@@ -4,8 +4,6 @@
 
 package it.fooddelivery.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +23,7 @@ import it.fooddelivery.model.implementation.RiderImpl;
  * Second window for the customer, used to select menus.
  */
 @SuppressWarnings("serial")
-public class ViewPlacing extends JFrame implements ActionListener {
+public class ViewPlacing extends JFrame {
 	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
 	
 	private final Manager controller;
@@ -33,9 +31,9 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	private JTextArea totalOrderArea;
 	private JTextArea sizeOrderArea;
 	private JButton confirmButton;
-	private JButton comeBackButton;
+	private JButton backButton;
 	private JButton emptyButton;
-	private Map<JButton, JTextArea> infoQuantityMenu;
+	private Map<JButton, JTextArea> buttonsToQuantityAreas;
 		
 	/**
 	 * Constructor.
@@ -43,7 +41,7 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 */
 	ViewPlacing(final Manager controller){
 		this.controller = controller;
-		this.infoQuantityMenu = new HashMap<>();
+		this.buttonsToQuantityAreas = new HashMap<>();
 		this.Init();
 		this.updateInfo();
 		this.pack();
@@ -55,149 +53,109 @@ public class ViewPlacing extends JFrame implements ActionListener {
 	 * It initializes all the window.
 	 */
 	private void Init() {
-		// setto le dimensioni e il titlo del JFrame
 		this.setTitle(this.title);
 		this.setLocation(700, 100);
 		
-		// aggiungo il pannello interno
-		final JPanel panel = new JPanel();	// pannello
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setBorder(new EmptyBorder(10, 20, 10, 20));
+		final JPanel mainPanel = new JPanel();	
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 	
-		// creo e aggiungo i bottoni per gestire incremento e decremento dell'ordine
-		for (Menu m : controller.getCurrentOrder().get().getRestaurant().getMenuOffer()) {
-					
+		for (Menu m : controller.getCurrentOrderPresent().getRestaurant().getMenuOffer()) {
 			final JPanel quantityPanel = new JPanel();
 			quantityPanel.setLayout(new FlowLayout());
 			quantityPanel.setBorder(new EmptyBorder(10, 20, 20, 10));	
 			quantityPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-			panel.add(quantityPanel);
+			mainPanel.add(quantityPanel);
 			
-			final JTextArea descriptionArea;
-			final JTextArea quantityArea;
-		
-			
-			JButton removeButton 		= new JButton("-");
-			JButton addButton 			= new JButton("+");
-			quantityArea 		= new JTextArea();
-			descriptionArea 	= new JTextArea();
+			final JTextArea descriptionArea = new JTextArea(m.showMenuInfo());
+			final JTextArea quantityArea = new JTextArea("0");
+			final JButton removeButton 	= new JButton("-");
+			final JButton addButton 	= new JButton("+");	
+			quantityArea.setPreferredSize(new Dimension(30, 20));
+			descriptionArea.setPreferredSize(new Dimension(300, 20));
 			
 			quantityPanel.add(removeButton);
 			quantityPanel.add(quantityArea);
 			quantityPanel.add(addButton);
 			quantityPanel.add(descriptionArea);
 			
-			quantityArea.setPreferredSize(new Dimension(30, 20));
-			descriptionArea.setPreferredSize(new Dimension(300, 20));
-			
-			descriptionArea.setText(m.showMenuInfo());
-			quantityArea.setText("0");
-			
-			// Mappatura bottoni
-			infoQuantityMenu.put(addButton, quantityArea);
-			infoQuantityMenu.put(removeButton, quantityArea);	
+			buttonsToQuantityAreas.put(addButton, quantityArea);
+			buttonsToQuantityAreas.put(removeButton, quantityArea);	
 			
 			addButton.addActionListener(event -> {
 				controller.addToCurrent(m);
-				infoQuantityMenu.get(addButton).setText("" + controller.howManyInCurrent(m));	
+				buttonsToQuantityAreas.get(addButton).setText("" + controller.howManyInCurrent(m));	
 				this.updateInfo();						
 			});
 			
 			removeButton.addActionListener(event -> {		
 				if (controller.removeFromCurrent(m))
-					infoQuantityMenu.get(removeButton).setText("" + controller.howManyInCurrent(m));
+					buttonsToQuantityAreas.get(removeButton).setText("" + controller.howManyInCurrent(m));
 				this.updateInfo();
 			});
 		}
 		
-		// creo una textArea nella quale stampare totOrdine e dimensioneOrdine
-		final JPanel result = new JPanel();
-		result.setLayout(new FlowLayout());
-		result.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-		panel.add(result);
+		final JPanel orderInfoPanel = new JPanel();
+		orderInfoPanel.setLayout(new FlowLayout());
+		orderInfoPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		mainPanel.add(orderInfoPanel);
 		
 		totalOrderArea 	= new JTextArea();
 		sizeOrderArea 	= new JTextArea();
-		
 		totalOrderArea.setPreferredSize(new Dimension(100, 30));
 		sizeOrderArea.setPreferredSize(new Dimension(100, 30));
 		totalOrderArea.setEditable(false);
 		sizeOrderArea.setEditable(false);
 
-		result.add(totalOrderArea);
-		result.add(Box.createHorizontalStrut(30));
-		result.add(sizeOrderArea, BorderLayout.PAGE_END);
-		
-		// creo bottoni
-		final JPanel dispositionBotton = new JPanel();
+		orderInfoPanel.add(totalOrderArea);
+		orderInfoPanel.add(Box.createHorizontalStrut(30));
+		orderInfoPanel.add(sizeOrderArea, BorderLayout.PAGE_END);
+
+		final JPanel buttonsPanel = new JPanel();
 		confirmButton 	= new JButton("Conferma");
-		comeBackButton 	= new JButton("Indietro");
-		
-		dispositionBotton.setLayout(new BorderLayout());
-		panel.add(dispositionBotton);
-		
-		emptyButton 	= new JButton("Svuota tutto");
-		emptyButton.addActionListener(event -> {
-			controller.getCurrentOrder().get().removeAllMenus();
-			
-			System.out.println("SIZE: " + infoQuantityMenu.size());
-			infoQuantityMenu.values().forEach(t -> t.setText("0"));
-			//infoQuantityMenu.values().stream().findAny().get().setText("0");
-			
-			//.values().stream().map(t -> t + "0").forEach(System.out::print);	
-			// prima potevo fare: quantityArea.setText("0");
-			this.updateInfo();
-		});
-		
-		confirmButton.addActionListener(this::actionPerformed);
-		comeBackButton.addActionListener(this::comeBackHandler);
-		dispositionBotton.add(confirmButton, BorderLayout.LINE_END);
-		dispositionBotton.add(comeBackButton, BorderLayout.LINE_START);
-		
-		panel.add(emptyButton, BoxLayout.X_AXIS);
-		
-		this.getContentPane().add(panel);
-		this.pack();
-	}
-	
-	/**
-	 * Handler for the event of  "confirm" button being pressed.
-	 * @param event.
-	 */
-	@Override
-	public void actionPerformed(final ActionEvent e) {
-		if (e.getSource() == confirmButton) {
-			if (controller.getCurrentOrder().get().getSize() <= 0) {
+		confirmButton.addActionListener(Event -> {
+			if (controller.getCurrentOrderPresent().getSize() <= 0) {
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
-			} else if(this.controller.getCurrentOrder().get().getSize() > RiderImpl.getMaxCapacity()) {
+			} else if(this.controller.getCurrentOrderPresent().getSize() > RiderImpl.getMaxCapacity()) {
 				JOptionPane.showMessageDialog(this, "Capacità massima superata");
 			}
 			else {				
 				this.setVisible(false);
 				new ViewRecap(this.controller,this);
 			}
-		}
-	}
-	
-	/**
-	 * Handler for the event of the "back" button being pressed.
-	 * @param event.
-	 */
-	public void comeBackHandler(final ActionEvent e) {
-		if (e.getSource() == comeBackButton) {
-			this.controller.getCurrentOrder().get().removeAllMenus();
+		});
+
+		backButton 	= new JButton("Indietro");
+		backButton.addActionListener(event -> {
+			this.controller.getCurrentOrderPresent().removeAllMenus();
 			this.setVisible(false);
 			this.dispose();
 			new ViewWelcome(this.controller);
-		}
+		});
+
+		emptyButton 	= new JButton("Svuota tutto");
+		emptyButton.addActionListener(event -> {
+			controller.getCurrentOrderPresent().removeAllMenus();
+			buttonsToQuantityAreas.values().forEach(t -> t.setText("0"));
+			this.updateInfo();
+		});
+		
+		buttonsPanel.setLayout(new BorderLayout());
+		mainPanel.add(buttonsPanel);
+
+		buttonsPanel.add(confirmButton, BorderLayout.LINE_END);
+		buttonsPanel.add(backButton, BorderLayout.LINE_START);
+		mainPanel.add(emptyButton, BoxLayout.X_AXIS);
+		
+		this.getContentPane().add(mainPanel);
+		this.pack();
 	}
 	
 	/**
-	 * It updates the price area and the size area.
+	 * Updates the price area and the size area.
 	 */
 	private void updateInfo() {
-		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrder().get().getPrice()) + "€");
-		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrder().get().getSize() + "u.");
-
+		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrderPresent().getPrice()) + "€");
+		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrderPresent().getSize() + "u.");
 	}
 }
