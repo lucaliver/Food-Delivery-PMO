@@ -36,7 +36,7 @@ public class ViewForWorker extends JFrame{
 	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
 	private final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
 	
-	private final Manager controller;
+	private Manager controller;
 	private JPanel mainPanel;
 	private JTextArea riderArea;
 	private JTextArea orderArea;
@@ -47,23 +47,28 @@ public class ViewForWorker extends JFrame{
 	
 	/**
 	 * Private singleton Constructor.
-	 * @param controller.
 	 */
-	private ViewForWorker (final Manager controller){
-		this.controller = controller;
+	private ViewForWorker (){
 		this.infoOrder = new HashMap<>();
-		this.infoRider = new HashMap<>();
-		this.Init();	
+		this.infoRider = new HashMap<>();	
+	}
+	
+	/**
+	 * It initializes the controller and the view
+	 * @param controller manager of the view
+	 */
+	public void initManager(final Manager controller) {
+		this.controller = controller;
+		this.Init();
 	}
 	
 	/**
 	 * It creates one and only one object with ViewForWorker type
-	 * @param controller
 	 * @return the same object every time
 	 */
-	public static ViewForWorker getInstance(final Manager controller) {
+	public static ViewForWorker getInstance() {
 		if(instance == null) {
-			instance = new ViewForWorker(controller);
+			instance = new ViewForWorker();
 		}
 		return instance;
 	}
@@ -72,6 +77,7 @@ public class ViewForWorker extends JFrame{
 	 * It initializes the window.
 	 */
 	private void Init(){
+		
 		this.setTitle(TITLE_PANEL);
 		this.setSize(200,70);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
