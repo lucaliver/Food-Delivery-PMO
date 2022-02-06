@@ -16,7 +16,7 @@ public class View {
 	 * @param controller
 	 */
 	public View(final Manager controller) {
-		ViewForWorker.getInstance().initManager(controller);
+		ViewForWorker.getInstance().initView(controller);
 		new ViewWelcome(controller);								
 	}
 }

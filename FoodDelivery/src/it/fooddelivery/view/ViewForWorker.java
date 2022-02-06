@@ -57,7 +57,7 @@ public class ViewForWorker extends JFrame{
 	 * It initializes the controller and the view
 	 * @param controller manager of the view
 	 */
-	public void initManager(final Manager controller) {
+	public void initView(final Manager controller) {
 		this.controller = controller;
 		this.Init();
 	}
