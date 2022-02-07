@@ -21,7 +21,7 @@ import it.fooddelivery.model.Restaurant;
  */
 public class Manager{
 	private Map<String, Rider> riders;
-	private List<Order> waitingOrders;	
+	private List<Order> waitingOrders;		//TODO Queste liste sarebbero meglio Set?
 	private List<Restaurant> restaurants;
 	private Optional<Order> currentOrder;
 	private Optional<Rider> riderWithLastOrder;

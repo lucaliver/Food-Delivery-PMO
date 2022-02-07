@@ -12,7 +12,7 @@ import it.fooddelivery.controller.Manager;
 import it.fooddelivery.controller.ManagerFactory;
 
 class TestManager {
-	// TODO Implementare i test per tutti i metodi di Manager (ssando la factory?)
+	// TODO Implementare i test per tutti i metodi di Manager (usando la factory?)
 	final Manager m = ManagerFactory.create();
 
 	@Test

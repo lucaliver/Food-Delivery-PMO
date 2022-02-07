@@ -5,7 +5,6 @@
 package it.fooddelivery.view;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +21,6 @@ import it.fooddelivery.controller.Manager;
  */
 @SuppressWarnings("serial")
 public class ViewRecap extends JFrame {
-	
 	private final Manager controller;
 	private final String title = "Il tuo ordine :)";
 	private JButton sendButton;
@@ -31,6 +29,7 @@ public class ViewRecap extends JFrame {
 	
 	/**
 	 * Constructor.
+	 * 
 	 * @param controller for the MVC pattern.
 	 */
 	ViewRecap(final Manager controller, final ViewPlacing viewPlacing){
@@ -44,7 +43,7 @@ public class ViewRecap extends JFrame {
 	}
 	
 	/**
-	 * It initializes all the GUI.
+	 * Initializes all the GUI.
 	 */
 	private void Init() {
 		this.setTitle(this.title);
@@ -86,13 +85,21 @@ public class ViewRecap extends JFrame {
 			this.viewPlacing.setVisible(true);
 		});
 
-		mainPanel.add(backButton);
-		mainPanel.add(Box.createHorizontalStrut(30));
-		mainPanel.add(infoArea);
-		mainPanel.add(Box.createHorizontalStrut(30));
-		mainPanel.add(menusArea);
-		mainPanel.add(Box.createHorizontalStrut(30));
-		mainPanel.add(sendButton);
+		JPanel areasPanel = new JPanel();
+		areasPanel.setLayout(new BoxLayout(areasPanel, BoxLayout.X_AXIS));
+		areasPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		areasPanel.add(infoArea);
+		areasPanel.add(menusArea);
+
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		buttonsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		buttonsPanel.add(backButton);
+		buttonsPanel.add(sendButton);
+		
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.add(areasPanel);
+		mainPanel.add(buttonsPanel);
 		this.getContentPane().add(mainPanel);
 		
 	}

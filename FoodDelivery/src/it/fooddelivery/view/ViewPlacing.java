@@ -27,7 +27,7 @@ public class ViewPlacing extends JFrame {
 	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
 	
 	private final Manager controller;
-	private final String title = "Seleziona il menù più adatto a te!";
+	private final String title = "Seleziona i piatti più adatti a te!";
 	private JTextArea totalOrderArea;
 	private JTextArea sizeOrderArea;
 	private JButton confirmButton;
@@ -37,6 +37,7 @@ public class ViewPlacing extends JFrame {
 		
 	/**
 	 * Constructor.
+	 * 
 	 * @param controller.
 	 */
 	ViewPlacing(final Manager controller){
@@ -44,13 +45,12 @@ public class ViewPlacing extends JFrame {
 		this.buttonsToQuantityAreas = new HashMap<>();
 		this.Init();
 		this.updateInfo();
-		this.pack();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
 	
 	/**
-	 * It initializes all the window.
+	 * Initializes all the window.
 	 */
 	private void Init() {
 		this.setTitle(this.title);
@@ -112,12 +112,13 @@ public class ViewPlacing extends JFrame {
 		orderInfoPanel.add(sizeOrderArea, BorderLayout.PAGE_END);
 
 		final JPanel buttonsPanel = new JPanel();
-		confirmButton 	= new JButton("Conferma");
+		confirmButton 	= new JButton("Procedi");
 		confirmButton.addActionListener(Event -> {
 			if (controller.getCurrentOrderPresent().getSize() <= 0) {
 				JOptionPane.showMessageDialog(this, "Non hai selezionato nessun menu :(");
 			} else if(this.controller.getCurrentOrderPresent().getSize() > RiderImpl.getMaxCapacity()) {
-				JOptionPane.showMessageDialog(this, "Capacità massima superata");
+				JOptionPane.showMessageDialog(this, "Non abbiamo zaini così grandi! \n"
+						+ "La capacità massima dei nostri zaini è di "  +RiderImpl.getMaxCapacity() + " unità.");
 			}
 			else {				
 				this.setVisible(false);
@@ -141,11 +142,10 @@ public class ViewPlacing extends JFrame {
 		});
 		
 		buttonsPanel.setLayout(new BorderLayout());
-		mainPanel.add(buttonsPanel);
-
 		buttonsPanel.add(confirmButton, BorderLayout.LINE_END);
+		buttonsPanel.add(emptyButton, BorderLayout.CENTER);
 		buttonsPanel.add(backButton, BorderLayout.LINE_START);
-		mainPanel.add(emptyButton, BoxLayout.X_AXIS);
+		mainPanel.add(buttonsPanel);
 		
 		this.getContentPane().add(mainPanel);
 		this.pack();

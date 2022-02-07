@@ -17,8 +17,10 @@ import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
 import it.fooddelivery.model.implementation.RiderImpl;
 
+/**
+ * Factory component for the Factory Method used to create Manager objects.
+ */
 public class ManagerFactory {
-	// TODO Factory pattern da guardare.
 
 	/**
 	 * Creates a Manager, configurated with restaurants and riders for the Pesaro and Urbino (PU) province.
@@ -45,12 +47,24 @@ public class ManagerFactory {
 		citiesForGiulia.add(City.TAVULLIA);;
 		citiesForGiulia.add(City.URBANIA);;
 		riders.put("Giulia", new RiderImpl("Giulia", citiesForGiulia));
-		
 
 		List<City> citiesForGiacomo = new ArrayList<>();
 		citiesForGiacomo.add(City.FERMIGNANO);
 		citiesForGiacomo.add(City.URBANIA);
 		riders.put("Giacomo", new RiderImpl("Giacomo", citiesForGiacomo));
+
+		List<City> citiesForSara = new ArrayList<>();
+		citiesForSara.add(City.FERMIGNANO);
+		citiesForSara.add(City.URBANIA);
+		citiesForSara.add(City.TAVULLIA);
+		citiesForSara.add(City.CAGLI);
+		riders.put("Sara", new RiderImpl("Sara", citiesForSara));
+		
+		List<City> citiesForSaverio = new ArrayList<>();
+		citiesForSaverio.add(City.TAVULLIA);
+		riders.put("Saverio", new RiderImpl("Saverio", citiesForSaverio));
+
+		riders.put("Marco", new RiderImpl("Marco", new ArrayList<>()));
 
 		return riders;
 	}
@@ -64,20 +78,34 @@ public class ManagerFactory {
 		List<Restaurant> restaurants = new ArrayList<>();
 		
 		List<Menu> menusForMc = new ArrayList<>();
-		menusForMc.add(new MenuImpl("HappyMeal", 5.00, 6));
-		menusForMc.add(new MenuImpl("BigMac Menu", 10.00, 4));
-		menusForMc.add(new MenuImpl("McChicken Menu", 8.00, 4));
-		menusForMc.add(new MenuImpl("Crispy McBacon Menu", 12.00, 99));
+		menusForMc.add(new MenuImpl("HappyMeal", 5.90, 5));
+		menusForMc.add(new MenuImpl("BigMac Menu", 9.90, 10));
+		menusForMc.add(new MenuImpl("McChicken Menu", 8.90, 9));
+		menusForMc.add(new MenuImpl("Crispy McBacon Menu", 8.90, 9));
+		menusForMc.add(new MenuImpl("McNuggets 6pz.", 3.90, 3));
+		menusForMc.add(new MenuImpl("McFlurry", 2.90, 2));
+		menusForMc.add(new MenuImpl("Insalata", 3.90, 6));
+		menusForMc.add(new MenuImpl("McVegan Menu", 8.50, 15));
 		restaurants.add(new RestaurantImpl("McDonalds", menusForMc));
 
 		List<Menu> menusForKFC = new ArrayList<>();
-		menusForKFC.add(new MenuImpl("Pollo crudo", 5.30, 2));
-		menusForKFC.add(new MenuImpl("Pollo fritto", 10, 66));
+		menusForKFC.add(new MenuImpl("Ali di pollo piccanti 6pz.", 5.50, 5));
+		menusForKFC.add(new MenuImpl("Pollo fritto 4pz.", 4.50, 10));
+		menusForKFC.add(new MenuImpl("Patatine piccole", 3.50, 7));
+		menusForKFC.add(new MenuImpl("Patatine medie", 5.50, 9));
+		menusForKFC.add(new MenuImpl("Patatine grandi", 6.30, 10));
+		menusForKFC.add(new MenuImpl("Cestino mix pollo", 19.90, 20));
 		restaurants.add(new RestaurantImpl("KFC", menusForKFC));
 
 		List<Menu> menusForPizzeria = new ArrayList<>();
-		menusForPizzeria.add(new MenuImpl("Margherita", 5.60, 2));
-		menusForPizzeria.add(new MenuImpl("Diavola", 100.00, 4));
+		menusForPizzeria.add(new MenuImpl("Margherita", 5.50, 5));
+		menusForPizzeria.add(new MenuImpl("Diavola", 6.50, 5));
+		menusForPizzeria.add(new MenuImpl("4 formaggi", 7.50, 5));
+		menusForPizzeria.add(new MenuImpl("Rossini", 6.50, 5));
+		menusForPizzeria.add(new MenuImpl("Frutti di mare", 9.50, 5));
+		menusForPizzeria.add(new MenuImpl("Funghi", 7.50, 5));
+		menusForPizzeria.add(new MenuImpl("Prosciutto crudo", 6.50, 5));
+		menusForPizzeria.add(new MenuImpl("Vegetariana", 7.50, 5));
 		restaurants.add(new RestaurantImpl("Pizzeria da Mario", menusForPizzeria));
 		
 		List<Menu> menusForSushi = new ArrayList<>();
