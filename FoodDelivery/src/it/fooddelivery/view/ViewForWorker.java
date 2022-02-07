@@ -103,13 +103,13 @@ public class ViewForWorker extends JFrame{
 		riderPanel.setBorder(BorderFactory.createTitledBorder(r.getName()));
 		final GroupLayout riderPanelLayout = new GroupLayout(riderPanel);
 		
-		riderArea = new JTextArea(2,10);
+		riderArea = new JTextArea(2,8);
 		riderArea.setEditable(false);
 		riderArea.setText(r.showRiderInfo());
 		riderArea.setBackground(getBackground());
 		infoRider.put(r, riderArea);
 		
-		orderArea = new JTextArea(7,30);
+		orderArea = new JTextArea(4,20);
 		orderArea.setEditable(false);
 		orderArea.setText(TITLE_BAG_VUOTA);
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -128,15 +128,16 @@ public class ViewForWorker extends JFrame{
 				riderPanelLayout.createSequentialGroup()
 				.addComponent(riderArea)
 				.addComponent(scrollOrderArea)
-				.addComponent(Box.createHorizontalStrut(10))
+				.addComponent(Box.createHorizontalStrut(15))
 				.addComponent(startDeliveryButton));	
 		riderPanelLayout.setVerticalGroup(
 				riderPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				.addComponent(riderArea)
 				.addComponent(scrollOrderArea)
-				.addComponent(Box.createHorizontalStrut(10))
+				.addComponent(Box.createHorizontalStrut(15))
 				.addComponent(startDeliveryButton));
 
+		this.pack();
 		return riderPanel;
 	}
 	
@@ -149,7 +150,7 @@ public class ViewForWorker extends JFrame{
 		waitingSection.setBorder(BorderFactory.createTitledBorder("Ordini in attesa"));
 		final GroupLayout waitingSectionLayout = new GroupLayout(waitingSection);
 		
-		waitingOrdersArea = new JTextArea(10,30);
+		waitingOrdersArea = new JTextArea(5,30);
 		waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				
