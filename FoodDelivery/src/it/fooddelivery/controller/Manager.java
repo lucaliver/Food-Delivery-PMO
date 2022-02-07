@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.implementation.OrderImpl;
@@ -21,8 +22,8 @@ import it.fooddelivery.model.Restaurant;
  */
 public class Manager{
 	private Map<String, Rider> riders;
-	private List<Order> waitingOrders;		//TODO Queste liste sarebbero meglio Set?
-	private List<Restaurant> restaurants;
+	private List<Order> waitingOrders;
+	private Set<Restaurant> restaurants;
 	private Optional<Order> currentOrder;
 	private Optional<Rider> riderWithLastOrder;
 	private int sequentialIdCounter;
@@ -33,7 +34,7 @@ public class Manager{
 	 * @param riders list of all riders
 	 * @param restaurants list of all restaurants
 	 */
-	public Manager(Map<String, Rider> riders, List <Restaurant> restaurants){
+	public Manager(Map<String, Rider> riders, Set<Restaurant> restaurants){
 		this.riders = riders;
 		this.restaurants = restaurants;
 		this.waitingOrders = new ArrayList<>();
@@ -148,11 +149,11 @@ public class Manager{
 		this.waitingOrders = waitingOrders;
 	}
 
-	public List<Restaurant> getRestaurants() {
+	public Set<Restaurant> getRestaurants() {
 		return restaurants;
 	}
 
-	public void setRestaurants(List<Restaurant> restaurants) {
+	public void setRestaurants(Set<Restaurant> restaurants) {
 		this.restaurants = restaurants;
 	}
 	

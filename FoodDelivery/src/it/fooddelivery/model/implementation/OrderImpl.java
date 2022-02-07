@@ -128,6 +128,7 @@ public class OrderImpl implements Order{
 		return restaurant;
 	}
 
+	// TODO Serve anche overridare hashCode()
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

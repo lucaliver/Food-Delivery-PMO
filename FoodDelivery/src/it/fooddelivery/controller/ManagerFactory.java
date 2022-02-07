@@ -6,8 +6,10 @@ package it.fooddelivery.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
@@ -26,7 +28,7 @@ public class ManagerFactory {
 	 * Creates a Manager, configurated with restaurants and riders for the Pesaro and Urbino (PU) province.
 	 */
 	public static Manager create(){
-		// TODO Prima di consegnare, aggiungere riders, ristoranti, menu, assegnamenti sensati.
+		// TODO Prima di consegnare: aggiungere riders, ristoranti, menu, assegnamenti sensati.
 		return new Manager(createRiders(), createRestaurants());
 	}
 
@@ -74,8 +76,8 @@ public class ManagerFactory {
 	 * 
 	 * @return a list of restaurants
 	 */
-	private static List<Restaurant> createRestaurants() {
-		List<Restaurant> restaurants = new ArrayList<>();
+	private static Set<Restaurant> createRestaurants() {
+		Set<Restaurant> restaurants = new HashSet<>();
 		
 		List<Menu> menusForMc = new ArrayList<>();
 		menusForMc.add(new MenuImpl("HappyMeal", 5.90, 5));
