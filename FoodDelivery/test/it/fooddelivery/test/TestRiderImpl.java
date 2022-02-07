@@ -79,13 +79,6 @@ class TestRiderImpl {
 		System.out.println(delivery.showBagInfo());
 		assertTrue(delivery.getBag().isEmpty());
 	}
-
-	@Test
-	void testIsFull() {
-		RiderImpl bagMan = new RiderImpl("Fattorino_5", null);
-		assertTrue(!bagMan.isFull());
-		assertFalse(bagMan.isFull());
-	}
 			
 	@Test
 	void testGetProfit() {

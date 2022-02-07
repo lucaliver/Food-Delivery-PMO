@@ -48,7 +48,6 @@ public class ViewWelcome extends JFrame {
 	 * Initializes all its GUI.
 	 */
 	private void Init() {
-		// TODO Usare meglio i layout anziche tutti sti panel?
 		this.setTitle(this.title);
 		this.setSize(400, 200);
 		this.setLocation(700, 100);

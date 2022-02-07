@@ -15,8 +15,8 @@ import it.fooddelivery.model.Order;
  * A class to represent a rider.
  */
 public class RiderImpl implements Rider{
-	static final int MAX_CAPACITY = 100;
-	private static final double PROFIT_PERCENTAGE = 0.20;
+	private static final int MAX_CAPACITY = 100;
+	private static final double PROFIT_PERCENTAGE = 0.10;
 	private double profit;
 	private final String name;
 	private int capacity;
@@ -93,11 +93,6 @@ public class RiderImpl implements Rider{
 	public void deliverAll() {
 		List<Order> orderListCopy = new ArrayList<Order>(this.orderList);
 		orderListCopy.forEach(o -> deliverOrder(o));
-	}
-
-	@Override
-	public boolean isFull() {	//TODO Lo rimuovo? Non si usa mai, abbiamo altri metodi per la capacità
-		return orderList.size() == MAX_CAPACITY;
 	}
 			
 	@Override

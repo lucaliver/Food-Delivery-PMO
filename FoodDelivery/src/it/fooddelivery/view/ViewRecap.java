@@ -51,7 +51,7 @@ public class ViewRecap extends JFrame {
 		this.setLocation(700, 100);
 		
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
 		JTextArea menusArea = new JTextArea("Questo ordine è vuoto?");
@@ -97,7 +97,6 @@ public class ViewRecap extends JFrame {
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(sendButton);
 		
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.add(areasPanel);
 		mainPanel.add(buttonsPanel);
 		this.getContentPane().add(mainPanel);

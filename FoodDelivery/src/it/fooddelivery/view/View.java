@@ -12,8 +12,9 @@ import it.fooddelivery.controller.Manager;
 public class View {
 	
 	/**
-	 * It creates the first windows for the customer and the window for the workers.
-	 * @param controller
+	 * Creates the first windows for the customer and the window for the workers.
+	 * 
+	 * @param controller the controller for the MVC pattern
 	 */
 	public View(final Manager controller) {
 		ViewForWorker.getInstance().initView(controller);

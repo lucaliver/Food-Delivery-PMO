@@ -33,11 +33,6 @@ public interface Rider {
 	 * Delivers every order of this rider.
 	 */
 	void deliverAll();
-	
-	/**
-	 * @return {code true} if bag is full, {false} if it isn't
-	 */
-	boolean isFull();
 
 	/**
 	 * @return rider's name
