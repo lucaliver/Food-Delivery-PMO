@@ -5,6 +5,7 @@
 package it.fooddelivery.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -40,30 +41,19 @@ public class ManagerFactory {
 	private static Map<String, Rider> createRiders() {
 		Map<String, Rider> riders = new HashMap<>();
 		
-		List<City> citiesForLuca = new ArrayList<>();
-		citiesForLuca.add(City.CAGLI);
-		citiesForLuca.add(City.URBANIA);
+		List<City> citiesForLuca = Arrays.asList(City.CAGLI, City.URBANIA);
 		riders.put("Luca", new RiderImpl("Luca", citiesForLuca));
 		
-		List<City> citiesForGiulia = new ArrayList<>();
-		citiesForGiulia.add(City.TAVULLIA);;
-		citiesForGiulia.add(City.URBANIA);;
+		List<City> citiesForGiulia = Arrays.asList(City.TAVULLIA, City.URBANIA);
 		riders.put("Giulia", new RiderImpl("Giulia", citiesForGiulia));
 
-		List<City> citiesForGiacomo = new ArrayList<>();
-		citiesForGiacomo.add(City.FERMIGNANO);
-		citiesForGiacomo.add(City.URBANIA);
+		List<City> citiesForGiacomo = Arrays.asList(City.FERMIGNANO, City.URBANIA);
 		riders.put("Giacomo", new RiderImpl("Giacomo", citiesForGiacomo));
 
-		List<City> citiesForSara = new ArrayList<>();
-		citiesForSara.add(City.FERMIGNANO);
-		citiesForSara.add(City.URBANIA);
-		citiesForSara.add(City.TAVULLIA);
-		citiesForSara.add(City.CAGLI);
+		List<City> citiesForSara = Arrays.asList(City.FERMIGNANO, City.URBANIA, City.TAVULLIA, City.CAGLI);
 		riders.put("Sara", new RiderImpl("Sara", citiesForSara));
 		
-		List<City> citiesForSaverio = new ArrayList<>();
-		citiesForSaverio.add(City.TAVULLIA);
+		List<City> citiesForSaverio = Arrays.asList(City.TAVULLIA);
 		riders.put("Saverio", new RiderImpl("Saverio", citiesForSaverio));
 
 		riders.put("Marco", new RiderImpl("Marco", new ArrayList<>()));

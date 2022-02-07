@@ -184,4 +184,8 @@ public class Manager{
 	public boolean removeFromCurrent(Menu menu) {
 		return this.currentOrder.get().removeMenu(menu);
 	}
+	
+	public int getSequetianlIdCounter() {
+		return this.sequentialIdCounter;
+	}
 }

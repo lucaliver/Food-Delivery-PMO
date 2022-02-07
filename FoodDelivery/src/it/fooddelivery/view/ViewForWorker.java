@@ -79,7 +79,7 @@ public class ViewForWorker extends JFrame{
 	private void Init(){
 		
 		this.setTitle(TITLE_PANEL);
-		this.setSize(200,70);
+		this.setSize(180,80);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		

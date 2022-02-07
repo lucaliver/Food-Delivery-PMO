@@ -25,10 +25,10 @@ public class OrderImpl implements Order{
 	
 	/**
 	 * Constructor.
-	 * @param id = id of the order
-	 * @param destination = destination of the order
-	 * @param address = address of the order
-	 * @param restaurant = resturant that made the order
+	 * @param id id of the order
+	 * @param destination destination of the order
+	 * @param address address of the order
+	 * @param restaurant resturant that made the order
 	 */
 	public OrderImpl(int id, City destination, String address, Restaurant restaurant) {		
 		this.idOrder = id;
