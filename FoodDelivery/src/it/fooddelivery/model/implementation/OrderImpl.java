@@ -128,22 +128,25 @@ public class OrderImpl implements Order{
 		return restaurant;
 	}
 
-	// TODO Serve anche overridare hashCode()
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idOrder;
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (!(obj instanceof OrderImpl))
 			return false;
-		}
-		if (!(obj instanceof OrderImpl)) {
-			return false;
-		}
 		OrderImpl other = (OrderImpl) obj;
-		if (this.idOrder != other.getId()) {
+		if (idOrder != other.idOrder)
 			return false;
-		}
 		return true;
 	}
+	
+	
 }

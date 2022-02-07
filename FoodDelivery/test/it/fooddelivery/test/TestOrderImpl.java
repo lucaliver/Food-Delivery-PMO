@@ -6,12 +6,10 @@ package it.fooddelivery.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
-import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
