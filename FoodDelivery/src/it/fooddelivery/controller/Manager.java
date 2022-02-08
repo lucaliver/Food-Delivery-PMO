@@ -50,14 +50,14 @@ public class Manager{
 	 * @return an Optional Rider if there is one that can take the order, empty if not
 	 */
 	public Optional<Rider> canBeAssigned(Order order){
-		this.riderWithLastOrder = this.riders
+		return this.riderWithLastOrder = 
+			   this.riders
 					.values()
 					.stream()
 					.filter(x->x.getCities().contains(order.getDestination()))
 					.filter(x->x.canFit(order))	
 					.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
-					.findFirst();
-		return riderWithLastOrder;
+					.findFirst();		
 	}
 	
 	/**
