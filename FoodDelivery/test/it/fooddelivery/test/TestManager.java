@@ -54,9 +54,7 @@ class TestManager {
 		this.o3.addMenu(m1);
 		this.o3.addMenu(m2);
 		this.o3.addMenu(m5);
-		System.out.println(this.o1.showOrderInfo());
-		System.out.println(this.o2.showOrderInfo());
-		System.out.println(this.o3.showOrderInfo());
+		
 		// Ordine creato correttamente, ci aspettiamo venga assegnato
 		assertTrue(this.m.canBeAssigned(o3).isPresent());
 		// Ordine che supera la size massima, ci aspettiamo che non venga assegnato
@@ -64,7 +62,31 @@ class TestManager {
 		// Ordine con destinazione non compresa in nessun fattorino, ci aspettiamo che non venga assegnato
 		assertTrue(this.m.canBeAssigned(o1).isEmpty());
 		
-		
+		// Verifica del corretto smistamento favorevole a Rider con guadagno minore
+		this.m.createCurrentOrder(City.TAVULLIA, "Casa", null);
+		this.m.getCurrentOrderPresent().addMenu(m1);
+		this.m.getCurrentOrderPresent().addMenu(m2);
+		assertTrue(this.m.assignCurrentOrder());
+		assertTrue(this.m.getRiderWithLastOrder().isPresent());
+		System.out.println(this.m.getRiderWithLastOrder().get().getName());
+		this.m.getRiderWithLastOrder().get().deliverAll();
+		System.out.println(this.m.getRiders().get("Saverio").getProfit());
+		this.m.createCurrentOrder(City.TAVULLIA, "Villa", null);
+		assertEquals(this.m.getSequetianlIdCounter(), 2);
+		this.m.getCurrentOrderPresent().addMenu(m4);
+		this.m.getCurrentOrderPresent().addMenu(m5);
+		assertTrue(this.m.assignCurrentOrder());
+		assertTrue(this.m.getRiderWithLastOrder().isPresent());
+		System.out.println(this.m.getRiderWithLastOrder().get().getName());
+		assertNotEquals(this.m.getRiderWithLastOrder().get().getName(), "Saverio");
+		assertEquals(this.m.getRiderWithLastOrder().get(), this.m.getRiders()
+				                                                 .entrySet()
+				                                                 .stream()
+				                                                 .filter(s -> s.getValue().getCities().contains(City.TAVULLIA))
+				                                                 .filter(s -> s.getValue().getProfit() == 0)
+				                                                 .findAny()
+				                                                 .get()
+				                                                 .getValue());
 	}
 
 	@Test
