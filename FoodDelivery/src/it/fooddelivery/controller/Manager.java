@@ -5,6 +5,7 @@
 package it.fooddelivery.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -56,7 +57,7 @@ public class Manager{
 					.stream()
 					.filter(x->x.getCities().contains(order.getDestination()))
 					.filter(x->x.canFit(order))	
-					.sorted((o1, o2)->{return (int)(o1.getProfit()-o2.getProfit());})	
+					.sorted(Comparator.comparingDouble(Rider::getProfit))	
 					.findFirst();		
 	}
 	
