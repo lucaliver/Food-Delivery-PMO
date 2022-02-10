@@ -31,6 +31,10 @@ class TestManager {
 	@Test
 	void testManager() {
 		assertTrue(m.getWaitingOrders().isEmpty());
+		/* Penso che il costrutto try-catch possa essere sostituito
+		 * da un assertThrows o assertDoesNotThrows, ma non ho capito
+		 * come funzionano
+		 */
 		boolean res = false;
 	    try {
 			m.getCurrentOrderPresent();
@@ -91,17 +95,45 @@ class TestManager {
 
 	@Test
 	void testCreateCurrentOrder() {
-		fail("Not yet implemented");
+		this.m.createCurrentOrder(City.URBANIA, "Via", new RestaurantImpl("Trattoria", null));
+		assertTrue(this.m.getSequetianlIdCounter() == 1);
+		boolean res = false;
+		try {
+			this.m.getCurrentOrderPresent();
+		} catch (NoSuchElementException e) {
+			res = true;
+		}
+		assertFalse(res);
+		assertEquals(this.m.getCurrentOrderPresent().getDestination(), City.URBANIA);
+		assertEquals(this.m.getCurrentOrderPresent().getAdress(), "Via");
+		assertEquals(this.m.getCurrentOrderPresent().getRestaurant().getName(), "Trattoria");
+		assertEquals(this.m.getCurrentOrderPresent().getRestaurant().getMenuOffer(), null);
 	}
 
 	@Test
 	void testAssignCurrentOrder() {
-		fail("Not yet implemented");
+		// Creazione di un currentOrder con destinazione non compresa fra i fattorini
+		this.m.createCurrentOrder(City.FOSSOMBRONE, "Piazza", null);
+		assertFalse(this.m.assignCurrentOrder());
+		
+		// Creazione di un currentOrder con destinazionecompresa fra i fattorini
+		this.m.createCurrentOrder(City.URBANIA, "Casa", null);
+		assertTrue(this.m.assignCurrentOrder());
 	}
 
 	@Test
 	void testHowManyInCurrent() {
-		fail("Not yet implemented");
+		this.m.createCurrentOrder(City.CAGLI, null, null);
+		assertTrue(this.m.howManyInCurrent(m1) == 0);
+		this.m.getCurrentOrderPresent().addMenu(m1);
+		assertTrue(this.m.howManyInCurrent(m1) == 1);
+		this.m.getCurrentOrderPresent().addMenu(m1);
+		assertTrue(this.m.howManyInCurrent(m1) == 2);
+		this.m.getCurrentOrderPresent().removeMenu(m1);
+		assertTrue(this.m.howManyInCurrent(m1) == 1);
+		for(int i = 1; i <= 3; i++)
+			this.m.getCurrentOrderPresent().addMenu(m3);
+		assertTrue(this.m.howManyInCurrent(m3) == 3);
 	}
 
 	@Test
