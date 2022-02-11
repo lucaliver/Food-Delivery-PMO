@@ -29,9 +29,9 @@ import it.fooddelivery.model.Rider;
  * The only screen riders will see. It shows the bag of everyone and let them empty it.
  */
 @SuppressWarnings("serial")
-public class ViewForWorker extends JFrame{
+public class ViewWorker extends JFrame{
 	
-	private static ViewForWorker instance = null;
+	private static ViewWorker instance = null;
 	
 	private final String TITLE_PANEL = "Rider Screen";	
 	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
@@ -49,7 +49,7 @@ public class ViewForWorker extends JFrame{
 	/**
 	 * Private singleton Constructor.
 	 */
-	private ViewForWorker (){
+	private ViewWorker (){
 		this.infoOrder = new HashMap<>();
 		this.infoRider = new HashMap<>();	
 	}
@@ -67,9 +67,9 @@ public class ViewForWorker extends JFrame{
 	 * It creates one and only one object with ViewForWorker type
 	 * @return the same object every time
 	 */
-	public static ViewForWorker getInstance() {
+	public static ViewWorker getInstance() {
 		if(instance == null) {
-			instance = new ViewForWorker();
+			instance = new ViewWorker();
 		}
 		return instance;
 	}

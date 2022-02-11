@@ -75,7 +75,7 @@ public class ViewRecap extends JFrame {
 			this.setVisible(false);
 			this.dispose();
 			new ViewWelcome(this.controller);
-			ViewForWorker.getInstance().receiveNewOrder(this.controller.getRiderWithLastOrder());
+			ViewWorker.getInstance().receiveNewOrder(this.controller.getRiderWithLastOrder());
 		});
 						
 		backButton = new JButton("Indietro"); 

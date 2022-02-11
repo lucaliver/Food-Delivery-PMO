@@ -17,7 +17,7 @@ public class View {
 	 * @param controller the controller for the MVC pattern
 	 */
 	public View(final Manager controller) {
-		ViewForWorker.getInstance().initView(controller);
+		ViewWorker.getInstance().initView(controller);
 		new ViewWelcome(controller);								
 	}
 }
