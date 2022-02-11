@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ScrollPaneLayout;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -88,7 +89,8 @@ public class ViewForWorker extends JFrame{
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
 		this.controller.getRiders().values().forEach(r -> mainPanel.add(createRiderPanel(r)));
-		mainPanel.add(createWaitingOrderPanel());		
+		mainPanel.add(createWaitingOrderPanel());
+		
 		this.getContentPane().add(mainPanel);
 		this.pack();
 	}
