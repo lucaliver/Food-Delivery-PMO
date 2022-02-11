@@ -179,11 +179,11 @@ public class Manager{
 	}
 	
 	public void addToCurrent(Menu menu) {
-		this.currentOrder.get().addMenu(menu);
+		this.getCurrentOrderPresent().addMenu(menu);
 	}
 
 	public boolean removeFromCurrent(Menu menu) {
-		return this.currentOrder.get().removeMenu(menu);
+		return this.getCurrentOrderPresent().removeMenu(menu);
 	}
 	
 	public int getSequetianlIdCounter() {

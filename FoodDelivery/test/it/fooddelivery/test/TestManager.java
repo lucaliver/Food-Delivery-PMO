@@ -19,8 +19,8 @@ class TestManager {
 	
 	private final Manager m = ManagerFactory.create();
 	private final Order o1 = new OrderImpl(01, City.FOSSOMBRONE, "Strada", null);
-	private final Order o2 = new OrderImpl(01, City.CAGLI, "Via", null);
-	private final Order o3 = new OrderImpl(01, City.URBANIA, "Piazza", null);
+	private final Order o2 = new OrderImpl(02, City.CAGLI, "Via", null);
+	private final Order o3 = new OrderImpl(03, City.URBANIA, "Piazza", null);
 	private final Menu m1 = new MenuImpl("Insalata", 3.90, 6);
 	private final Menu m2 = new MenuImpl("HappyMeal", 5.90, 5);
 	private final Menu m3 = new MenuImpl("Pollo fritto 4pz.", 4.50, 10);
@@ -138,17 +138,34 @@ class TestManager {
 
 	@Test
 	void testRefreshWaitingOrder() {
-		fail("Not yet implemented");
+		this.o1.addMenu(m1);
+		this.o1.addMenu(m5);
+		this.o2.addMenu(m1);
+		this.o2.addMenu(m2);
+		this.o2.addMenu(m3);
+		this.o3.addMenu(m3);
+		this.o3.addMenu(m4);
+		this.o3.addMenu(m5);
+		this.m.getWaitingOrders().add(o1);	
+		this.m.getWaitingOrders().add(o2);	
+		this.m.getWaitingOrders().add(o3);
+		
+		// Mi aspetto false poichè nella waitingList non ci sono ordini assegnabili ad il rider Giulia
+		assertFalse(this.m.refreshWaitingOrder(this.m.getRiders().get("Giulia")));
+		
+		// Mi aspetto true poichè nella waitingList ci sono ordini assegnabili ad il Rider Giacomo
+		assertTrue(this.m.refreshWaitingOrder(this.m.getRiders().get("Giacomo")));
+		assertTrue(this.m.getRiders().get("Giacomo").getBag().contains(o3));
+		assertTrue(this.m.getRiders().get("Giacomo").getBag().size() == 1);
+		assertFalse(this.m.getRiders().get("Giacomo").getBag().contains(o1) || this.m.getRiders().get("Giacomo").getBag().contains(o2));
+		
+		// Mi aspetto true poichè nella waitingList ci sono ordini assegnabili ad il Rider Luca
+		assertTrue(this.m.refreshWaitingOrder(this.m.getRiders().get("Luca")));
+		assertTrue(this.m.getRiders().get("Luca").getBag().contains(o2));
+		assertTrue(this.m.getRiders().get("Luca").getBag().size() == 1);
+		assertFalse(this.m.getRiders().get("Luca").getBag().contains(o1));
 	}
 
-	@Test
-	void testAddToCurrent() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	void testRemoveFromCurrent() {
-		fail("Not yet implemented");
-	}
 
 }
