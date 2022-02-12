@@ -67,7 +67,7 @@ public class RiderImpl implements Rider{
 	@Override
 	public String showBagInfo() {
 		StringBuilder sb = new StringBuilder();		
-		this.orderList.forEach(o -> sb.append(o.showInfoForRider() +"Totale: " + String.format("%.2f", o.getPrice()) + "€\n"));
+		this.orderList.forEach(o -> sb.append(o.showInfoForRider() +"    Totale: " + String.format("%.2f", o.getPrice()) + "€\n"));
 		return sb.toString();
 	}
 

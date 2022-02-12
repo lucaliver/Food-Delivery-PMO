@@ -91,7 +91,7 @@ public class Manager{
 	 */
 	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append(o.showInfoForRider()+o.showOrderContent()));
+		this.waitingOrders.forEach(o -> sb.append(o.showInfoForRider() + "    Totale: " + String.format("%.2f", o.getPrice()) + "€\n"));
 		return sb.toString();
 	}
 	
