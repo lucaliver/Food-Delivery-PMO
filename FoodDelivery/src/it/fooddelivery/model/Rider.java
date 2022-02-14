@@ -1,5 +1,5 @@
 /**
- * @author Giulia Costa
+ * @author Luca Procicchiani
  */
 
 package it.fooddelivery.model;
