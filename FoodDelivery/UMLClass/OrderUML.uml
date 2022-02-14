@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UMLLabProfile="http:///schemas/UMLLabProfile/NS/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/UMLLabProfile/NS/0 pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile">
+  <uml:Model xmi:id="_vgaqUI3OEeyJ_rYKtJ5KPQ" name="OrderUML">
+    <eAnnotations xmi:id="_vnBBkI3OEeyJ_rYKtJ5KPQ" source="http://ns.yatta.de/umllab">
+      <contents xmi:type="ecore:EAnnotation" xmi:id="_vnBBkY3OEeyJ_rYKtJ5KPQ" source="codegen">
+        <details xmi:id="_vnBBko3OEeyJ_rYKtJ5KPQ" key="codegenDirectory" value="/FoodDelivery/src"/>
+        <details xmi:id="_vtwiwI3OEeyJ_rYKtJ5KPQ" key="AssociatedSourceCode" value="/FoodDelivery/src/it/fooddelivery/model/Order.java;2646643009/1;"/>
+      </contents>
+    </eAnnotations>
+    <elementImport xmi:id="_vsy5cY3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+    </elementImport>
+    <elementImport xmi:id="_vsy5co3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+    </elementImport>
+    <elementImport xmi:id="_vsy5c43OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+    </elementImport>
+    <elementImport xmi:id="_vsy5dI3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+    </elementImport>
+    <elementImport xmi:id="_vsy5dY3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+    </elementImport>
+    <elementImport xmi:id="_vs0HkI3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+    </elementImport>
+    <elementImport xmi:id="_vs0HkY3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+    </elementImport>
+    <elementImport xmi:id="_vs0Hko3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#short"/>
+    </elementImport>
+    <elementImport xmi:id="_vs0uoI3OEeyJ_rYKtJ5KPQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_vsleEI3OEeyJ_rYKtJ5KPQ" name="it">
+      <packagedElement xmi:type="uml:Package" xmi:id="_vsmFII3OEeyJ_rYKtJ5KPQ" name="fooddelivery">
+        <packagedElement xmi:type="uml:Package" xmi:id="_vsqWkI3OEeyJ_rYKtJ5KPQ" name="model">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_vswdMI3OEeyJ_rYKtJ5KPQ" name="Order">
+            <ownedComment xmi:id="_vtJewI3OEeyJ_rYKtJ5KPQ">
+              <body>Interface to represent an order.</body>
+            </ownedComment>
+            <ownedAttribute xmi:id="_vs5AEI3OEeyJ_rYKtJ5KPQ" name="size" isReadOnly="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_vs5nII3OEeyJ_rYKtJ5KPQ" name="price" isReadOnly="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_vs61QI3OEeyJ_rYKtJ5KPQ" name="destination" type="_vtHpk43OEeyJ_rYKtJ5KPQ" isReadOnly="true"/>
+            <ownedAttribute xmi:id="_vs8DYY3OEeyJ_rYKtJ5KPQ" name="restaurant" type="_vtIQoY3OEeyJ_rYKtJ5KPQ" isReadOnly="true" association="_vtLT8I3OEeyJ_rYKtJ5KPQ"/>
+            <ownedOperation xmi:id="_vsy5cI3OEeyJ_rYKtJ5KPQ" name="getMenus">
+              <ownedComment xmi:id="_vtKF0I3OEeyJ_rYKtJ5KPQ">
+                <body>@return all the menus in the order.</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vtGbcI3OEeyJ_rYKtJ5KPQ" type="_vtEmQI3OEeyJ_rYKtJ5KPQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vs4ZAI3OEeyJ_rYKtJ5KPQ" name="removeAllMenus">
+              <ownedComment xmi:id="_vtKF043OEeyJ_rYKtJ5KPQ">
+                <body>Remove all the menus from the order.</body>
+              </ownedComment>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vs6OMI3OEeyJ_rYKtJ5KPQ" name="getId">
+              <ownedComment xmi:id="_vtKF1I3OEeyJ_rYKtJ5KPQ">
+                <body>@return the ID of the order.</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vs6OMY3OEeyJ_rYKtJ5KPQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vs7cUI3OEeyJ_rYKtJ5KPQ" name="getAdress">
+              <ownedComment xmi:id="_vtKF1Y3OEeyJ_rYKtJ5KPQ">
+                <body>&#xD;
+	 * @return the adress of the order</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vs8DYI3OEeyJ_rYKtJ5KPQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vs8qcI3OEeyJ_rYKtJ5KPQ" name="showOrderContent" visibility="public">
+              <ownedComment xmi:id="_vtKF1o3OEeyJ_rYKtJ5KPQ">
+                <body>&#xD;
+	 * @return the all the menus in the order</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vs9RgI3OEeyJ_rYKtJ5KPQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vs94kI3OEeyJ_rYKtJ5KPQ" name="showOrderInfo" visibility="public">
+              <ownedComment xmi:id="_vtKF143OEeyJ_rYKtJ5KPQ">
+                <body>&#xD;
+	 * @return infos about the order (city and address of destination, restaurant,&#xD;
+	 *         total price).</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vs94kY3OEeyJ_rYKtJ5KPQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vs-foI3OEeyJ_rYKtJ5KPQ" name="showInfoForRider">
+              <ownedComment xmi:id="_vtKF2I3OEeyJ_rYKtJ5KPQ">
+                <body>&#xD;
+	 * @return the string to print with the id.</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vs-foY3OEeyJ_rYKtJ5KPQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vtHCgY3OEeyJ_rYKtJ5KPQ" name="addMenu" visibility="public">
+              <ownedComment xmi:id="_vtKF0Y3OEeyJ_rYKtJ5KPQ">
+                <body>@param m = menu to add at the order.</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vtHCgo3OEeyJ_rYKtJ5KPQ" name="m" type="_vtGbcY3OEeyJ_rYKtJ5KPQ"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_vtHpkI3OEeyJ_rYKtJ5KPQ" name="removeMenu" visibility="public">
+              <ownedComment xmi:id="_vtKF0o3OEeyJ_rYKtJ5KPQ">
+                <body>@param m = menu to remove from the order.</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_vtHpko3OEeyJ_rYKtJ5KPQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_vtHpkY3OEeyJ_rYKtJ5KPQ" name="m" type="_vtGbcY3OEeyJ_rYKtJ5KPQ"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_vtGbcY3OEeyJ_rYKtJ5KPQ" name="Menu"/>
+          <packagedElement xmi:type="uml:Enumeration" xmi:id="_vtHpk43OEeyJ_rYKtJ5KPQ" name="City"/>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_vtIQoY3OEeyJ_rYKtJ5KPQ" name="Restaurant"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_vtLT8I3OEeyJ_rYKtJ5KPQ" name="" memberEnd="_vtLT8Y3OEeyJ_rYKtJ5KPQ _vs8DYY3OEeyJ_rYKtJ5KPQ">
+            <ownedEnd xmi:id="_vtLT8Y3OEeyJ_rYKtJ5KPQ" name="" type="_vswdMI3OEeyJ_rYKtJ5KPQ" association="_vtLT8I3OEeyJ_rYKtJ5KPQ"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_vsmsMI3OEeyJ_rYKtJ5KPQ" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_vsnTQI3OEeyJ_rYKtJ5KPQ" name="util">
+        <packagedElement xmi:type="uml:Interface" xmi:id="_vtEmQI3OEeyJ_rYKtJ5KPQ" name="Map"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_vnCPsI3OEeyJ_rYKtJ5KPQ">
+      <eAnnotations xmi:id="_vnCPsY3OEeyJ_rYKtJ5KPQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile"/>
+    </profileApplication>
+  </uml:Model>
+  <UMLLabProfile:TargetLanguage xmi:id="_vnC2wI3OEeyJ_rYKtJ5KPQ" base_Package="_vgaqUI3OEeyJ_rYKtJ5KPQ">
+    <languageName>java</languageName>
+  </UMLLabProfile:TargetLanguage>
+  <UMLLabProfile:Generics xmi:id="_vs2j0I3OEeyJ_rYKtJ5KPQ" genericsValue="Menu, Integer" base_Element="_vsy5cI3OEeyJ_rYKtJ5KPQ"/>
+  <UMLLabProfile:Reference xmi:id="_vtFNUI3OEeyJ_rYKtJ5KPQ" base_Element="_vtEmQI3OEeyJ_rYKtJ5KPQ"/>
+  <UMLLabProfile:Reference xmi:id="_vtHCgI3OEeyJ_rYKtJ5KPQ" base_Element="_vtGbcY3OEeyJ_rYKtJ5KPQ"/>
+  <UMLLabProfile:Reference xmi:id="_vtIQoI3OEeyJ_rYKtJ5KPQ" base_Element="_vtHpk43OEeyJ_rYKtJ5KPQ"/>
+  <UMLLabProfile:Reference xmi:id="_vtI3sI3OEeyJ_rYKtJ5KPQ" base_Element="_vtIQoY3OEeyJ_rYKtJ5KPQ"/>
+  <UMLLabProfile:Reference xmi:id="_vtL7AI3OEeyJ_rYKtJ5KPQ" base_Element="_vtLT8I3OEeyJ_rYKtJ5KPQ"/>
+</xmi:XMI>
