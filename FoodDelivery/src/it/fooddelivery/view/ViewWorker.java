@@ -19,6 +19,7 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -80,7 +81,7 @@ public class ViewWorker extends JFrame{
 	private void Init(){
 		
 		this.setTitle(TITLE_PANEL);
-		this.setSize(180,80);
+		//this.setSize(180,80);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		

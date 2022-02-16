@@ -4,18 +4,17 @@
 
 package it.fooddelivery.view;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-
 import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.implementation.RiderImpl;
@@ -25,7 +24,6 @@ import it.fooddelivery.model.implementation.RiderImpl;
  */
 @SuppressWarnings("serial")
 public class ViewPlacing extends JFrame {
-	private static final DecimalFormat df = new DecimalFormat("0.00"); //Per i centesimi
 	
 	private final String TITLE = "Seleziona i piatti più adatti a te!";
 	
@@ -74,7 +72,7 @@ public class ViewPlacing extends JFrame {
 	}
 	
 	/**
-	 * It creates the buttons of "Procedi" "Indietro" ans "Svuota tutto" of the window
+	 * It creates the buttons of "Procedi" "Indietro" and "Svuota tutto" of the window
 	 * @return the panel itself
 	 */
 	private JPanel createButtonPanel() {
@@ -128,10 +126,12 @@ public class ViewPlacing extends JFrame {
 		totalOrderArea 	= new JTextArea();
 		totalOrderArea.setPreferredSize(new Dimension(100, 30));
 		totalOrderArea.setEditable(false);
+		totalOrderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		sizeOrderArea 	= new JTextArea();		
 		sizeOrderArea.setPreferredSize(new Dimension(100, 30));		
 		sizeOrderArea.setEditable(false);
+		sizeOrderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
 		orderInfoPanel.add(totalOrderArea);
 		orderInfoPanel.add(Box.createHorizontalStrut(30));
@@ -156,6 +156,7 @@ public class ViewPlacing extends JFrame {
 		
 		quantityArea.setPreferredSize(new Dimension(30, 20));
 		descriptionArea.setPreferredSize(new Dimension(300, 20));
+		descriptionArea.setFont(new Font("", Font.ITALIC, 12));
 		
 		quantityPanel.add(removeButton);
 		quantityPanel.add(quantityArea);
@@ -184,7 +185,7 @@ public class ViewPlacing extends JFrame {
 	 * Updates the price area and the size area.
 	 */
 	private void updateInfo() {
-		this.totalOrderArea.setText("Totale: " + df.format(controller.getCurrentOrderPresent().getPrice()) + "€");
+		this.totalOrderArea.setText("Totale: " + String.format("%.2f",controller.getCurrentOrderPresent().getPrice()) + "€");
 		this.sizeOrderArea.setText("Dimensione: " + controller.getCurrentOrderPresent().getSize() + "u.");
 	}
 }
