@@ -88,7 +88,8 @@ public class ViewWorker extends JFrame{
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
-		this.controller.getRiders().values().forEach(r -> mainPanel.add(createRiderPanel(r)));
+		this.controller.getRiders().values().forEach(r -> 
+			mainPanel.add(createRiderPanel(r)));
 		mainPanel.add(createWaitingOrderPanel());
 		
 		this.getContentPane().add(mainPanel);
