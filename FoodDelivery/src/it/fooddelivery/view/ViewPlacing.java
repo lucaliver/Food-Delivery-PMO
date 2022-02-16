@@ -75,6 +75,8 @@ public class ViewPlacing extends JFrame {
 		
 	private JPanel createButtonPanel() {
 		final JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new BorderLayout());
+		
 		confirmButton 	= new JButton("Procedi");
 		confirmButton.addActionListener(Event -> {
 			if (controller.getCurrentOrderPresent().getSize() <= 0) {
@@ -88,6 +90,7 @@ public class ViewPlacing extends JFrame {
 				new ViewRecap(this.controller,this);
 			}
 		});
+		buttonsPanel.add(confirmButton, BorderLayout.LINE_END);
 
 		backButton 	= new JButton("Indietro");
 		backButton.addActionListener(event -> {
@@ -96,6 +99,7 @@ public class ViewPlacing extends JFrame {
 			this.dispose();
 			new ViewWelcome(this.controller);
 		});
+		buttonsPanel.add(backButton, BorderLayout.LINE_START);
 
 		emptyButton 	= new JButton("Svuota tutto");
 		emptyButton.addActionListener(event -> {
@@ -103,14 +107,8 @@ public class ViewPlacing extends JFrame {
 			buttonsToQuantityAreas.values().forEach(t -> t.setText("0"));
 			this.updateInfo();
 		});
-		
-		buttonsPanel.setLayout(new BorderLayout());
-		buttonsPanel.add(confirmButton, BorderLayout.LINE_END);
 		buttonsPanel.add(emptyButton, BorderLayout.CENTER);
-		buttonsPanel.add(backButton, BorderLayout.LINE_START);
-		mainPanel.add(buttonsPanel);
-		
-		this.pack();
+							
 		return buttonsPanel;
 	}
 

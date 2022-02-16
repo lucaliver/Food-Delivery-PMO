@@ -69,43 +69,38 @@ public class ManagerFactory {
 	private static Set<Restaurant> createRestaurants() {
 		Set<Restaurant> restaurants = new HashSet<>();
 		
-		List<Menu> menusForMc = new ArrayList<>();
-		menusForMc.add(new MenuImpl("HappyMeal", 5.90, 5));
-		menusForMc.add(new MenuImpl("BigMac Menu", 9.90, 10));
-		menusForMc.add(new MenuImpl("McChicken Menu", 8.90, 9));
-		menusForMc.add(new MenuImpl("Crispy McBacon Menu", 8.90, 9));
-		menusForMc.add(new MenuImpl("McNuggets 6pz.", 3.90, 3));
-		menusForMc.add(new MenuImpl("McFlurry", 2.90, 2));
-		menusForMc.add(new MenuImpl("Insalata", 3.90, 6));
-		menusForMc.add(new MenuImpl("McVegan Menu", 8.50, 15));
+		List<Menu> menusForMc = Arrays.asList(new MenuImpl("HappyMeal", 5.90, 5),
+				                              new MenuImpl("BigMac Menu", 9.90, 10),
+				                              new MenuImpl("McChicken Menu", 8.90, 9),
+				                              new MenuImpl("Crispy McBacon Menu", 8.90, 9),
+				                              new MenuImpl("McNuggets 6pz.", 3.90, 3),
+				                              new MenuImpl("McFlurry", 2.90, 2),
+				                              new MenuImpl("Insalata", 3.90, 6),
+				                              new MenuImpl("McVegan Menu", 8.50, 15));
 		restaurants.add(new RestaurantImpl("McDonalds", menusForMc));
-
-		List<Menu> menusForKFC = new ArrayList<>();
-		menusForKFC.add(new MenuImpl("Ali di pollo piccanti 6pz.", 5.50, 5));
-		menusForKFC.add(new MenuImpl("Pollo fritto 4pz.", 4.50, 10));
-		menusForKFC.add(new MenuImpl("Patatine piccole", 3.50, 7));
-		menusForKFC.add(new MenuImpl("Patatine medie", 5.50, 9));
-		menusForKFC.add(new MenuImpl("Patatine grandi", 6.30, 10));
-		menusForKFC.add(new MenuImpl("Cestino mix pollo", 19.90, 20));
+		
+		List<Menu> menusForKFC = Arrays.asList(new MenuImpl("Ali di pollo piccanti 6pz.", 5.50, 5),
+				                               new MenuImpl("Pollo fritto 4pz.", 4.50, 10),
+				                               new MenuImpl("Patatine piccole", 3.50, 7),
+				                               new MenuImpl("Patatine medie", 5.50, 9),
+				                               new MenuImpl("Patatine grandi", 6.30, 10),
+				                               new MenuImpl("Cestino mix pollo", 19.90, 20));
 		restaurants.add(new RestaurantImpl("KFC", menusForKFC));
 
-		List<Menu> menusForPizzeria = new ArrayList<>();
-		menusForPizzeria.add(new MenuImpl("Margherita", 5.50, 5));
-		menusForPizzeria.add(new MenuImpl("Diavola", 6.50, 5));
-		menusForPizzeria.add(new MenuImpl("4 formaggi", 7.50, 5));
-		menusForPizzeria.add(new MenuImpl("Rossini", 6.50, 5));
-		menusForPizzeria.add(new MenuImpl("Frutti di mare", 9.50, 5));
-		menusForPizzeria.add(new MenuImpl("Funghi", 7.50, 5));
-		menusForPizzeria.add(new MenuImpl("Prosciutto crudo", 6.50, 5));
-		menusForPizzeria.add(new MenuImpl("Vegetariana", 7.50, 5));
+		List<Menu> menusForPizzeria = Arrays.asList(new MenuImpl("Margherita", 5.50, 5),
+				                                    new MenuImpl("Diavola", 6.50, 5),
+				                                    new MenuImpl("4 formaggi", 7.50, 5),
+				                                    new MenuImpl("Rossini", 6.50, 5),
+				                                    new MenuImpl("Frutti di mare", 9.50, 5),
+				                                    new MenuImpl("Funghi", 7.50, 5),
+				                                    new MenuImpl("Prosciutto crudo", 6.50, 5),
+				                                    new MenuImpl("Vegetariana", 7.50, 5));
 		restaurants.add(new RestaurantImpl("Pizzeria da Mario", menusForPizzeria));
 		
-		List<Menu> menusForSushi = new ArrayList<>();
-		menusForSushi.add(new MenuImpl("Sushi", 5.90, 9));
-		menusForSushi.add(new MenuImpl("Ramen", 10.30, 7));
+		List<Menu> menusForSushi = Arrays.asList(new MenuImpl("Sushi", 5.90, 9),
+				                                 new MenuImpl("Ramen", 10.30, 7));
 		restaurants.add(new RestaurantImpl("Sushino", menusForSushi));
 		
 		return restaurants;
-	}
-	
+	}		
 }
