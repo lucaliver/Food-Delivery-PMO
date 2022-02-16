@@ -72,7 +72,11 @@ public class ViewPlacing extends JFrame {
 		this.getContentPane().add(mainPanel);
 		this.pack();
 	}
-		
+	
+	/**
+	 * It creates the buttons of "Procedi" "Indietro" ans "Svuota tutto" of the window
+	 * @return the panel itself
+	 */
 	private JPanel createButtonPanel() {
 		final JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BorderLayout());
@@ -112,6 +116,10 @@ public class ViewPlacing extends JFrame {
 		return buttonsPanel;
 	}
 
+	/**
+	 * It creates the part of the window that show the size and the price of the current order
+	 * @return the panel itself
+	 */
 	private JPanel createOrderInfoPanel() {
 		final JPanel orderInfoPanel = new JPanel();
 		orderInfoPanel.setLayout(new FlowLayout());
@@ -130,7 +138,11 @@ public class ViewPlacing extends JFrame {
 		orderInfoPanel.add(sizeOrderArea, BorderLayout.PAGE_END);
 		return orderInfoPanel;
 	}
-
+	/**
+	 * It creates the part of the window for a menu (Description, button...)
+	 * @param m the menu where to get the data
+	 * @return the panel itself
+	 */
 	private JPanel createMenuPanel(Menu m) {
 		JPanel quantityPanel = new JPanel();
 		quantityPanel.setLayout(new FlowLayout());

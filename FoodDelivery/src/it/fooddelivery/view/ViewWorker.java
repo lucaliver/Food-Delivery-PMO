@@ -98,7 +98,7 @@ public class ViewWorker extends JFrame{
 
 	/**
 	 * It creates the GUI for one rider (text and button).
-	 * @param r is the rider.
+	 * @param r the rider where to get the data
 	 * @return the panel itself.
 	 */
 	private JPanel createRiderPanel(Rider r) {
