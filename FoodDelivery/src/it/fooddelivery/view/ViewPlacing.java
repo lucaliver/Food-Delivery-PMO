@@ -15,7 +15,7 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import it.fooddelivery.controller.Manager;
+import it.fooddelivery.controller.ManagerImpl;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.implementation.RiderImpl;
 
@@ -24,26 +24,25 @@ import it.fooddelivery.model.implementation.RiderImpl;
  */
 @SuppressWarnings("serial")
 public class ViewPlacing extends JFrame {
-	
-	private final String TITLE = "Seleziona i piatti più adatti a te!";
-	
-	private final Manager controller;
+		
+	private final ManagerImpl controller;
 	private JPanel mainPanel;
 	private JTextArea totalOrderArea;
 	private JTextArea sizeOrderArea;
 	private JButton confirmButton;
 	private JButton backButton;
-	private JButton emptyButton;
-	private Map<JButton, JTextArea> buttonsToQuantityAreas;
+	private JButton removeAllButton;
+	private final String title = "Seleziona i piatti più adatti a te!";
+	private final Map<JButton, JTextArea> infoButtons;
 		
 	/**
 	 * Constructor.
 	 * 
 	 * @param controller.
 	 */
-	ViewPlacing(final Manager controller){
+	public ViewPlacing(final ManagerImpl controller){
 		this.controller = controller;
-		this.buttonsToQuantityAreas = new HashMap<>();
+		this.infoButtons = new HashMap<>();
 		this.Init();
 		this.updateInfo();
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -54,7 +53,7 @@ public class ViewPlacing extends JFrame {
 	 * Initializes all the window.
 	 */
 	private void Init() {
-		this.setTitle(TITLE);
+		this.setTitle(title);
 		this.setLocation(700, 100);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
@@ -64,7 +63,7 @@ public class ViewPlacing extends JFrame {
 	
 		this.controller.getCurrentOrderPresent().getRestaurant().getMenuOffer().forEach(m ->
 			mainPanel.add(this.createMenuPanel(m)));		
-		mainPanel.add(createOrderInfoPanel());
+		mainPanel.add(createOrderDataPanel());
 		mainPanel.add(createButtonPanel());		
 		
 		this.getContentPane().add(mainPanel);
@@ -103,13 +102,13 @@ public class ViewPlacing extends JFrame {
 		});
 		buttonsPanel.add(backButton, BorderLayout.LINE_START);
 
-		emptyButton 	= new JButton("Svuota tutto");
-		emptyButton.addActionListener(event -> {
+		removeAllButton 	= new JButton("Svuota tutto");
+		removeAllButton.addActionListener(event -> {
 			controller.getCurrentOrderPresent().removeAllMenus();
-			buttonsToQuantityAreas.values().forEach(t -> t.setText("0"));
+			infoButtons.values().forEach(t -> t.setText("0"));
 			this.updateInfo();
 		});
-		buttonsPanel.add(emptyButton, BorderLayout.CENTER);
+		buttonsPanel.add(removeAllButton, BorderLayout.CENTER);
 							
 		return buttonsPanel;
 	}
@@ -118,7 +117,7 @@ public class ViewPlacing extends JFrame {
 	 * It creates the part of the window that show the size and the price of the current order
 	 * @return the panel itself
 	 */
-	private JPanel createOrderInfoPanel() {
+	private JPanel createOrderDataPanel() {
 		final JPanel orderInfoPanel = new JPanel();
 		orderInfoPanel.setLayout(new FlowLayout());
 		orderInfoPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
@@ -163,18 +162,18 @@ public class ViewPlacing extends JFrame {
 		quantityPanel.add(addButton);
 		quantityPanel.add(descriptionArea);
 		
-		buttonsToQuantityAreas.put(addButton, quantityArea);
-		buttonsToQuantityAreas.put(removeButton, quantityArea);	
+		infoButtons.put(addButton, quantityArea);
+		infoButtons.put(removeButton, quantityArea);	
 		
 		addButton.addActionListener(event -> {
 			controller.addToCurrent(m);
-			buttonsToQuantityAreas.get(addButton).setText("" + controller.howManyInCurrent(m));	
+			infoButtons.get(addButton).setText("" + controller.howManyInCurrent(m));	
 			this.updateInfo();						
 		});
 		
 		removeButton.addActionListener(event -> {		
 			if (controller.removeFromCurrent(m))
-				buttonsToQuantityAreas.get(removeButton).setText("" + controller.howManyInCurrent(m));
+				infoButtons.get(removeButton).setText("" + controller.howManyInCurrent(m));
 			this.updateInfo();
 		});
 		return quantityPanel;

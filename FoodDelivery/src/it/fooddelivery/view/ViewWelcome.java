@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import it.fooddelivery.controller.Manager;
+import it.fooddelivery.controller.ManagerImpl;
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Restaurant;
 
@@ -24,7 +24,7 @@ import it.fooddelivery.model.Restaurant;
  */
 @SuppressWarnings("serial")
 public class ViewWelcome extends JFrame {
-	private final Manager controller;
+	private final ManagerImpl controller;
 	private final String title = "Benvenuto, inizia ad ordinare!";
 	private JComboBox<City> citiesCombo;
 	private JComboBox<Restaurant> restaurantCombo;
@@ -36,7 +36,7 @@ public class ViewWelcome extends JFrame {
 	 * 
 	 * @param controller controller component for the MVC pattern.
 	 */
-	ViewWelcome(final Manager controller){
+	ViewWelcome(final ManagerImpl controller){
 		this.controller = controller;
 		this.Init();
 		this.pack();

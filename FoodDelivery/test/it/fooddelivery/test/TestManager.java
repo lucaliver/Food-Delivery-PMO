@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
-import it.fooddelivery.controller.Manager;
+import it.fooddelivery.controller.ManagerImpl;
 import it.fooddelivery.controller.ManagerFactory;
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
@@ -17,7 +17,7 @@ import it.fooddelivery.model.implementation.RestaurantImpl;
 
 class TestManager {
 	
-	private final Manager m = ManagerFactory.create();
+	private final ManagerImpl m = ManagerFactory.create();
 	private final Order o1 = new OrderImpl(01, City.FOSSOMBRONE, "Strada", null);
 	private final Order o2 = new OrderImpl(02, City.CAGLI, "Via", null);
 	private final Order o3 = new OrderImpl(03, City.URBANIA, "Piazza", null);

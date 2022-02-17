@@ -23,7 +23,7 @@ import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import it.fooddelivery.controller.Manager;
+import it.fooddelivery.controller.ManagerImpl;
 import it.fooddelivery.model.Rider;
 
 /**
@@ -34,18 +34,17 @@ public class ViewWorker extends JFrame{
 	
 	private static ViewWorker instance = null;
 	
-	private final String TITLE_PANEL = "Rider Screen";	
-	private final String TITLE_BAG_VUOTA = "In attesa di ordini da consegnare!!!";
-	private final String TITLE_WAIT_VUOTA = "In attesa di ordini da smistare!!!";
-	
-	private Manager controller;
+	private ManagerImpl controller;
 	private JPanel mainPanel;
 	private JTextArea riderArea;
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
-	private JButton startDeliveryButton;
-	private Map<Rider, JTextArea> infoOrder;
-	private Map<Rider, JTextArea> infoRider;
+	private JButton deliveryButton;
+	private final String mainPanelTitle = "Rider Screen";	
+	private final String emptyBagTitle = "In attesa di ordini da consegnare!!!";
+	private final String emptyWaitTitle = "In attesa di ordini da smistare!!!";
+	private final Map<Rider, JTextArea> infoOrder;
+	private final Map<Rider, JTextArea> infoRider;
 	
 	/**
 	 * Private singleton Constructor.
@@ -59,7 +58,7 @@ public class ViewWorker extends JFrame{
 	 * It initializes the controller and the view
 	 * @param controller manager of the view
 	 */
-	public void initView(final Manager controller) {
+	public void initView(final ManagerImpl controller) {
 		this.controller = controller;
 		this.Init();
 	}
@@ -76,11 +75,23 @@ public class ViewWorker extends JFrame{
 	}
 	
 	/**
+	 * It checks where the last order was sent
+	 * @param r = rider who receives the last order, null if order is in waitingList
+	 */
+	public void receiveNewOrder(Optional<Rider> r) {
+		if(r.isPresent()) {
+			this.updateRiderData(r.get());
+		}else {
+			this.updateWaitingOrders();
+		}
+	}
+	
+	/**
 	 * It initializes the window.
 	 */
 	private void Init(){
 		
-		this.setTitle(TITLE_PANEL);
+		this.setTitle(mainPanelTitle);
 		//this.setSize(180,80);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
@@ -115,15 +126,15 @@ public class ViewWorker extends JFrame{
 		
 		orderArea = new JTextArea(4,20);
 		orderArea.setEditable(false);
-		orderArea.setText(TITLE_BAG_VUOTA);
+		orderArea.setText(emptyBagTitle);
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		infoOrder.put(r, orderArea);
 		
 		JScrollPane scrollOrderArea = new JScrollPane(orderArea);
 		scrollOrderArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
-		startDeliveryButton = new JButton("Parti e consegna!");
-		startDeliveryButton.addActionListener(e -> {
+		deliveryButton = new JButton("Parti e consegna!");
+		deliveryButton.addActionListener(e -> {
 			this.startDelivery(r);
 			this.checkWaitingOrders(r);			
 		});
@@ -133,13 +144,13 @@ public class ViewWorker extends JFrame{
 				.addComponent(riderArea)
 				.addComponent(scrollOrderArea)
 				.addComponent(Box.createHorizontalStrut(15))
-				.addComponent(startDeliveryButton));	
+				.addComponent(deliveryButton));	
 		riderPanelLayout.setVerticalGroup(
 				riderPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 				.addComponent(riderArea)
 				.addComponent(scrollOrderArea)
 				.addComponent(Box.createHorizontalStrut(15))
-				.addComponent(startDeliveryButton));
+				.addComponent(deliveryButton));
 
 		this.pack();
 		return riderPanel;
@@ -155,7 +166,7 @@ public class ViewWorker extends JFrame{
 		final GroupLayout waitingSectionLayout = new GroupLayout(waitingSection);
 		
 		waitingOrdersArea = new JTextArea(5,30);
-		waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
+		waitingOrdersArea.setText(emptyWaitTitle);
 		waitingOrdersArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				
 		JScrollPane scrollWaitingArea = new JScrollPane(waitingOrdersArea);
@@ -169,18 +180,6 @@ public class ViewWorker extends JFrame{
 				.addComponent(scrollWaitingArea));
 		
 		return waitingSection;
-	}
-			
-	/**
-	 * It checks where the last order was sent
-	 * @param r = rider who receives the last order, null if order is in waitingList
-	 */
-	public void receiveNewOrder(Optional<Rider> r) {
-		if(r.isPresent()) {
-			this.updateRiderData(r.get());
-		}else {
-			this.updateWaitingOrders();
-		}
 	}
 	
 	/**
@@ -229,7 +228,7 @@ public class ViewWorker extends JFrame{
 		if(!r.getBag().isEmpty())
 			this.infoOrder.get(r).setText(r.showBagInfo());
 		else
-			this.infoOrder.get(r).setText(TITLE_BAG_VUOTA);
+			this.infoOrder.get(r).setText(emptyBagTitle);
 		this.infoRider.get(r).setText(r.showRiderInfo());
 	}
 	
@@ -240,7 +239,7 @@ public class ViewWorker extends JFrame{
 		if(!this.controller.getWaitingOrders().isEmpty())
 			this.waitingOrdersArea.setText(this.controller.showWaitingOrders());
 		else
-			this.waitingOrdersArea.setText(TITLE_WAIT_VUOTA);
+			this.waitingOrdersArea.setText(emptyWaitTitle);
 	}
 }
 

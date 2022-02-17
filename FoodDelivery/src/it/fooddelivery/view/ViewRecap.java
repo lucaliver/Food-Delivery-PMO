@@ -14,14 +14,14 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import it.fooddelivery.controller.Manager;
+import it.fooddelivery.controller.ManagerImpl;
 
 /**
  * Window for the recap screen of the current order for the customer.
  */
 @SuppressWarnings("serial")
 public class ViewRecap extends JFrame {
-	private final Manager controller;
+	private final ManagerImpl controller;
 	private final String title = "Il tuo ordine :)";
 	private JButton sendButton;
 	private JButton backButton;
@@ -32,7 +32,7 @@ public class ViewRecap extends JFrame {
 	 * 
 	 * @param controller for the MVC pattern.
 	 */
-	ViewRecap(final Manager controller, final ViewPlacing viewPlacing){
+	ViewRecap(final ManagerImpl controller, final ViewPlacing viewPlacing){
 		this.controller = controller;
 		this.Init();
 		this.pack();

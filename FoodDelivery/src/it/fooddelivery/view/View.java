@@ -4,7 +4,7 @@
 
 package it.fooddelivery.view;
 
-import it.fooddelivery.controller.Manager;
+import it.fooddelivery.controller.ManagerImpl;
 
 /**
  * View component for MVC pattern of the delivery management software.
@@ -16,7 +16,7 @@ public class View {
 	 * 
 	 * @param controller the controller for the MVC pattern
 	 */
-	public View(final Manager controller) {
+	public View(final ManagerImpl controller) {
 		ViewWorker.getInstance().initView(controller);
 		new ViewWelcome(controller);								
 	}

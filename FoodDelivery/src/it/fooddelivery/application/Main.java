@@ -4,7 +4,7 @@
 
 package it.fooddelivery.application;
 
-import it.fooddelivery.controller.Manager;
+import it.fooddelivery.controller.ManagerImpl;
 import it.fooddelivery.controller.ManagerFactory;
 import it.fooddelivery.view.View;
 
@@ -13,7 +13,7 @@ import it.fooddelivery.view.View;
  */
 public class Main {
 	public static void main(String[] args) {
-		final Manager controller = ManagerFactory.create();
+		final ManagerImpl controller = ManagerFactory.create();
 		new View(controller);
 	}
 }
