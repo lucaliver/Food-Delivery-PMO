@@ -43,7 +43,7 @@ class TestManager {
 		}
 		assertTrue(res);
 		assertTrue(m.getRiderWithLastOrder().isEmpty());
-		assertEquals(m.getSequetianlIdCounter(), 0);
+		assertEquals(m.getSequentialIdCounter(), 0);
 	}
 
 	@Test
@@ -76,7 +76,7 @@ class TestManager {
 		this.m.getRiderWithLastOrder().get().deliverAll();
 		System.out.println(this.m.getRiders().get("Saverio").getProfit());
 		this.m.createCurrentOrder(City.TAVULLIA, "Villa", null);
-		assertEquals(this.m.getSequetianlIdCounter(), 2);
+		assertEquals(this.m.getSequentialIdCounter(), 2);
 		this.m.getCurrentOrderPresent().addMenu(m4);
 		this.m.getCurrentOrderPresent().addMenu(m5);
 		assertTrue(this.m.assignCurrentOrder());
@@ -96,7 +96,7 @@ class TestManager {
 	@Test
 	void testCreateCurrentOrder() {
 		this.m.createCurrentOrder(City.URBANIA, "Via", new RestaurantImpl("Trattoria", null));
-		assertTrue(this.m.getSequetianlIdCounter() == 1);
+		assertTrue(this.m.getSequentialIdCounter() == 1);
 		boolean res = false;
 		try {
 			this.m.getCurrentOrderPresent();

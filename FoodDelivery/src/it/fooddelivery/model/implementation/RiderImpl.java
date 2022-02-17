@@ -38,26 +38,6 @@ public class RiderImpl implements Rider{
 	}
 
 	@Override
-	public List<Order> getBag() {
-		return orderList;
-	}
-	
-	@Override
-	public double getProfit() {
-		return profit;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-	
-	@Override
-	public List<City> getCities() {
-		return cities;
-	}
-
-	@Override
 	public String showRiderInfo() {
 		return "Profito: "+String.format("%.2f", getProfit())+
 		       "€"+'\n'+"Capacità: "+this.getCapacity()+
@@ -99,7 +79,35 @@ public class RiderImpl implements Rider{
 	public boolean canFit(Order order) {
 		return (this.capacity + order.getSize()) <= MAX_CAPACITY;
 	}
-
+	
+	public static double getPercentage() {
+		return PROFIT_PERCENTAGE;
+	}
+	
+	public static int getMaxCapacity() {
+		return MAX_CAPACITY;
+	}
+	
+	@Override
+	public List<Order> getBag() {
+		return orderList;
+	}
+	
+	@Override
+	public double getProfit() {
+		return profit;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+	
+	@Override
+	public List<City> getCities() {
+		return cities;
+	}
+	
 	@Override
 	public int getCapacity() {
 		return capacity;
@@ -122,13 +130,5 @@ public class RiderImpl implements Rider{
 	 */
 	private double calculateOrderProfit(Order order) {
 		return order.getPrice() * getPercentage();
-	}	
-	
-	public static double getPercentage() {
-		return PROFIT_PERCENTAGE;
-	}
-	
-	public static int getMaxCapacity() {
-		return MAX_CAPACITY;
 	}
 }

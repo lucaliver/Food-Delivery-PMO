@@ -127,7 +127,7 @@ public class Manager{
 	}
 	
 	/**
-	* Tries to assign the order to a rider that delivers the order's city.
+	* Tries to assign the order to a rider that delivers in the order's city.
 	* He must have enough bag space. The rider with the lowest profit has the priority.
 	* If no Rider can receive the Order, it will be put into the waiting list.
 	* 
@@ -145,17 +145,17 @@ public class Manager{
 			return false;
 		}
 	}
-	
-	public void setWaitingOrders(List<Order> waitingOrders) {
-		this.waitingOrders = waitingOrders;
+		
+	public void addToCurrent(Menu menu) {
+		this.getCurrentOrderPresent().addMenu(menu);
 	}
 
+	public boolean removeFromCurrent(Menu menu) {
+		return this.getCurrentOrderPresent().removeMenu(menu);
+	}
+	
 	public Set<Restaurant> getRestaurants() {
 		return restaurants;
-	}
-
-	public void setRestaurants(Set<Restaurant> restaurants) {
-		this.restaurants = restaurants;
 	}
 	
 	public Map<String, Rider> getRiders() {
@@ -166,10 +166,6 @@ public class Manager{
 		return this.riderWithLastOrder;
 	}
 
-	public void setRiders(Map<String, Rider> riders) {
-		this.riders = riders;
-	}
-
 	public Order getCurrentOrderPresent() {
 		return this.currentOrder.orElseThrow();
 	}
@@ -177,16 +173,7 @@ public class Manager{
 	public List<Order> getWaitingOrders() {
 		return waitingOrders;
 	}
-	
-	public void addToCurrent(Menu menu) {
-		this.getCurrentOrderPresent().addMenu(menu);
-	}
-
-	public boolean removeFromCurrent(Menu menu) {
-		return this.getCurrentOrderPresent().removeMenu(menu);
-	}
-	
-	public int getSequetianlIdCounter() {
+	public int getSequentialIdCounter() {
 		return this.sequentialIdCounter;
 	}
 }
