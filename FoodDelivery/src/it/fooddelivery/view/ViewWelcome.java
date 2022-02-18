@@ -4,6 +4,8 @@
 
 package it.fooddelivery.view;
 
+import java.awt.Component;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -25,11 +27,13 @@ import it.fooddelivery.model.Restaurant;
 @SuppressWarnings("serial")
 public class ViewWelcome extends JFrame {
 	private final ManagerImpl controller;
+	private JPanel mainPanel;
 	private final String title = "Benvenuto, inizia ad ordinare!";
 	private JComboBox<City> citiesCombo;
 	private JComboBox<Restaurant> restaurantCombo;
 	private JTextField addressField;
 	private JButton proceedButton;
+	private JButton exitButton;
 	
 	/**
 	 * Constructs a welcome screen for the user.
@@ -52,26 +56,41 @@ public class ViewWelcome extends JFrame {
 		this.setSize(400, 200);
 		this.setLocation(700, 100);
 		
-		JPanel mainPanel = new JPanel();
+		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
-		JLabel citiesLabel = new JLabel("Selezionare la destinazione: ");
-		citiesCombo = new JComboBox<>();
-		for(City c: City.values())
-			citiesCombo.addItem(c);
+		mainPanel.add(createOrderInfoPanel());
+		mainPanel.add(createButtonsPanel());
 		
-		JLabel addressLabel = new JLabel("Inserire indirizzo: ");
-		addressField = new JTextField("Indirizzo");
+		this.getContentPane().add(mainPanel);				
+	}
+
+	private JPanel createOrderInfoPanel() {
+		JPanel orderInfoPanel = new JPanel();
+		orderInfoPanel.setLayout(new BoxLayout(orderInfoPanel, BoxLayout.X_AXIS));
+		orderInfoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		JLabel restaurantLabel = new JLabel("Selezionare il ristorante: ");
-		restaurantCombo = new JComboBox<>();
-		for(Restaurant r: controller.getRestaurants())
-			restaurantCombo.addItem(r);
+		orderInfoPanel.add(createDestinationPanel());
+		orderInfoPanel.add(createRestaurantPanel());
 		
+		return orderInfoPanel;
+	}
+
+	private JPanel createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		buttonsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		
+		exitButton = new JButton("Esci");
+		exitButton.addActionListener(event -> {
+			this.dispose();
+			ViewWorker.getInstance().dispose();
+		});
+		buttonsPanel.add(exitButton);
+		
+		buttonsPanel.add(Box.createHorizontalStrut(60));
+		
 		proceedButton = new JButton("Procedi"); 
 		proceedButton.addActionListener(event -> {
 			controller.createCurrentOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
@@ -80,31 +99,44 @@ public class ViewWelcome extends JFrame {
 			new ViewPlacing(this.controller);
 		});
 		buttonsPanel.add(proceedButton);
-		
-		JPanel destinationPanel = new JPanel();
-		destinationPanel.setLayout(new BoxLayout(destinationPanel, BoxLayout.Y_AXIS));
-		destinationPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		destinationPanel.add(citiesLabel);
-		destinationPanel.add(citiesCombo);
-	    destinationPanel.add(Box.createVerticalStrut(20));
-	    destinationPanel.add(addressLabel);
-		destinationPanel.add(addressField);
-		
+						
+		return buttonsPanel;
+	}
+
+	private JPanel createRestaurantPanel() {
 		JPanel restaurantPanel = new JPanel();
 		restaurantPanel.setLayout(new BoxLayout(restaurantPanel, BoxLayout.Y_AXIS));
 		restaurantPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+		JLabel restaurantLabel = new JLabel("Selezionare il ristorante: ");
 		restaurantPanel.add(restaurantLabel);
+		
+		restaurantCombo = new JComboBox<>();
+		for(Restaurant r: controller.getRestaurants())
+			restaurantCombo.addItem(r);
 		restaurantPanel.add(restaurantCombo);
 		
-		JPanel selectionPanel = new JPanel();
-		selectionPanel.setLayout(new BoxLayout(selectionPanel, BoxLayout.X_AXIS));
-		selectionPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		selectionPanel.add(destinationPanel);
-		selectionPanel.add(restaurantPanel);
+		return restaurantPanel;
+	}
+
+	private JPanel createDestinationPanel() {
+		JPanel destinationPanel = new JPanel();
+		destinationPanel.setLayout(new BoxLayout(destinationPanel, BoxLayout.Y_AXIS));
+		destinationPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		mainPanel.add(selectionPanel);
-		mainPanel.add(buttonsPanel);
+		JLabel citiesLabel = new JLabel("Selezionare la destinazione: ");
+		destinationPanel.add(citiesLabel);
+		citiesCombo = new JComboBox<>();
+		for(City c: City.values())
+			citiesCombo.addItem(c);
+		destinationPanel.add(citiesCombo);
 		
-		this.getContentPane().add(mainPanel);
+	    destinationPanel.add(Box.createVerticalStrut(20));
+		JLabel addressLabel = new JLabel("Inserire indirizzo: ");
+	    destinationPanel.add(addressLabel);
+		addressField = new JTextField("Indirizzo");
+		destinationPanel.add(addressField);
+		
+		return destinationPanel;
 	}
 }
