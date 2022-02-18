@@ -55,12 +55,16 @@ public class ViewRecap extends JFrame {
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
 		mainPanel.add(createOrderRecapPanel());
-		mainPanel.add(createButtonPanel());
+		mainPanel.add(createButtonsPanel());
 		
 		this.getContentPane().add(mainPanel);		
 	}
 
-	private JPanel createButtonPanel() {
+	/**
+	 * It creates the panel with the buttons
+	 * @return the panel itself
+	 */
+	private JPanel createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		buttonsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -91,6 +95,10 @@ public class ViewRecap extends JFrame {
 		return buttonsPanel;
 	}
 
+	/**
+	 * It creates the panel with the recap information of the order
+	 * @return the panel itself
+	 */
 	private JPanel createOrderRecapPanel() {
 		
 		JPanel orderDataPanel = new JPanel();
