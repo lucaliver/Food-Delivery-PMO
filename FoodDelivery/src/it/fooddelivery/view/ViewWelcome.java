@@ -66,6 +66,10 @@ public class ViewWelcome extends JFrame {
 		this.getContentPane().add(mainPanel);				
 	}
 
+	/**
+	 * It creates the panel where the user choose the info of his order
+	 * @return the panel itself
+	 */
 	private JPanel createOrderInfoPanel() {
 		JPanel orderInfoPanel = new JPanel();
 		orderInfoPanel.setLayout(new BoxLayout(orderInfoPanel, BoxLayout.X_AXIS));
@@ -77,6 +81,10 @@ public class ViewWelcome extends JFrame {
 		return orderInfoPanel;
 	}
 
+	/**
+	 * It creates the panel with all the button 
+	 * @return the panel itself
+	 */
 	private JPanel createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
@@ -103,6 +111,10 @@ public class ViewWelcome extends JFrame {
 		return buttonsPanel;
 	}
 
+	/**
+	 * It Creates the panel where to choose the order's restaurant
+	 * @return the panel itself
+	 */
 	private JPanel createRestaurantPanel() {
 		JPanel restaurantPanel = new JPanel();
 		restaurantPanel.setLayout(new BoxLayout(restaurantPanel, BoxLayout.Y_AXIS));
@@ -119,6 +131,10 @@ public class ViewWelcome extends JFrame {
 		return restaurantPanel;
 	}
 
+	/**
+	 * It creates the panel where to input all the order's destination data
+	 * @return the panel itself
+	 */
 	private JPanel createDestinationPanel() {
 		JPanel destinationPanel = new JPanel();
 		destinationPanel.setLayout(new BoxLayout(destinationPanel, BoxLayout.Y_AXIS));
