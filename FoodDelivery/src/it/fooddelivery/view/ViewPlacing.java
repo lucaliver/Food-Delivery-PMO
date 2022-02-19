@@ -177,7 +177,7 @@ public class ViewPlacing extends JFrame {
 		});
 		
 		removeButton.addActionListener(event -> {		
-			if (controller.decreaseInCurrent(menu))
+			this.controller.decreaseInCurrent(menu);
 				infoButtons.get(removeButton).setText("" + controller.howManyInCurrent(menu));
 			this.updateInfo();
 		});

@@ -214,8 +214,7 @@ public class ViewWorker extends JFrame{
 				this.receiveNewOrder(Optional.of(rider));
 				JOptionPane.showMessageDialog(this, "Hai nuovi ordini presi dalla lista d'attesa ;)");
 			}
-		}else
-			JOptionPane.showMessageDialog(this, "Nessun nuovo ordine per te al momento.");
+		}
 	}
 	
 	/**

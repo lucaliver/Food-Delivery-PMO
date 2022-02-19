@@ -43,7 +43,6 @@ class TestManager {
 		}
 		assertTrue(res);
 		assertTrue(m.getRiderWithLastOrder().isEmpty());
-		assertEquals(m.getSequentialIdCounter(), 0);
 	}
 
 	@Test
@@ -76,7 +75,6 @@ class TestManager {
 		this.m.getRiderWithLastOrder().get().deliverAll();
 		System.out.println(this.m.getRiders().get("Saverio").getProfit());
 		this.m.createCurrentOrder(City.TAVULLIA, "Villa", null);
-		assertEquals(this.m.getSequentialIdCounter(), 2);
 		this.m.getCurrentOrderPresent().increaseMenu(m4);
 		this.m.getCurrentOrderPresent().increaseMenu(m5);
 		assertTrue(this.m.assignCurrentOrder());
@@ -96,7 +94,6 @@ class TestManager {
 	@Test
 	void testCreateCurrentOrder() {
 		this.m.createCurrentOrder(City.URBANIA, "Via", new RestaurantImpl("Trattoria", null));
-		assertTrue(this.m.getSequentialIdCounter() == 1);
 		boolean res = false;
 		try {
 			this.m.getCurrentOrderPresent();
@@ -151,7 +148,7 @@ class TestManager {
 		this.m.getWaitingOrders().add(o3);
 		
 		// Mi aspetto false poichè nella waitingList non ci sono ordini assegnabili ad il rider Giulia
-		assertFalse(this.m.refreshWaitingOrder(this.m.getRiders().get("Giulia")));
+		assertFalse(this.m.refreshWaitingOrder(this.m.getRiders().get("Sara")));
 		
 		// Mi aspetto true poichè nella waitingList ci sono ordini assegnabili ad il Rider Giacomo
 		assertTrue(this.m.refreshWaitingOrder(this.m.getRiders().get("Giacomo")));
@@ -159,10 +156,10 @@ class TestManager {
 		assertTrue(this.m.getRiders().get("Giacomo").getBag().size() == 1);
 		assertFalse(this.m.getRiders().get("Giacomo").getBag().contains(o1) || this.m.getRiders().get("Giacomo").getBag().contains(o2));
 		
-		// Mi aspetto true poichè nella waitingList ci sono ordini assegnabili ad il Rider Luca
-		assertTrue(this.m.refreshWaitingOrder(this.m.getRiders().get("Luca")));
-		assertTrue(this.m.getRiders().get("Luca").getBag().contains(o2));
-		assertTrue(this.m.getRiders().get("Luca").getBag().size() == 1);
-		assertFalse(this.m.getRiders().get("Luca").getBag().contains(o1));
+		// Mi aspetto true poichè nella waitingList ci sono ordini assegnabili ad il Rider Saverio
+		assertTrue(this.m.refreshWaitingOrder(this.m.getRiders().get("Saverio")));
+		assertTrue(this.m.getRiders().get("Saverio").getBag().contains(o2));
+		assertTrue(this.m.getRiders().get("Saverio").getBag().size() == 1);
+		assertFalse(this.m.getRiders().get("Saverio").getBag().contains(o1));
 	}
 }
