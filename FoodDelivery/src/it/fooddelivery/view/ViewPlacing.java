@@ -1,5 +1,5 @@
 /**
- * @author Tombari Giacomo
+ * @author Giacomo Tombari
  */
 
 package it.fooddelivery.view;
@@ -32,13 +32,13 @@ public class ViewPlacing extends JFrame {
 	private JButton confirmButton;
 	private JButton backButton;
 	private JButton removeAllButton;
-	private final String title = "Seleziona i piatti più adatti a te!";
+	private final String title = "Seleziona i piatti del tuo ordine!";
 	private final Map<JButton, JTextArea> infoButtons;
 		
 	/**
-	 * Constructor.
+	 * Constructs a screen to select menus for the order.
 	 * 
-	 * @param controller.
+	 * @param controller controller component for the MVC pattern
 	 */
 	public ViewPlacing(final ManagerImpl controller){
 		this.controller = controller;
@@ -62,7 +62,8 @@ public class ViewPlacing extends JFrame {
 		mainPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 	
 		this.controller.getCurrentOrderPresent().getRestaurant().getMenuOffer().forEach(m ->
-			mainPanel.add(this.createMenuPanel(m)));		
+			mainPanel.add(this.createMenuPanel(m)));
+		
 		mainPanel.add(createOrderDataPanel());
 		mainPanel.add(createButtonPanel());		
 		
@@ -71,7 +72,8 @@ public class ViewPlacing extends JFrame {
 	}
 	
 	/**
-	 * It creates the buttons of "Procedi" "Indietro" and "Svuota tutto" of the window
+	 * Creates the proceed button, back button and empty button.
+	 * 
 	 * @return the panel itself
 	 */
 	private JPanel createButtonPanel() {
@@ -92,7 +94,7 @@ public class ViewPlacing extends JFrame {
 			}
 		});
 		buttonsPanel.add(confirmButton, BorderLayout.LINE_END);
-
+		
 		backButton 	= new JButton("Indietro");
 		backButton.addActionListener(event -> {
 			this.controller.getCurrentOrderPresent().removeAllMenus();
@@ -114,7 +116,8 @@ public class ViewPlacing extends JFrame {
 	}
 
 	/**
-	 * It creates the part of the window that show the size and the price of the current order
+	 * Creates the part of the window that shows total size and price of the current order.
+	 * 
 	 * @return the panel itself
 	 */
 	private JPanel createOrderDataPanel() {
@@ -137,18 +140,20 @@ public class ViewPlacing extends JFrame {
 		orderInfoPanel.add(sizeOrderArea, BorderLayout.PAGE_END);
 		return orderInfoPanel;
 	}
+	
 	/**
-	 * It creates the part of the window for a menu (Description, button...)
-	 * @param m the menu where to get the data
+	 * Creates the part of the window for a single menu, with its descriptions and the buttons to select it.
+	 * 
+	 * @param menu the menu
 	 * @return the panel itself
 	 */
-	private JPanel createMenuPanel(Menu m) {
+	private JPanel createMenuPanel(Menu menu) {
 		JPanel quantityPanel = new JPanel();
 		quantityPanel.setLayout(new FlowLayout());
 		quantityPanel.setBorder(new EmptyBorder(10, 20, 20, 10));	
 		quantityPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		
-		final JTextArea descriptionArea = new JTextArea(m.showMenuInfo());
+		final JTextArea descriptionArea = new JTextArea(menu.showMenuInfo());
 		final JTextArea quantityArea = new JTextArea("0");
 		final JButton removeButton 	= new JButton("-");
 		final JButton addButton 	= new JButton("+");	
@@ -166,19 +171,18 @@ public class ViewPlacing extends JFrame {
 		infoButtons.put(removeButton, quantityArea);	
 		
 		addButton.addActionListener(event -> {
-			controller.addToCurrent(m);
-			infoButtons.get(addButton).setText("" + controller.howManyInCurrent(m));	
+			controller.increaseInCurrent(menu);
+			infoButtons.get(addButton).setText("" + controller.howManyInCurrent(menu));	
 			this.updateInfo();						
 		});
 		
 		removeButton.addActionListener(event -> {		
-			if (controller.removeFromCurrent(m))
-				infoButtons.get(removeButton).setText("" + controller.howManyInCurrent(m));
+			if (controller.decreaseInCurrent(menu))
+				infoButtons.get(removeButton).setText("" + controller.howManyInCurrent(menu));
 			this.updateInfo();
 		});
 		return quantityPanel;
 	}
-	
 	
 	/**
 	 * Updates the price area and the size area.

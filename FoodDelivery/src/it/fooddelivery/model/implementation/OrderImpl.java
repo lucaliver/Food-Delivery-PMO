@@ -13,25 +13,26 @@ import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.City;
 
 /**
- * A class to represent an order.
+ * A class to represent an order.  Implementation of {@link Order}.
  */
 public class OrderImpl implements Order{
 	
-	private final int idOrder;
+	private final int id;
 	private final City destination;
 	private final Map<Menu, Integer> menus;
 	private final String address;
 	private final Restaurant restaurant;
 	
 	/**
-	 * Constructor.
-	 * @param id id of the order
-	 * @param destination destination of the order
-	 * @param address address of the order
-	 * @param restaurant resturant that made the order
+	 * Constructs an order.
+	 * 
+	 * @param id id of this order
+	 * @param destination destination of this order
+	 * @param address address of this order
+	 * @param restaurant resturant that is making this order
 	 */
 	public OrderImpl(int id, City destination, String address, Restaurant restaurant) {		
-		this.idOrder = id;
+		this.id = id;
 		this.destination = destination;
 		this.address = address;
 		this.restaurant = restaurant;
@@ -39,22 +40,20 @@ public class OrderImpl implements Order{
 	}
 	
 	@Override
-	public void addMenu(Menu m) {
-		if (menus.containsKey(m))
-			this.menus.put(m, menus.get(m)+1);
+	public void increaseMenu(Menu menu) {
+		if (menus.containsKey(menu))
+			this.menus.put(menu, menus.get(menu)+1);
 		else
-			this.menus.put(m, 1);
+			this.menus.put(menu, 1);
 	}
 
 	@Override
-	public boolean removeMenu(Menu m) {
-		if (menus.containsKey(m) && menus.get(m)>0) {
-			this.menus.put(m, menus.get(m)-1);
-			if (menus.get(m)==0)
-				menus.remove(m);
-			return true;
+	public void decreaseMenu(Menu menu) {
+		if (menus.containsKey(menu) && menus.get(menu)>0) {
+			this.menus.put(menu, menus.get(menu)-1);
+			if (menus.get(menu)==0)
+				menus.remove(menu);
 		}
-		return false;
 	}
 	
 	@Override
@@ -65,9 +64,10 @@ public class OrderImpl implements Order{
 	}
 	
 	@Override
-	public String showInfoForRider() {
-		return new String("[ID: "+String.format("%03d", this.getId())+"] "
-		                  +this.getDestination()+", "+this.getAdress()+'\n');
+	public String showBasicInfo() {
+		return "[ID: "+String.format("%03d", this.getId())+"] "
+				+this.getDestination()+", "+this.getAdress()+", "
+		        +String.format("%.2f", this.getPrice()) + "€\n";
 	}
 	
 	@Override
@@ -83,7 +83,7 @@ public class OrderImpl implements Order{
 		return "Destinazione: " + this.getDestination() + ", "+ this.getAdress()
 				+ " \nRistorante: " + this.getRestaurant()
 				+ " \nTotale: " + String.format("%.2f",this.getPrice())
-				+ "€ \nDimensione: " + this.getSize();
+				+ "€ \nDimensione: " + this.getSize() + "u";
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class OrderImpl implements Order{
 
 	@Override
 	public int getId() {
-		return this.idOrder;
+		return this.id;
 	}
 	@Override
 	public City getDestination() {
@@ -132,7 +132,7 @@ public class OrderImpl implements Order{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idOrder;
+		result = prime * result + id;
 		return result;
 	}
 
@@ -143,10 +143,8 @@ public class OrderImpl implements Order{
 		if (!(obj instanceof OrderImpl))
 			return false;
 		OrderImpl other = (OrderImpl) obj;
-		if (idOrder != other.idOrder)
+		if (id != other.id)
 			return false;
 		return true;
 	}
-	
-	
 }

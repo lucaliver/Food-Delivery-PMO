@@ -5,6 +5,7 @@
 package it.fooddelivery.model;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Interface to represent a rider.
@@ -12,18 +13,19 @@ import java.util.List;
 public interface Rider {
 	
 	/** 
-	 * @return a list of all the orders in the rider's bag.
+	 * @return a list of all the orders in this rider's bag
 	 */
 	List<Order> getBag();
 	
 	/**
-	 * Adds the order to the rider's bag.
+	 * Adds the order to this rider's bag.
+	 * 
 	 * @param order the order to add
 	 */
 	void addOrder(Order order);
 	
 	/**
-	 * Delivers the order, removing it from the bag and earning its part.
+	 * Delivers the order, removing it from the bag and earning the profit.
 	 * 
 	 * @param order the order to deliver
 	 */
@@ -35,30 +37,32 @@ public interface Rider {
 	void deliverAll();
 
 	/**
-	 * @return rider's name
+	 * @return this rider's name
 	 */
 	String getName();
 	
 	/** 
-	 * @return total rider's profit at the moment
+	 * @return the total profit of this rider
 	 */
 	double getProfit();
 	
 	/**
-	 * @param order the order to check if can fit in this rider's bag
-	 * @return {true} if it could fit, {false} if it couldn't.
+	 * Checks if the order could fit in this rider's bag
+	 * 
+	 * @param order the order to check
+	 * @return {@code true} if it could fit, {@code false} if it couldn't
 	 */
 	boolean canFit(Order order);
 	
 	/**
-	 * @return a list of all the cities where this rider's can deliver
+	 * @return a list of all the cities where this rider can deliver
 	 */
-	List<City> getCities();
+	Set<City> getCities();
 	
 	/**
-	 * @return the space used in this rider's bag at the moment
+	 * @return the space used in this rider's bag
 	 */
-	int getCapacity();
+	int getUsedSpace();
 	
 	/**
 	 * @return a String with the info about this rider (profit and capacity)
@@ -66,12 +70,12 @@ public interface Rider {
 	String showRiderInfo();
 	
 	/**
-	 * @return a String with the content of the rider's bag at the moment
+	 * @return a String with the content of this rider's bag
 	 */
 	String showBagInfo();
 	
 	/**
-	 * @return how much profit he will make with the orders that are in his bag right now
+	 * @return how much this rider would earn with the orders that are in his bag
 	 */
 	double getBagProfit();
 	

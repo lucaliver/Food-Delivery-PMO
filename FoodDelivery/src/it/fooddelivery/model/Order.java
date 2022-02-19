@@ -12,73 +12,67 @@ import java.util.Map;
 public interface Order {
 
 	/**
-	 * @return all the menus in the order.
+	 * @return all the menus in this order
 	 */
 	Map<Menu, Integer> getMenus();
 
 	/**
-	 * @param m = menu to add at the order.
+	 * @param menu menu to add at this order
 	 */
-	void addMenu(Menu m);
+	void increaseMenu(Menu menu);
 
 	/**
-	 * @param m = menu to remove from the order.
+	 * @param menu menu to remove from this order
 	 */
-	boolean removeMenu(Menu m);
+	void decreaseMenu(Menu menu);
 
 	/**
-	 * Remove all the menus from the order.
+	 * Remove all the menus from this order
 	 */
 	void removeAllMenus();
 
 	/**
-	 * @return the size of the whole order.
+	 * @return the size of this order
 	 */
 	int getSize();
 
 	/**
-	 * @return the price of the whole order.
+	 * @return the price of this order
 	 */
 	double getPrice();
 
 	/**
-	 * @return the ID of the order.
+	 * @return the ID of this order
 	 */
 	int getId();
 
 	/**
-	 * @return the destination of the order.
+	 * @return the destination of this order
 	 */
 	City getDestination();
 
 	/**
-	 * 
-	 * @return the adress of the order
+	 * @return the adress of this order
 	 */
 	String getAdress();
 
 	/**
-	 * 
-	 * @return the restaurant that is making the order
+	 * @return the restaurant that is making this order
 	 */
 	Restaurant getRestaurant();
 
 	/**
-	 * 
-	 * @return the all the menus in the order
+	 * @return the all the menus in this order
 	 */
 	String showOrderContent();
 
 	/**
-	 * 
-	 * @return infos about the order (city and address of destination, restaurant,
-	 *         total price).
+	 * @return a String with all the info about this order
 	 */
 	String showOrderInfo();
 
 	/**
-	 * 
-	 * @return the string to print with the id.
+	 * @return a String with basic info about this order 
 	 */
-	String showInfoForRider();
+	String showBasicInfo();
 }

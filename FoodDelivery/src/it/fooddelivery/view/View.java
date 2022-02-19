@@ -7,7 +7,7 @@ package it.fooddelivery.view;
 import it.fooddelivery.controller.ManagerImpl;
 
 /**
- * View component for MVC pattern of the delivery management software.
+ * View component for MVC pattern of the Food Delivery application.
  */
 public class View {
 	

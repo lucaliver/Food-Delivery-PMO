@@ -1,3 +1,7 @@
+/**
+ * @author Luca Procicchiani
+ */
+
 package it.fooddelivery.controller;
 
 import java.util.List;
@@ -11,13 +15,16 @@ import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.Rider;
 
+/**
+ * Interface for the controller component of the MVC pattern in the Food Delivery application.
+ */
 public interface Manager {
 
 	/**
 	 * Checks if the order can be assigned.
 	 * 
 	 * @param order the order to check
-	 * @return an Optional Rider if there is one that can take the order, empty if not
+	 * @return an Optional Rider if there is one that can take the order, {@code empty} if not
 	 */
 	Optional<Rider> canBeAssigned(Order order);
 	
@@ -47,8 +54,8 @@ public interface Manager {
 	/**
 	 * Returns the quantity of a specific menu in the current order.
 	 * 
-	 * @param menu menu to look for
-	 * @return quantity of that menu
+	 * @param menu the menu to look for
+	 * @return the quantity of that menu
 	 */
 	int howManyInCurrent(Menu menu);
 	
@@ -60,19 +67,42 @@ public interface Manager {
 	 */
 	boolean refreshWaitingOrder(Rider freeRider);
 	
-	void addToCurrent(Menu menu);
+	/**
+	 * Increases the quantity of the menu in the current order.
+	 * 
+	 * @param menu the menu to increase
+	 */
+	void increaseInCurrent(Menu menu);
 	
-	boolean removeFromCurrent(Menu menu);
+	/**
+	 * Decreases the quantity of the menu in the current order.
+	 * 
+	 * @param menu the menu to decrease
+	 */
+	void decreaseInCurrent(Menu menu);
 	
+	/**
+	 * @return a Set of all the restaurants
+	 */
 	Set<Restaurant> getRestaurants();
 	
+	/**
+	 * @return a Map of all riders, mapped by their name
+	 */
 	Map<String, Rider> getRiders();
 	
+	/**
+	 * @return an Optional Rider of the rider that took last order, {@code empty} if it went to the waiting list
+	 */
 	Optional<Rider> getRiderWithLastOrder();
 	
+	/**
+	 * @return if current order is present returns the value, otherwise throws {@code NoSuchElementException}
+	 */
 	Order getCurrentOrderPresent();
 	
+	/**
+	 * @return a List of the orders in waiting list
+	 */
 	List<Order> getWaitingOrders();
-	
-	int getSequentialIdCounter();	
 }

@@ -1,5 +1,5 @@
 /**
- * @author Giulia Costa
+ * @author Luca Procicchiani
  */
 
 package it.fooddelivery.test;
@@ -51,8 +51,8 @@ class TestRiderImpl {
 		OrderImpl o1 = new OrderImpl(25, City.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
 		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
-		o.addMenu(m);
-		o.addMenu(m2);
+		o.increaseMenu(m);
+		o.increaseMenu(m2);
 		delivery.addOrder(o);
 		delivery.deliverOrder(o);
 		assertFalse(delivery.getBag().contains(o));
@@ -68,8 +68,8 @@ class TestRiderImpl {
 		OrderImpl o1 = new OrderImpl(25, City.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
 		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
-		o.addMenu(m);
-		o1.addMenu(m2);
+		o.increaseMenu(m);
+		o1.increaseMenu(m2);
 		delivery.addOrder(o);
 		delivery.addOrder(o1);
 		assertTrue(delivery.getBag().contains(o1));
@@ -101,11 +101,11 @@ class TestRiderImpl {
 		MenuImpl m = new MenuImpl("Dfgheu", 80.00, 50);
 		MenuImpl m2 = new MenuImpl("Sushi", 50.00, 50);
 		MenuImpl m3 = new MenuImpl("Pizzeria", 80.00, 101);
-		o.addMenu(m);
-		o.addMenu(m2);
+		o.increaseMenu(m);
+		o.increaseMenu(m2);
 		assertTrue(man.canFit(o));
 		o.removeAllMenus();
-		o.addMenu(m3);
+		o.increaseMenu(m3);
 		assertFalse(man.canFit(o));
 	}
 }

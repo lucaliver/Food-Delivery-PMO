@@ -4,7 +4,6 @@
 
 package it.fooddelivery.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,7 +28,6 @@ public class ManagerFactory {
 	 * Creates a Manager, configurated with restaurants and riders for the Pesaro and Urbino (PU) province.
 	 */
 	public static ManagerImpl create(){
-		// TODO Prima di consegnare: aggiungere riders, ristoranti, menu, assegnamenti sensati.
 		return new ManagerImpl(createRiders(), createRestaurants());
 	}
 
@@ -41,22 +39,17 @@ public class ManagerFactory {
 	private static Map<String, Rider> createRiders() {
 		Map<String, Rider> riders = new HashMap<>();
 		
-		List<City> citiesForLuca = Arrays.asList(City.CAGLI, City.URBANIA);
+		Set<City> citiesForLuca = new HashSet<City>(Arrays.asList(City.CAGLI, City.URBANIA));
 		riders.put("Luca", new RiderImpl("Luca", citiesForLuca));
-		
-		List<City> citiesForGiulia = Arrays.asList(City.TAVULLIA, City.URBANIA);
-		riders.put("Giulia", new RiderImpl("Giulia", citiesForGiulia));
 
-		List<City> citiesForGiacomo = Arrays.asList(City.FERMIGNANO, City.URBANIA);
+		Set<City> citiesForGiacomo = new HashSet<City>(Arrays.asList(City.FERMIGNANO, City.URBANIA));
 		riders.put("Giacomo", new RiderImpl("Giacomo", citiesForGiacomo));
 
-		List<City> citiesForSara = Arrays.asList(City.FERMIGNANO, City.URBANIA, City.TAVULLIA, City.CAGLI);
+		Set<City> citiesForSara = new HashSet<City>(Arrays.asList(City.FERMIGNANO, City.URBANIA, City.TAVULLIA, City.CAGLI));
 		riders.put("Sara", new RiderImpl("Sara", citiesForSara));
 		
-		List<City> citiesForSaverio = Arrays.asList(City.TAVULLIA);
+		Set<City> citiesForSaverio = new HashSet<City>(Arrays.asList(City.TAVULLIA, City.CAGLI));
 		riders.put("Saverio", new RiderImpl("Saverio", citiesForSaverio));
-
-		riders.put("Marco", new RiderImpl("Marco", new ArrayList<>()));
 
 		return riders;
 	}
@@ -98,7 +91,10 @@ public class ManagerFactory {
 		restaurants.add(new RestaurantImpl("Pizzeria da Mario", menusForPizzeria));
 		
 		List<Menu> menusForSushi = Arrays.asList(new MenuImpl("Sushi", 5.90, 9),
-				                                 new MenuImpl("Ramen", 10.30, 7));
+				                                 new MenuImpl("Ramen", 10.30, 7),
+				                                 new MenuImpl("Ravioli", 4.40, 4),
+				                                 new MenuImpl("Riso cantonese", 5.50, 6),
+				                                 new MenuImpl("Biscotto della fortuna", 0.50, 1));
 		restaurants.add(new RestaurantImpl("Sushino", menusForSushi));
 		
 		return restaurants;

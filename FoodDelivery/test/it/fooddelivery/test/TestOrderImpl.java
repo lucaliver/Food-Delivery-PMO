@@ -38,40 +38,40 @@ class TestOrderImpl {
 	@Test
 	void testAddMenu() {
 		assertTrue(o.getMenus().isEmpty()); 
-		o.addMenu(m1);
+		o.increaseMenu(m1);
 		assertTrue(!o.getMenus().isEmpty());
 		assertEquals(1, o.getMenus().size());
 		assertTrue(o.getMenus().containsKey(m1));
 		assertEquals(o.getMenus().get(m1), 1);
-		o.addMenu(m2);
+		o.increaseMenu(m2);
 		assertEquals(o.getMenus().get(m2), 1);
 		assertEquals(o.getMenus().get(m1), 1);
-		o.addMenu(m1);
+		o.increaseMenu(m1);
 		assertEquals(o.getMenus().get(m1), 2);
 	}
 
 	@Test
 	void testRemoveMenu() {
-		o.addMenu(m1);
-		o.addMenu(m2);
-		o.addMenu(m1);
-		o.addMenu(m2);
-		o.removeMenu(m1);
+		o.increaseMenu(m1);
+		o.increaseMenu(m2);
+		o.increaseMenu(m1);
+		o.increaseMenu(m2);
+		o.decreaseMenu(m1);
 		assertTrue(o.getMenus().containsKey(m1));
 		assertEquals(o.getMenus().get(m1), 1);
-		o.removeMenu(m1);
+		o.decreaseMenu(m1);
 		assertFalse(o.getMenus().containsKey(m1));
-		o.removeMenu(m2);
-		o.removeMenu(m2);
+		o.decreaseMenu(m2);
+		o.decreaseMenu(m2);
 		assertTrue(o.getMenus().isEmpty());
 	}
 	
 	@Test
 	void testRemoveAllMenus() {
-		o.addMenu(m1);
-		o.addMenu(m1);
-		o.addMenu(m2);
-		o.addMenu(m3);
+		o.increaseMenu(m1);
+		o.increaseMenu(m1);
+		o.increaseMenu(m2);
+		o.increaseMenu(m3);
 		o.removeAllMenus();
 		assertTrue(o.getMenus().isEmpty());
 	}
@@ -79,27 +79,27 @@ class TestOrderImpl {
 	@Test
 	void testGetMenus() {
 		assertTrue(o.getMenus().isEmpty());		
-		o.addMenu(m1);
+		o.increaseMenu(m1);
 		assertNotNull(o.getMenus());
 		assertTrue(o.getMenus().containsKey(m1));
 	}
 
 	@Test
 	void testGetSize() {
-		o.addMenu(m1); 
-		o.addMenu(m2); 
-		o.addMenu(m2); 
-		o.addMenu(m3);
+		o.increaseMenu(m1); 
+		o.increaseMenu(m2); 
+		o.increaseMenu(m2); 
+		o.increaseMenu(m3);
 		int sizeTot = m1.getSize()+m2.getSize()+m2.getSize()+m3.getSize(); 
 		assertEquals(sizeTot, o.getSize());
 	}
 
 	@Test
 	void testTotalPrice() {
-		o.addMenu(m1); 
-		o.addMenu(m2); 
-		o.addMenu(m3); 
-		o.addMenu(m3);
+		o.increaseMenu(m1); 
+		o.increaseMenu(m2); 
+		o.increaseMenu(m3); 
+		o.increaseMenu(m3);
 		double priceTot = m1.getPrice()+m2.getPrice()+m3.getPrice()+m3.getPrice();
 		assertEquals(priceTot, o.getPrice());
 	}
@@ -113,5 +113,4 @@ class TestOrderImpl {
 	void testGetDestination() {
 		assertEquals(City.CAGLI, o.getDestination());
 	}
-
 }

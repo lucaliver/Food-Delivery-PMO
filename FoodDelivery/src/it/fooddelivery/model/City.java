@@ -1,5 +1,5 @@
 /**
-* @author Tombari Giacomo
+* @author Giacomo Tombari
  */
 
 package it.fooddelivery.model;
@@ -18,6 +18,7 @@ public enum City {
 	
 	/**
 	 * Constructor, it sets the city's name.
+	 * 
 	 * @param name of the city
 	 */
 	City(final String name) {

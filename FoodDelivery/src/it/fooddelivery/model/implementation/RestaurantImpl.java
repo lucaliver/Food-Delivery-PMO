@@ -13,13 +13,14 @@ import it.fooddelivery.model.Restaurant;
  * A class to represent a restaurant. Implementation of {@link Restaurant}.
  */
 public class RestaurantImpl implements Restaurant {
+	
 	private final String name;
 	private List<Menu> menuOffer;
 	
 	/**
 	 * Constructs a Restaurant with the specified name and menu offer.
 	 * 
-	 * @param name the name of the restaurant
+	 * @param name the name of this restaurant
 	 * @param menuOffer the list of menus offered by this restaurant
 	 */
 	public RestaurantImpl(String name, List<Menu> menuOffer) {

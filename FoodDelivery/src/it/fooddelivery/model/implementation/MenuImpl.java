@@ -7,7 +7,7 @@ package it.fooddelivery.model.implementation;
 import it.fooddelivery.model.Menu;
 
 /**
- * A class to represent a menu.
+ * A class to represent a menu. Implementation of {@link Menu}.
  */
 public class MenuImpl implements Menu{
 	
@@ -17,9 +17,10 @@ public class MenuImpl implements Menu{
 	
 	/**
 	 * Constructor, initializes all the fields.
-	 * @param name = name of the menu.
-	 * @param price = price of the menu.
-	 * @param size = size of the menu.
+	 * 
+	 * @param name name of this menu
+	 * @param price price of this menu
+	 * @param size size of this menu
 	 */
 	public MenuImpl(String name, double price, int size) {		
 		this.name = name;

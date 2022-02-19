@@ -15,11 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -27,27 +25,26 @@ import it.fooddelivery.controller.ManagerImpl;
 import it.fooddelivery.model.Rider;
 
 /**
- * The only screen riders will see. It shows the bag of everyone and let them empty it.
+ * The only screen riders will see. It shows the bag of every rider and let them manage it.
  */
 @SuppressWarnings("serial")
 public class ViewWorker extends JFrame{
 	
 	private static ViewWorker instance = null;
-	
 	private ManagerImpl controller;
 	private JPanel mainPanel;
 	private JTextArea riderArea;
 	private JTextArea orderArea;
 	private JTextArea waitingOrdersArea;
 	private JButton deliveryButton;
-	private final String mainPanelTitle = "Rider Screen";	
-	private final String emptyBagTitle = "In attesa di ordini da consegnare!!!";
-	private final String emptyWaitTitle = "In attesa di ordini da smistare!!!";
+	private final String mainPanelTitle = "Schermata fattorini: gestite i vostri ordini!";	
+	private final String emptyBagTitle = "Nessun ordine nel tuo ziano";
+	private final String emptyWaitTitle = "Nessun ordine in attesa";
 	private final Map<Rider, JTextArea> infoOrder;
 	private final Map<Rider, JTextArea> infoRider;
 	
 	/**
-	 * Private singleton Constructor.
+	 * Private singleton constructor.
 	 */
 	private ViewWorker (){
 		this.infoOrder = new HashMap<>();
@@ -55,8 +52,9 @@ public class ViewWorker extends JFrame{
 	}
 	
 	/**
-	 * It initializes the controller and the view
-	 * @param controller manager of the view
+	 * Set the controller and initializes the view.
+	 * 
+	 * @param controller controller component for the MVC pattern
 	 */
 	public void initView(final ManagerImpl controller) {
 		this.controller = controller;
@@ -64,7 +62,8 @@ public class ViewWorker extends JFrame{
 	}
 	
 	/**
-	 * It creates one and only one object with ViewForWorker type
+	 * Creates one and only one object of the ViewForWorker type.
+	 * 
 	 * @return the same object every time
 	 */
 	public static ViewWorker getInstance() {
@@ -75,24 +74,23 @@ public class ViewWorker extends JFrame{
 	}
 	
 	/**
-	 * It checks where the last order was sent
-	 * @param r = rider who receives the last order, null if order is in waitingList
+	 * Checks where the last order was sent.
+	 * 
+	 * @param ride rider who received the last order, {@code empty} if order was put in waitingList
 	 */
-	public void receiveNewOrder(Optional<Rider> r) {
-		if(r.isPresent()) {
-			this.updateRiderData(r.get());
+	public void receiveNewOrder(Optional<Rider> rider) {
+		if(rider.isPresent()) {
+			this.updateRiderData(rider.get());
 		}else {
 			this.updateWaitingOrders();
 		}
 	}
 	
 	/**
-	 * It initializes the window.
+	 * Initializes all the window.
 	 */
 	private void Init(){
-		
 		this.setTitle(mainPanelTitle);
-		//this.setSize(180,80);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		
@@ -109,34 +107,35 @@ public class ViewWorker extends JFrame{
 	}
 
 	/**
-	 * It creates the GUI for one rider (text and button).
-	 * @param r the rider where to get the data
-	 * @return the panel itself.
+	 * Creates the GUI for one rider (text and button).
+	 * 
+	 * @param rider the rider where to get the data
+	 * @return the panel itself
 	 */
-	private JPanel createRiderPanel(Rider r) {
+	private JPanel createRiderPanel(Rider rider) {
 		JPanel riderPanel = new JPanel();
-		riderPanel.setBorder(BorderFactory.createTitledBorder(r.getName()));
+		riderPanel.setBorder(BorderFactory.createTitledBorder(rider.getName()));
 		final GroupLayout riderPanelLayout = new GroupLayout(riderPanel);
 		
 		riderArea = new JTextArea(2,8);
 		riderArea.setEditable(false);
-		riderArea.setText(r.showRiderInfo());
+		riderArea.setText(rider.showRiderInfo());
 		riderArea.setBackground(getBackground());
-		infoRider.put(r, riderArea);
+		infoRider.put(rider, riderArea);
 		
-		orderArea = new JTextArea(4,20);
+		orderArea = new JTextArea(4,30);
 		orderArea.setEditable(false);
 		orderArea.setText(emptyBagTitle);
 		orderArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		infoOrder.put(r, orderArea);
+		infoOrder.put(rider, orderArea);
 		
 		JScrollPane scrollOrderArea = new JScrollPane(orderArea);
 		scrollOrderArea.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
-		deliveryButton = new JButton("Parti e consegna!");
+		deliveryButton = new JButton("Consegna ordini");
 		deliveryButton.addActionListener(e -> {
-			this.startDelivery(r);
-			this.checkWaitingOrders(r);			
+			this.startDelivery(rider);
+			this.checkWaitingOrders(rider);			
 		});
 					
 		riderPanelLayout.setHorizontalGroup(
@@ -152,17 +151,17 @@ public class ViewWorker extends JFrame{
 				.addComponent(Box.createHorizontalStrut(15))
 				.addComponent(deliveryButton));
 
-		this.pack();
 		return riderPanel;
 	}
 	
 	/**
-	 * It creates part of the window that shows the waiting orders.
-	 * @return the panel itself.
+	 * Creates the part of the window that shows the waiting orders.
+	 * 
+	 * @return the panel itself
 	 */
 	private JPanel createWaitingOrderPanel() {
 		JPanel waitingSection = new JPanel();
-		waitingSection.setBorder(BorderFactory.createTitledBorder("Ordini in attesa"));
+		waitingSection.setBorder(BorderFactory.createTitledBorder("Ordini in attesa:"));
 		final GroupLayout waitingSectionLayout = new GroupLayout(waitingSection);
 		
 		waitingOrdersArea = new JTextArea(5,30);
@@ -183,57 +182,57 @@ public class ViewWorker extends JFrame{
 	}
 	
 	/**
-	 * It start a new delivery
-	 * @param r = rider who's making the delivery
+	 * Starts a new delivery.
+	 * 
+	 * @param rider the rider who's making the delivery
 	 */
-	private void startDelivery (Rider r) {
-		if(!r.getBag().isEmpty()){
-			String bagProfit = String.format("%.2f",r.getBagProfit());
-			this.controller.getRiders().get(r.getName()).deliverAll();
-			this.updateRiderData(r);
-			if(r.getBag().isEmpty()) {
+	private void startDelivery (Rider rider) {
+		if(!rider.getBag().isEmpty()){
+			String bagProfit = String.format("%.2f",rider.getBagProfit());
+			this.controller.getRiders().get(rider.getName()).deliverAll();
+			this.updateRiderData(rider);
+			if(rider.getBag().isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Consegna effettuata :)\n"+
-	                                          "Hai guadagnato: " +bagProfit+"€");
+	                                          "Hai guadagnato " +bagProfit+"€");
 			}else {
-				JOptionPane.showMessageDialog(this,"Error...");
+				JOptionPane.showMessageDialog(this,"Errore.");
 			}
 		}else{
-			JOptionPane.showMessageDialog(this, "La tua bag è vuota :(");
+			JOptionPane.showMessageDialog(this, "Non puoi consegnare, la tua bag è vuota :(");
 		}		
 	}
 	
 	/**
-	 * It checks if some orders in waiting can be assign to the given rider
-	 * @param r = rider who's finish the last delivery
+	 * Checks if some orders in waiting can be assigned to the given rider.
+	 * 
+	 * @param rider the rider that is looking for new orders
 	 */
-	private void checkWaitingOrders(Rider r) {
+	private void checkWaitingOrders(Rider rider) {
 		if(!this.controller.getWaitingOrders().isEmpty()) {
-			if(this.controller.refreshWaitingOrder(r)) {				
+			if(this.controller.refreshWaitingOrder(rider)) {				
 				this.updateWaitingOrders();
-				this.receiveNewOrder(Optional.of(r));
-				JOptionPane.showMessageDialog(this, "Nuovi ordini aggiunti dalla lista d'attesa");
-			}else {
-				JOptionPane.showMessageDialog(this, "Nessun nuovo ordine al momento");
-			}					
-		}else {
-			JOptionPane.showMessageDialog(this, "Lista d'attesa vuota");
-		}
+				this.receiveNewOrder(Optional.of(rider));
+				JOptionPane.showMessageDialog(this, "Hai nuovi ordini presi dalla lista d'attesa ;)");
+			}
+		}else
+			JOptionPane.showMessageDialog(this, "Nessun nuovo ordine per te al momento.");
 	}
 	
 	/**
-	 * It update the given rider data and bag 
-	 * @param r = given rider
+	 * Updates the given rider data and bag.
+	 *  
+	 * @param rider given rider
 	 */
-	private void updateRiderData(Rider r) {
-		if(!r.getBag().isEmpty())
-			this.infoOrder.get(r).setText(r.showBagInfo());
+	private void updateRiderData(Rider rider) {
+		if(!rider.getBag().isEmpty())
+			this.infoOrder.get(rider).setText(rider.showBagInfo());
 		else
-			this.infoOrder.get(r).setText(emptyBagTitle);
-		this.infoRider.get(r).setText(r.showRiderInfo());
+			this.infoOrder.get(rider).setText(emptyBagTitle);
+		this.infoRider.get(rider).setText(rider.showRiderInfo());
 	}
 	
 	/**
-	 * It update the waitingOrder area
+	 * Update the waiting orders area.
 	 */
 	private void updateWaitingOrders() {
 		if(!this.controller.getWaitingOrders().isEmpty())
@@ -242,4 +241,3 @@ public class ViewWorker extends JFrame{
 			this.waitingOrdersArea.setText(emptyWaitTitle);
 	}
 }
-

@@ -6,62 +6,60 @@ package it.fooddelivery.model.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import it.fooddelivery.model.Rider;
 import it.fooddelivery.model.City;
 import it.fooddelivery.model.Order;
 
 /**
- * A class to represent a rider.
+ * A class to represent a rider.  Implementation of {@link Rider}.
  */
 public class RiderImpl implements Rider{
+	
 	private static final int MAX_CAPACITY = 100;
 	private static final double PROFIT_PERCENTAGE = 0.10;
 	private double profit;
 	private final String name;
-	private int capacity;
 	private List<Order> orderList;
-	private List<City> cities;
+	private Set<City> cities;
 	
 	/**
-	 * Constructor.
+	 * Constructs a Rider with the specified name and cities.
 	 * 
 	 * @param name the rider's name
 	 * @param cities a list of all cities where he can deliver
 	 */
-	public RiderImpl(String name, List<City> cities) {
-		this.profit = 0;
-		this.capacity = 0;
+	public RiderImpl(String name, Set<City> cities) {
 		this.name = name;
 		this.cities = cities;
+		this.profit = 0;
 		this.orderList = new ArrayList<>();
 	}
 
 	@Override
 	public String showRiderInfo() {
 		return "Profito: "+String.format("%.2f", getProfit())+
-		       "€"+'\n'+"Capacità: "+this.getCapacity()+
-		       "/"+RiderImpl.MAX_CAPACITY;
+		       "€"+'\n'+"Capacità: "+this.getUsedSpace()+
+		       "/"+RiderImpl.MAX_CAPACITY + "u";
 	}
 	
 	@Override
 	public String showBagInfo() {
 		StringBuilder sb = new StringBuilder();		
-		this.orderList.forEach(o -> sb.append(o.showInfoForRider() +"    Totale: " + String.format("%.2f", o.getPrice()) + "€\n"));
+		this.orderList.forEach(o -> sb.append(o.showBasicInfo()));
 		return sb.toString();
 	}
 
 	@Override
 	public void addOrder(Order order) {
 		orderList.add(order);
-		this.capacity += order.getSize();
 	}
 	
 	@Override
 	public void deliverOrder(Order order) {
 		if(this.orderList.contains(order)) {
 			this.profit += this.calculateOrderProfit(order);
-			this.capacity -= order.getSize();
 			orderList.remove(order);
 		}
 		else {
@@ -77,15 +75,7 @@ public class RiderImpl implements Rider{
 			
 	@Override
 	public boolean canFit(Order order) {
-		return (this.capacity + order.getSize()) <= MAX_CAPACITY;
-	}
-	
-	public static double getPercentage() {
-		return PROFIT_PERCENTAGE;
-	}
-	
-	public static int getMaxCapacity() {
-		return MAX_CAPACITY;
+		return (this.getUsedSpace() + order.getSize()) <= MAX_CAPACITY;
 	}
 	
 	@Override
@@ -104,13 +94,13 @@ public class RiderImpl implements Rider{
 	}
 	
 	@Override
-	public List<City> getCities() {
+	public Set<City> getCities() {
 		return cities;
 	}
 	
 	@Override
-	public int getCapacity() {
-		return capacity;
+	public int getUsedSpace() {
+		return this.orderList.stream().mapToInt(o -> o.getSize()).sum();
 	}
 	
 	@Override
@@ -126,9 +116,17 @@ public class RiderImpl implements Rider{
 	 * Calculates the profit of the order.
 	 * 
 	 * @param order the order
-	 * @return how much this rider can make out of this order
+	 * @return how much this rider could make out of this order
 	 */
 	private double calculateOrderProfit(Order order) {
-		return order.getPrice() * getPercentage();
+		return order.getPrice() * RiderImpl.PROFIT_PERCENTAGE;
+	}
+	
+	public static double getPercentage() {
+		return PROFIT_PERCENTAGE;
+	}
+	
+	public static int getMaxCapacity() {
+		return MAX_CAPACITY;
 	}
 }

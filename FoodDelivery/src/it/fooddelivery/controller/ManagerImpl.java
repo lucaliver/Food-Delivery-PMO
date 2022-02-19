@@ -22,9 +22,9 @@ import it.fooddelivery.model.Restaurant;
  * Controller component in the MVC pattern for the Food Delivery Application.
  */
 public class ManagerImpl implements Manager{
-	private Map<String, Rider> riders;
+	private final Map<String, Rider> riders;
+	private final Set<Restaurant> restaurants;
 	private List<Order> waitingOrders;
-	private Set<Restaurant> restaurants;
 	private Optional<Order> currentOrder;
 	private Optional<Rider> riderWithLastOrder;
 	private int sequentialIdCounter;
@@ -52,7 +52,7 @@ public class ManagerImpl implements Manager{
 					.stream()
 					.filter(x->x.getCities().contains(order.getDestination()))
 					.filter(x->x.canFit(order))	
-					.sorted(Comparator.comparingDouble(Rider::getProfit))	
+					.sorted(Comparator.comparingDouble(Rider::getProfit))
 					.findFirst();		
 	}
 	
@@ -72,7 +72,7 @@ public class ManagerImpl implements Manager{
 	@Override
 	public String showWaitingOrders() {
 		StringBuilder sb = new StringBuilder();
-		this.waitingOrders.forEach(o -> sb.append(o.showInfoForRider() + "    Totale: " + String.format("%.2f", o.getPrice()) + "€\n"));
+		this.waitingOrders.forEach(o -> sb.append(o.showBasicInfo() + "    Totale: " + String.format("%.2f", o.getPrice()) + "€\n"));
 		return sb.toString();
 	}
 	
@@ -98,13 +98,13 @@ public class ManagerImpl implements Manager{
 	}
 	
 	@Override
-	public void addToCurrent(Menu menu) {
-		this.getCurrentOrderPresent().addMenu(menu);
+	public void increaseInCurrent(Menu menu) {
+		this.getCurrentOrderPresent().increaseMenu(menu);
 	}
 	
 	@Override
-	public boolean removeFromCurrent(Menu menu) {
-		return this.getCurrentOrderPresent().removeMenu(menu);
+	public void decreaseInCurrent(Menu menu) {
+		this.getCurrentOrderPresent().decreaseMenu(menu);
 	}
 	
 	@Override
@@ -130,11 +130,6 @@ public class ManagerImpl implements Manager{
 	@Override
 	public List<Order> getWaitingOrders() {
 		return waitingOrders;
-	}
-	
-	@Override
-	public int getSequentialIdCounter() {
-		return this.sequentialIdCounter;
 	}
 	
 	/**

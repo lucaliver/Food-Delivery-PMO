@@ -34,5 +34,4 @@ class TestMenuImpl {
 	void testGetSize() {
 		assertEquals(49, m.getSize());
 	}
-	
 }

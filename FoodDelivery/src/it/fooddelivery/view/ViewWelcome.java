@@ -4,8 +4,6 @@
 
 package it.fooddelivery.view;
 
-import java.awt.Component;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -26,6 +24,7 @@ import it.fooddelivery.model.Restaurant;
  */
 @SuppressWarnings("serial")
 public class ViewWelcome extends JFrame {
+	
 	private final ManagerImpl controller;
 	private JPanel mainPanel;
 	private final String title = "Benvenuto, inizia ad ordinare!";
@@ -38,18 +37,15 @@ public class ViewWelcome extends JFrame {
 	/**
 	 * Constructs a welcome screen for the user.
 	 * 
-	 * @param controller controller component for the MVC pattern.
+	 * @param controller controller component for the MVC pattern
 	 */
 	ViewWelcome(final ManagerImpl controller){
 		this.controller = controller;
 		this.Init();
-		this.pack();
-		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
 	}
 	
 	/**
-	 * Initializes all its GUI.
+	 * Initializes all the window.
 	 */
 	private void Init() {
 		this.setTitle(this.title);
@@ -59,18 +55,21 @@ public class ViewWelcome extends JFrame {
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
-		
-		mainPanel.add(createOrderInfoPanel());
+		mainPanel.add(createChoicePanel());
 		mainPanel.add(createButtonsPanel());
 		
-		this.getContentPane().add(mainPanel);				
+		this.getContentPane().add(mainPanel);
+		this.pack();	
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		this.setVisible(true);			
 	}
 
 	/**
-	 * It creates the panel where the user choose the info of his order
+	 * Creates the panel where the user choose restaurant and destination.
+	 * 
 	 * @return the panel itself
 	 */
-	private JPanel createOrderInfoPanel() {
+	private JPanel createChoicePanel() {
 		JPanel orderInfoPanel = new JPanel();
 		orderInfoPanel.setLayout(new BoxLayout(orderInfoPanel, BoxLayout.X_AXIS));
 		orderInfoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -82,7 +81,8 @@ public class ViewWelcome extends JFrame {
 	}
 
 	/**
-	 * It creates the panel with all the button 
+	 * Creates the panel with the proceed button and exit button.
+	 * 
 	 * @return the panel itself
 	 */
 	private JPanel createButtonsPanel() {
@@ -112,7 +112,8 @@ public class ViewWelcome extends JFrame {
 	}
 
 	/**
-	 * It Creates the panel where to choose the order's restaurant
+	 * Creates the panel for choosing the restaurant.
+	 * 
 	 * @return the panel itself
 	 */
 	private JPanel createRestaurantPanel() {
@@ -132,7 +133,8 @@ public class ViewWelcome extends JFrame {
 	}
 
 	/**
-	 * It creates the panel where to input all the order's destination data
+	 * Creates the panel for the insertion of the destination.
+	 * 
 	 * @return the panel itself
 	 */
 	private JPanel createDestinationPanel() {

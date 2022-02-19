@@ -48,16 +48,16 @@ class TestManager {
 
 	@Test
 	void testCanBeAssigned() {
-		this.o1.addMenu(m1);
-		this.o1.addMenu(m3);
-		this.o1.addMenu(m4);
-		this.o2.addMenu(m2);
-		this.o2.addMenu(m3);
-		this.o2.addMenu(m5);
-		this.o2.addMenu(m6);
-		this.o3.addMenu(m1);
-		this.o3.addMenu(m2);
-		this.o3.addMenu(m5);
+		this.o1.increaseMenu(m1);
+		this.o1.increaseMenu(m3);
+		this.o1.increaseMenu(m4);
+		this.o2.increaseMenu(m2);
+		this.o2.increaseMenu(m3);
+		this.o2.increaseMenu(m5);
+		this.o2.increaseMenu(m6);
+		this.o3.increaseMenu(m1);
+		this.o3.increaseMenu(m2);
+		this.o3.increaseMenu(m5);
 		
 		// Ordine creato correttamente, ci aspettiamo venga assegnato
 		assertTrue(this.m.canBeAssigned(o3).isPresent());
@@ -68,8 +68,8 @@ class TestManager {
 		
 		// Verifica del corretto smistamento favorevole a Rider con guadagno minore
 		this.m.createCurrentOrder(City.TAVULLIA, "Casa", null);
-		this.m.getCurrentOrderPresent().addMenu(m1);
-		this.m.getCurrentOrderPresent().addMenu(m2);
+		this.m.getCurrentOrderPresent().increaseMenu(m1);
+		this.m.getCurrentOrderPresent().increaseMenu(m2);
 		assertTrue(this.m.assignCurrentOrder());
 		assertTrue(this.m.getRiderWithLastOrder().isPresent());
 		System.out.println(this.m.getRiderWithLastOrder().get().getName());
@@ -77,8 +77,8 @@ class TestManager {
 		System.out.println(this.m.getRiders().get("Saverio").getProfit());
 		this.m.createCurrentOrder(City.TAVULLIA, "Villa", null);
 		assertEquals(this.m.getSequentialIdCounter(), 2);
-		this.m.getCurrentOrderPresent().addMenu(m4);
-		this.m.getCurrentOrderPresent().addMenu(m5);
+		this.m.getCurrentOrderPresent().increaseMenu(m4);
+		this.m.getCurrentOrderPresent().increaseMenu(m5);
 		assertTrue(this.m.assignCurrentOrder());
 		assertTrue(this.m.getRiderWithLastOrder().isPresent());
 		System.out.println(this.m.getRiderWithLastOrder().get().getName());
@@ -125,27 +125,27 @@ class TestManager {
 	void testHowManyInCurrent() {
 		this.m.createCurrentOrder(City.CAGLI, null, null);
 		assertTrue(this.m.howManyInCurrent(m1) == 0);
-		this.m.getCurrentOrderPresent().addMenu(m1);
+		this.m.getCurrentOrderPresent().increaseMenu(m1);
 		assertTrue(this.m.howManyInCurrent(m1) == 1);
-		this.m.getCurrentOrderPresent().addMenu(m1);
+		this.m.getCurrentOrderPresent().increaseMenu(m1);
 		assertTrue(this.m.howManyInCurrent(m1) == 2);
-		this.m.getCurrentOrderPresent().removeMenu(m1);
+		this.m.getCurrentOrderPresent().decreaseMenu(m1);
 		assertTrue(this.m.howManyInCurrent(m1) == 1);
 		for(int i = 1; i <= 3; i++)
-			this.m.getCurrentOrderPresent().addMenu(m3);
+			this.m.getCurrentOrderPresent().increaseMenu(m3);
 		assertTrue(this.m.howManyInCurrent(m3) == 3);
 	}
 
 	@Test
 	void testRefreshWaitingOrder() {
-		this.o1.addMenu(m1);
-		this.o1.addMenu(m5);
-		this.o2.addMenu(m1);
-		this.o2.addMenu(m2);
-		this.o2.addMenu(m3);
-		this.o3.addMenu(m3);
-		this.o3.addMenu(m4);
-		this.o3.addMenu(m5);
+		this.o1.increaseMenu(m1);
+		this.o1.increaseMenu(m5);
+		this.o2.increaseMenu(m1);
+		this.o2.increaseMenu(m2);
+		this.o2.increaseMenu(m3);
+		this.o3.increaseMenu(m3);
+		this.o3.increaseMenu(m4);
+		this.o3.increaseMenu(m5);
 		this.m.getWaitingOrders().add(o1);	
 		this.m.getWaitingOrders().add(o2);	
 		this.m.getWaitingOrders().add(o3);
@@ -165,7 +165,4 @@ class TestManager {
 		assertTrue(this.m.getRiders().get("Luca").getBag().size() == 1);
 		assertFalse(this.m.getRiders().get("Luca").getBag().contains(o1));
 	}
-
-
-
 }
