@@ -12,8 +12,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import it.fooddelivery.model.Order;
-import it.fooddelivery.model.City;
 import it.fooddelivery.model.implementation.RiderImpl;
+import it.fooddelivery.model.implementation.CityImpl;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
 
@@ -38,7 +38,7 @@ class TestRiderImpl {
 	@Test
 	void testAddOrder() {
 		RiderImpl man2 = new RiderImpl("Fattorino_2", null);
-		OrderImpl o = new OrderImpl(21, City.CAGLI, null, null);
+		OrderImpl o = new OrderImpl(21, CityImpl.CAGLI, null, null);
 		man2.addOrder(o);
 		assertFalse(man2.getBag().isEmpty());
 		assertEquals(1, man2.getBag().size());
@@ -47,8 +47,8 @@ class TestRiderImpl {
 	@Test
 	void testDeliverOrder() {
 		RiderImpl delivery = new RiderImpl("Fattorino", null);
-		OrderImpl o = new OrderImpl(22, City.FERMIGNANO, null, null);
-		OrderImpl o1 = new OrderImpl(25, City.FERMIGNANO, null, null);
+		OrderImpl o = new OrderImpl(22, CityImpl.FERMIGNANO, null, null);
+		OrderImpl o1 = new OrderImpl(25, CityImpl.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
 		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
 		o.increaseMenu(m);
@@ -64,8 +64,8 @@ class TestRiderImpl {
 	@Test
 	void testDeliveryAll() {
 		RiderImpl delivery = new RiderImpl("Fattorino", null);
-		OrderImpl o = new OrderImpl(22, City.FERMIGNANO, null, null);
-		OrderImpl o1 = new OrderImpl(25, City.FERMIGNANO, null, null);
+		OrderImpl o = new OrderImpl(22, CityImpl.FERMIGNANO, null, null);
+		OrderImpl o1 = new OrderImpl(25, CityImpl.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
 		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
 		o.increaseMenu(m);
@@ -97,7 +97,7 @@ class TestRiderImpl {
 	@Test
 	void testCanFit() {
 		RiderImpl man = new RiderImpl("Fattorino", null);
-		OrderImpl o = new OrderImpl(23, City.FOSSOMBRONE, null, null);
+		OrderImpl o = new OrderImpl(23, CityImpl.FOSSOMBRONE, null, null);
 		MenuImpl m = new MenuImpl("Dfgheu", 80.00, 50);
 		MenuImpl m2 = new MenuImpl("Sushi", 50.00, 50);
 		MenuImpl m3 = new MenuImpl("Pizzeria", 80.00, 101);

@@ -12,8 +12,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import it.fooddelivery.model.Rider;
+import it.fooddelivery.model.implementation.CityImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
-import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
@@ -57,7 +57,7 @@ public class ManagerImpl implements Manager{
 	}
 	
 	@Override
-	public void createCurrentOrder(City destination, String address, Restaurant restaurant) {
+	public void createCurrentOrder(CityImpl destination, String address, Restaurant restaurant) {
 		this.sequentialIdCounter += 1;
 		this.currentOrder = Optional.of(new OrderImpl(this.sequentialIdCounter, destination, address, restaurant)); 
 	}

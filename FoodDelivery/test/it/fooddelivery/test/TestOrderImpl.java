@@ -8,8 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import it.fooddelivery.model.City;
+
 import it.fooddelivery.model.Menu;
+import it.fooddelivery.model.implementation.CityImpl;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
@@ -18,7 +19,7 @@ class TestOrderImpl {
 	
 	final private List<Menu> menus = new ArrayList<>();
 	final private RestaurantImpl restaurant = new RestaurantImpl("MasterChef", menus);
-	private OrderImpl o = new OrderImpl(01, City.CAGLI, "Strada_1", restaurant);
+	private OrderImpl o = new OrderImpl(01, CityImpl.CAGLI, "Strada_1", restaurant);
 	private MenuImpl m1 = new MenuImpl("Panino", 4.00, 3);
 	private MenuImpl m2 = new MenuImpl("Pizza", 7.00, 10);
 	private MenuImpl m3 = new MenuImpl("Pasta", 10.00, 8);
@@ -27,7 +28,7 @@ class TestOrderImpl {
 	void testOrderImpl() {	
 		assertNotNull(o);
 		assertEquals(o.getId(), 01);
-		assertEquals(o.getDestination(), City.CAGLI);
+		assertEquals(o.getDestination(), CityImpl.CAGLI);
 		assertEquals(o.getAdress(), "Strada_1");
 		assertEquals(o.getRestaurant(), this.restaurant);
 		assertTrue(o.getMenus().isEmpty());
@@ -111,6 +112,6 @@ class TestOrderImpl {
 
 	@Test
 	void testGetDestination() {
-		assertEquals(City.CAGLI, o.getDestination());
+		assertEquals(CityImpl.CAGLI, o.getDestination());
 	}
 }

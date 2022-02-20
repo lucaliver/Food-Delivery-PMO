@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.Rider;
+import it.fooddelivery.model.implementation.CityImpl;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
 import it.fooddelivery.model.implementation.RiderImpl;
@@ -39,16 +39,16 @@ public class ManagerFactory {
 	private static Map<String, Rider> createRiders() {
 		Map<String, Rider> riders = new HashMap<>();
 		
-		Set<City> citiesForLuca = new HashSet<City>(Arrays.asList(City.CAGLI, City.URBANIA));
+		Set<CityImpl> citiesForLuca = new HashSet<CityImpl>(Arrays.asList(CityImpl.CAGLI, CityImpl.URBANIA));
 		riders.put("Luca", new RiderImpl("Luca", citiesForLuca));
 
-		Set<City> citiesForGiacomo = new HashSet<City>(Arrays.asList(City.FERMIGNANO, City.URBANIA));
+		Set<CityImpl> citiesForGiacomo = new HashSet<CityImpl>(Arrays.asList(CityImpl.FERMIGNANO, CityImpl.URBANIA));
 		riders.put("Giacomo", new RiderImpl("Giacomo", citiesForGiacomo));
 
-		Set<City> citiesForSara = new HashSet<City>(Arrays.asList(City.FERMIGNANO, City.URBANIA, City.TAVULLIA, City.CAGLI));
+		Set<CityImpl> citiesForSara = new HashSet<CityImpl>(Arrays.asList(CityImpl.FERMIGNANO, CityImpl.URBANIA, CityImpl.TAVULLIA, CityImpl.CAGLI));
 		riders.put("Sara", new RiderImpl("Sara", citiesForSara));
 		
-		Set<City> citiesForSaverio = new HashSet<City>(Arrays.asList(City.TAVULLIA, City.CAGLI));
+		Set<CityImpl> citiesForSaverio = new HashSet<CityImpl>(Arrays.asList(CityImpl.TAVULLIA, CityImpl.CAGLI));
 		riders.put("Saverio", new RiderImpl("Saverio", citiesForSaverio));
 
 		return riders;

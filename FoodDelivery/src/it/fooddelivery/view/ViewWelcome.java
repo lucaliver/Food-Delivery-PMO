@@ -16,8 +16,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import it.fooddelivery.controller.ManagerImpl;
-import it.fooddelivery.model.City;
 import it.fooddelivery.model.Restaurant;
+import it.fooddelivery.model.implementation.CityImpl;
 
 /**
  * Welcome screen for the customer, used to select restaurant and destination.
@@ -28,7 +28,7 @@ public class ViewWelcome extends JFrame {
 	private final ManagerImpl controller;
 	private JPanel mainPanel;
 	private final String title = "Benvenuto, inizia ad ordinare!";
-	private JComboBox<City> citiesCombo;
+	private JComboBox<CityImpl> citiesCombo;
 	private JComboBox<Restaurant> restaurantCombo;
 	private JTextField addressField;
 	private JButton proceedButton;
@@ -101,7 +101,7 @@ public class ViewWelcome extends JFrame {
 		
 		proceedButton = new JButton("Procedi"); 
 		proceedButton.addActionListener(event -> {
-			controller.createCurrentOrder((City)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
+			controller.createCurrentOrder((CityImpl)citiesCombo.getSelectedItem(), addressField.getText(), (Restaurant)restaurantCombo.getSelectedItem());
 			this.setVisible(false);
 			this.dispose();
 			new ViewPlacing(this.controller);
@@ -145,7 +145,7 @@ public class ViewWelcome extends JFrame {
 		JLabel citiesLabel = new JLabel("Selezionare la destinazione: ");
 		destinationPanel.add(citiesLabel);
 		citiesCombo = new JComboBox<>();
-		for(City c: City.values())
+		for(CityImpl c: CityImpl.values())
 			citiesCombo.addItem(c);
 		destinationPanel.add(citiesCombo);
 		

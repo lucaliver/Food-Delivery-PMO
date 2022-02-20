@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 import it.fooddelivery.model.Rider;
-import it.fooddelivery.model.City;
 import it.fooddelivery.model.Order;
 
 /**
@@ -22,7 +21,7 @@ public class RiderImpl implements Rider{
 	private double profit;
 	private final String name;
 	private List<Order> orderList;
-	private Set<City> cities;
+	private Set<CityImpl> cities;
 	
 	/**
 	 * Constructs a Rider with the specified name and cities.
@@ -30,7 +29,7 @@ public class RiderImpl implements Rider{
 	 * @param name the rider's name
 	 * @param cities a list of all cities where he can deliver
 	 */
-	public RiderImpl(String name, Set<City> cities) {
+	public RiderImpl(String name, Set<CityImpl> cities) {
 		this.name = name;
 		this.cities = cities;
 		this.profit = 0;
@@ -94,7 +93,7 @@ public class RiderImpl implements Rider{
 	}
 	
 	@Override
-	public Set<City> getCities() {
+	public Set<CityImpl> getCities() {
 		return cities;
 	}
 	

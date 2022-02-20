@@ -10,7 +10,6 @@ import java.util.Map;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
-import it.fooddelivery.model.City;
 
 /**
  * A class to represent an order.  Implementation of {@link Order}.
@@ -18,7 +17,7 @@ import it.fooddelivery.model.City;
 public class OrderImpl implements Order{
 	
 	private final int id;
-	private final City destination;
+	private final CityImpl destination;
 	private final Map<Menu, Integer> menus;
 	private final String address;
 	private final Restaurant restaurant;
@@ -31,7 +30,7 @@ public class OrderImpl implements Order{
 	 * @param address address of this order
 	 * @param restaurant resturant that is making this order
 	 */
-	public OrderImpl(int id, City destination, String address, Restaurant restaurant) {		
+	public OrderImpl(int id, CityImpl destination, String address, Restaurant restaurant) {		
 		this.id = id;
 		this.destination = destination;
 		this.address = address;
@@ -114,7 +113,7 @@ public class OrderImpl implements Order{
 		return this.id;
 	}
 	@Override
-	public City getDestination() {
+	public CityImpl getDestination() {
 		return this.destination;		
 	}
 	

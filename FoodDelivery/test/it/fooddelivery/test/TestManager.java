@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import it.fooddelivery.controller.ManagerImpl;
 import it.fooddelivery.controller.ManagerFactory;
-import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
+import it.fooddelivery.model.implementation.CityImpl;
 import it.fooddelivery.model.implementation.MenuImpl;
 import it.fooddelivery.model.implementation.OrderImpl;
 import it.fooddelivery.model.implementation.RestaurantImpl;
@@ -18,9 +18,9 @@ import it.fooddelivery.model.implementation.RestaurantImpl;
 class TestManager {
 	
 	private final ManagerImpl m = ManagerFactory.create();
-	private final Order o1 = new OrderImpl(01, City.FOSSOMBRONE, "Strada", null);
-	private final Order o2 = new OrderImpl(02, City.CAGLI, "Via", null);
-	private final Order o3 = new OrderImpl(03, City.URBANIA, "Piazza", null);
+	private final Order o1 = new OrderImpl(01, CityImpl.FOSSOMBRONE, "Strada", null);
+	private final Order o2 = new OrderImpl(02, CityImpl.CAGLI, "Via", null);
+	private final Order o3 = new OrderImpl(03, CityImpl.URBANIA, "Piazza", null);
 	private final Menu m1 = new MenuImpl("Insalata", 3.90, 6);
 	private final Menu m2 = new MenuImpl("HappyMeal", 5.90, 5);
 	private final Menu m3 = new MenuImpl("Pollo fritto 4pz.", 4.50, 10);
@@ -66,7 +66,7 @@ class TestManager {
 		assertTrue(this.m.canBeAssigned(o1).isEmpty());
 		
 		// Verifica del corretto smistamento favorevole a Rider con guadagno minore
-		this.m.createCurrentOrder(City.TAVULLIA, "Casa", null);
+		this.m.createCurrentOrder(CityImpl.TAVULLIA, "Casa", null);
 		this.m.getCurrentOrderPresent().increaseMenu(m1);
 		this.m.getCurrentOrderPresent().increaseMenu(m2);
 		assertTrue(this.m.assignCurrentOrder());
@@ -74,7 +74,7 @@ class TestManager {
 		System.out.println(this.m.getRiderWithLastOrder().get().getName());
 		this.m.getRiderWithLastOrder().get().deliverAll();
 		System.out.println(this.m.getRiders().get("Saverio").getProfit());
-		this.m.createCurrentOrder(City.TAVULLIA, "Villa", null);
+		this.m.createCurrentOrder(CityImpl.TAVULLIA, "Villa", null);
 		this.m.getCurrentOrderPresent().increaseMenu(m4);
 		this.m.getCurrentOrderPresent().increaseMenu(m5);
 		assertTrue(this.m.assignCurrentOrder());
@@ -84,7 +84,7 @@ class TestManager {
 		assertEquals(this.m.getRiderWithLastOrder().get(), this.m.getRiders()
 				                                                 .entrySet()
 				                                                 .stream()
-				                                                 .filter(s -> s.getValue().getCities().contains(City.TAVULLIA))
+				                                                 .filter(s -> s.getValue().getCities().contains(CityImpl.TAVULLIA))
 				                                                 .filter(s -> s.getValue().getProfit() == 0)
 				                                                 .findAny()
 				                                                 .get()
@@ -93,7 +93,7 @@ class TestManager {
 
 	@Test
 	void testCreateCurrentOrder() {
-		this.m.createCurrentOrder(City.URBANIA, "Via", new RestaurantImpl("Trattoria", null));
+		this.m.createCurrentOrder(CityImpl.URBANIA, "Via", new RestaurantImpl("Trattoria", null));
 		boolean res = false;
 		try {
 			this.m.getCurrentOrderPresent();
@@ -101,7 +101,7 @@ class TestManager {
 			res = true;
 		}
 		assertFalse(res);
-		assertEquals(this.m.getCurrentOrderPresent().getDestination(), City.URBANIA);
+		assertEquals(this.m.getCurrentOrderPresent().getDestination(), CityImpl.URBANIA);
 		assertEquals(this.m.getCurrentOrderPresent().getAdress(), "Via");
 		assertEquals(this.m.getCurrentOrderPresent().getRestaurant().getName(), "Trattoria");
 		assertEquals(this.m.getCurrentOrderPresent().getRestaurant().getMenuOffer(), null);
@@ -110,17 +110,17 @@ class TestManager {
 	@Test
 	void testAssignCurrentOrder() {
 		// Creazione di un currentOrder con destinazione non compresa fra i fattorini
-		this.m.createCurrentOrder(City.FOSSOMBRONE, "Piazza", null);
+		this.m.createCurrentOrder(CityImpl.FOSSOMBRONE, "Piazza", null);
 		assertFalse(this.m.assignCurrentOrder());
 		
 		// Creazione di un currentOrder con destinazionecompresa fra i fattorini
-		this.m.createCurrentOrder(City.URBANIA, "Casa", null);
+		this.m.createCurrentOrder(CityImpl.URBANIA, "Casa", null);
 		assertTrue(this.m.assignCurrentOrder());
 	}
 
 	@Test
 	void testHowManyInCurrent() {
-		this.m.createCurrentOrder(City.CAGLI, null, null);
+		this.m.createCurrentOrder(CityImpl.CAGLI, null, null);
 		assertTrue(this.m.howManyInCurrent(m1) == 0);
 		this.m.getCurrentOrderPresent().increaseMenu(m1);
 		assertTrue(this.m.howManyInCurrent(m1) == 1);

@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import it.fooddelivery.model.City;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
 import it.fooddelivery.model.Restaurant;
 import it.fooddelivery.model.Rider;
+import it.fooddelivery.model.implementation.CityImpl;
 
 /**
  * Interface for the controller component of the MVC pattern in the Food Delivery application.
@@ -35,7 +35,7 @@ public interface Manager {
 	 * @param address address of the order
 	 * @param restuarant restaurant of the order
 	 */
-	void createCurrentOrder(City destination, String address, Restaurant restaurant);
+	void createCurrentOrder(CityImpl destination, String address, Restaurant restaurant);
 
 	/**
 	 * Assigns the current order (to a rider or to waiting list) and empties the current order slot.

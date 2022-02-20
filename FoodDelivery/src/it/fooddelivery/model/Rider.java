@@ -7,6 +7,8 @@ package it.fooddelivery.model;
 import java.util.List;
 import java.util.Set;
 
+import it.fooddelivery.model.implementation.CityImpl;
+
 /**
  * Interface to represent a rider.
  */
@@ -57,7 +59,7 @@ public interface Rider {
 	/**
 	 * @return a list of all the cities where this rider can deliver
 	 */
-	Set<City> getCities();
+	Set<CityImpl> getCities();
 	
 	/**
 	 * @return the space used in this rider's bag

@@ -6,6 +6,8 @@ package it.fooddelivery.model;
 
 import java.util.Map;
 
+import it.fooddelivery.model.implementation.CityImpl;
+
 /**
  * Interface to represent an order.
  */
@@ -49,7 +51,7 @@ public interface Order {
 	/**
 	 * @return the destination of this order
 	 */
-	City getDestination();
+	CityImpl getDestination();
 
 	/**
 	 * @return the adress of this order
