@@ -13,12 +13,7 @@ import it.fooddelivery.model.implementation.CityImpl;
  * Interface to represent a rider.
  */
 public interface Rider {
-	
-	/** 
-	 * @return a list of all the orders in this rider's bag
-	 */
-	List<Order> getBag();
-	
+		
 	/**
 	 * Adds the order to this rider's bag.
 	 * 
@@ -37,16 +32,6 @@ public interface Rider {
 	 * Delivers every order of this rider.
 	 */
 	void deliverAll();
-
-	/**
-	 * @return this rider's name
-	 */
-	String getName();
-	
-	/** 
-	 * @return the total profit of this rider
-	 */
-	double getProfit();
 	
 	/**
 	 * Checks if the order could fit in this rider's bag
@@ -55,6 +40,22 @@ public interface Rider {
 	 * @return {@code true} if it could fit, {@code false} if it couldn't
 	 */
 	boolean canFit(Order order);
+	
+	/**
+	 * @return a String with the info about this rider (profit and capacity)
+	 */
+	String showRiderInfo();
+	
+	/**
+	 * @return a String with the content of this rider's bag
+	 */
+	
+	String showBagInfo();
+	
+	/** 
+	 * @return a list of all the orders in this rider's bag
+	 */
+	List<Order> getBag();
 	
 	/**
 	 * @return a list of all the cities where this rider can deliver
@@ -67,14 +68,14 @@ public interface Rider {
 	int getUsedSpace();
 	
 	/**
-	 * @return a String with the info about this rider (profit and capacity)
+	 * @return this rider's name
 	 */
-	String showRiderInfo();
+	String getName();
 	
-	/**
-	 * @return a String with the content of this rider's bag
+	/** 
+	 * @return the total profit of this rider
 	 */
-	String showBagInfo();
+	double getProfit();
 	
 	/**
 	 * @return how much this rider would earn with the orders that are in his bag
