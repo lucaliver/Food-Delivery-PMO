@@ -119,7 +119,9 @@ public class ViewWorker extends JFrame{
 		
 		riderArea = new JTextArea(2,8);
 		riderArea.setEditable(false);
-		riderArea.setText(rider.showRiderInfo());
+		StringBuilder riderCities = new StringBuilder("Destinazioni:");
+		rider.getCities().forEach(c -> riderCities.append(c.getName()+"\n                     "));
+		riderArea.setText(rider.showRiderInfo()+'\n'+riderCities);
 		riderArea.setBackground(getBackground());
 		infoRider.put(rider, riderArea);
 		

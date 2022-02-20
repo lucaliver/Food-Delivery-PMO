@@ -50,7 +50,7 @@ public class ViewWelcome extends JFrame {
 	private void Init() {
 		this.setTitle(this.title);
 		this.setSize(400, 200);
-		this.setLocation(700, 100);
+		this.setLocation(800, 100);
 		
 		mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
