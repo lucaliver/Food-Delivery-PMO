@@ -32,6 +32,21 @@ public interface Order {
 	 * Remove all the menus from this order
 	 */
 	void removeAllMenus();
+	
+	/**
+	 * @return the all the menus in this order
+	 */
+	String showOrderContent();
+
+	/**
+	 * @return a String with all the info about this order
+	 */
+	String showOrderInfo();
+
+	/**
+	 * @return a String with basic info about this order 
+	 */
+	String showBasicInfo();
 
 	/**
 	 * @return the size of this order
@@ -62,19 +77,4 @@ public interface Order {
 	 * @return the restaurant that is making this order
 	 */
 	Restaurant getRestaurant();
-
-	/**
-	 * @return the all the menus in this order
-	 */
-	String showOrderContent();
-
-	/**
-	 * @return a String with all the info about this order
-	 */
-	String showOrderInfo();
-
-	/**
-	 * @return a String with basic info about this order 
-	 */
-	String showBasicInfo();
 }

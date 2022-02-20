@@ -8,6 +8,11 @@ package it.fooddelivery.model;
  * Interface to represent a menu.
  */
 public interface Menu {
+	
+	/**
+	 * @return a String with all the info of this menu (name, price, size)
+	 */
+	String showMenuInfo();
 
 	/**
 	 * @return the price of this menu
@@ -23,9 +28,4 @@ public interface Menu {
 	 * @return the size of this menu
 	 */
 	int getSize();
-	
-	/**
-	 * @return a String with all the info of this menu (name, price, size)
-	 */
-	String showMenuInfo();
 }

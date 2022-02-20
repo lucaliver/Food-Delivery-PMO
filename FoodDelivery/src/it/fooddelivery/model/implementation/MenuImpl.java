@@ -27,6 +27,11 @@ public class MenuImpl implements Menu{
 		this.price = price;
 		this.size = size;
 	}
+	
+	@Override
+	public String showMenuInfo() {
+		return(this.name+" - "+ String.format("%.2f",this.price)+"€ - "+this.size+"u");
+	}
 
 	@Override
 	public double getPrice() {		
@@ -42,11 +47,4 @@ public class MenuImpl implements Menu{
 	public int getSize() {
 		return size;
 	}
-
-	@Override
-	public String showMenuInfo() {
-		return(this.name+" - "+ String.format("%.2f",this.price)+"€ - "+this.size+"u");
-		
-	}
-
 }
