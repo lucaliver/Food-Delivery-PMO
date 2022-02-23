@@ -40,16 +40,20 @@ public class OrderImpl implements Order{
 	
 	@Override
 	public void increaseMenu(Menu menu) {
+		// Se la mappa contiene già tale chiave incrementiamo il suo valore 
 		if (menus.containsKey(menu))
 			this.menus.put(menu, menus.get(menu)+1);
+		// Altrimenti inseriamo una nuova chiave con valore 1
 		else
 			this.menus.put(menu, 1);
 	}
 
 	@Override
 	public void decreaseMenu(Menu menu) {
+		// Se la mappa contiene tale chiave e il suo valore è > 0 lo decrementiamo 
 		if (menus.containsKey(menu) && menus.get(menu)>0) {
 			this.menus.put(menu, menus.get(menu)-1);
+			// Se dopo il decremento il valore è pari a 0 rimuoviamo la chiave
 			if (menus.get(menu)==0)
 				menus.remove(menu);
 		}

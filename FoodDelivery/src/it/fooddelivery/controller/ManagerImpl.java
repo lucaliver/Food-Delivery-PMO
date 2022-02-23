@@ -85,14 +85,18 @@ public class ManagerImpl implements Manager{
 	
 	@Override
 	public boolean refreshWaitingOrder(Rider freeRider) {
-		List<Order> noMoreWaitingOrders = new ArrayList<Order>(); 
-		this.getWaitingOrders().forEach(o ->{	
+		// Lista di supporto
+		List<Order> noMoreWaitingOrders = new ArrayList<Order>();
+		// Iterazione su tutti gliordini in attesa
+		this.getWaitingOrders().forEach(o ->{
+			// Verifico se l'ordine verrebbe assegnato veramente al freeRider
 			if(this.canBeAssigned(o).isPresent())
 				if(this.canBeAssigned(o).get().equals(freeRider)) {
 				noMoreWaitingOrders.add(o);
 				freeRider.addOrder(o);
 			}
 		});
+		// Rimuovo tutti gli ordini assegnati dalla lista d'attesa
 		this.waitingOrders.removeAll(noMoreWaitingOrders);
 		return(noMoreWaitingOrders.size()>=1);
 	}
