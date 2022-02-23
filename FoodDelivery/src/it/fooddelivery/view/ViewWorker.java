@@ -56,7 +56,7 @@ public class ViewWorker extends JFrame{
 	 * 
 	 * @param controller controller component for the MVC pattern
 	 */
-	public void initView(final ManagerImpl controller) {
+	public void initView(ManagerImpl controller) {
 		this.controller = controller;
 		this.Init();
 	}

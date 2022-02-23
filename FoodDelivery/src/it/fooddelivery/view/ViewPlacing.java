@@ -62,10 +62,10 @@ public class ViewPlacing extends JFrame {
 		mainPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 	
 		this.controller.getCurrentOrderPresent().getRestaurant().getMenuOffer().forEach(m ->
-			mainPanel.add(this.createMenuPanel(m)));
+			mainPanel.add(createMenuPanel(m)));
 		
 		mainPanel.add(createOrderDataPanel());
-		mainPanel.add(createButtonPanel());		
+		mainPanel.add(createButtonsPanel());		
 		
 		this.getContentPane().add(mainPanel);
 		this.pack();
@@ -76,7 +76,7 @@ public class ViewPlacing extends JFrame {
 	 * 
 	 * @return the panel itself
 	 */
-	private JPanel createButtonPanel() {
+	private JPanel createButtonsPanel() {
 		final JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BorderLayout());
 		

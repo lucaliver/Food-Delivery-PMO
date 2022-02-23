@@ -77,6 +77,14 @@ public class RiderImpl implements Rider{
 		return (this.getUsedSpace() + order.getSize()) <= MAX_CAPACITY;
 	}
 	
+	public static double getPercentage() {
+		return PROFIT_PERCENTAGE;
+	}
+	
+	public static int getMaxCapacity() {
+		return MAX_CAPACITY;
+	}
+	
 	@Override
 	public List<Order> getBag() {
 		return orderList;
@@ -119,13 +127,5 @@ public class RiderImpl implements Rider{
 	 */
 	private double calculateOrderProfit(Order order) {
 		return order.getPrice() * RiderImpl.PROFIT_PERCENTAGE;
-	}
-	
-	public static double getPercentage() {
-		return PROFIT_PERCENTAGE;
-	}
-	
-	public static int getMaxCapacity() {
-		return MAX_CAPACITY;
 	}
 }

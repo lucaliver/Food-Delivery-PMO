@@ -15,7 +15,7 @@ import it.fooddelivery.model.Restaurant;
 public class RestaurantImpl implements Restaurant {
 	
 	private final String name;
-	private List<Menu> menuOffer;
+	private final List<Menu> menuOffer;
 	
 	/**
 	 * Constructs a Restaurant with the specified name and menu offer.
