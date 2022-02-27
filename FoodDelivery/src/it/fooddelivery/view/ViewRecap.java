@@ -68,14 +68,13 @@ public class ViewRecap extends JFrame {
 	 * @return the panel itself
 	 */
 	private JPanel createOrderRecapPanel() {
-		
 		JPanel orderDataPanel = new JPanel();
 		orderDataPanel.setLayout(new BoxLayout(orderDataPanel, BoxLayout.X_AXIS));
 		orderDataPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		JTextArea orderInfoArea = new JTextArea();
 		orderInfoArea.setEditable(false);
-		orderInfoArea.setBorder(BorderFactory.createTitledBorder("Info ordine: "));
+		orderInfoArea.setBorder(BorderFactory.createTitledBorder("Informazioni ordine: "));
 		orderInfoArea.setText(this.controller.getCurrentOrderPresent().showOrderInfo());
 		orderDataPanel.add(orderInfoArea);
 				
