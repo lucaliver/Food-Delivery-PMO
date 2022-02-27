@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import it.fooddelivery.controller.ManagerImpl;
+import it.fooddelivery.controller.Manager;
 
 /**
  * Recap screen for the customer. Last window, where he can send the order.
@@ -23,7 +23,7 @@ import it.fooddelivery.controller.ManagerImpl;
 @SuppressWarnings("serial")
 public class ViewRecap extends JFrame {
 	
-	private final ManagerImpl controller;
+	private final Manager controller;
 	private JPanel mainPanel;
 	private final String title = "Ricapitoliamo il tuo ordine :)";
 	private JButton sendButton;
@@ -35,7 +35,7 @@ public class ViewRecap extends JFrame {
 	 * 
 	 * @param controller controller for the MVC pattern.
 	 */
-	ViewRecap(final ManagerImpl controller, final ViewPlacing viewPlacing){
+	ViewRecap(final Manager controller, final ViewPlacing viewPlacing){
 		this.controller = controller;
 		this.Init();
 		this.viewPlacing = viewPlacing;

@@ -15,7 +15,8 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import it.fooddelivery.controller.ManagerImpl;
+
+import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.implementation.RiderImpl;
 
@@ -25,7 +26,7 @@ import it.fooddelivery.model.implementation.RiderImpl;
 @SuppressWarnings("serial")
 public class ViewPlacing extends JFrame {
 		
-	private final ManagerImpl controller;
+	private final Manager controller;
 	private JPanel mainPanel;
 	private JTextArea totalOrderArea;
 	private JTextArea sizeOrderArea;
@@ -40,7 +41,7 @@ public class ViewPlacing extends JFrame {
 	 * 
 	 * @param controller controller component for the MVC pattern
 	 */
-	public ViewPlacing(final ManagerImpl controller){
+	public ViewPlacing(final Manager controller){
 		this.controller = controller;
 		this.infoButtons = new HashMap<>();
 		this.Init();

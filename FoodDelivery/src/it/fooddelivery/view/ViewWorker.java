@@ -21,7 +21,8 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import it.fooddelivery.controller.ManagerImpl;
+
+import it.fooddelivery.controller.Manager;
 import it.fooddelivery.model.Rider;
 
 /**
@@ -31,7 +32,7 @@ import it.fooddelivery.model.Rider;
 public class ViewWorker extends JFrame{
 	
 	private static ViewWorker instance = null;
-	private ManagerImpl controller;
+	private Manager controller;
 	private JPanel mainPanel;
 	private JTextArea riderArea;
 	private JTextArea orderArea;
@@ -56,7 +57,7 @@ public class ViewWorker extends JFrame{
 	 * 
 	 * @param controller controller component for the MVC pattern
 	 */
-	public void initView(ManagerImpl controller) {
+	public void initView(Manager controller) {
 		this.controller = controller;
 		this.Init();
 	}

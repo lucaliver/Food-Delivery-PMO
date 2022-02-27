@@ -27,7 +27,7 @@ public class ManagerFactory {
 	/**
 	 * Creates a Manager, configurated with restaurants and riders for the Pesaro and Urbino (PU) province.
 	 */
-	public static ManagerImpl create(){
+	public static Manager create(){
 		return new ManagerImpl(createRiders(), createRestaurants());
 	}
 

@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
-import it.fooddelivery.controller.ManagerImpl;
+import it.fooddelivery.controller.Manager;
 import it.fooddelivery.controller.ManagerFactory;
 import it.fooddelivery.model.Menu;
 import it.fooddelivery.model.Order;
@@ -17,7 +17,7 @@ import it.fooddelivery.model.implementation.RestaurantImpl;
 
 class TestManager {
 	
-	private final ManagerImpl m = ManagerFactory.create();
+	private final Manager m = ManagerFactory.create();
 	private final Order o1 = new OrderImpl(01, CityImpl.FOSSOMBRONE, "Strada", null);
 	private final Order o2 = new OrderImpl(02, CityImpl.CAGLI, "Via", null);
 	private final Order o3 = new OrderImpl(03, CityImpl.URBANIA, "Piazza", null);
@@ -31,7 +31,7 @@ class TestManager {
 	@Test
 	void testManager() {
 		assertTrue(m.getWaitingOrders().isEmpty());
-		/* Penso che il costrutto try-catch possa essere sostituito
+		/* TODO Penso che il costrutto try-catch possa essere sostituito
 		 * da un assertThrows o assertDoesNotThrows, ma non ho capito
 		 * come funzionano
 		 */
