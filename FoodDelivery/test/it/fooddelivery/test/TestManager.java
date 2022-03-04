@@ -31,10 +31,6 @@ class TestManager {
 	@Test
 	void testManager() {
 		assertTrue(m.getWaitingOrders().isEmpty());
-		/* TODO Penso che il costrutto try-catch possa essere sostituito
-		 * da un assertThrows o assertDoesNotThrows, ma non ho capito
-		 * come funzionano
-		 */
 		boolean res = false;
 	    try {
 			m.getCurrentOrderPresent();
