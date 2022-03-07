@@ -57,7 +57,11 @@ class TestRiderImpl {
 		delivery.deliverOrder(o);
 		assertFalse(delivery.getBag().contains(o));
 		assertEquals(o.getPrice()*RiderImpl.getPercentage(), delivery.getProfit());
+		try {
 		delivery.deliverOrder(o1);
+		}catch (IllegalArgumentException e) {
+			// TODO: handle exception
+		}
 		assertFalse(delivery.getBag().contains(o1));
 	}
 	
