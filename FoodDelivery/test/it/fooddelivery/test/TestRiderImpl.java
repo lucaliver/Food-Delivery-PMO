@@ -50,7 +50,8 @@ class TestRiderImpl {
 		OrderImpl o = new OrderImpl(22, CityImpl.FERMIGNANO, null, null);
 		OrderImpl o1 = new OrderImpl(25, CityImpl.FERMIGNANO, null, null);
 		MenuImpl m = new MenuImpl("Ristorante", 100.00, 50);
-		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);				
+		MenuImpl m2 = new MenuImpl("uyub", 80.00, 40);	
+		boolean res = false;
 		o.increaseMenu(m);
 		o.increaseMenu(m2);
 		delivery.addOrder(o);
@@ -58,10 +59,11 @@ class TestRiderImpl {
 		assertFalse(delivery.getBag().contains(o));
 		assertEquals(o.getPrice()*RiderImpl.getPercentage(), delivery.getProfit());
 		try {
-		delivery.deliverOrder(o1);
+			delivery.deliverOrder(o1);
 		}catch (IllegalArgumentException e) {
-			// TODO: handle exception
+			res = true;
 		}
+		assertTrue(res);
 		assertFalse(delivery.getBag().contains(o1));
 	}
 	
