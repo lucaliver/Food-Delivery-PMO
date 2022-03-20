@@ -38,9 +38,12 @@ public class RiderImpl implements Rider{
 
 	@Override
 	public String showRiderInfo() {
+		StringBuilder riderCities = new StringBuilder("Destinazioni:");
+		cities.forEach(c -> riderCities.append(c.getName()+"\n                     "));
 		return "Profito: "+String.format("%.2f", getProfit())+
 		       "€"+'\n'+"Capacità: "+this.getUsedSpace()+
-		       "/"+RiderImpl.MAX_CAPACITY + "u";
+		       "/"+RiderImpl.MAX_CAPACITY + "u\n"+
+		       riderCities;
 	}
 	
 	@Override
