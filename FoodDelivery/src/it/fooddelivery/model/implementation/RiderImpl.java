@@ -36,7 +36,7 @@ public class RiderImpl implements Rider{
 		this.orderList = new ArrayList<>();
 	}
 
-	@Override
+	@Override//
 	public String showRiderInfo() {
 		StringBuilder riderCities = new StringBuilder("Destinazioni:");
 		cities.forEach(c -> riderCities.append(c.getName()+"\n                     "));
