@@ -1,4 +1,4 @@
-# Food-Delivery-PMO
-Project for the exam of Object Oriented Programming and Design 2021/2021 of the Urbino University.
+# Food Delivery
+Progetto per l'esame di Programmazione e Modellazione ad Oggetti a.a. 2021/2022 dell'Università degli Studi di Urbino.
 
-Essay about the development can be found in the resources folder.
+La relazione del progetto è all'interno della cartella resources.
